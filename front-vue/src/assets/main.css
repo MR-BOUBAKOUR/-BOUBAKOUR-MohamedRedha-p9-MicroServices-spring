@@ -1,0 +1,41 @@
+.conteneur {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.login-form {
+    width: 300px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid #ccc;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+input,
+button {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    max-width: 300px;
+    background-color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
