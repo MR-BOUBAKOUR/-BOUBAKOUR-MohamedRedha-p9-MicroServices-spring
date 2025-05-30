@@ -17,7 +17,7 @@ defineProps({
             <li><strong>Téléphone :</strong> {{ patient.phone }}</li>
         </ul>
         <RouterLink :to="{ name: 'patient-edit', params: { id: patient.id } }">
-            Modifier le patient
+            Mettre à jour la fiche du patient ▶
         </RouterLink>
     </section>
 </template>
@@ -25,8 +25,9 @@ defineProps({
 <style scoped>
 .patient-card {
     border: 1px solid #ccc;
-    margin: 4rem auto;
+    margin: 3rem auto;
     padding: 1rem;
     border-radius: 8px;
+    max-width: 600px;
 }
 </style>

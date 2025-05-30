@@ -19,6 +19,6 @@ async function handlePatientCreate(newPatient) {
 <template>
     <main>
         <PatientsList :patients="patients" />
-        <PatientForm @submit="handlePatientCreate" />
+        <PatientForm @submit="handlePatientCreate" submitLabel="Ajouter un patient" />
     </main>
 </template>

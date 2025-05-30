@@ -3,6 +3,7 @@ import { ref } from 'vue'
 
 const props = defineProps({
     patient: Object,
+    submitLabel: String,
 })
 
 const emit = defineEmits(['submit'])
@@ -40,7 +41,7 @@ function handleSubmit() {
             <label>Adresse <input v-model="form.address" /></label>
             <label>Téléphone <input v-model="form.phone" /></label>
 
-            <button type="submit">Enregistrer</button>
+            <button type="submit">{{ submitLabel }}</button>
         </form>
     </section>
 </template>

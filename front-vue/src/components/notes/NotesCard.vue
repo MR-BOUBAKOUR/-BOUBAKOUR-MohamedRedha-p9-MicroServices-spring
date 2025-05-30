@@ -33,6 +33,6 @@ defineProps({
     border: 1px solid #ccc;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
-    background-color: #f9f9f9;
+    background-color: #f5f5f5;
 }
 </style>

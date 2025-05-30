@@ -22,6 +22,11 @@ function handlePatientUpdate(updatedpatient) {
 
 <template>
     <main>
-        <PatientForm v-if="patient" :patient="patient" @submit="handlePatientUpdate" />
+        <PatientForm
+            v-if="patient"
+            :patient="patient"
+            @submit="handlePatientUpdate"
+            submitLabel="Mettre à jour la fiche du patient"
+        />
     </main>
 </template>

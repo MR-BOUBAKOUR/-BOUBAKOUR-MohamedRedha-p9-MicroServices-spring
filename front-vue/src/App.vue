@@ -15,13 +15,13 @@ const showReturnToPatientLink = computed(() => route.name === 'patient-edit')
         <header v-if="showLayout">
             <h1>MediLabo Solutions</h1>
             <RouterLink v-if="showReturnToPatientsLink" to="/patients">
-                Retour à la liste des patients
+                ◀ Retour à la liste des patients
             </RouterLink>
             <RouterLink
                 v-if="showReturnToPatientLink"
                 :to="{ name: 'patient', params: { id: patientId } }"
             >
-                Retour à la fiche du patient
+                ◀ Retour à la fiche du patient
             </RouterLink>
         </header>
 

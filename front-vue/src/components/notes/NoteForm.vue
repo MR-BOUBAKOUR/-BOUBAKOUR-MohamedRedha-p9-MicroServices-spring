@@ -20,7 +20,7 @@ function handleSubmit() {
     <form @submit.prevent="handleSubmit" class="patient-form">
         <input v-model="form.note" required />
 
-        <button type="submit">Rajouter une note</button>
+        <button type="submit">Ajouter une note</button>
     </form>
 </template>
 
