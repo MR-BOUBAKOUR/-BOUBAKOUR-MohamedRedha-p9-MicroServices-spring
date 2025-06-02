@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: assessment
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  # De-register gracefully from Eureka
+  endpoint:
+    shutdown:
+      access: unrestricted
+  # Enabling the info endpoint
+  info:
+    env:
+      enabled: true
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+  # By default, the registration is done with the hostname
+  # (no DNS mapping setup on the local system -> Using the ip address)
+  instance:
+    preferIpAddress: true
+
+# For the Eureka dashboard (we will see the name of the ms instead of the id address)
+# Exposed via an endpoint of the actuator (not enabled by default)
+info:
+  app:
+    name: assessment
