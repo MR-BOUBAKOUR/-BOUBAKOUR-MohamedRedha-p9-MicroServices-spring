@@ -4,7 +4,7 @@ import { ref, onMounted } from 'vue'
 import PatientCard from '@/components/patients/PatientCard.vue'
 import NotesCard from '@/components/notes/NotesCard.vue'
 import NoteForm from '@/components/notes/NoteForm.vue'
-import AssessmentCard from '@/components/assessment/AssessmentCard.vue'
+import AssessmentCard from '@/components/assessments/AssessmentCard.vue'
 import { fetchPatientById } from '@/services/patient-service'
 import { fetchNotesByPatientId, createNote } from '@/services/note-service'
 

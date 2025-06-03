@@ -6,6 +6,7 @@ spring:
     name: assessment
 
 management:
+  # In production, limit exposure (include: "health,info")
   endpoints:
     web:
       exposure:

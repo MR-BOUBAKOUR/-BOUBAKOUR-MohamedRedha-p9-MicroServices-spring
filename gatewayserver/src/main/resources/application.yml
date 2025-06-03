@@ -1,0 +1,45 @@
+server:
+  port: 8072
+
+spring:
+  application:
+    name: gatewayserver
+  # Enable the gateway to forward the trafic to the right ms
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          # Activate the lowerCase for the URIs ( -> upperCase: false)
+          lowerCaseServiceId: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      access: unrestricted
+  info:
+    env:
+      enabled: true
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+  instance:
+    preferIpAddress: true
+
+info:
+  app:
+    name: gatewayserver
+
+logging:
+  level:
+    com:
+      MedilaboSolutions:
+        gatewayserver: DEBUG
