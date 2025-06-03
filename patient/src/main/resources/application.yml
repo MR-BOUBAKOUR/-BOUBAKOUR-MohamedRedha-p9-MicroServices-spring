@@ -29,3 +29,9 @@ eureka:
 info:
   app:
     name: patient
+
+logging:
+  level:
+    com:
+      MedilaboSolutions:
+        patient: DEBUG

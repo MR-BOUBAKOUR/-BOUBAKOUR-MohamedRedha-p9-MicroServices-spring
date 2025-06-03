@@ -29,3 +29,9 @@ eureka:
 info:
   app:
     name: note
+
+logging:
+  level:
+    com:
+      MedilaboSolutions:
+        note: DEBUG

@@ -36,3 +36,9 @@ eureka:
 info:
   app:
     name: assessment
+
+logging:
+  level:
+    com:
+      MedilaboSolutions:
+        assessment: DEBUG
