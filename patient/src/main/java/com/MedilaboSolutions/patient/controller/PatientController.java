@@ -1,8 +1,8 @@
 package com.MedilaboSolutions.patient.controller;
 
-import com.MedilaboSolutions.patient.dto.PatientCreateDto;
+import com.MedilaboSolutions.patient.dto.PatientRequestDto;
 import com.MedilaboSolutions.patient.dto.PatientDto;
-import com.MedilaboSolutions.patient.dto.ResponseDto;
+import com.MedilaboSolutions.patient.dto.SuccessResponse;
 import com.MedilaboSolutions.patient.service.PatientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,26 +20,34 @@ public class PatientController {
     private final PatientService patientService;
 
     @GetMapping
-    public ResponseEntity<ResponseDto<List<PatientDto>>> getAllPatients() {
+    public ResponseEntity<SuccessResponse<List<PatientDto>>> getAllPatients() {
         List<PatientDto> patients = patientService.findAll();
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(new ResponseDto<>(200, "Patients fetched successfully", patients));
+                .body(new SuccessResponse<>(200, "Patients fetched successfully", patients));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseDto<PatientDto>> getPatientById(@PathVariable Long id) {
+    public ResponseEntity<SuccessResponse<PatientDto>> getPatientById(@PathVariable Long id) {
         PatientDto patient = patientService.findById(id);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(new ResponseDto<>(200, "Patient fetched successfully", patient));
+                .body(new SuccessResponse<>(200, "Patient fetched successfully", patient));
     }
 
     @PostMapping
-    public ResponseEntity<ResponseDto<PatientDto>> createPatient(@Valid @RequestBody PatientCreateDto patientDto) {
+    public ResponseEntity<SuccessResponse<PatientDto>> createPatient(@Valid @RequestBody PatientRequestDto patientDto) {
         PatientDto patient = patientService.create(patientDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new ResponseDto<>(201, "Patient created successfully", patient));
+                .body(new SuccessResponse<>(201, "Patient created successfully", patient));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<SuccessResponse<PatientDto>> updatePatient(@PathVariable Long id, @Valid @RequestBody PatientRequestDto patientDto) {
+        PatientDto patient = patientService.update(id, patientDto);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new SuccessResponse<>(200, "Patient updated successfully", patient));
     }
 }

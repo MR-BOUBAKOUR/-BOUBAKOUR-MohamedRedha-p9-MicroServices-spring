@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PatientCreateDto {
+public class PatientRequestDto {
 
     @NotBlank
     @Size(max = 50)
