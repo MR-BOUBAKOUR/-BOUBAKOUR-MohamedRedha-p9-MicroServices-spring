@@ -20,18 +20,18 @@ public class PatientService {
 
     public List<PatientDto> findAll() {
         return patientRepository.findAll().stream()
-                .map(patientMapper::toClientDto)
+                .map(patientMapper::toPatientDto)
                 .toList();
     }
 
     public PatientDto findById(Long id) {
         return patientRepository.findById(id)
-                .map(patientMapper::toClientDto)
+                .map(patientMapper::toPatientDto)
                 .orElseThrow(() -> new ResourceNotFoundException("Ressource not found."));
     }
 
-    public PatientDto create(PatientCreateDto clientDto) {
-        Patient saved = patientRepository.save(patientMapper.toClient(clientDto));
-        return patientMapper.toClientDto(saved);
+    public PatientDto create(PatientCreateDto PatientDto) {
+        Patient saved = patientRepository.save(patientMapper.toPatient(PatientDto));
+        return patientMapper.toPatientDto(saved);
     }
 }

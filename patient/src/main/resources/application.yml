@@ -5,10 +5,10 @@ spring:
   application:
     name: patient
   datasource:
-    url: jdbc:mysql://localhost:3306/MedilaboSolutions?useSSL=false&serverTimezone=UTC
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: ${DB_DRIVER}
 
 management:
   endpoints:
