@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: patient
+  datasource:
+    url: jdbc:mysql://localhost:3306/MedilaboSolutions?useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 management:
   endpoints:
