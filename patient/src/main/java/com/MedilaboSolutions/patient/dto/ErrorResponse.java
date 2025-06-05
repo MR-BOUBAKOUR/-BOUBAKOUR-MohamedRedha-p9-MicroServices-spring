@@ -13,13 +13,13 @@ import java.time.Instant;
 public class ErrorResponse {
 
     public ErrorResponse(int status, String message) {
+        this.timestamp = Instant.now().toString();
         this.status = status;
         this.message = message;
-        this.timestamp = Instant.now().toString();
     }
 
+    private String timestamp;
     private int status;
     private String message;
-    private String timestamp;
 
 }

@@ -13,15 +13,15 @@ import java.time.Instant;
 public class SuccessResponse<T> {
 
     public SuccessResponse(int status, String message, T data) {
+        this.timestamp = Instant.now().toString();
         this.status = status;
         this.message = message;
         this.data = data;
-        this.timestamp = Instant.now().toString();
     }
 
+    private String timestamp;
     private int status;
     private String message;
     private T data;
-    private String timestamp;
 
 }
