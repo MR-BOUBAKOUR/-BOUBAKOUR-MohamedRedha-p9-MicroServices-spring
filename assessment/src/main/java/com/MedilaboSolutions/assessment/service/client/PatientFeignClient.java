@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient("patient")
 public interface PatientFeignClient {
 
-    @GetMapping("/patients/{id}")
+    @GetMapping(value = "/patients/{id}", consumes = "application/json")
     ResponseEntity<SuccessResponse<PatientDto>> getPatientById(@PathVariable Long id);
 
 }

@@ -12,7 +12,7 @@ import java.util.List;
 @FeignClient("note")
 public interface NoteFeignClient {
 
-    @GetMapping("/notes/{patId}")
+    @GetMapping(value = "/notes/{patId}", consumes = "application/json")
     ResponseEntity<SuccessResponse<List<NoteDto>>> getNoteByPatientId(@PathVariable Long patId);
 
 }
