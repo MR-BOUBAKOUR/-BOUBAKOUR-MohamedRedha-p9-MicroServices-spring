@@ -1,37 +1,19 @@
-package com.MedilaboSolutions.patient.dto;
+package com.MedilaboSolutions.note.dto;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @NoArgsConstructor
-public class PatientRequestDto {
+public class NoteRequestDto {
 
-    @NotBlank
-    @Size(max = 50)
-    private String firstName;
+    private Long patId;
+    private String patFirstName;
 
-    @NotBlank
-    @Size(max = 50)
-    private String lastName;
+    @NotBlank(message = "Note content must not be blank.")
+    private String note;
 
-    @NotNull
-    @Past
-    private LocalDate birthDate;
-
-    @NotBlank
-    @Pattern(regexp = "^[MF]$", message = "Gender must be 'M' or 'F'")
-    private String gender;
-
-    @Size(max = 100)
-    private String address;
-
-    @Size(max = 20)
-    @Pattern(regexp = "^\\d{3}-\\d{3}-\\d{4}$", message = "Phone number must match XXX-XXX-XXXX format")
-    private String phone;
 }

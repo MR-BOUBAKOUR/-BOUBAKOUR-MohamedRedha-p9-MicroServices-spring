@@ -1,6 +1,6 @@
-package com.MedilaboSolutions.patient.exception;
+package com.MedilaboSolutions.note.exception;
 
-import com.MedilaboSolutions.patient.dto.ErrorResponse;
+import com.MedilaboSolutions.note.dto.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;

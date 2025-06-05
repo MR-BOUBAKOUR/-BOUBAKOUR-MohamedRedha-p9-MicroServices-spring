@@ -1,10 +1,14 @@
-package com.MedilaboSolutions.patient.repository;
+package com.MedilaboSolutions.note.repository;
 
-import com.MedilaboSolutions.patient.domain.Patient;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.MedilaboSolutions.note.domain.Note;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface PatientRepository extends JpaRepository<Patient, Long> {
+public interface NoteRepository extends MongoRepository<Note, Long> {
+
+    List<Note> findByPatId(Long patId);
 
 }

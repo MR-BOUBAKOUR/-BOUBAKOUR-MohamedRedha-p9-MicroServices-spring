@@ -1,4 +1,4 @@
-package com.MedilaboSolutions.patient.exception;
+package com.MedilaboSolutions.note.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

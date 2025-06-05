@@ -1,4 +1,4 @@
-package com.MedilaboSolutions.patient.dto;
+package com.MedilaboSolutions.note.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

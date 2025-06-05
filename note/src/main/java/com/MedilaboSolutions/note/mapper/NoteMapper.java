@@ -1,14 +1,14 @@
-package com.MedilaboSolutions.patient.mapper;
+package com.MedilaboSolutions.note.mapper;
 
-import com.MedilaboSolutions.patient.domain.Patient;
-import com.MedilaboSolutions.patient.dto.PatientRequestDto;
-import com.MedilaboSolutions.patient.dto.PatientDto;
+import com.MedilaboSolutions.note.domain.Note;
+import com.MedilaboSolutions.note.dto.NoteRequestDto;
+import com.MedilaboSolutions.note.dto.NoteDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface PatientMapper {
+public interface NoteMapper {
 
-    PatientDto toPatientDto(Patient patient);
-    Patient toPatient(PatientDto patientDto);
-    Patient toPatient(PatientRequestDto patientRequestDto);
+    NoteDto toNoteDto(Note note);
+    Note toNote(NoteDto noteDto);
+    Note toNote(NoteRequestDto noteRequestDto);
 }

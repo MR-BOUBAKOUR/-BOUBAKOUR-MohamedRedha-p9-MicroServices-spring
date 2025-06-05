@@ -1,11 +1,11 @@
-package com.MedilaboSolutions.patient.service;
+package com.MedilaboSolutions.note.service;
 
-import com.MedilaboSolutions.patient.domain.Patient;
-import com.MedilaboSolutions.patient.dto.PatientRequestDto;
-import com.MedilaboSolutions.patient.dto.PatientDto;
-import com.MedilaboSolutions.patient.exception.ResourceNotFoundException;
-import com.MedilaboSolutions.patient.mapper.PatientMapper;
-import com.MedilaboSolutions.patient.repository.PatientRepository;
+import com.MedilaboSolutions.note.domain.Note;
+import com.MedilaboSolutions.note.dto.NoteRequestDto;
+import com.MedilaboSolutions.note.dto.NoteDto;
+import com.MedilaboSolutions.note.exception.ResourceNotFoundException;
+import com.MedilaboSolutions.note.mapper.NoteMapper;
+import com.MedilaboSolutions.note.repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,36 +13,26 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class PatientService {
+public class NoteService {
 
-    private final PatientRepository patientRepository;
-    private final PatientMapper patientMapper;
+    private final NoteRepository noteRepository;
+    private final NoteMapper noteMapper;
 
-    public List<PatientDto> findAll() {
-        return patientRepository.findAll().stream()
-                .map(patientMapper::toPatientDto)
+    public List<NoteDto> findByPatientId(Long patId) {
+        List<Note> notes = noteRepository.findByPatId(patId);
+
+        if (notes.isEmpty()) {
+            throw new ResourceNotFoundException("Ressource not found.");
+        }
+
+        return notes.stream()
+                .map(noteMapper::toNoteDto)
                 .toList();
     }
 
-    public PatientDto findById(Long id) {
-        return patientRepository.findById(id)
-                .map(patientMapper::toPatientDto)
-                .orElseThrow(() -> new ResourceNotFoundException("Ressource not found."));
+    public NoteDto create(NoteRequestDto noteDto) {
+        Note saved = noteRepository.save(noteMapper.toNote(noteDto));
+        return noteMapper.toNoteDto(saved);
     }
 
-    public PatientDto create(PatientRequestDto patientDto) {
-        Patient saved = patientRepository.save(patientMapper.toPatient(patientDto));
-        return patientMapper.toPatientDto(saved);
-    }
-
-    public PatientDto update(long id, PatientRequestDto patientDto) {
-        patientRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Ressource not found."));
-
-        Patient patientToUpdate = patientMapper.toPatient(patientDto);
-        patientToUpdate.setId(id);
-
-        Patient saved = patientRepository.save(patientToUpdate);
-        return patientMapper.toPatientDto(saved);
-    }
 }
