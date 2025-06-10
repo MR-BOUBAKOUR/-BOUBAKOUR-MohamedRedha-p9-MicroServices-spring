@@ -43,6 +43,7 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+      - ./data:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
     restart: unless-stopped
