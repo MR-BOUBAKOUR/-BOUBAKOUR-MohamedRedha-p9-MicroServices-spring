@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: assessment
+    name: assessments
 
 management:
   # In production, limit exposure (include: "health,info")
@@ -35,7 +35,7 @@ eureka:
 # Exposed via an endpoint of the actuator (not enabled by default)
 info:
   app:
-    name: assessment
+    name: assessments
 
 logging:
   level:

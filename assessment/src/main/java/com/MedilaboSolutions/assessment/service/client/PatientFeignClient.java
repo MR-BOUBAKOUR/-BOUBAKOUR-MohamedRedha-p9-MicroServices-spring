@@ -7,10 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient("patient")
+@FeignClient("patients")
 public interface PatientFeignClient {
 
-    @GetMapping(value = "/patients/{id}", consumes = "application/json")
+    @GetMapping(value = "/patients/{id}")
     ResponseEntity<SuccessResponse<PatientDto>> getPatientById(@PathVariable Long id);
 
 }

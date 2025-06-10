@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient("note")
+@FeignClient("notes")
 public interface NoteFeignClient {
 
-    @GetMapping(value = "/notes/{patId}", consumes = "application/json")
+    @GetMapping(value = "/notes/{patId}")
     ResponseEntity<SuccessResponse<List<NoteDto>>> getNoteByPatientId(@PathVariable Long patId);
 
 }

@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: patient
+    name: patients
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}
@@ -33,7 +33,7 @@ eureka:
 
 info:
   app:
-    name: patient
+    name: patients
 
 logging:
   level:
