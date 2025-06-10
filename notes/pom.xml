@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.MedilaboSolutions</groupId>
-	<artifactId>note</artifactId>
+	<artifactId>notes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>note</name>
 	<description>Note microservice</description>

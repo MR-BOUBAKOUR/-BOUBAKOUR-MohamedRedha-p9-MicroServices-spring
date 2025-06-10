@@ -1,0 +1,172 @@
+services:
+  eurekaserver:
+    build:
+      context: ./eurekaserver
+    container_name: eurekaserver
+    ports:
+      - "8070:8070"
+    networks:
+      - medilabosolutions-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8070/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: medilabosolutions
+      MYSQL_USER: employeeSpring
+      MYSQL_PASSWORD: employeeSpring
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./data:/docker-entrypoint-initdb.d
+    networks:
+      - medilabosolutions-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - medilabosolutions-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  patients:
+    build:
+      context: ./patients
+    container_name: patients
+    ports:
+      - "8100:8100"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/medilabosolutions
+      - SPRING_DATASOURCE_USERNAME=employeeSpring
+      - SPRING_DATASOURCE_PASSWORD=employeeSpring
+      - DB_DRIVER=com.mysql.cj.jdbc.Driver
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eurekaserver:8070/eureka
+    depends_on:
+      mysql:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+    networks:
+      - medilabosolutions-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  notes:
+    build:
+      context: ./notes
+    container_name: notes
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/medilabosolutions
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eurekaserver:8070/eureka
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+    networks:
+      - medilabosolutions-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8090/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  assessments:
+    build:
+      context: ./assessments
+    container_name: assessments
+    ports:
+      - "8080:8080"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eurekaserver:8070/eureka
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
+    networks:
+      - medilabosolutions-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  gatewayserver:
+    build:
+      context: ./gatewayserver
+    container_name: gatewayserver
+    ports:
+      - "8071:8071"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eurekaserver:8070/eureka
+    depends_on:
+      assessments:
+        condition: service_healthy
+      patients:
+        condition: service_healthy
+      notes:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+    networks:
+      - medilabosolutions-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8071/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  front-vue:
+    build:
+      context: ./front-vue
+    container_name: front-vue
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./front-vue:/app
+      - /app/node_modules
+    networks:
+      - medilabosolutions-net
+    restart: unless-stopped
+    depends_on:
+      gatewayserver:
+        condition: service_healthy
+
+networks:
+  medilabosolutions-net:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  mongo-data:
