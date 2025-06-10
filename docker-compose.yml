@@ -18,10 +18,10 @@ services:
     image: mysql:8
     container_name: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: medilabosolutions
-      MYSQL_USER: employeeSpring
-      MYSQL_PASSWORD: employeeSpring
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
@@ -59,11 +59,11 @@ services:
     ports:
       - "8100:8100"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/medilabosolutions
-      - SPRING_DATASOURCE_USERNAME=employeeSpring
-      - SPRING_DATASOURCE_PASSWORD=employeeSpring
-      - DB_DRIVER=com.mysql.cj.jdbc.Driver
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eurekaserver:8070/eureka
+      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+      - DB_DRIVER=${DB_DRIVER}
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
     depends_on:
       mysql:
         condition: service_healthy
@@ -85,8 +85,8 @@ services:
     ports:
       - "8090:8090"
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/medilabosolutions
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eurekaserver:8070/eureka
+      - SPRING_DATA_MONGODB_URI=${SPRING_DATA_MONGODB_URI}
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
     depends_on:
       mongodb:
         condition: service_healthy
@@ -108,7 +108,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eurekaserver:8070/eureka
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
     depends_on:
       eurekaserver:
         condition: service_healthy
@@ -128,7 +128,7 @@ services:
     ports:
       - "8071:8071"
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eurekaserver:8070/eureka
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
     depends_on:
       assessments:
         condition: service_healthy
