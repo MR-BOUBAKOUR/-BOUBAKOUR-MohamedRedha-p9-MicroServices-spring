@@ -25,13 +25,13 @@ public class PatientRequestDto {
     private LocalDate birthDate;
 
     @NotBlank
-    @Pattern(regexp = "^[MF]$", message = "Gender must be 'M' or 'F'")
+    @Pattern(regexp = "^[MFmf]$", message = "Gender must be 'M' or 'F'")
     private String gender;
 
     @Size(max = 100)
     private String address;
 
     @Size(max = 20)
-    @Pattern(regexp = "^\\d{3}-\\d{3}-\\d{4}$", message = "Phone number must match XXX-XXX-XXXX format")
+    @Pattern(regexp = "^$|^\\d{3}-\\d{3}-\\d{4}$", message = "Phone number must match XXX-XXX-XXXX format")
     private String phone;
 }

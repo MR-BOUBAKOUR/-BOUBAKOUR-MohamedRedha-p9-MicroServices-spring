@@ -1,13 +1,19 @@
 <script setup>
-import { useRoute, RouterView } from 'vue-router'
-import { computed } from 'vue'
+import { globalError, clearError } from '@/stores/error'
+import { useRoute, useRouter, RouterView } from 'vue-router'
+import { computed, watch } from 'vue'
 
 const route = useRoute()
+const router = useRouter()
 const patientId = computed(() => route.params.id)
 
 const showLayout = computed(() => route.name !== 'login')
 const showReturnToPatientsLink = computed(() => route.name === 'patient')
 const showReturnToPatientLink = computed(() => route.name === 'patient-edit')
+
+watch(() => router.currentRoute.value.path, () => {
+  clearError()
+})
 </script>
 
 <template>
@@ -25,6 +31,30 @@ const showReturnToPatientLink = computed(() => route.name === 'patient-edit')
             </RouterLink>
         </header>
 
+        <div v-if="globalError" class="error-banner">
+            {{ globalError }}
+            <button @click="clearError">×</button>
+        </div>
+
         <RouterView />
     </div>
 </template>
+
+<style scoped>
+.error-banner {
+    background: #ff4444;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.error-banner button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+</style>

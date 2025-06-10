@@ -3,7 +3,6 @@ package com.MedilaboSolutions.note.service;
 import com.MedilaboSolutions.note.domain.Note;
 import com.MedilaboSolutions.note.dto.NoteRequestDto;
 import com.MedilaboSolutions.note.dto.NoteDto;
-import com.MedilaboSolutions.note.exception.ResourceNotFoundException;
 import com.MedilaboSolutions.note.mapper.NoteMapper;
 import com.MedilaboSolutions.note.repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +19,6 @@ public class NoteService {
 
     public List<NoteDto> findByPatientId(Long patId) {
         List<Note> notes = noteRepository.findByPatId(patId);
-
-        if (notes.isEmpty()) {
-            throw new ResourceNotFoundException("Ressource not found.");
-        }
 
         return notes.stream()
                 .map(noteMapper::toNoteDto)

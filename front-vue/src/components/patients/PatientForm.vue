@@ -18,7 +18,13 @@ const form = ref({
 })
 
 function handleSubmit() {
-    emit('submit', form.value)
+
+    const dataToSend = {
+        ...form.value,
+        gender: form.value.gender ? form.value.gender.toUpperCase() : '',
+    };
+
+    emit('submit', dataToSend)
 
     form.value = {
         firstName: '',

@@ -34,7 +34,7 @@ async function handleNoteCreate(note) {
 <template>
     <main>
         <PatientCard v-if="patient" :patient="patient" />
-        <NotesCard v-if="notes.length" :notes="notes" />
+        <NotesCard :notes="notes" />
         <NoteForm @submit="handleNoteCreate" />
         <AssessmentCard />
     </main>

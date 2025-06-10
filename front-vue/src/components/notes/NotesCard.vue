@@ -10,11 +10,12 @@ defineProps({
 <template>
     <section class="notes-card">
         <h2>Notes</h2>
-        <ul class="notes-list">
+        <ul class="notes-list" v-if="notes.length > 0">
             <li v-for="(note, index) in notes" :key="index" class="note-item">
                 {{ note.note }}
             </li>
         </ul>
+        <p v-else>Ce patient n'a pas encore de notes.</p>
     </section>
 </template>
 
