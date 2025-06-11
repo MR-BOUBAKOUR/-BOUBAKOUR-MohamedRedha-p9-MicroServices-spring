@@ -7,16 +7,20 @@ import NoteForm from '@/components/notes/NoteForm.vue'
 import AssessmentCard from '@/components/assessments/AssessmentCard.vue'
 import { fetchPatientById } from '@/services/patient-service'
 import { fetchNotesByPatientId, createNote } from '@/services/note-service'
+import { fetchAssessmentByPatientId } from '@/services/assessment-service'
 
 const route = useRoute()
 const patientId = Number(route.params.id)
 
 const patient = ref()
 const notes = ref([])
+const assessment = ref()
 
 onMounted(async () => {
     patient.value = await fetchPatientById(patientId)
     notes.value = await fetchNotesByPatientId(patientId)
+    assessment.value = await fetchAssessmentByPatientId(patientId)
+    console.log(assessment.value)
 })
 
 async function handleNoteCreate(note) {
@@ -36,6 +40,6 @@ async function handleNoteCreate(note) {
         <PatientCard v-if="patient" :patient="patient" />
         <NotesCard :notes="notes" />
         <NoteForm @submit="handleNoteCreate" />
-        <AssessmentCard />
+        <AssessmentCard v-if="assessment" :assessment="assessment" />
     </main>
 </template>
