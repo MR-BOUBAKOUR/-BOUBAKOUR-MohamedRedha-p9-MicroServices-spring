@@ -11,9 +11,12 @@ const showLayout = computed(() => route.name !== 'login')
 const showReturnToPatientsLink = computed(() => route.name === 'patient')
 const showReturnToPatientLink = computed(() => route.name === 'patient-edit')
 
-watch(() => router.currentRoute.value.path, () => {
-  clearError()
-})
+watch(
+    () => router.currentRoute.value.path,
+    () => {
+        clearError()
+    },
+)
 </script>
 
 <template>
@@ -44,7 +47,8 @@ watch(() => router.currentRoute.value.path, () => {
 .error-banner {
     background: #ff4444;
     color: white;
-    padding: 1rem;
+    padding: 0.5rem 2rem;
+    margin-top: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
