@@ -20,7 +20,6 @@ onMounted(async () => {
     patient.value = await fetchPatientById(patientId)
     notes.value = await fetchNotesByPatientId(patientId)
     assessment.value = await fetchAssessmentByPatientId(patientId)
-    console.log(assessment.value)
 })
 
 async function handleNoteCreate(note) {
@@ -32,6 +31,8 @@ async function handleNoteCreate(note) {
 
     const createdNote = await createNote(newNote)
     notes.value.push(createdNote)
+
+    assessment.value = await fetchAssessmentByPatientId(patientId)
 }
 </script>
 
