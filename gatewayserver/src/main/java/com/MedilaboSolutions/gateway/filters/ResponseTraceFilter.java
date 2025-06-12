@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 public class ResponseTraceFilter {
 
     @Autowired
-    FilterUtils filterUtils;
+    TraceUtils traceUtils;
 
     @Bean
     public GlobalFilter postGlobalFilter() {
@@ -20,11 +20,11 @@ public class ResponseTraceFilter {
             chain.filter(exchange)
                 .then(Mono.fromRunnable(() -> {
                     // Copy correlation ID from the request headers to the response headers for end-to-end tracing
-                    String correlationId = filterUtils.getCorrelationId(exchange.getRequest().getHeaders());
+                    String correlationId = traceUtils.getCorrelationId(exchange.getRequest().getHeaders());
 
                     log.debug("Updated the correlation id to the response headers: {}", correlationId);
                     exchange.getResponse().getHeaders()
-                        .add(FilterUtils.CORRELATION_ID_HEADER, correlationId);
+                        .add(TraceUtils.CORRELATION_ID_HEADER, correlationId);
         }));
     }
 }

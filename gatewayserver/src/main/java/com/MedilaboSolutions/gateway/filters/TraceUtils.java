@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 
 @Component
-public class FilterUtils {
+public class TraceUtils {
 
     public static final String CORRELATION_ID_HEADER = "medilabo-solutions-correlation-id";
 
