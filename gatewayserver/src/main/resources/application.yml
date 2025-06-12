@@ -42,4 +42,4 @@ logging:
   level:
     com:
       MedilaboSolutions:
-        gatewayserver: DEBUG
+        gateway: DEBUG

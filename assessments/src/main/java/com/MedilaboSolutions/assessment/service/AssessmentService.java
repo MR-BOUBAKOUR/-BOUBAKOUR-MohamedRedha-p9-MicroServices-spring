@@ -24,17 +24,16 @@ public class AssessmentService {
     private final PatientFeignClient patientFeignClient;
     private final NoteFeignClient noteFeignClient;
 
-    public AssessmentDto generateAssessment(Long patId) {
+    public AssessmentDto generateAssessment(Long patId, String correlationId) {
 
-        ResponseEntity<SuccessResponse<PatientDto>> patient = patientFeignClient.getPatientById(patId);
+        ResponseEntity<SuccessResponse<PatientDto>> patient = patientFeignClient.getPatientById(patId, correlationId);
         String gender = Objects.requireNonNull(patient.getBody()).getData().getGender().toLowerCase();
         int age = calculateAge(patient.getBody().getData().getBirthDate());
-        log.info("Gender : " + gender);
-        log.info("Age : " + age);
+        log.info("Gender : {}", gender);
+        log.info("Age : {}", age);
 
-        ResponseEntity<SuccessResponse<List<NoteDto>>> notes = noteFeignClient.getNoteByPatientId(patId);
+        ResponseEntity<SuccessResponse<List<NoteDto>>> notes = noteFeignClient.getNoteByPatientId(patId, correlationId);
         int triggerCount = countMedicalTriggers(notes);
-
 
         String risk = evaluateRiskLevel(gender, age, triggerCount);
 

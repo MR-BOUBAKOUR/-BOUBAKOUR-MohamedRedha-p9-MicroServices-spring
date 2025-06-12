@@ -6,12 +6,14 @@ import com.MedilaboSolutions.patient.dto.SuccessResponse;
 import com.MedilaboSolutions.patient.service.PatientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/patients")
 @RestController
@@ -28,7 +30,12 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SuccessResponse<PatientDto>> getPatientById(@PathVariable Long id) {
+    public ResponseEntity<SuccessResponse<PatientDto>> getPatientById(
+            @PathVariable Long id,
+            @RequestHeader("medilabo-solutions-correlation-id") String correlationId
+    ) {
+        log.debug("medilabo-solutions-correlation-id found : {}", correlationId);
+
         PatientDto patient = patientService.findById(id);
         return ResponseEntity
                 .status(HttpStatus.OK)

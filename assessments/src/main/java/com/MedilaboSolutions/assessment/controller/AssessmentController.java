@@ -4,15 +4,14 @@ import com.MedilaboSolutions.assessment.dto.AssessmentDto;
 import com.MedilaboSolutions.assessment.dto.SuccessResponse;
 import com.MedilaboSolutions.assessment.service.AssessmentService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/assessments")
 @RestController
@@ -21,8 +20,13 @@ public class AssessmentController {
     private final AssessmentService assessmentService;
 
     @GetMapping("/{patId}")
-    public ResponseEntity<SuccessResponse<AssessmentDto>> getAssessmentByPatientId(@PathVariable Long patId) {
-        AssessmentDto assessment = assessmentService.generateAssessment(patId);
+    public ResponseEntity<SuccessResponse<AssessmentDto>> getAssessmentByPatientId(
+            @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
+            @PathVariable Long patId
+    ) {
+        log.debug("medilabo-solutions-correlation-id found : {}", correlationId);
+
+        AssessmentDto assessment = assessmentService.generateAssessment(patId, correlationId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new SuccessResponse<>(200, "Assessment fetched successfully", assessment));

@@ -6,12 +6,14 @@ import com.MedilaboSolutions.note.dto.SuccessResponse;
 import com.MedilaboSolutions.note.service.NoteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/notes")
 @RestController
@@ -20,7 +22,12 @@ public class NoteController {
     private final NoteService noteService;
 
     @GetMapping("/{patId}")
-    public ResponseEntity<SuccessResponse<List<NoteDto>>> getNoteByPatientId(@PathVariable Long patId) {
+    public ResponseEntity<SuccessResponse<List<NoteDto>>> getNoteByPatientId(
+            @PathVariable Long patId,
+            @RequestHeader("medilabo-solutions-correlation-id") String correlationId
+    ) {
+        log.debug("medilabo-solutions-correlation-id found : {}", correlationId);
+
         List<NoteDto> notes = noteService.findByPatientId(patId);
         return ResponseEntity
                 .status(HttpStatus.OK)
