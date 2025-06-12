@@ -21,25 +21,30 @@ watch(
 
 <template>
     <div class="conteneur">
-        <header v-if="showLayout">
-            <h1>MediLabo Solutions</h1>
-            <RouterLink v-if="showReturnToPatientsLink" to="/patients">
-                ◀ Retour à la liste des patients
-            </RouterLink>
-            <RouterLink
-                v-if="showReturnToPatientLink"
-                :to="{ name: 'patient', params: { id: patientId } }"
-            >
-                ◀ Retour à la fiche du patient
-            </RouterLink>
+        <header>
+            <template v-if="showLayout">
+                <h1>MediLabo Solutions</h1>
+                <RouterLink v-if="showReturnToPatientsLink" to="/patients">
+                    ◀ Retour à la liste des patients
+                </RouterLink>
+                <RouterLink
+                    v-if="showReturnToPatientLink"
+                    :to="{ name: 'patient', params: { id: patientId } }"
+                >
+                    ◀ Retour à la fiche du patient
+                </RouterLink>
+            </template>
         </header>
 
+        
         <div v-if="globalError" class="error-banner">
             {{ globalError }}
             <button @click="clearError">×</button>
         </div>
-
-        <RouterView />
+        
+        <Transition name="fade" mode="out-in">
+            <RouterView :key="$route.fullPath" />
+        </Transition>
     </div>
 </template>
 
