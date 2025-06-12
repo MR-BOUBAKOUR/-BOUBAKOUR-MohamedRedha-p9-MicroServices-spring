@@ -3,8 +3,6 @@ services:
     build:
       context: ./eurekaserver
     container_name: eurekaserver
-    ports:
-      - "8070:8070"
     networks:
       - medilabosolutions-net
     # restart: unless-stopped
@@ -22,8 +20,6 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    ports:
-      - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
       - ./data:/docker-entrypoint-initdb.d
@@ -39,8 +35,6 @@ services:
   mongodb:
     image: mongo:latest
     container_name: mongodb
-    ports:
-      - "27017:27017"
     volumes:
       - mongo-data:/data/db
       - ./data:/docker-entrypoint-initdb.d
@@ -57,8 +51,6 @@ services:
     build:
       context: ./patients
     container_name: patients
-    ports:
-      - "8100:8100"
     environment:
       - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
       - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
@@ -83,8 +75,6 @@ services:
     build:
       context: ./notes
     container_name: notes
-    ports:
-      - "8090:8090"
     environment:
       - SPRING_DATA_MONGODB_URI=${SPRING_DATA_MONGODB_URI}
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
@@ -106,8 +96,6 @@ services:
     build:
       context: ./assessments
     container_name: assessments
-    ports:
-      - "8080:8080"
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
     depends_on:

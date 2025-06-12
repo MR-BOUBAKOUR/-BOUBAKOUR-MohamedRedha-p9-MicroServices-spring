@@ -36,15 +36,16 @@ watch(
             </template>
         </header>
 
-        
         <div v-if="globalError" class="error-banner">
             {{ globalError }}
             <button @click="clearError">×</button>
         </div>
-        
-        <Transition name="fade" mode="out-in">
-            <RouterView :key="$route.fullPath" />
-        </Transition>
+
+        <RouterView v-slot="{ Component }">
+            <Transition name="fade" mode="out-in">
+                <component :is="Component" :key="$route.fullPath" />
+            </Transition>
+        </RouterView>
     </div>
 </template>
 
