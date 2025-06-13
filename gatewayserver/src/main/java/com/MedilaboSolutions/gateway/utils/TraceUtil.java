@@ -1,11 +1,11 @@
-package com.MedilaboSolutions.gateway.filters;
+package com.MedilaboSolutions.gateway.utils;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 
 @Component
-public class TraceUtils {
+public class TraceUtil {
 
     public static final String CORRELATION_ID_HEADER = "medilabo-solutions-correlation-id";
 

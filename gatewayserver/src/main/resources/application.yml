@@ -43,3 +43,5 @@ logging:
     com:
       MedilaboSolutions:
         gateway: DEBUG
+
+secretKey: ${SECRET_KEY}

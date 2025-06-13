@@ -3,6 +3,8 @@ services:
     build:
       context: ./eurekaserver
     container_name: eurekaserver
+    ports:
+      - "8070:8070"
     networks:
       - medilabosolutions-net
     # restart: unless-stopped
@@ -118,6 +120,7 @@ services:
       - "8071:8071"
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+      - SECRET_KEY=${SECRET_KEY}
     depends_on:
       assessments:
         condition: service_healthy

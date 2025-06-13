@@ -1,5 +1,6 @@
 package com.MedilaboSolutions.gateway.filters;
 
+import com.MedilaboSolutions.gateway.utils.TraceUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -17,18 +18,18 @@ import reactor.core.publisher.Mono;
 @Component
 public class RequestTraceFilter implements GlobalFilter {
 
-    private final TraceUtils traceUtils;
+    private final TraceUtil traceUtil;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         HttpHeaders requestHeaders = exchange.getRequest().getHeaders();
-        String correlationId = traceUtils.getCorrelationId(requestHeaders);
+        String correlationId = traceUtil.getCorrelationId(requestHeaders);
 
         if (correlationId != null) {
             log.debug("medilabo-solutions-correlation-id found in RequestTraceFilter: {}", correlationId);
         } else {
             correlationId = generateCorrelationId();
-            exchange = traceUtils.setCorrelationId(exchange, correlationId);
+            exchange = traceUtil.setCorrelationId(exchange, correlationId);
             log.debug("medilabo-solutions-correlation-id generated in RequestTraceFilter: {}", correlationId);
         }
         return chain.filter(exchange);

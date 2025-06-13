@@ -19,6 +19,13 @@ public class GatewayApplication {
 	public RouteLocator customRoutes(RouteLocatorBuilder builder) {
 		return builder.routes()
 				.route(p -> p
+						.path("/login")
+						.filters(f -> f
+								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+						)
+						.uri("forward:/login")
+				)
+				.route(p -> p
 						.path("/v1/assessments/**")
 						.filters( f -> f
 								.rewritePath("/v1/assessments/(?<segment>.*)","/assessments/${segment}")
