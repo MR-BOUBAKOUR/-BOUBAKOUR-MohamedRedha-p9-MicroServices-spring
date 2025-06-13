@@ -1,6 +1,5 @@
-package com.MedilaboSolutions.gateway.config;
+package com.MedilaboSolutions.gateway.security;
 
-import com.MedilaboSolutions.gateway.filters.UnauthorizedHandler;
 import com.MedilaboSolutions.gateway.filters.AuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +23,7 @@ import java.util.List;
 public class SecurityConfig {
 
     private final AuthFilter authFilter;
-    private final UnauthorizedHandler unauthorizedHandler;
+    private final UnauthorizedEntryPoint unauthorizedEntryPoint;
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
@@ -40,7 +39,9 @@ public class SecurityConfig {
                     config.setAllowedMethods(List.of("GET", "POST", "PUT", "OPTIONS"));
                     return config;
                 }))
-                .exceptionHandling(e -> e.authenticationEntryPoint(unauthorizedHandler))
+                // when an unauthenticated user tries to access a protected resource,
+                // delegate the response to the UnauthorizedEntryPoint to return a 401 Unauthorized status.
+                .exceptionHandling(e -> e.authenticationEntryPoint(unauthorizedEntryPoint))
                 // Allow healthcheck for Docker; avoid exposing actuator endpoints in prod
                 .authorizeExchange(ex -> ex
                         .pathMatchers("/login", "/actuator/health","/actuator/info").permitAll()
