@@ -26,14 +26,13 @@ public class AuthFilter implements WebFilter {
 
         String path = exchange.getRequest().getURI().getPath();
 
-        // Skip authentication for system endpoints such as Eureka registration, health checks, and login.
-        // These endpoints must remain publicly accessible without requiring a JWT token.
+        // Skip authentication for Eureka registration, health checks, and the login page.
+        // These endpoints must remain accessible without requiring a JWT token.
         if (path.startsWith("/eureka") || path.startsWith("/actuator") || path.equals("/login")) {
             return chain.filter(exchange);
         }
 
         String token = exchange.getRequest().getHeaders().getFirst("Authorization");
-
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7);
 
@@ -42,14 +41,18 @@ public class AuthFilter implements WebFilter {
                 String username = claims.get("username", String.class);
                 String role = claims.get("role", String.class);
 
+                // Create an authority object from the extracted role
                 SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role);
 
+                // Create an authenticated user; password is null since it was checked at login and isn’t in the JWT
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                         username,
                         null,
                         List.of(authority)
                 );
 
+                // Continue processing the request, injecting the authentication into the reactive security context
+                // This allows downstream components (controllers, etc.) to know who the user is
                 return chain.filter(exchange)
                         .contextWrite(ReactiveSecurityContextHolder.withAuthentication(auth));
             } else {

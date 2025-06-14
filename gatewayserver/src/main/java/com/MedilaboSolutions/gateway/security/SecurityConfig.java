@@ -29,8 +29,8 @@ public class SecurityConfig {
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
-                // CORS configuration to allow requests from the Vue.js frontend running on localhost during development.
-                // This setup enables cross-origin requests with credentials (headers).
+                // CORS configuration to allow requests from the Vue.js frontend running on localhost during development
+                // This setup enables cross-origin requests with credentials (headers)
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
                     config.setAllowCredentials(true);
@@ -39,7 +39,7 @@ public class SecurityConfig {
                     config.setAllowedMethods(List.of("GET", "POST", "PUT", "OPTIONS"));
                     return config;
                 }))
-                // when an unauthenticated user tries to access a protected resource,
+                // When an unauthenticated user tries to access a protected resource,
                 // delegate the response to the UnauthorizedEntryPoint to return a 401 Unauthorized status.
                 .exceptionHandling(e -> e.authenticationEntryPoint(unauthorizedEntryPoint))
                 // Allow healthcheck for Docker; avoid exposing actuator endpoints in prod
@@ -47,7 +47,7 @@ public class SecurityConfig {
                         .pathMatchers("/login", "/actuator/health","/actuator/info").permitAll()
                         .anyExchange().hasRole("MEDECIN")
                 )
-                // Adds the custom JWT auth filter BEFORE Spring Security’s default authentication processing.
+                // Adds the custom JWT auth filter BEFORE Spring Security’s default authentication processing
                 .addFilterBefore(authFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 // Disable HTTP Basic auth (no browser popup)
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)

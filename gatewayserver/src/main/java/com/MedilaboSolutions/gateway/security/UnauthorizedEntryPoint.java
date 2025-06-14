@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-// //Sends 401 Unauthorized response
+// Sends 401 Unauthorized response
 // Returns Mono<Void> to signal async completion without a body
 // following reactive non-blocking WebFlux pattern.
 @Component
