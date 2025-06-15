@@ -43,7 +43,7 @@ defineProps({
 <style scoped>
 .patients-table {
     width: 100%;
-    margin-top: 1rem;
+    margin: 2rem auto;
 }
 .patients-table th,
 .patients-table td {

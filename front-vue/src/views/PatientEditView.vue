@@ -14,7 +14,7 @@ onMounted(async () => {
     patient.value = await fetchPatientById(patientId)
 })
 
-async function handlePatientUpdate(updatedPatient) {   
+async function handlePatientUpdate(updatedPatient) {
     await updatePatient(patientId, updatedPatient)
     router.push({ name: 'patient', params: { id: patientId } })
 }

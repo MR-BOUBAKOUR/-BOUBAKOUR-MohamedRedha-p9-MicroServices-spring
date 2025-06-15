@@ -1,16 +1,16 @@
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
-  opacity: 0;
+    opacity: 0;
 }
 
 .fade-enter-to,
 .fade-leave-from {
-  opacity: 1;
+    opacity: 1;
 }
 
 .conteneur {
@@ -19,19 +19,8 @@
     padding: 0 1rem;
 }
 
-.login-form {
-    width: 300px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: 1px solid #ccc;
-}
-
 header {
-    min-height: 85px;
-}
-
-h2 {
-    margin-bottom: 1.5rem;
+    min-height: 105px;
 }
 
 .form-group {

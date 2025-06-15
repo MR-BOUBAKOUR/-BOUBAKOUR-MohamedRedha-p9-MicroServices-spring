@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { setError } from '@/stores/error'
+import { setupAxiosInterceptors } from './api'
 
 const api = axios.create({
     baseURL: 'http://localhost:8071/v1',
@@ -8,6 +9,8 @@ const api = axios.create({
         'Content-Type': 'application/json',
     },
 })
+
+setupAxiosInterceptors(api)
 
 export async function fetchAssessmentByPatientId(id) {
     try {

@@ -18,11 +18,10 @@ const form = ref({
 })
 
 function handleSubmit() {
-
     const dataToSend = {
         ...form.value,
         gender: form.value.gender ? form.value.gender.toUpperCase() : '',
-    };
+    }
 
     emit('submit', dataToSend)
 
@@ -40,12 +39,30 @@ function handleSubmit() {
 <template>
     <section class="patient-card">
         <form @submit.prevent="handleSubmit" class="patient-form">
-            <label>Prénom <input v-model="form.firstName" required /></label>
-            <label>Nom <input v-model="form.lastName" required /></label>
-            <label>Date de naissance <input type="date" v-model="form.birthDate" required /></label>
-            <label>Genre <input v-model="form.gender" /></label>
-            <label>Adresse <input v-model="form.address" /></label>
-            <label>Téléphone <input v-model="form.phone" /></label>
+            <div class="form-group">
+                <label>Prénom</label>
+                <input v-model="form.firstName" required />
+            </div>
+            <div class="form-group">
+                <label>Nom</label>
+                <input v-model="form.lastName" required />
+            </div>
+            <div class="form-group">
+                <label>Date de naissance</label>
+                <input type="date" v-model="form.birthDate" required />
+            </div>
+            <div class="form-group">
+                <label>Genre</label>
+                <input v-model="form.gender" />
+            </div>
+            <div class="form-group">
+                <label>Adresse</label>
+                <input v-model="form.address" />
+            </div>
+            <div class="form-group">
+                <label>Téléphone</label>
+                <input v-model="form.phone" />
+            </div>
 
             <button type="submit">{{ submitLabel }}</button>
         </form>
@@ -55,15 +72,13 @@ function handleSubmit() {
 <style scoped>
 .patient-card {
     border: 1px solid #ccc;
-    margin: 4rem auto;
+    margin: 2rem auto;
     padding: 1rem;
     border-radius: 8px;
     max-width: 300px;
 }
 
 .patient-form {
-    display: flex;
     flex-direction: column;
-    gap: 0.5rem;
 }
 </style>
