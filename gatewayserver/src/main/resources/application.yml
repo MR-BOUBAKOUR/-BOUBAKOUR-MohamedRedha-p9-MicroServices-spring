@@ -1,5 +1,5 @@
 server:
-  port: 8072
+  port: 8071
 
 spring:
   application:
@@ -42,4 +42,6 @@ logging:
   level:
     com:
       MedilaboSolutions:
-        gatewayserver: DEBUG
+        gateway: DEBUG
+
+secretKey: ${SECRET_KEY}

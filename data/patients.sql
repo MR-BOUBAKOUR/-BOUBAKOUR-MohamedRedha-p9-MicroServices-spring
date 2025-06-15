@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS MedilaboSolutions;
-USE MedilaboSolutions;
+CREATE DATABASE IF NOT EXISTS medilabosolutions;
+USE medilabosolutions;
 
 CREATE TABLE patient (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,

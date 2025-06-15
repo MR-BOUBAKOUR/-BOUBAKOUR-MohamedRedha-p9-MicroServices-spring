@@ -25,7 +25,7 @@ defineProps({
 <style scoped>
 .patient-card {
     border: 1px solid #ccc;
-    margin: 3rem auto;
+    margin: 2rem auto;
     padding: 1rem;
     border-radius: 8px;
     max-width: 600px;

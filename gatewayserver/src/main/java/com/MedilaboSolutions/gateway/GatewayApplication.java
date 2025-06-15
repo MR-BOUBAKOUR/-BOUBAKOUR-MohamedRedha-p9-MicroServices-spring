@@ -19,25 +19,46 @@ public class GatewayApplication {
 	public RouteLocator customRoutes(RouteLocatorBuilder builder) {
 		return builder.routes()
 				.route(p -> p
+						.path("/login")
+						.filters(f -> f
+								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+						)
+						.uri("forward:/login")
+				)
+				.route(p -> p
 						.path("/v1/assessments/**")
 						.filters( f -> f
-								.rewritePath("/v1/assessments/(?<segment>.*)","/${segment}")
+								.rewritePath("/v1/assessments/(?<segment>.*)","/assessments/${segment}")
 								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
-						.uri("lb://ASSESSMENTS")
+						.uri("lb://assessments")
+				)
+				.route(p -> p
+						.path("/v1/notes")
+						.filters(f -> f
+								.rewritePath("/v1/notes", "/notes")
+								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+						.uri("lb://notes")
 				)
 				.route(p -> p
 						.path("/v1/notes/**")
 						.filters( f -> f
-								.rewritePath("/v1/notes/(?<segment>.*)","/${segment}")
+								.rewritePath("/v1/notes/(?<segment>.*)","/notes/${segment}")
 								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
-						.uri("lb://NOTES")
+						.uri("lb://notes")
+				)
+				.route(p -> p
+						.path("/v1/patients")
+						.filters(f -> f
+								.rewritePath("/v1/patients", "/patients")
+								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+						.uri("lb://patients")
 				)
 				.route(p -> p
 						.path("/v1/patients/**")
-						.filters( f -> f
-								.rewritePath("/v1/patients/(?<segment>.*)","/${segment}")
+						.filters(f -> f
+								.rewritePath("/v1/patients/(?<segment>.*)", "/patients/${segment}")
 								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
-						.uri("lb://PATIENTS")
+						.uri("lb://patients")
 				)
 				.build();
 	}

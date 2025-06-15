@@ -1,62 +1,70 @@
+import axios from 'axios'
+import { setError, clearError } from '@/stores/error'
+import { setupAxiosInterceptors } from './api'
+
+const api = axios.create({
+    baseURL: 'http://localhost:8071/v1',
+    timeout: 10000,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+
+setupAxiosInterceptors(api)
+
 export async function fetchPatients() {
-    return [...patients]
+    try {
+        const response = await api.get('/patients')
+        return response.data.data
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            setError(error.response.data.message || 'Erreur API.')
+        } else {
+            setError('Erreur de connexion.')
+        }
+        throw error
+    }
 }
 
 export async function fetchPatientById(id) {
-    return patients.find((p) => p.id === Number(id)) ?? null
+    try {
+        const response = await api.get(`/patients/${id}`)
+        return response.data.data
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            setError(error.response.data.message || 'Erreur API.')
+        } else {
+            setError('Erreur de connexion.')
+        }
+        throw error
+    }
 }
 
 export async function createPatient(newPatient) {
-    const newId = Math.max(...patients.map((p) => p.id)) + 1
-    const createdPatient = { ...newPatient, id: newId }
-    patients.push(createdPatient)
-    return createdPatient
+    try {
+        clearError()
+        const response = await api.post('/patients', newPatient)
+        return response.data.data
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            setError(error.response.data.message || 'Erreur lors de la création.')
+        } else {
+            setError('Erreur de connexion.')
+        }
+        throw error
+    }
 }
 
 export async function updatePatient(id, updatedPatient) {
-    const index = patients.findIndex((p) => p.id === Number(id))
-    if (index !== -1) {
-        patients[index] = { ...updatedPatient, id: Number(id) }
-        return patients[index]
+    try {
+        const response = await api.put(`/patients/${id}`, updatedPatient)
+        return response.data.data
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            setError(error.response.data.message || 'Erreur lors de la mise à jour.')
+        } else {
+            setError('Erreur de connexion.')
+        }
+        throw error
     }
-    return null
 }
-
-const patients = [
-    {
-        id: 1,
-        firstName: 'TestNone',
-        lastName: 'Test',
-        birthDate: '1966-12-31',
-        gender: 'F',
-        address: '1 Brookside St',
-        phone: '100-222-3333',
-    },
-    {
-        id: 2,
-        firstName: 'TestBorderline',
-        lastName: 'Test',
-        birthDate: '1945-06-24',
-        gender: 'M',
-        address: '2 High St',
-        phone: '200-333-4444',
-    },
-    {
-        id: 3,
-        firstName: 'TestInDanger',
-        lastName: 'Test',
-        birthDate: '2004-06-18',
-        gender: 'M',
-        address: '3 Club Road',
-        phone: '300-444-5555',
-    },
-    {
-        id: 4,
-        firstName: 'TestEarlyOnset',
-        lastName: 'Test',
-        birthDate: '2002-06-28',
-        gender: 'F',
-        address: '4 Valley Dr',
-        phone: '400-555-6666',
-    },
-]
