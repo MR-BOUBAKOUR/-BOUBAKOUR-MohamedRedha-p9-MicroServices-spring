@@ -11,7 +11,7 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 - **Databases**: MySQL 8, MongoDB
 - **Infrastructure**: Docker, Docker-Compose, ⚠️ *Kubernetes (on the roadmap)*
 - **Communication**: RestAPI, OpenFeign, ⚠️ *Kafka or RabbitMQ (on the roadmap)*
-- **Observability**: ⚠️ *ELK Stack, OpenTelemetry / Grafana (on the roadmap)*
+- **Observability**: ⚠️ *ELK Stack, OpenTelemetry / Prometheus / Grafana (on the roadmap)*
 
 ---
 
@@ -34,9 +34,6 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ### Resilience
 - Resilience4J - circuit breakers and retry patterns
-
-### Event-Driven
-- Kafka - integration for asynchronous communication
 
 ---
 
