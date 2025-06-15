@@ -7,7 +7,7 @@ services:
       - "8070:8070"
     networks:
       - medilabosolutions-net
-    # restart: unless-stopped
+#    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8070/actuator/health"]
       interval: 10s
@@ -17,6 +17,8 @@ services:
   mysql:
     image: mysql:8
     container_name: mysql
+#    ports:
+#      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -27,7 +29,7 @@ services:
       - ./data:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
-    # restart: unless-stopped
+#    restart: unless-stopped
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -37,12 +39,14 @@ services:
   mongodb:
     image: mongo:latest
     container_name: mongodb
+#    ports:
+#      - "27017:27017"
     volumes:
       - mongo-data:/data/db
       - ./data:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
-    # restart: unless-stopped
+#    restart: unless-stopped
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 10s
@@ -66,7 +70,7 @@ services:
         condition: service_healthy
     networks:
       - medilabosolutions-net
-    # restart: unless-stopped
+#    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8100/actuator/health"]
       interval: 10s
@@ -87,7 +91,7 @@ services:
         condition: service_healthy
     networks:
       - medilabosolutions-net
-    # restart: unless-stopped
+#    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8090/actuator/health"]
       interval: 10s
@@ -105,7 +109,7 @@ services:
         condition: service_healthy
     networks:
       - medilabosolutions-net
-    # restart: unless-stopped
+#    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       interval: 10s
@@ -132,7 +136,7 @@ services:
         condition: service_healthy
     networks:
       - medilabosolutions-net
-    # restart: unless-stopped
+#    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8071/actuator/health"]
       interval: 10s
@@ -150,7 +154,7 @@ services:
       - /app/node_modules
     networks:
       - medilabosolutions-net
-    # restart: unless-stopped
+#    restart: unless-stopped
     depends_on:
       gatewayserver:
         condition: service_healthy
