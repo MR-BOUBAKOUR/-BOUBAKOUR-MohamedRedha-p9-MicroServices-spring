@@ -26,9 +26,14 @@ public class AuthFilter implements WebFilter {
 
         String path = exchange.getRequest().getURI().getPath();
 
-        // Skip authentication for Eureka registration, health checks, and the login page.
-        // These endpoints must remain accessible without requiring a JWT token.
-        if (path.startsWith("/eureka") || path.startsWith("/actuator") || path.equals("/login")) {
+        // Skip authentication for these endpoints. They must remain accessible
+        // ⚠️ In production, we should restrict the access to eureka & actuator to the admin users only.
+        if (path.startsWith("/eureka") ||
+            path.startsWith("/actuator") ||
+            path.equals("/login") ||
+            path.equals("/refresh") ||
+            path.equals("/logout")
+        ) {
             return chain.filter(exchange);
         }
 
@@ -36,7 +41,7 @@ public class AuthFilter implements WebFilter {
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7);
 
-            if (authUtil.validateToken(token)) {
+            if (authUtil.isValidToken(token)) {
                 Claims claims = authUtil.getAllClaimsFromToken(token);
                 String username = claims.get("username", String.class);
                 String role = claims.get("role", String.class);

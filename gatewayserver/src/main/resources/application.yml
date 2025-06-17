@@ -44,4 +44,7 @@ logging:
       MedilaboSolutions:
         gateway: DEBUG
 
-secretKey: ${SECRET_KEY}
+jwt:
+  secretKey: ${SECRET_KEY}
+  accessTokenExpirationMs: 900000        # 15 minutes
+  refreshTokenExpirationMs: 604800000    # 7 days

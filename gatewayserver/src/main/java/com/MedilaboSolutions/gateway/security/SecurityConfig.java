@@ -44,9 +44,20 @@ public class SecurityConfig {
                 .exceptionHandling(e -> e.authenticationEntryPoint(unauthorizedEntryPoint))
                 // Allow healthcheck for Docker; avoid exposing actuator endpoints in prod
                 .authorizeExchange(ex -> ex
-                        .pathMatchers("/login", "/actuator/health","/actuator/info").permitAll()
+                        .pathMatchers(
+                                "/login",
+                                "/logout",
+                                "/refresh",
+                                "/actuator/**"
+                        ).permitAll()
                         .anyExchange().hasRole("MEDECIN")
                 )
+//              .logout(logout -> logout
+//                        .logoutUrl("/logout")
+//                        .logoutSuccessHandler((webFilterExchange, authentication) ->
+//                                webFilterExchange.getExchange().getResponse().setComplete()
+//                        )
+//                )
                 // Adds the custom JWT auth filter BEFORE Spring Security’s default authentication processing
                 .addFilterBefore(authFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 // Disable HTTP Basic auth (no browser popup)
