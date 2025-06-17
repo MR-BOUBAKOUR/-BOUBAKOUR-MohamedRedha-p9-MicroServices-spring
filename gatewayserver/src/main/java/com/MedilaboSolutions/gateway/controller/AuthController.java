@@ -120,25 +120,25 @@ public class AuthController {
                 });
     }
 
-    @PostMapping("/signout")
-    public Mono<ResponseEntity<Void>> signout(ServerHttpResponse response) {
-        // Create a cookie with the same name but empty value to delete it
-        ResponseCookie clearCookie = ResponseCookie.from("refreshToken", "")
-                .httpOnly(true)
-                .secure(false)              // ⚠️ In production, need to be true (HTTPS)
-                .sameSite("Strict")
-                .maxAge(Duration.ZERO)      // Set the cookie's max age to zero to expire it immediately
-                .path("/")
-                .build();
-
-        response.addCookie(clearCookie);
-
-        log.info("User logged out");
-
-        // Signout is a simple immediate action: just delete the cookie
-        // No asynchronous processing or waiting needed
-        // Return a 200 OK with empty body to confirm success
-        // Mono.just(...) creates a Mono with an immediate value
-        return Mono.just(ResponseEntity.ok().build());
-    }
+//    @PostMapping("/signout")
+//    public Mono<ResponseEntity<Void>> signout(ServerHttpResponse response) {
+//        // Create a cookie with the same name but empty value to delete it
+//        ResponseCookie clearCookie = ResponseCookie.from("refreshToken", "")
+//                .httpOnly(true)
+//                .secure(false)              // ⚠️ In production, need to be true (HTTPS)
+//                .sameSite("Strict")
+//                .maxAge(Duration.ZERO)      // Set the cookie's max age to zero to expire it immediately
+//                .path("/")
+//                .build();
+//
+//        response.addCookie(clearCookie);
+//
+//        log.info("User logged out");
+//
+//        // Signout is a simple immediate action: just delete the cookie
+//        // No asynchronous processing or waiting needed
+//        // Return a 200 OK with empty body to confirm success
+//        // Mono.just(...) creates a Mono with an immediate value
+//        return Mono.just(ResponseEntity.ok().build());
+//    }
 }

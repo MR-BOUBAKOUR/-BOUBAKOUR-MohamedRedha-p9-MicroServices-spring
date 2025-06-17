@@ -33,11 +33,11 @@ public class GatewayApplication {
 						.uri("forward:/refresh")
 				)
 				.route(p -> p
-						.path("/signout")
+						.path("/logout")
 						.filters(f -> f
 								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
 						)
-						.uri("forward:/signout")
+						.uri("forward:/logout")
 				)
 				.route(p -> p
 						.path("/v1/assessments/**")

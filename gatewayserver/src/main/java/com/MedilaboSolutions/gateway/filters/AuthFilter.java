@@ -32,7 +32,7 @@ public class AuthFilter implements WebFilter {
             path.startsWith("/actuator") ||
             path.equals("/login") ||
             path.equals("/refresh") ||
-            path.equals("/signout")
+            path.equals("/logout")
         ) {
             return chain.filter(exchange);
         }
