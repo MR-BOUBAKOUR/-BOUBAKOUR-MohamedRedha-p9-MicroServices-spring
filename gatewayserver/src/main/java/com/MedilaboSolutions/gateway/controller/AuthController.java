@@ -120,8 +120,8 @@ public class AuthController {
                 });
     }
 
-    @PostMapping("/logout")
-    public Mono<ResponseEntity<Void>> logout(ServerHttpResponse response) {
+    @PostMapping("/signout")
+    public Mono<ResponseEntity<Void>> signout(ServerHttpResponse response) {
         // Create a cookie with the same name but empty value to delete it
         ResponseCookie clearCookie = ResponseCookie.from("refreshToken", "")
                 .httpOnly(true)
@@ -135,7 +135,7 @@ public class AuthController {
 
         log.info("User logged out");
 
-        // Logout is a simple immediate action: just delete the cookie
+        // Signout is a simple immediate action: just delete the cookie
         // No asynchronous processing or waiting needed
         // Return a 200 OK with empty body to confirm success
         // Mono.just(...) creates a Mono with an immediate value

@@ -46,18 +46,12 @@ public class SecurityConfig {
                 .authorizeExchange(ex -> ex
                         .pathMatchers(
                                 "/login",
-                                "/logout",
+                                "/signout",
                                 "/refresh",
                                 "/actuator/**"
                         ).permitAll()
                         .anyExchange().hasRole("MEDECIN")
                 )
-//              .logout(logout -> logout
-//                        .logoutUrl("/logout")
-//                        .logoutSuccessHandler((webFilterExchange, authentication) ->
-//                                webFilterExchange.getExchange().getResponse().setComplete()
-//                        )
-//                )
                 // Adds the custom JWT auth filter BEFORE Spring Security’s default authentication processing
                 .addFilterBefore(authFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 // Disable HTTP Basic auth (no browser popup)
