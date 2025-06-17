@@ -4,69 +4,80 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ---
 
-## 🧰 Technology Stack
+### 🏗️ Architecture
+
+- **Service discovery**: Eureka Server
+- **API Gateway**: Spring Cloud Gateway - *(routing, auth)*
+- **Frontend**: Vue.js
+- **Patient**: business microservice - MySQL
+- **Notes**: business microservice - MongoDB
+- **Assessments**: business microservice - *(aggregation, logic, results)*
+
+---
+
+### 🧰 Technology stack
 
 - **Backend**: Java 21, Spring Boot 3.4.1, Spring Security, Spring Cloud Gateway, Eureka
 - **Frontend**: Vue.js 3, Pinia (Store Manager), Axios
 - **Databases**: MySQL 8, MongoDB
-- **Infrastructure**: Docker, Docker-Compose, ⚠️ *Kubernetes (on the roadmap)*
 - **Communication**: RestAPI, OpenFeign, ⚠️ *Kafka or RabbitMQ (on the roadmap)*
 - **Observability**: ⚠️ *ELK Stack, OpenTelemetry / Prometheus / Grafana (on the roadmap)*
+- **Infrastructure**: Docker, Docker-Compose, ⚠️ *Kubernetes (on the roadmap)*
 
 ---
 
-## 🏗️ Architecture
+### ❌ Out of scope
 
-- **Service Discovery**: Eureka Server
-- **API Gateway**: Spring Cloud Gateway - (routing, auth)
-- **Frontend**: Vue.js
-- **Patient**: business microservice - MySQL
-- **Notes**: business microservice - MongoDB
-- **Assessments**: business microservice - (aggregation, logic, results)
+- **Spring Cloud Config Server**: No centralized configuration management. *(used in a different project, with RabbitMQ as the refresh trigger and a GitHub repository for versioning and storing configurations)*
+- **Secrets Manager**: Secrets are managed via environment variables.
+
 
 ---
 
-## 🔧 In Progress
+### 🔧 In progress
 
-### Security Enhancements
-- HTTP-only cookies implementation (`branch: httponly`)
+#### Security implementation versions
+- JWT header only (`branch: jwt-header`) ✅ current
+- Access token in header + Refresh token in HttpOnly cookie (`branch: access-header-refresh-httponly`)
+- HTTP-only cookies full implementation (`branch: all-httponly`)
+- OAuth2 login via Spring Security (`branch: oauth2`)
 - Keycloak integration (`branch: keycloak`)
 
-### Resilience
+#### Resilience
 - Resilience4J - circuit breakers and retry patterns
 
 ---
 
-## ✅ Already done
+### ✅ Already done
 
-### Infrastructure
+#### Infrastructure
 - Eureka Server for service discovery ✅
 - API Gateway with routing ✅
 - Docker Compose setup ✅
 - Health checks for all services ✅
 - Feign client for inter-service communication ✅
 
-### Security
+#### Security
 - Services protected behind the gateway ✅
-- Spring Security integration : JWT authentication (Token propagation in the headers) ✅
+- Spring Security integration depending on the branch ✅
 
-### Data Layer
+#### Data layer
 - Patients microservice with MySQL ✅
 - Notes microservice with MongoDB ✅
 
-### Frontend
+#### Frontend
 - Vue.js application ✅
 - Pinia state management (Authentication store) ✅
-- Local storage integration ✅
+- Token management depending on the branch ✅
 
-### Features
+#### Features
 - View/update/add patient information ✅
 - View/add notes ✅
 - Diabetes risk assessments ✅
 - (Notes && Age && gender) based risk rules ✅
 
-### Monitoring
-- Correlation ID on the requests/responses headers (filter in the Gateway) ✅
-- Logging the tracing across microservices (checking the headers) ✅
+#### Monitoring
+- Correlation ID on request/response headers (filter in the Gateway) ✅
+- Distributed tracing logs across the microservices ✅
 
 
