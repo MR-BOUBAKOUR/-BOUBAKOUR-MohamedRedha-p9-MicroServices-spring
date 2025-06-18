@@ -9,7 +9,7 @@ export const useAuthStore = defineStore('auth', () => {
     const tokenExpiry = ref(null)
     const refreshTimer = ref(null)
 
-    const isInitialized = ref(false) // État crucial pour savoir si l'init est terminée
+    const isInitialized = ref(false)
     const isInitializing = ref(false)
     const isLoggingOut = ref(false)
 
@@ -94,11 +94,13 @@ export const useAuthStore = defineStore('auth', () => {
                 refreshTimer.value = null
             }
 
-            const authApi = axios.create({
-                baseURL: 'http://localhost:8071',
-                withCredentials: true,
-            })
-            await authApi.post('/logout')
+            if (token.value) {
+                const authApi = axios.create({
+                    baseURL: 'http://localhost:8071',
+                    withCredentials: true,
+                })
+                await authApi.post('/logout')
+            }
         } catch (error) {
             if (!silent && error.response?.status !== 401) {
                 setError('Error during logout')
@@ -113,6 +115,10 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     const refreshToken = async () => {
+        if (isLoggingOut.value) {
+            return false
+        }
+
         try {
             const authApi = axios.create({
                 baseURL: 'http://localhost:8071',
@@ -167,6 +173,7 @@ export const useAuthStore = defineStore('auth', () => {
         isAuthenticated,
         isInitialized,
         isInitializing,
+        isLoggingOut,
         timeToExpiry,
         initAuth,
         login,

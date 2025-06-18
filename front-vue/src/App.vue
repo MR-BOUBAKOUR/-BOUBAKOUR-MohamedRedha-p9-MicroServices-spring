@@ -1,7 +1,7 @@
 <script setup>
 import { globalError, clearError } from '@/stores/error'
 import { useRoute, useRouter, RouterView } from 'vue-router'
-import { computed, onMounted, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 
 const route = useRoute()
@@ -12,10 +12,6 @@ const patientId = computed(() => route.params.id)
 const showLayout = computed(() => route.name !== 'login')
 const showReturnToPatientsLink = computed(() => route.name === 'patient')
 const showReturnToPatientLink = computed(() => route.name === 'patient-edit')
-
-onMounted(() => {
-    authStore.initAuth()
-})
 
 const handleLogout = async () => {
     await authStore.logout()

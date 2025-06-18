@@ -9,9 +9,10 @@ export function setupAxiosInterceptors(apiInstance) {
         // Here we add the auth token to the headers before the request is sent to the server
         (config) => {
             const authStore = useAuthStore()
-            if (authStore.token) {
+            if (!authStore.isLoggingOut && authStore.token) {
                 config.headers.Authorization = `Bearer ${authStore.token}`
             }
+
             return config
         },
         (error) => {
@@ -29,8 +30,8 @@ export function setupAxiosInterceptors(apiInstance) {
                 const authStore = useAuthStore()
 
                 // Avoid mutliple logouts
-                if (!authStore.isLoggingOut) {
-                    await authStore.logout(true) // Sient logout
+                if (!authStore.isLoggingOut && authStore.isAuthenticated) {
+                    await authStore.logout(true) // Silent logout
                     router.push('/login')
                 }
             }
