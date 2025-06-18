@@ -50,7 +50,6 @@ router.beforeEach(async (to, from, next) => {
     const authStore = useAuthStore()
 
     if (!authStore.isInitialized && !authStore.isInitializing) {
-        console.log('Loading authentication...')
         await authStore.initAuth()
     }
     while (authStore.isInitializing) {
