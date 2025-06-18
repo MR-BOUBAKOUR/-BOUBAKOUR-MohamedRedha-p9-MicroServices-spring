@@ -80,6 +80,7 @@ public class AuthController {
     public Mono<ResponseEntity<AuthResponse>> refresh(ServerWebExchange exchange) {
         return Mono
                 // Get refresh token from the cookie, validate it, then extract the username
+                // .fromCallable: wraps a blocking or synchronous task into a Mono for reactive execution
                 .fromCallable(() -> {
                     MultiValueMap<String, HttpCookie> cookies = exchange.getRequest().getCookies();
                     List<HttpCookie> refreshCookies = cookies.get("refreshToken");
@@ -99,6 +100,7 @@ public class AuthController {
                     return authUtil.getAllClaimsFromToken(refreshToken).getSubject();
                 })
                 // Retrieves the user, generates a new access token with their role, and returns it in the response.
+                // .flatMap: transforms the Mono asynchronously by flattening nested Monos into a single stream
                 .flatMap(username ->
                     userDetailsService
                             .findByUsername(username)
@@ -114,6 +116,7 @@ public class AuthController {
                                 return ResponseEntity.ok(refreshResponse);
                             })
                 )
+                // .onErrorResume: handles errors by switching to a fallback Mono
                 .onErrorResume(e -> {
                     log.warn("Refresh token failed: {}", e.getMessage());
                     return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());

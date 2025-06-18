@@ -17,12 +17,15 @@ export async function fetchAssessmentByPatientId(id) {
         const response = await api.get(`/assessments/${id}`)
         return response.data.data
     } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-            setError(
-                error.response.data.message || "Erreur lors de la récupération de l'évaluation.",
-            )
-        } else {
-            setError('Erreur de connexion.')
+        if (error.response?.status !== 401) {
+            if (axios.isAxiosError(error) && error.response) {
+                setError(
+                    error.response.data.message ||
+                        "Erreur lors de la récupération de l'évaluation.",
+                )
+            } else {
+                setError('Erreur de connexion.')
+            }
         }
         throw error
     }

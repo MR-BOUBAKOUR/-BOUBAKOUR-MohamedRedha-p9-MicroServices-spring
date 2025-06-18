@@ -46,11 +46,15 @@ const router = createRouter({
 // Global navigation guard: runs before every route change
 // It checks if the user is allowed to access the route
 // Based on route meta and auth state, it allows or redirects using `next()`
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
     const authStore = useAuthStore()
 
-    if (!authStore.token && localStorage.getItem('token')) {
-        authStore.initAuth()
+    if (!authStore.isInitialized && !authStore.isInitializing) {
+        console.log('Loading authentication...')
+        await authStore.initAuth()
+    }
+    while (authStore.isInitializing) {
+        await new Promise((resolve) => setTimeout(resolve, 50)) // Waiting for the init's result
     }
 
     // Check if the target route requires authentication
