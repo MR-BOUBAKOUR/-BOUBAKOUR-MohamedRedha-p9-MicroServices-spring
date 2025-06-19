@@ -31,15 +31,14 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 - **Spring Cloud Config Server**: No centralized configuration management. *(used in a different project, with RabbitMQ as the refresh trigger and a GitHub repository for versioning and storing configurations)*
 - **Secrets Manager**: Secrets are managed via environment variables.
 
-
 ---
 
 ### 🔧 In progress
 
 #### Security implementation versions
-- JWT header only (`branch: jwt-header`) ✅ current
-- Access token in header + Refresh token in HttpOnly cookie (`branch: access-header-refresh-httponly`)
-- HTTP-only cookies full implementation (`branch: all-httponly`)
+- JWT header only (`branch: jwt-header`) ✅
+- Access token in header + Refresh token in HttpOnly cookie (`branch: access-header-refresh-httponly`) ✅ current
+- Full HTTP-only implementation with the CSRF token (`branch: all-httponly`) 🔧
 - OAuth2 login via Spring Security (`branch: oauth2`)
 - Keycloak integration (`branch: keycloak`)
 
@@ -51,33 +50,31 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 ### ✅ Already done
 
 #### Infrastructure
-- Eureka Server for service discovery ✅
-- API Gateway with routing ✅
-- Docker Compose setup ✅
-- Health checks for all services ✅
-- Feign client for inter-service communication ✅
+- Eureka Server for service discovery
+- API Gateway with routing
+- Docker Compose setup
+- Health checks for all services
+- Feign client for inter-service communication
 
 #### Security
-- Services protected behind the gateway ✅
-- Spring Security integration depending on the branch ✅
+- Services protected behind the gateway
+- Spring Security integration depending on the branch
 
 #### Data layer
-- Patients microservice with MySQL ✅
-- Notes microservice with MongoDB ✅
+- Patients microservice with MySQL
+- Notes microservice with MongoDB
 
 #### Frontend
-- Vue.js application ✅
-- Pinia state management (Authentication store) ✅
-- Token management depending on the branch ✅
+- Vue.js application
+- Pinia state management (Authentication store)
+- Token management depending on the branch
 
 #### Features
-- View/update/add patient information ✅
-- View/add notes ✅
-- Diabetes risk assessments ✅
-- (Notes && Age && gender) based risk rules ✅
+- View/update/add patient information
+- View/add notes
+- Diabetes risk assessments
+- (Notes && Age && gender) based risk rules
 
 #### Monitoring
-- Correlation ID on request/response headers (filter in the Gateway) ✅
-- Distributed tracing logs across the microservices ✅
-
-
+- Correlation ID on request/response headers (filter in the Gateway)
+- Distributed tracing logs across the microservices
