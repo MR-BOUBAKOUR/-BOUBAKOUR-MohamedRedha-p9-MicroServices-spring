@@ -11,8 +11,12 @@ onMounted(async () => {
 })
 
 async function handlePatientCreate(newPatient) {
-    const createdPatient = await createPatient(newPatient)
-    patients.value.push(createdPatient)
+    try {
+        const createdPatient = await createPatient(newPatient)
+        patients.value.push(createdPatient)
+    } catch (e) {
+        console.warn('Erreur lors de la création du patient.')
+    }
 }
 </script>
 

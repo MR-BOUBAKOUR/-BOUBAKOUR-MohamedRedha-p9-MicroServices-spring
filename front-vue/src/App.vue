@@ -9,7 +9,7 @@ const router = useRouter()
 const authStore = useAuthStore()
 const patientId = computed(() => route.params.id)
 
-const showLayout = computed(() => route.name !== 'login')
+const isLoginPage = computed(() => route.name !== 'login')
 const showReturnToPatientsLink = computed(() => route.name === 'patient')
 const showReturnToPatientLink = computed(() => route.name === 'patient-edit')
 
@@ -29,12 +29,19 @@ watch(
 <template>
     <div class="conteneur">
         <div v-if="authStore.isInitializing" class="loader">Loading authentication...</div>
+
         <template v-else>
-            <header>
-                <template v-if="showLayout">
+            <header :class="{ 'header-empty': !isLoginPage }">
+                <template v-if="isLoginPage">
                     <div class="header-content">
                         <h1>MediLabo Solutions</h1>
-                        <div class="header-actions">
+                        <Transition name="fade">
+                            <div v-if="globalError" class="header-error-banner">
+                                <p>{{ globalError }}</p>
+                                <button @click="clearError">×</button>
+                            </div>
+                        </Transition>
+                        <div class="header-info-logout">
                             <span v-if="authStore.user" class="user-info">
                                 {{ authStore.user.username }}
                                 {{ authStore.user.role }}
@@ -44,23 +51,18 @@ watch(
                     </div>
                     <nav>
                         <RouterLink v-if="showReturnToPatientsLink" to="/patients">
-                            ◀ Retour à la liste des patients
+                        ◀ Retour à la liste des patients
                         </RouterLink>
                         <RouterLink
                             v-if="showReturnToPatientLink"
                             :to="{ name: 'patient', params: { id: patientId } }"
-                        >
+                            >
                             ◀ Retour à la fiche du patient
                         </RouterLink>
                     </nav>
                 </template>
             </header>
-
-            <div v-if="globalError" class="error-banner">
-                {{ globalError }}
-                <button @click="clearError">×</button>
-            </div>
-
+            
             <RouterView v-slot="{ Component }">
                 <Transition name="fade" mode="out-in">
                     <component :is="Component" :key="$route.fullPath" />
@@ -69,6 +71,7 @@ watch(
         </template>
     </div>
 </template>
+
 
 <style scoped>
 .loader {
@@ -84,7 +87,7 @@ watch(
     align-items: center;
 }
 
-.header-actions {
+.header-info-logout {
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -95,17 +98,18 @@ watch(
     color: #666;
 }
 
-.error-banner {
+.header-error-banner {
     background: #ff4444;
     color: white;
-    padding: 0.5rem 2rem;
-    margin-top: 1rem;
+    padding: 0 1rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    max-width: 400px;
+    min-height: 50px;
+    border-radius: 4px;
 }
 
-.error-banner button {
+.header-error-banner button {
+    max-width: 50px;
     background: none;
     border: none;
     color: white;
