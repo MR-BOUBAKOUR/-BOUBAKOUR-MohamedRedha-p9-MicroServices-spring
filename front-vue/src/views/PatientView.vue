@@ -23,16 +23,20 @@ onMounted(async () => {
 })
 
 async function handleNoteCreate(note) {
-    const newNote = {
-        patId: patient.value.id,
-        patient: patient.value.firstName,
-        ...note,
+    try {
+        const newNote = {
+            patId: patient.value.id,
+            patient: patient.value.firstName,
+            ...note,
+        }
+
+        const createdNote = await createNote(newNote)
+        notes.value.push(createdNote)
+
+        assessment.value = await fetchAssessmentByPatientId(patientId)
+    } catch (e) {
+        console.warn('Erreur lors de la création de la note.')
     }
-
-    const createdNote = await createNote(newNote)
-    notes.value.push(createdNote)
-
-    assessment.value = await fetchAssessmentByPatientId(patientId)
 }
 </script>
 

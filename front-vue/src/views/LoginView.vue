@@ -12,8 +12,12 @@ const credentials = ref({
 })
 
 const handleLogin = async () => {
-    await authStore.login(credentials.value)
-    router.push('/patients')
+    try {
+        await authStore.login(credentials.value)
+        router.push('/patients')
+    } catch (e) {
+        console.warn('Erreur lors de la connexion.')
+    }
 }
 </script>
 
