@@ -26,6 +26,20 @@ public class GatewayApplication {
 						.uri("forward:/login")
 				)
 				.route(p -> p
+						.path("/refresh")
+						.filters(f -> f
+								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+						)
+						.uri("forward:/refresh")
+				)
+				.route(p -> p
+						.path("/logout")
+						.filters(f -> f
+								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+						)
+						.uri("forward:/logout")
+				)
+				.route(p -> p
 						.path("/v1/assessments/**")
 						.filters( f -> f
 								.rewritePath("/v1/assessments/(?<segment>.*)","/assessments/${segment}")

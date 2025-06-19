@@ -17,10 +17,12 @@ export async function fetchNotesByPatientId(id) {
         const response = await api.get(`/notes/${id}`)
         return response.data.data
     } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-            setError(error.response.data.message || 'Erreur lors de la récupération des notes.')
-        } else {
-            setError('Erreur de connexion.')
+        if (error.response?.status !== 401) {
+            if (axios.isAxiosError(error) && error.response) {
+                setError(error.response.data.message || 'Erreur lors de la récupération des notes.')
+            } else {
+                setError('Erreur de connexion.')
+            }
         }
         throw error
     }
@@ -32,10 +34,12 @@ export async function createNote(newNote) {
         const response = await api.post('/notes', newNote)
         return response.data.data
     } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-            setError(error.response.data.message || 'Erreur lors de la création de la note.')
-        } else {
-            setError('Erreur de connexion.')
+        if (error.response?.status !== 401) {
+            if (axios.isAxiosError(error) && error.response) {
+                setError(error.response.data.message || 'Erreur lors de la création de la note.')
+            } else {
+                setError('Erreur de connexion.')
+            }
         }
         throw error
     }

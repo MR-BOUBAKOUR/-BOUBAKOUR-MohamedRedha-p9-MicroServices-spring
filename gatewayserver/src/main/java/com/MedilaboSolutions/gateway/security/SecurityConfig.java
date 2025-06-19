@@ -4,6 +4,7 @@ import com.MedilaboSolutions.gateway.filters.AuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -13,8 +14,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.authentication.logout.ServerLogoutHandler;
 import org.springframework.web.cors.CorsConfiguration;
+import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.util.List;
 
 @Configuration
@@ -27,6 +31,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 // CORS configuration to allow requests from the Vue.js frontend running on localhost during development
@@ -44,8 +49,22 @@ public class SecurityConfig {
                 .exceptionHandling(e -> e.authenticationEntryPoint(unauthorizedEntryPoint))
                 // Allow healthcheck for Docker; avoid exposing actuator endpoints in prod
                 .authorizeExchange(ex -> ex
-                        .pathMatchers("/login", "/actuator/health","/actuator/info").permitAll()
+                        .pathMatchers(
+                                "/login",
+                                "/logout",
+                                "/refresh",
+                                "/actuator/**"
+                        ).permitAll()
                         .anyExchange().hasRole("MEDECIN")
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        // Add custom logout handler to clear the cookie
+                        .logoutHandler(cookieClearingLogoutHandler)
+                        // Configure logout success to return 200 OK
+                        .logoutSuccessHandler((webFilterExchange, authentication) ->
+                                webFilterExchange.getExchange().getResponse().setComplete()
+                        )
                 )
                 // Adds the custom JWT auth filter BEFORE Spring Security’s default authentication processing
                 .addFilterBefore(authFilter, SecurityWebFiltersOrder.AUTHENTICATION)
@@ -70,5 +89,19 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    ServerLogoutHandler cookieClearingLogoutHandler = (webFilterExchange, authentication) -> {
+        // Create a cookie with the "same name" but with an empty value to delete it
+        ResponseCookie clearCookie = ResponseCookie.from("refreshToken", "")
+                .httpOnly(true)
+                .secure(false)              // ⚠️ In production, need to be true (HTTPS)
+                .sameSite("Strict")
+                .maxAge(Duration.ZERO)      // Set the cookie's max age to zero to expire it immediately
+                .path("/")
+                .build();
+
+        webFilterExchange.getExchange().getResponse().addCookie(clearCookie);
+        return Mono.empty();                // Indicate that the handler has completed its work
+    };
 
 }

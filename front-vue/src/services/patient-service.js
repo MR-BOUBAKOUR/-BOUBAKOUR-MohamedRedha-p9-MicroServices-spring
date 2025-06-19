@@ -17,10 +17,14 @@ export async function fetchPatients() {
         const response = await api.get('/patients')
         return response.data.data
     } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-            setError(error.response.data.message || 'Erreur API.')
-        } else {
-            setError('Erreur de connexion.')
+        if (error.response?.status !== 401) {
+            if (axios.isAxiosError(error) && error.response) {
+                setError(
+                    error.response.data.message || 'Erreur lors de la récupération des patients.',
+                )
+            } else {
+                setError('Erreur de connexion.')
+            }
         }
         throw error
     }
@@ -31,10 +35,14 @@ export async function fetchPatientById(id) {
         const response = await api.get(`/patients/${id}`)
         return response.data.data
     } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-            setError(error.response.data.message || 'Erreur API.')
-        } else {
-            setError('Erreur de connexion.')
+        if (error.response?.status !== 401) {
+            if (axios.isAxiosError(error) && error.response) {
+                setError(
+                    error.response.data.message || 'Erreur lors de la récupération du patient.',
+                )
+            } else {
+                setError('Erreur de connexion.')
+            }
         }
         throw error
     }
@@ -46,10 +54,12 @@ export async function createPatient(newPatient) {
         const response = await api.post('/patients', newPatient)
         return response.data.data
     } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-            setError(error.response.data.message || 'Erreur lors de la création.')
-        } else {
-            setError('Erreur de connexion.')
+        if (error.response?.status !== 401) {
+            if (axios.isAxiosError(error) && error.response) {
+                setError(error.response.data.message || 'Erreur lors de la création du patient.')
+            } else {
+                setError('Erreur de connexion.')
+            }
         }
         throw error
     }
@@ -60,10 +70,12 @@ export async function updatePatient(id, updatedPatient) {
         const response = await api.put(`/patients/${id}`, updatedPatient)
         return response.data.data
     } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-            setError(error.response.data.message || 'Erreur lors de la mise à jour.')
-        } else {
-            setError('Erreur de connexion.')
+        if (error.response?.status !== 401) {
+            if (axios.isAxiosError(error) && error.response) {
+                setError(error.response.data.message || 'Erreur lors de la mise à jour du patient')
+            } else {
+                setError('Erreur de connexion.')
+            }
         }
         throw error
     }
