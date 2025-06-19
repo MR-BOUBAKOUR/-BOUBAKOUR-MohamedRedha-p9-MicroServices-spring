@@ -15,8 +15,12 @@ onMounted(async () => {
 })
 
 async function handlePatientUpdate(updatedPatient) {
-    await updatePatient(patientId, updatedPatient)
-    router.push({ name: 'patient', params: { id: patientId } })
+    try {
+        await updatePatient(patientId, updatedPatient)
+        router.push({ name: 'patient', params: { id: patientId } })
+    } catch (e) {
+        console.warn('Erreur lors de la mise à jour du patient.')
+    }
 }
 </script>
 

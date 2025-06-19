@@ -20,7 +20,12 @@
 }
 
 header {
-    min-height: 105px;
+    min-height: 120px;
+}
+
+.header-empty {
+    min-height: 120px;
+    visibility: hidden;
 }
 
 .form-group {
