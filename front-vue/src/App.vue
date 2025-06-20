@@ -51,18 +51,18 @@ watch(
                     </div>
                     <nav>
                         <RouterLink v-if="showReturnToPatientsLink" to="/patients">
-                        ◀ Retour à la liste des patients
+                            ◀ Retour à la liste des patients
                         </RouterLink>
                         <RouterLink
                             v-if="showReturnToPatientLink"
                             :to="{ name: 'patient', params: { id: patientId } }"
-                            >
+                        >
                             ◀ Retour à la fiche du patient
                         </RouterLink>
                     </nav>
                 </template>
             </header>
-            
+
             <RouterView v-slot="{ Component }">
                 <Transition name="fade" mode="out-in">
                     <component :is="Component" :key="$route.fullPath" />
@@ -71,7 +71,6 @@ watch(
         </template>
     </div>
 </template>
-
 
 <style scoped>
 .loader {
@@ -99,12 +98,13 @@ watch(
 }
 
 .header-error-banner {
+    font-size: 0.9rem;
     background: #ff4444;
     color: white;
     padding: 0 1rem;
     display: flex;
     max-width: 400px;
-    min-height: 50px;
+    min-height: 40px;
     border-radius: 4px;
 }
 

@@ -22,7 +22,7 @@ defineProps({
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>
+        <TransitionGroup tag="tbody" name="list" v-if="patients.length > 0">
             <tr v-for="patient in patients" :key="patient.id">
                 <td>{{ patient.firstName }}</td>
                 <td>{{ patient.lastName }}</td>
@@ -36,11 +36,20 @@ defineProps({
                     </RouterLink>
                 </td>
             </tr>
-        </tbody>
+        </TransitionGroup>
     </table>
 </template>
 
 <style scoped>
+.list-enter-active {
+    transition: all 1s ease;
+}
+
+.list-enter-from {
+    opacity: 0;
+    transform: translateX(-30px);
+}
+
 .patients-table {
     width: 100%;
     margin: 2rem auto;
