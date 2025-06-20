@@ -21,7 +21,7 @@ public class PatientRequestDto {
     private String lastName;
 
     @NotNull
-    @Past
+    @Past(message = "Birth date must be in the past.")
     private LocalDate birthDate;
 
     @NotBlank
