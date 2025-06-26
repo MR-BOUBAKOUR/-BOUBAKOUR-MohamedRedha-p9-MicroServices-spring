@@ -55,14 +55,14 @@ public class AuthController {
                 log.info("Login success for user: {}", username);
 
                 // Generate access and refresh tokens
-                String accessToken = authUtil.generateAccessToken(username, role);
+                String accessToken = authUtil.generateAccessToken(username, role, null);
                 String refreshToken = authUtil.generateRefreshToken(username);
 
                 // Store refresh token in an HttpOnly cookie which will be sent only in requests from the same domain
                 ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", refreshToken)
                     .httpOnly(true)         // Prevent access from JavaScript (XSS protection)
-                    .secure(false)          // ⚠️ In production, need to be true (HTTPS)
-                    .sameSite("Strict")     // Cross-site requests won’t include the cookie, (CSRF attacks protection)
+                    .secure(true)          // ⚠️ In production, need to be true (HTTPS)
+                    .sameSite("None")     // Cross-site requests won’t include the cookie, (CSRF attacks protection)
                     .maxAge(Duration.ofMillis(refreshTokenExpirationMs))
                     .path("/")              // Cookie included in requests to all paths on the same domain
                     .build();
@@ -104,13 +104,14 @@ public class AuthController {
                 .flatMap(username ->
                     userDetailsService
                             .findByUsername(username)
+                            .switchIfEmpty(Mono.error(new BadCredentialsException("User not found: " + username)))
                             .map(user -> {
                                 String role = user.getAuthorities().iterator().next().getAuthority();
 
                                 log.info("Refresh token success for user: {}", username);
 
                                 // Generate a new access tokens
-                                String newAccessToken = authUtil.generateAccessToken(username, role);
+                                String newAccessToken = authUtil.generateAccessToken(username, role, null);
 
                                 AuthResponse refreshResponse = new AuthResponse(newAccessToken, accessTokenExpirationMs);
                                 return ResponseEntity.ok(refreshResponse);

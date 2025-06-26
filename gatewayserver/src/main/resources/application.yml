@@ -1,5 +1,11 @@
 server:
   port: 8071
+  ssl:
+    enabled: true
+    key-store: classpath:keystore.p12
+    key-store-password: ${KEY_STORE_PASSWORD}
+    key-store-type: PKCS12
+    key-alias: spring
 
 spring:
   application:
@@ -12,6 +18,29 @@ spring:
           enabled: false
           # Activate the lowerCase for the URIs ( -> upperCase: false)
           lowerCaseServiceId: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - openid
+              - email
+              - profile
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            authorization-grant-type: authorization_code
+            client-name: Google
+        provider:
+          google:
+            issuer-uri: https://accounts.google.com
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            user-name-attribute: sub
+
+cors:
+  frontend-success-url: https://localhost:5173/oauth2/success
+  frontend-error-url: https://localhost:5173/login
 
 management:
   endpoints:

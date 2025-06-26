@@ -16,8 +16,12 @@ const handleLogin = async () => {
         await authStore.login(credentials.value)
         router.push('/patients')
     } catch (e) {
-        console.warn('Erreur lors de la connexion.')
+        console.warn('Erreur lors de la connexion.', e)
     }
+}
+
+const handleGoogleLogin = () => {
+    authStore.loginWithGoogle()
 }
 </script>
 
@@ -38,14 +42,32 @@ const handleLogin = async () => {
 
             <button type="submit">Se connecter</button>
         </form>
+
+        <div class="oauth-separator">ou</div>
+
+        <button type="button" @click="handleGoogleLogin" class="google-login-btn">
+            Se connecter avec Google
+        </button>
     </main>
 </template>
 
 <style>
 .login-form {
     width: 300px;
-    margin: 2rem auto;
+    margin: 1.5rem auto;
     padding: 2rem;
     border: 1px solid #ccc;
+}
+
+.oauth-separator {
+    text-align: center;
+    margin: 1.5rem auto;
+    color: #666;
+}
+
+.google-login-btn {
+    display: block;
+    margin: 1.5rem auto;
+    width: 100%;
 }
 </style>

@@ -31,11 +31,17 @@ public class AuthUtil {
         return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
-    public String generateAccessToken(String username, String role) {
+    public String generateAccessToken(String username, String role, String imageUrl) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", username);
         claims.put("role", role);
         claims.put("token_type", "access");
+
+        // Add the profile image URL to the token claims only for OAuth2 logins,
+        // since only the OAuth2 user have this info; we keep it absent for classic login.
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            claims.put("image_url", imageUrl);
+        }
 
         return Jwts.builder()
                 .setClaims(claims)

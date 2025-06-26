@@ -43,6 +43,12 @@ watch(
                         </Transition>
                         <div class="header-info-logout">
                             <span v-if="authStore.user" class="user-info">
+                                <img
+                                    v-if="authStore.user.imageUrl"
+                                    :src="authStore.user.imageUrl"
+                                    alt="Profile"
+                                    class="profile-image"
+                                />
                                 {{ authStore.user.username }}
                                 {{ authStore.user.role }}
                             </span>
@@ -95,6 +101,14 @@ watch(
 .user-info {
     font-size: 0.9rem;
     color: #666;
+}
+
+.profile-image {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
 }
 
 .header-error-banner {

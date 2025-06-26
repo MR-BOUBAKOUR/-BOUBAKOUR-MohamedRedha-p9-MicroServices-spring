@@ -4,6 +4,7 @@ import PatientsView from '../views/PatientsView.vue'
 import PatientView from '@/views/PatientView.vue'
 import LoginView from '@/views/LoginView.vue'
 import PatientEditView from '@/views/PatientEditView.vue'
+import OAuth2CallbackView from '@/views/OAuth2CallbackView.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,6 +13,12 @@ const router = createRouter({
             path: '/login',
             name: 'login',
             component: LoginView,
+            meta: { requiresGuest: true },
+        },
+        {
+            path: '/oauth2/success',
+            name: 'oauth2-callback',
+            component: OAuth2CallbackView,
             meta: { requiresGuest: true },
         },
         {

@@ -32,4 +32,10 @@ build/
 ### VS Code ###
 .vscode/
 
+cert/
+*.pem
+*.key
+*.p12
+keystore.p12
+
 .env

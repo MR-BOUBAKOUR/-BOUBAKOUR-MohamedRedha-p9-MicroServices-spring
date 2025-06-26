@@ -17,8 +17,8 @@ services:
   mysql:
     image: mysql:8
     container_name: mysql
-#    ports:
-#      - "3306:3306"
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -39,8 +39,8 @@ services:
   mongodb:
     image: mongo:latest
     container_name: mongodb
-#    ports:
-#      - "27017:27017"
+    ports:
+      - "27017:27017"
     volumes:
       - mongo-data:/data/db
       - ./data:/docker-entrypoint-initdb.d
@@ -125,6 +125,9 @@ services:
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
       - SECRET_KEY=${SECRET_KEY}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - KEY_STORE_PASSWORD=${KEY_STORE_PASSWORD}
     depends_on:
       assessments:
         condition: service_healthy
