@@ -32,23 +32,22 @@ public class AuthFilter implements WebFilter {
                 exchange.getRequest().getURI().getPath(),
                 exchange.getRequest().getHeaders());
 
-        String path = exchange.getRequest().getURI().getPath();
-
         // Skip authentication for public paths
-        if (path.startsWith("/eureka") ||
-                path.startsWith("/actuator") ||
-                path.equals("/login") ||
-                path.equals("/refresh") ||
-                path.equals("/logout") ||
+        String path = exchange.getRequest().getURI().getPath();
+        if (
+                path.startsWith("/login") ||
+                path.startsWith("/login/oauth2/code/") ||
                 path.startsWith("/oauth2/") ||
-                path.startsWith("/login/oauth2/code/")
+                path.startsWith("/refresh") ||
+                path.startsWith("/logout") ||
+                path.startsWith("/eureka") ||
+                path.startsWith("/actuator")
         ) {
             return chain.filter(exchange);
         }
 
         String token = exchange.getRequest().getHeaders().getFirst("Authorization");
         if (token != null && token.startsWith("Bearer ")) {
-            log.debug("Un token Bearer est présent. Tentative de validation JWT.");
             token = token.substring(7);
 
             if (authUtil.isValidToken(token)) {

@@ -39,3 +39,5 @@ cert/
 keystore.p12
 
 .env
+!/src/main/resources/keystore.p12
+

@@ -1,6 +1,7 @@
 package com.MedilaboSolutions.gateway.security;
 
 import com.MedilaboSolutions.gateway.filters.AuthFilter;
+import com.MedilaboSolutions.gateway.service.ReactiveUserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -9,16 +10,12 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.logout.SecurityContextServerLogoutHandler;
-import org.springframework.security.web.server.authentication.logout.ServerLogoutHandler;
 import org.springframework.web.cors.CorsConfiguration;
-import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.util.List;
@@ -33,6 +30,7 @@ public class SecurityConfig {
     private final UnauthorizedEntryPoint unauthorizedEntryPoint;
     private final OAuth2SuccessHandler oauth2SuccessHandler;
     private final OAuth2FailureHandler oauth2FailureHandler;
+    private final ReactiveUserDetailsServiceImpl reactiveUserDetailsServiceImpl;
     SecurityContextServerLogoutHandler securityContextLogoutHandler = new SecurityContextServerLogoutHandler();
 
     @Bean
@@ -103,13 +101,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public MapReactiveUserDetailsService userDetailsService(PasswordEncoder encoder) {
-        UserDetails user = User
-                .withUsername("medecin.medilabosolutions@gmail.com")
-                .password(encoder.encode("123"))
-                .roles("MEDECIN")
-                .build();
-        return new MapReactiveUserDetailsService(user);
+    public ReactiveUserDetailsService reactiveUserDetailsService() {
+        return reactiveUserDetailsServiceImpl;
     }
 
     @Bean

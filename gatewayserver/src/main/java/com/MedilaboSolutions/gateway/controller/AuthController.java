@@ -35,16 +35,14 @@ public class AuthController {
     @Value("${jwt.refreshTokenExpirationMs}")
     private long refreshTokenExpirationMs;
 
-    private final ReactiveUserDetailsService userDetailsService;
+    private final ReactiveUserDetailsService reactiveUserDetailsService;
     private final AuthUtil authUtil;
     private final PasswordEncoder encoder;
 
     @PostMapping("/login")
-    public Mono<ResponseEntity<AuthResponse>> login(
-            @RequestBody AuthRequest authRequest,
-            ServerHttpResponse response
-    ) {
-        return userDetailsService
+    public Mono<ResponseEntity<AuthResponse>> login(@RequestBody AuthRequest authRequest,
+                                                    ServerHttpResponse response) {
+        return reactiveUserDetailsService
             .findByUsername(authRequest.getUsername())
             .filter(user -> encoder.matches(authRequest.getPassword(), user.getPassword()))
             .switchIfEmpty(Mono.error(new BadCredentialsException("Invalid credentials")))
@@ -102,7 +100,7 @@ public class AuthController {
                 // Retrieves the user, generates a new access token with their role, and returns it in the response.
                 // .flatMap: transforms the Mono asynchronously by flattening nested Monos into a single stream
                 .flatMap(username ->
-                    userDetailsService
+                        reactiveUserDetailsService
                             .findByUsername(username)
                             .switchIfEmpty(Mono.error(new BadCredentialsException("User not found: " + username)))
                             .map(user -> {
@@ -123,26 +121,4 @@ public class AuthController {
                     return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
                 });
     }
-
-//    @PostMapping("/signout")
-//    public Mono<ResponseEntity<Void>> signout(ServerHttpResponse response) {
-//        // Create a cookie with the same name but empty value to delete it
-//        ResponseCookie clearCookie = ResponseCookie.from("refreshToken", "")
-//                .httpOnly(true)
-//                .secure(false)              // ⚠️ In production, need to be true (HTTPS)
-//                .sameSite("Strict")
-//                .maxAge(Duration.ZERO)      // Set the cookie's max age to zero to expire it immediately
-//                .path("/")
-//                .build();
-//
-//        response.addCookie(clearCookie);
-//
-//        log.info("User logged out");
-//
-//        // Signout is a simple immediate action: just delete the cookie
-//        // No asynchronous processing or waiting needed
-//        // Return a 200 OK with empty body to confirm success
-//        // Mono.just(...) creates a Mono with an immediate value
-//        return Mono.just(ResponseEntity.ok().build());
-//    }
 }

@@ -1,6 +1,7 @@
 package com.MedilaboSolutions.gateway.security;
 
 import com.MedilaboSolutions.gateway.dto.OAuth2UserInfo;
+import com.MedilaboSolutions.gateway.service.UserService;
 import com.MedilaboSolutions.gateway.utils.AuthUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.security.web.server.authentication.ServerAuthenticati
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.net.URI;
 import java.time.Duration;
@@ -35,6 +37,7 @@ public class OAuth2SuccessHandler implements ServerAuthenticationSuccessHandler 
     private String frontendSuccessUrl;
 
     private final AuthUtil authUtil;
+    private final UserService userService;
 
     @Override
     public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
@@ -43,14 +46,18 @@ public class OAuth2SuccessHandler implements ServerAuthenticationSuccessHandler 
                     OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
                     Map<String, Object> attributes = oauth2User.getAttributes();
 
-                    log.info("OAuth2 authentication success for user: {}", attributes.get("email"));
+                    log.info("OAuth2 authentication success for user: {}", attributes.get("name"));
 
                     // Extract user info from Google attributes
                     OAuth2UserInfo userInfo = OAuth2UserInfo.fromGoogleAttributes(attributes);
 
-                    String role = "ROLE_MEDECIN";
-                    String username = userInfo.getEmail();
+                    String email = userInfo.getEmail();
+                    String username = userInfo.getName();
                     String pictureUrl = userInfo.getPictureUrl();
+                    String role = "ROLE_MEDECIN";
+
+                    userService.findByUsername(username).ifPresent(user ->
+                            userService.updateUserPicture(user, pictureUrl));
 
                     // Generate JWT tokens
                     String accessToken = authUtil.generateAccessToken(username, role, pictureUrl);
@@ -79,6 +86,7 @@ public class OAuth2SuccessHandler implements ServerAuthenticationSuccessHandler 
 
                     return null;
                 })
+                .subscribeOn(Schedulers.boundedElastic())
                 .then(webFilterExchange.getExchange().getResponse().setComplete())
                 .doOnError(error -> log.error("Error in OAuth2 success handler", error));
     }

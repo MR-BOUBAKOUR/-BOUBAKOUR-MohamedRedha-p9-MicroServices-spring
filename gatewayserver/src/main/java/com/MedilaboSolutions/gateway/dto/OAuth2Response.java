@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class OAuth2Response {
     private String accessToken;
     private long expiresIn;
+
     private OAuth2UserInfo userInfo;
 }

@@ -7,7 +7,7 @@ services:
       - "8070:8070"
     networks:
       - medilabosolutions-net
-#    restart: unless-stopped
+    #    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8070/actuator/health"]
       interval: 10s
@@ -21,15 +21,37 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_PATIENTS_DATABASE}
+      MYSQL_USER: ${MYSQL_PATIENTS_USER}
+      MYSQL_PASSWORD: ${MYSQL_PATIENTS_PASSWORD}
     volumes:
       - mysql-data:/var/lib/mysql
       - ./data:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
-#    restart: unless-stopped
+    #    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mysql-gateway:
+    image: mysql:8
+    container_name: mysql-gateway
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_GATEWAY_DATABASE}
+      MYSQL_USER: ${MYSQL_GATEWAY_USER}
+      MYSQL_PASSWORD: ${MYSQL_GATEWAY_PASSWORD}
+    volumes:
+      - mysql-gateway-data:/var/lib/mysql
+      - ./data/users.sql:/docker-entrypoint-initdb.d/users.sql
+    networks:
+      - medilabosolutions-net
+    #    restart: unless-stopped
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -46,7 +68,7 @@ services:
       - ./data:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
-#    restart: unless-stopped
+    #    restart: unless-stopped
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 10s
@@ -70,7 +92,7 @@ services:
         condition: service_healthy
     networks:
       - medilabosolutions-net
-#    restart: unless-stopped
+    #    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8100/actuator/health"]
       interval: 10s
@@ -91,7 +113,7 @@ services:
         condition: service_healthy
     networks:
       - medilabosolutions-net
-#    restart: unless-stopped
+    #    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8090/actuator/health"]
       interval: 10s
@@ -109,7 +131,7 @@ services:
         condition: service_healthy
     networks:
       - medilabosolutions-net
-#    restart: unless-stopped
+    #    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       interval: 10s
@@ -124,10 +146,14 @@ services:
       - "8071:8071"
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
-      - SECRET_KEY=${SECRET_KEY}
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - OAUTH2_GOOGLE_CLIENT_ID=${OAUTH2_GOOGLE_CLIENT_ID}
+      - OAUTH2_GOOGLE_CLIENT_SECRET=${OAUTH2_GOOGLE_CLIENT_SECRET}
       - KEY_STORE_PASSWORD=${KEY_STORE_PASSWORD}
+      - SPRING_DATASOURCE_URL=${GATEWAY_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${GATEWAY_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${GATEWAY_DATASOURCE_PASSWORD}
+      - DB_DRIVER=${DB_DRIVER}
     depends_on:
       assessments:
         condition: service_healthy
@@ -137,9 +163,11 @@ services:
         condition: service_healthy
       eurekaserver:
         condition: service_healthy
+      mysql-gateway:
+        condition: service_healthy
     networks:
       - medilabosolutions-net
-#    restart: unless-stopped
+    #    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8071/actuator/health"]
       interval: 10s
@@ -168,4 +196,5 @@ networks:
 
 volumes:
   mysql-data:
+  mysql-gateway-data:
   mongo-data:

@@ -23,8 +23,8 @@ spring:
       client:
         registration:
           google:
-            client-id: ${GOOGLE_CLIENT_ID}
-            client-secret: ${GOOGLE_CLIENT_SECRET}
+            client-id: ${OAUTH2_GOOGLE_CLIENT_ID}
+            client-secret: ${OAUTH2_GOOGLE_CLIENT_SECRET}
             scope:
               - openid
               - email
@@ -37,6 +37,12 @@ spring:
             issuer-uri: https://accounts.google.com
             user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
             user-name-attribute: sub
+
+  datasource:
+    url: ${GATEWAY_DATASOURCE_URL}
+    username: ${GATEWAY_DATASOURCE_USERNAME}
+    password: ${GATEWAY_DATASOURCE_PASSWORD}
+    driver-class-name: ${DB_DRIVER}
 
 cors:
   frontend-success-url: https://localhost:5173/oauth2/success
@@ -59,7 +65,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:8070/eureka/
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
   instance:
     preferIpAddress: true
 
@@ -74,6 +80,6 @@ logging:
         gateway: DEBUG
 
 jwt:
-  secretKey: ${SECRET_KEY}
+  secretKey: ${JWT_SECRET_KEY}
   accessTokenExpirationMs: 900000        # 15 minutes
   refreshTokenExpirationMs: 604800000    # 7 days
