@@ -3,7 +3,6 @@ package com.MedilaboSolutions.gateway.security;
 import com.MedilaboSolutions.gateway.dto.OAuth2UserInfo;
 import com.MedilaboSolutions.gateway.service.UserService;
 import com.MedilaboSolutions.gateway.utils.AuthUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,53 +40,49 @@ public class OAuth2SuccessHandler implements ServerAuthenticationSuccessHandler 
 
     @Override
     public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
-        return Mono
-                .fromCallable(() -> {
-                    OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
-                    Map<String, Object> attributes = oauth2User.getAttributes();
 
-                    log.info("OAuth2 authentication success for user: {}", attributes.get("name"));
+        OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+        Map<String, Object> attributes = oauth2User.getAttributes();
 
-                    // Extract user info from Google attributes
-                    OAuth2UserInfo userInfo = OAuth2UserInfo.fromGoogleAttributes(attributes);
+        log.info("OAuth2 authentication success for user: {}", attributes.get("name"));
 
-                    String email = userInfo.getEmail();
-                    String username = userInfo.getName();
-                    String pictureUrl = userInfo.getPictureUrl();
-                    String role = "ROLE_MEDECIN";
+        OAuth2UserInfo userInfo = OAuth2UserInfo.fromGoogleAttributes(attributes);
+        String username = userInfo.getName();
+        String pictureUrl = userInfo.getPictureUrl();
 
-                    userService.findByUsername(username).ifPresent(user ->
-                            userService.updateUserPicture(user, pictureUrl));
+        ServerWebExchange exchange = webFilterExchange.getExchange();
 
-                    // Generate JWT tokens
-                    String accessToken = authUtil.generateAccessToken(username, role, pictureUrl);
+        return userService.findByUsernameReactive(username)
+                .switchIfEmpty(Mono.error(new RuntimeException("User not found")))
+                .flatMap(user -> userService.updateUserPictureReactive(user, pictureUrl).thenReturn(user))
+                .flatMap(user -> {
+                    String role = "ROLE_" + user.getRole();
+                    String accessToken = authUtil.generateAccessToken(username, role, user.getUrlPicture());
                     String refreshToken = authUtil.generateRefreshToken(username);
 
-                    // Create the refresh token cookie
                     ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", refreshToken)
                             .httpOnly(true)
-                            .secure(true)              // ⚠️ Should be true in production (HTTPS)
+                            .secure(true)
                             .sameSite("None")
                             .maxAge(Duration.ofMillis(refreshTokenExpirationMs))
                             .path("/")
                             .build();
 
-                    ServerWebExchange exchange = webFilterExchange.getExchange();
                     exchange.getResponse().addCookie(refreshCookie);
 
-                    // Redirect to frontend with access token and expiration
                     String redirectUrl = String.format("%s?token=%s&expires=%d",
                             frontendSuccessUrl, accessToken, accessTokenExpirationMs);
 
-                    exchange.getResponse()
-                            .setStatusCode(HttpStatus.FOUND);
-                    exchange.getResponse().getHeaders()
-                            .setLocation(URI.create(redirectUrl));
-
-                    return null;
+                    exchange.getResponse().setStatusCode(HttpStatus.FOUND);
+                    exchange.getResponse().getHeaders().setLocation(URI.create(redirectUrl));
+                    return exchange.getResponse().setComplete();
+                })
+                .onErrorResume(ex -> {
+                    log.warn("Unauthorized OAuth2 login attempt for unknown user: {}", username);
+                    exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                    return exchange.getResponse().setComplete();
                 })
                 .subscribeOn(Schedulers.boundedElastic())
-                .then(webFilterExchange.getExchange().getResponse().setComplete())
-                .doOnError(error -> log.error("Error in OAuth2 success handler", error));
+                .doOnError(e -> log.error("Error in OAuth2 success handler", e));
     }
 }

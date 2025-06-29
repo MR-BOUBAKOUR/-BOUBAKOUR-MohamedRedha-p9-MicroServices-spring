@@ -60,17 +60,18 @@ export const useAuthStore = defineStore('auth', () => {
             })
 
             const response = await authApi.post('/login', credentials)
-            const { accessToken, expiresIn } = response.data
+            const { accessToken, expiresIn, email, username, pictureUrl } = response.data
 
             // Store the token and his expiry in reactive states
             token.value = accessToken
             tokenExpiry.value = expiresIn + Date.now()
 
-            // Extract the user info from the token and set the user state
-            const payload = JSON.parse(atob(accessToken.split('.')[1]))
+            // Extract the user role from the token and set the user state
             user.value = {
-                username: payload.username,
-                role: payload.role,
+                email,
+                username,
+                role: JSON.parse(atob(accessToken.split('.')[1])).role,
+                imageUrl: pictureUrl,
             }
 
             scheduleTokenRefresh(expiresIn)
@@ -127,15 +128,16 @@ export const useAuthStore = defineStore('auth', () => {
             })
 
             const response = await authApi.post('/refresh')
-            const { accessToken, expiresIn } = response.data
+            const { accessToken, expiresIn, email, username, pictureUrl } = response.data
 
             token.value = accessToken
             tokenExpiry.value = expiresIn + Date.now()
 
-            const payload = JSON.parse(atob(accessToken.split('.')[1]))
             user.value = {
-                username: payload.username,
-                role: payload.role,
+                email,
+                username,
+                role: JSON.parse(atob(accessToken.split('.')[1])).role,
+                imageUrl: pictureUrl,
             }
 
             // We trigger a new refreshTimer (if it reachs under 2 minutes, we come back here)

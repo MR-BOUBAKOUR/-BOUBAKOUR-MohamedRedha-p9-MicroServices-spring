@@ -2,6 +2,7 @@ package com.MedilaboSolutions.gateway.controller;
 
 import com.MedilaboSolutions.gateway.dto.AuthRequest;
 import com.MedilaboSolutions.gateway.dto.AuthResponse;
+import com.MedilaboSolutions.gateway.service.UserService;
 import com.MedilaboSolutions.gateway.utils.AuthUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,7 @@ public class AuthController {
     private long refreshTokenExpirationMs;
 
     private final ReactiveUserDetailsService reactiveUserDetailsService;
+    private final UserService userService;
     private final AuthUtil authUtil;
     private final PasswordEncoder encoder;
 
@@ -46,9 +48,11 @@ public class AuthController {
             .findByUsername(authRequest.getUsername())
             .filter(user -> encoder.matches(authRequest.getPassword(), user.getPassword()))
             .switchIfEmpty(Mono.error(new BadCredentialsException("Invalid credentials")))
-            .map(user -> {
+            .flatMap(userDetails -> userService.findByUsernameReactive(userDetails.getUsername()))
+            .flatMap(user -> {
                 String username = user.getUsername();
-                String role = user.getAuthorities().iterator().next().getAuthority();
+                String role = "ROLE_" + user.getRole();
+                String pictureUrl = user.getUrlPicture();
 
                 log.info("Login success for user: {}", username);
 
@@ -68,8 +72,14 @@ public class AuthController {
                 response.addCookie(refreshCookie);
 
                 // Send access token in the response body
-                AuthResponse loginResponse = new AuthResponse(accessToken, accessTokenExpirationMs);
-                return ResponseEntity.ok(loginResponse);
+                AuthResponse loginResponse = new AuthResponse(
+                        accessToken,
+                        accessTokenExpirationMs,
+                        user.getEmail(),
+                        user.getUsername(),
+                        pictureUrl
+                );
+                return Mono.just(ResponseEntity.ok(loginResponse));
             })
             .doOnError(e -> log.warn("Login failed for user {}: {}", authRequest.getUsername(), e.getMessage()));
     }
@@ -78,7 +88,6 @@ public class AuthController {
     public Mono<ResponseEntity<AuthResponse>> refresh(ServerWebExchange exchange) {
         return Mono
                 // Get refresh token from the cookie, validate it, then extract the username
-                // .fromCallable: wraps a blocking or synchronous task into a Mono for reactive execution
                 .fromCallable(() -> {
                     MultiValueMap<String, HttpCookie> cookies = exchange.getRequest().getCookies();
                     List<HttpCookie> refreshCookies = cookies.get("refreshToken");
@@ -97,25 +106,30 @@ public class AuthController {
 
                     return authUtil.getAllClaimsFromToken(refreshToken).getSubject();
                 })
-                // Retrieves the user, generates a new access token with their role, and returns it in the response.
-                // .flatMap: transforms the Mono asynchronously by flattening nested Monos into a single stream
                 .flatMap(username ->
-                        reactiveUserDetailsService
-                            .findByUsername(username)
-                            .switchIfEmpty(Mono.error(new BadCredentialsException("User not found: " + username)))
-                            .map(user -> {
-                                String role = user.getAuthorities().iterator().next().getAuthority();
-
-                                log.info("Refresh token success for user: {}", username);
-
-                                // Generate a new access tokens
-                                String newAccessToken = authUtil.generateAccessToken(username, role, null);
-
-                                AuthResponse refreshResponse = new AuthResponse(newAccessToken, accessTokenExpirationMs);
-                                return ResponseEntity.ok(refreshResponse);
-                            })
+                        reactiveUserDetailsService.findByUsername(username)
+                                .switchIfEmpty(Mono.error(new BadCredentialsException("User not found: " + username)))
+                                // UserDetails found, now retrieve full User entity
+                                .flatMap(userDetails -> userService.findByUsernameReactive(userDetails.getUsername()))
                 )
-                // .onErrorResume: handles errors by switching to a fallback Mono
+                .map(user -> {
+                    String role = "ROLE_" + user.getRole();
+                    String username = user.getUsername();
+                    String pictureUrl = user.getUrlPicture();
+                    String newAccessToken = authUtil.generateAccessToken(user.getUsername(), role, pictureUrl);
+
+                    log.info("Refresh token success for user: {}", username);
+
+                    // Send access token in the response body
+                    AuthResponse refreshResponse = new AuthResponse(
+                            newAccessToken,
+                            accessTokenExpirationMs,
+                            user.getEmail(),
+                            user.getUsername(),
+                            pictureUrl
+                    );
+                    return ResponseEntity.ok(refreshResponse);
+                })
                 .onErrorResume(e -> {
                     log.warn("Refresh token failed: {}", e.getMessage());
                     return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());

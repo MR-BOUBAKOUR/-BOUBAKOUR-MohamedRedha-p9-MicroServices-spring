@@ -8,4 +8,8 @@ import lombok.*;
 public class AuthResponse {
     private String accessToken;
     private long expiresIn;
+
+    private String email;
+    private String username;
+    private String pictureUrl;
 }
