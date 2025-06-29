@@ -39,7 +39,7 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 - JWT header only (`branch: jwt-header`) ✅
 
 
-- Access token in header + Refresh token in HttpOnly cookie (`branch: access-header-refresh-httponly`) ✅ current
+- Access token in header + Refresh token in HttpOnly cookie (`branch: access-header-refresh-httponly`) ✅
 
 
 - Access & refresh tokens full HttpOnly implementation + CSRF token (`branch: all-httponly`) ❌
@@ -47,10 +47,12 @@ Microservices application for diabetes risk assessment built with Spring Boot an
     *Abandoned: adds unnecessary complexity without significant security benefits. Modern SPA architecture with SameSite cookies and proper CORS configuration provides equivalent protection.*
 
 
-- OAuth2 login via Spring Security (`branch: oauth2`) 🔧
+- OAuth2/Google + username/password (Access&Refresh tokens for both) (`branch: oauth2-access&refresh`) ✅ current
 
 
-- Keycloak integration (`branch: keycloak`)
+- Keycloak integration (`branch: keycloak`) 🕒
+
+  *Postponed: This integration is currently on hold as I focus on advancing on event-driven and observability. Implementation will be reconsidered if time permits.*
 
 #### Resilience
 - Resilience4J - circuit breakers and retry patterns
