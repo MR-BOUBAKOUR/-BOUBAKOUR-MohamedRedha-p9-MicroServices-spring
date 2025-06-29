@@ -23,11 +23,12 @@ export const useAuthStore = defineStore('auth', () => {
     const initAuth = async () => {
         // Avoid multiple concurrent calls, skip if already initialized or after a logout
         if (isInitializing.value || isInitialized.value || wasLoggedOut.value) return false
+        if (window.location.pathname === '/oauth2/success') return false
 
         isInitializing.value = true
 
         try {
-            // Try to refresh the access token using the refresh token stored in the HttpOnly cookie
+            // Try to refresh the access token using the refresh token stored in the HttpsOnly cookie
             const success = await refreshToken()
 
             if (success) {
@@ -49,7 +50,7 @@ export const useAuthStore = defineStore('auth', () => {
     const login = async (credentials) => {
         try {
             const authApi = axios.create({
-                baseURL: 'http://localhost:8071',
+                baseURL: 'https://localhost:8071',
                 timeout: 10000,
                 headers: {
                     'Content-Type': 'application/json',
@@ -59,17 +60,18 @@ export const useAuthStore = defineStore('auth', () => {
             })
 
             const response = await authApi.post('/login', credentials)
-            const { accessToken, expiresIn } = response.data
+            const { accessToken, expiresIn, email, username, pictureUrl } = response.data
 
             // Store the token and his expiry in reactive states
             token.value = accessToken
             tokenExpiry.value = expiresIn + Date.now()
 
-            // Extract the user info from the token and set the user state
-            const payload = JSON.parse(atob(accessToken.split('.')[1]))
+            // Extract the user role from the token and set the user state
             user.value = {
-                username: payload.username,
-                role: payload.role,
+                email,
+                username,
+                role: JSON.parse(atob(accessToken.split('.')[1])).role,
+                imageUrl: pictureUrl,
             }
 
             scheduleTokenRefresh(expiresIn)
@@ -86,6 +88,10 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    const loginWithGoogle = () => {
+        window.location.href = 'https://localhost:8071/oauth2/authorization/google'
+    }
+
     const logout = async (silent = false) => {
         try {
             if (refreshTimer.value) {
@@ -94,7 +100,7 @@ export const useAuthStore = defineStore('auth', () => {
             }
 
             const authApi = axios.create({
-                baseURL: 'http://localhost:8071',
+                baseURL: 'https://localhost:8071',
                 withCredentials: true,
             })
             await authApi.post('/logout')
@@ -114,23 +120,24 @@ export const useAuthStore = defineStore('auth', () => {
     const refreshToken = async () => {
         try {
             const authApi = axios.create({
-                baseURL: 'http://localhost:8071',
+                baseURL: 'https://localhost:8071',
                 timeout: 10000,
-                // No Authorization header needed: refresh is handled via HttpOnly cookie
+                // No Authorization header needed: refresh is handled via HttpsOnly cookie
                 // Enable the sending of the refreshToken cookie to the backend domain
                 withCredentials: true,
             })
 
             const response = await authApi.post('/refresh')
-            const { accessToken, expiresIn } = response.data
+            const { accessToken, expiresIn, email, username, pictureUrl } = response.data
 
             token.value = accessToken
             tokenExpiry.value = expiresIn + Date.now()
 
-            const payload = JSON.parse(atob(accessToken.split('.')[1]))
             user.value = {
-                username: payload.username,
-                role: payload.role,
+                email,
+                username,
+                role: JSON.parse(atob(accessToken.split('.')[1])).role,
+                imageUrl: pictureUrl,
             }
 
             // We trigger a new refreshTimer (if it reachs under 2 minutes, we come back here)
@@ -171,6 +178,8 @@ export const useAuthStore = defineStore('auth', () => {
         timeToExpiry,
         initAuth,
         login,
+        loginWithGoogle,
         logout,
+        scheduleTokenRefresh,
     }
 })

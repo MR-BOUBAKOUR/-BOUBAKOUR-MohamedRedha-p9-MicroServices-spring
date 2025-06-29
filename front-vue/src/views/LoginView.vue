@@ -1,8 +1,10 @@
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import { setError } from '@/stores/error'
 
+const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
 
@@ -11,13 +13,23 @@ const credentials = ref({
     password: '',
 })
 
+onMounted(() => {
+    if (route.query.error === 'oauth2_unknown_user') {
+        setError("Utilisateur Google non autorisé, contactez l'administrateur.")
+    }
+})
+
 const handleLogin = async () => {
     try {
         await authStore.login(credentials.value)
         router.push('/patients')
     } catch (e) {
-        console.warn('Erreur lors de la connexion.')
+        console.warn('Erreur lors de la connexion.', e)
     }
+}
+
+const handleGoogleLogin = () => {
+    authStore.loginWithGoogle()
 }
 </script>
 
@@ -38,14 +50,32 @@ const handleLogin = async () => {
 
             <button type="submit">Se connecter</button>
         </form>
+
+        <div class="oauth-separator">ou</div>
+
+        <button type="button" @click="handleGoogleLogin" class="google-login-btn">
+            Se connecter avec Google
+        </button>
     </main>
 </template>
 
 <style>
 .login-form {
     width: 300px;
-    margin: 2rem auto;
+    margin: 1.5rem auto;
     padding: 2rem;
     border: 1px solid #ccc;
+}
+
+.oauth-separator {
+    text-align: center;
+    margin: 1.5rem auto;
+    color: #666;
+}
+
+.google-login-btn {
+    display: block;
+    margin: 1.5rem auto;
+    width: 100%;
 }
 </style>

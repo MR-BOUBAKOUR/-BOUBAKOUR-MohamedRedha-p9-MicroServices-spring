@@ -9,7 +9,6 @@ const router = useRouter()
 const authStore = useAuthStore()
 const patientId = computed(() => route.params.id)
 
-const isLoginPage = computed(() => route.name !== 'login')
 const showReturnToPatientsLink = computed(() => route.name === 'patient')
 const showReturnToPatientLink = computed(() => route.name === 'patient-edit')
 
@@ -31,36 +30,63 @@ watch(
         <div v-if="authStore.isInitializing" class="loader">Loading authentication...</div>
 
         <template v-else>
-            <header :class="{ 'header-empty': !isLoginPage }">
-                <template v-if="isLoginPage">
-                    <div class="header-content">
+            <header>
+                <div class="header-content" v-if="route.name !== 'login'">
+                    <!-- Logo -->
+                    <div class="header-logo">
                         <h1>MediLabo Solutions</h1>
+                    </div>
+
+                    <!-- Erreurs -->
+                    <div class="header-error-banner">
                         <Transition name="fade">
-                            <div v-if="globalError" class="header-error-banner">
+                            <div v-if="globalError" class="error-message">
                                 <p>{{ globalError }}</p>
                                 <button @click="clearError">×</button>
                             </div>
                         </Transition>
-                        <div class="header-info-logout">
-                            <span v-if="authStore.user" class="user-info">
-                                {{ authStore.user.username }}
-                                {{ authStore.user.role }}
-                            </span>
-                            <button @click="handleLogout">Déconnexion</button>
+                    </div>
+
+                    <!-- User info -->
+                    <div v-if="authStore.user" class="header-user-banner">
+                        <img
+                            v-if="authStore.user.imageUrl"
+                            :src="authStore.user.imageUrl"
+                            alt="Profile"
+                            class="profile-image"
+                        />
+                        <div class="user-meta">
+                            <div>{{ authStore.user.username }}</div>
+                            <div>{{ authStore.user.role }}</div>
                         </div>
                     </div>
-                    <nav>
-                        <RouterLink v-if="showReturnToPatientsLink" to="/patients">
-                            ◀ Retour à la liste des patients
-                        </RouterLink>
-                        <RouterLink
-                            v-if="showReturnToPatientLink"
-                            :to="{ name: 'patient', params: { id: patientId } }"
-                        >
-                            ◀ Retour à la fiche du patient
-                        </RouterLink>
-                    </nav>
-                </template>
+
+                    <!-- Déconnexion -->
+                    <div class="header-logout">
+                        <button @click="handleLogout">Déconnexion</button>
+                    </div>
+                </div>
+
+                <div v-else class="header-error-banner">
+                    <Transition name="fade">
+                        <div v-if="globalError" class="error-message">
+                            <p>{{ globalError }}</p>
+                            <button @click="clearError">×</button>
+                        </div>
+                    </Transition>
+                </div>
+
+                <nav>
+                    <RouterLink v-if="showReturnToPatientsLink" to="/patients">
+                        ◀ Retour à la liste des patients
+                    </RouterLink>
+                    <RouterLink
+                        v-if="showReturnToPatientLink"
+                        :to="{ name: 'patient', params: { id: patientId } }"
+                    >
+                        ◀ Retour à la fiche du patient
+                    </RouterLink>
+                </nav>
             </header>
 
             <RouterView v-slot="{ Component }">
@@ -73,31 +99,27 @@ watch(
 </template>
 
 <style scoped>
-.loader {
-    text-align: center;
-    margin: 2rem;
-    font-size: 1.2rem;
-    color: #666;
-}
-
 .header-content {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    min-height: 80px;
 }
 
-.header-info-logout {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+/* Logo */
+.header-logo h1 {
+    margin: 0;
 }
 
-.user-info {
-    font-size: 0.9rem;
-    color: #666;
-}
-
+/* Bannière d’erreur */
 .header-error-banner {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+.error-message {
     font-size: 0.9rem;
     background: #ff4444;
     color: white;
@@ -106,14 +128,37 @@ watch(
     max-width: 400px;
     min-height: 40px;
     border-radius: 4px;
+    align-items: center;
 }
-
-.header-error-banner button {
+.error-message button {
     max-width: 50px;
     background: none;
     border: none;
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+/* User info */
+.header-user-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.profile-image {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.user-meta {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.header-logout {
+    margin-left: 1rem;
 }
 </style>

@@ -1,5 +1,11 @@
 server:
   port: 8071
+  ssl:
+    enabled: true
+    key-store: classpath:keystore.p12
+    key-store-password: ${KEY_STORE_PASSWORD}
+    key-store-type: PKCS12
+    key-alias: spring
 
 spring:
   application:
@@ -12,6 +18,35 @@ spring:
           enabled: false
           # Activate the lowerCase for the URIs ( -> upperCase: false)
           lowerCaseServiceId: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${OAUTH2_GOOGLE_CLIENT_ID}
+            client-secret: ${OAUTH2_GOOGLE_CLIENT_SECRET}
+            scope:
+              - openid
+              - email
+              - profile
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            authorization-grant-type: authorization_code
+            client-name: Google
+        provider:
+          google:
+            issuer-uri: https://accounts.google.com
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            user-name-attribute: sub
+
+  datasource:
+    url: ${GATEWAY_DATASOURCE_URL}
+    username: ${GATEWAY_DATASOURCE_USERNAME}
+    password: ${GATEWAY_DATASOURCE_PASSWORD}
+    driver-class-name: ${DB_DRIVER}
+
+cors:
+  frontend-success-url: https://localhost:5173/oauth2/success
+  frontend-error-url: https://localhost:5173/login
 
 management:
   endpoints:
@@ -30,7 +65,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:8070/eureka/
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
   instance:
     preferIpAddress: true
 
@@ -45,6 +80,6 @@ logging:
         gateway: DEBUG
 
 jwt:
-  secretKey: ${SECRET_KEY}
+  secretKey: ${JWT_SECRET_KEY}
   accessTokenExpirationMs: 900000        # 15 minutes
   refreshTokenExpirationMs: 604800000    # 7 days

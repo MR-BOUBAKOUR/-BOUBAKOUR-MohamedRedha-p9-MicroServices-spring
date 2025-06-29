@@ -37,9 +37,19 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 #### Security implementation versions
 - JWT header only (`branch: jwt-header`) ✅
+
+
 - Access token in header + Refresh token in HttpOnly cookie (`branch: access-header-refresh-httponly`) ✅ current
-- Full HTTP-only implementation with the CSRF token (`branch: all-httponly`) 🔧
-- OAuth2 login via Spring Security (`branch: oauth2`)
+
+
+- Access & refresh tokens full HttpOnly implementation + CSRF token (`branch: all-httponly`) ❌
+
+    *Abandoned: adds unnecessary complexity without significant security benefits. Modern SPA architecture with SameSite cookies and proper CORS configuration provides equivalent protection.*
+
+
+- OAuth2 login via Spring Security (`branch: oauth2`) 🔧
+
+
 - Keycloak integration (`branch: keycloak`)
 
 #### Resilience
