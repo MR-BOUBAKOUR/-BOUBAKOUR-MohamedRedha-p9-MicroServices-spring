@@ -15,7 +15,7 @@ const credentials = ref({
 
 onMounted(() => {
     if (route.query.error === 'oauth2_unknown_user') {
-        setError("Utilisateur Google non autorisé, contactez l'administrateur.")
+        setError('Google user not authorized, please contact the administrator.')
     }
 })
 
