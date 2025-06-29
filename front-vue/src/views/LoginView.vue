@@ -1,14 +1,22 @@
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import { setError } from '@/stores/error'
 
+const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
 
 const credentials = ref({
     username: '',
     password: '',
+})
+
+onMounted(() => {
+    if (route.query.error === 'oauth2_unknown_user') {
+        setError("Utilisateur Google non autorisé, contactez l'administrateur.")
+    }
 })
 
 const handleLogin = async () => {

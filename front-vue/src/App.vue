@@ -9,7 +9,6 @@ const router = useRouter()
 const authStore = useAuthStore()
 const patientId = computed(() => route.params.id)
 
-const isLoginPage = computed(() => route.name !== 'login')
 const showReturnToPatientsLink = computed(() => route.name === 'patient')
 const showReturnToPatientLink = computed(() => route.name === 'patient-edit')
 
@@ -31,56 +30,63 @@ watch(
         <div v-if="authStore.isInitializing" class="loader">Loading authentication...</div>
 
         <template v-else>
-            <header :class="{ 'header-empty': !isLoginPage }">
-                <template v-if="isLoginPage">
-                    <div class="header-content">
-                        <!-- Logo -->
-                        <div class="header-logo">
-                            <h1>MediLabo Solutions</h1>
-                        </div>
+            <header>
+                <div class="header-content" v-if="route.name !== 'login'">
+                    <!-- Logo -->
+                    <div class="header-logo">
+                        <h1>MediLabo Solutions</h1>
+                    </div>
 
-                        <!-- Erreurs -->
-                        <div class="header-error-banner">
-                            <Transition name="fade">
-                                <div v-if="globalError" class="error-message">
-                                    <p>{{ globalError }}</p>
-                                    <button @click="clearError">×</button>
-                                </div>
-                            </Transition>
-                        </div>
-
-                        <!-- User info -->
-                        <div v-if="authStore.user" class="header-user-banner">
-                            <img
-                                v-if="authStore.user.imageUrl"
-                                :src="authStore.user.imageUrl"
-                                alt="Profile"
-                                class="profile-image"
-                            />
-                            <div class="user-meta">
-                                <div>{{ authStore.user.username }}</div>
-                                <div>{{ authStore.user.role }}</div>
+                    <!-- Erreurs -->
+                    <div class="header-error-banner">
+                        <Transition name="fade">
+                            <div v-if="globalError" class="error-message">
+                                <p>{{ globalError }}</p>
+                                <button @click="clearError">×</button>
                             </div>
-                        </div>
+                        </Transition>
+                    </div>
 
-                        <!-- Déconnexion -->
-                        <div class="header-logout">
-                            <button @click="handleLogout">Déconnexion</button>
+                    <!-- User info -->
+                    <div v-if="authStore.user" class="header-user-banner">
+                        <img
+                            v-if="authStore.user.imageUrl"
+                            :src="authStore.user.imageUrl"
+                            alt="Profile"
+                            class="profile-image"
+                        />
+                        <div class="user-meta">
+                            <div>{{ authStore.user.username }}</div>
+                            <div>{{ authStore.user.role }}</div>
                         </div>
                     </div>
 
-                    <nav>
-                        <RouterLink v-if="showReturnToPatientsLink" to="/patients">
-                            ◀ Retour à la liste des patients
-                        </RouterLink>
-                        <RouterLink
-                            v-if="showReturnToPatientLink"
-                            :to="{ name: 'patient', params: { id: patientId } }"
-                        >
-                            ◀ Retour à la fiche du patient
-                        </RouterLink>
-                    </nav>
-                </template>
+                    <!-- Déconnexion -->
+                    <div class="header-logout">
+                        <button @click="handleLogout">Déconnexion</button>
+                    </div>
+                </div>
+
+                <div v-else class="header-error-banner">
+                    <Transition name="fade">
+                        <div v-if="globalError" class="error-message">
+                            <p>{{ globalError }}</p>
+                            <button @click="clearError">×</button>
+                        </div>
+                    </Transition>
+                </div>
+
+                <nav>
+                    <RouterLink v-if="showReturnToPatientsLink" to="/patients">
+                        ◀ Retour à la liste des patients
+                    </RouterLink>
+                    <RouterLink
+                        v-if="showReturnToPatientLink"
+                        :to="{ name: 'patient', params: { id: patientId } }"
+                    >
+                        ◀ Retour à la fiche du patient
+                    </RouterLink>
+                </nav>
             </header>
 
             <RouterView v-slot="{ Component }">

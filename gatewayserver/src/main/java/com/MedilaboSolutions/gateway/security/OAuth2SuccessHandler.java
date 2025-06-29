@@ -35,6 +35,9 @@ public class OAuth2SuccessHandler implements ServerAuthenticationSuccessHandler 
     @Value("${cors.frontend-success-url}")
     private String frontendSuccessUrl;
 
+    @Value("${cors.frontend-error-url}")
+    private String frontendErrorUrl;
+
     private final AuthUtil authUtil;
     private final UserService userService;
 
@@ -43,8 +46,6 @@ public class OAuth2SuccessHandler implements ServerAuthenticationSuccessHandler 
 
         OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
         Map<String, Object> attributes = oauth2User.getAttributes();
-
-        log.info("OAuth2 authentication success for user: {}", attributes.get("name"));
 
         OAuth2UserInfo userInfo = OAuth2UserInfo.fromGoogleAttributes(attributes);
         String username = userInfo.getName();
@@ -73,13 +74,17 @@ public class OAuth2SuccessHandler implements ServerAuthenticationSuccessHandler 
                     String redirectUrl = String.format("%s?token=%s&expires=%d",
                             frontendSuccessUrl, accessToken, accessTokenExpirationMs);
 
+                    log.info("OAuth2 authentication success for user: {}", username);
+
                     exchange.getResponse().setStatusCode(HttpStatus.FOUND);
                     exchange.getResponse().getHeaders().setLocation(URI.create(redirectUrl));
                     return exchange.getResponse().setComplete();
                 })
                 .onErrorResume(ex -> {
                     log.warn("Unauthorized OAuth2 login attempt for unknown user: {}", username);
-                    exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                    String redirectUrl = frontendErrorUrl + "?error=oauth2_unknown_user";
+                    exchange.getResponse().setStatusCode(HttpStatus.FOUND);
+                    exchange.getResponse().getHeaders().setLocation(URI.create(redirectUrl));
                     return exchange.getResponse().setComplete();
                 })
                 .subscribeOn(Schedulers.boundedElastic())
