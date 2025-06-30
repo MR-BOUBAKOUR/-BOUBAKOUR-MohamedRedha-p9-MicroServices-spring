@@ -44,7 +44,7 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 - Access & refresh tokens full HttpOnly implementation + CSRF token (`branch: all-httponly`) ❌
 
-    *Abandoned: adds unnecessary complexity without significant security benefits. Modern SPA architecture with SameSite cookies and proper CORS configuration provides equivalent protection.*
+  *Abandoned: adds unnecessary complexity without significant security benefits. Modern SPA architecture with SameSite cookies and proper CORS configuration provides equivalent protection.*
 
 
 - OAuth2/Google + username/password (Access&Refresh tokens for both) (`branch: oauth2-access&refresh`) ✅ current
