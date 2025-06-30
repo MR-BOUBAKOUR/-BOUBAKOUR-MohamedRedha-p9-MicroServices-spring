@@ -48,7 +48,7 @@ public class AuthController {
             .findByUsername(authRequest.getUsername())
             .filter(user -> encoder.matches(authRequest.getPassword(), user.getPassword()))
             .switchIfEmpty(Mono.error(new BadCredentialsException("Invalid credentials")))
-            .flatMap(userDetails -> userService.findByUsernameReactive(userDetails.getUsername()))
+            .flatMap(userDetails -> userService.findByUsername(userDetails.getUsername()))
             .flatMap(user -> {
                 String username = user.getUsername();
                 String role = "ROLE_" + user.getRole();
@@ -110,7 +110,7 @@ public class AuthController {
                         reactiveUserDetailsService.findByUsername(username)
                                 .switchIfEmpty(Mono.error(new BadCredentialsException("User not found: " + username)))
                                 // UserDetails found, now retrieve full User entity
-                                .flatMap(userDetails -> userService.findByUsernameReactive(userDetails.getUsername()))
+                                .flatMap(userDetails -> userService.findByUsername(userDetails.getUsername()))
                 )
                 .map(user -> {
                     String role = "ROLE_" + user.getRole();

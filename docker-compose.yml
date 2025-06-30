@@ -26,7 +26,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PATIENTS_PASSWORD}
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./data:/docker-entrypoint-initdb.d
+      - ./data/mysql-init:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
     #    restart: unless-stopped
@@ -36,24 +36,22 @@ services:
       timeout: 5s
       retries: 5
 
-  mysql-gateway:
-    image: mysql:8
-    container_name: mysql-gateway
+  postgres-gateway:
+    image: postgres:15
+    container_name: postgres-gateway
     ports:
-      - "3307:3306"
+      - "5432:5432"
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_GATEWAY_DATABASE}
-      MYSQL_USER: ${MYSQL_GATEWAY_USER}
-      MYSQL_PASSWORD: ${MYSQL_GATEWAY_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_GATEWAY_DATABASE}
+      POSTGRES_USER: ${POSTGRES_GATEWAY_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_GATEWAY_PASSWORD}
     volumes:
-      - mysql-gateway-data:/var/lib/mysql
-      - ./data/users.sql:/docker-entrypoint-initdb.d/users.sql
+      - postgres-gateway-data:/var/lib/postgresql/data
+      - ./data/postgres-init:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
-    #    restart: unless-stopped
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_GATEWAY_USER}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -65,7 +63,7 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
-      - ./data:/docker-entrypoint-initdb.d
+      - ./data/mongo-init:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
     #    restart: unless-stopped
@@ -80,11 +78,11 @@ services:
       context: ./patients
     container_name: patients
     environment:
-      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
-      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
-      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
-      - DB_DRIVER=${DB_DRIVER}
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+      SPRING_DATASOURCE_URL: ${MYSQL_PATIENTS_URL}
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_PATIENTS_USER}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PATIENTS_PASSWORD}
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: ${MYSQL_PATIENTS_DRIVER}
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
     depends_on:
       mysql:
         condition: service_healthy
@@ -104,8 +102,8 @@ services:
       context: ./notes
     container_name: notes
     environment:
-      - SPRING_DATA_MONGODB_URI=${SPRING_DATA_MONGODB_URI}
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+      SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
     depends_on:
       mongodb:
         condition: service_healthy
@@ -125,7 +123,7 @@ services:
       context: ./assessments
     container_name: assessments
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
     depends_on:
       eurekaserver:
         condition: service_healthy
@@ -145,15 +143,14 @@ services:
     ports:
       - "8071:8071"
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-      - OAUTH2_GOOGLE_CLIENT_ID=${OAUTH2_GOOGLE_CLIENT_ID}
-      - OAUTH2_GOOGLE_CLIENT_SECRET=${OAUTH2_GOOGLE_CLIENT_SECRET}
-      - KEY_STORE_PASSWORD=${KEY_STORE_PASSWORD}
-      - SPRING_DATASOURCE_URL=${GATEWAY_DATASOURCE_URL}
-      - SPRING_DATASOURCE_USERNAME=${GATEWAY_DATASOURCE_USERNAME}
-      - SPRING_DATASOURCE_PASSWORD=${GATEWAY_DATASOURCE_PASSWORD}
-      - DB_DRIVER=${DB_DRIVER}
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      OAUTH2_GOOGLE_CLIENT_ID: ${OAUTH2_GOOGLE_CLIENT_ID}
+      OAUTH2_GOOGLE_CLIENT_SECRET: ${OAUTH2_GOOGLE_CLIENT_SECRET}
+      KEY_STORE_PASSWORD: ${KEY_STORE_PASSWORD}
+      SPRING_R2DBC_URL: r2dbc:postgresql://postgres-gateway:5432/${POSTGRES_GATEWAY_DATABASE}
+      SPRING_R2DBC_USERNAME: ${POSTGRES_GATEWAY_USER}
+      SPRING_R2DBC_PASSWORD: ${POSTGRES_GATEWAY_PASSWORD}
     depends_on:
       assessments:
         condition: service_healthy
@@ -163,7 +160,7 @@ services:
         condition: service_healthy
       eurekaserver:
         condition: service_healthy
-      mysql-gateway:
+      postgres-gateway:
         condition: service_healthy
     networks:
       - medilabosolutions-net
@@ -196,5 +193,5 @@ networks:
 
 volumes:
   mysql-data:
-  mysql-gateway-data:
+  postgres-gateway-data:
   mongo-data:
