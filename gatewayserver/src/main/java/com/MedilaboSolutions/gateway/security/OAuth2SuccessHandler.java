@@ -53,9 +53,9 @@ public class OAuth2SuccessHandler implements ServerAuthenticationSuccessHandler 
 
         ServerWebExchange exchange = webFilterExchange.getExchange();
 
-        return userService.findByUsernameReactive(username)
+        return userService.findByUsername(username)
                 .switchIfEmpty(Mono.error(new RuntimeException("User not found")))
-                .flatMap(user -> userService.updateUserPictureReactive(user, pictureUrl).thenReturn(user))
+                .flatMap(user -> userService.updateUserPicture(user, pictureUrl).thenReturn(user))
                 .flatMap(user -> {
                     String role = "ROLE_" + user.getRole();
                     String accessToken = authUtil.generateAccessToken(username, role, user.getUrlPicture());
@@ -86,8 +86,6 @@ public class OAuth2SuccessHandler implements ServerAuthenticationSuccessHandler 
                     exchange.getResponse().setStatusCode(HttpStatus.FOUND);
                     exchange.getResponse().getHeaders().setLocation(URI.create(redirectUrl));
                     return exchange.getResponse().setComplete();
-                })
-                .subscribeOn(Schedulers.boundedElastic())
-                .doOnError(e -> log.error("Error in OAuth2 success handler", e));
+                });
     }
 }

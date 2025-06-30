@@ -21,13 +21,9 @@ public class ReactiveUserDetailsServiceImpl implements ReactiveUserDetailsServic
 
     @Override
     public Mono<UserDetails> findByUsername(String username) {
-        return Mono.fromCallable(() -> userRepository
-                .findByUsername(username))
-                .subscribeOn(Schedulers.boundedElastic())
-                .flatMap(userOpt -> userOpt.map(this::toUserDetails)
-                        .map(Mono::just)
-                        .orElseGet(() -> Mono.error(new UsernameNotFoundException("User not found: " + username)))
-                );
+        return userRepository.findByUsername(username)
+                .switchIfEmpty(Mono.error(new UsernameNotFoundException("User not found: " + username)))
+                .map(this::toUserDetails);
     }
 
     private UserDetails toUserDetails(User user) {

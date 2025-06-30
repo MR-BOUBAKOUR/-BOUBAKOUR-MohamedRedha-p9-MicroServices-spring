@@ -10,6 +10,10 @@ server:
 spring:
   application:
     name: gatewayserver
+  r2dbc:
+    url: ${POSTGRES_GATEWAY_URL}
+    username: ${POSTGRES_GATEWAY_USERNAME}
+    password: ${POSTGRES_GATEWAY_PASSWORD}
   # Enable the gateway to forward the trafic to the right ms
   cloud:
     gateway:
@@ -37,12 +41,6 @@ spring:
             issuer-uri: https://accounts.google.com
             user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
             user-name-attribute: sub
-
-  datasource:
-    url: ${GATEWAY_DATASOURCE_URL}
-    username: ${GATEWAY_DATASOURCE_USERNAME}
-    password: ${GATEWAY_DATASOURCE_PASSWORD}
-    driver-class-name: ${DB_DRIVER}
 
 cors:
   frontend-success-url: https://localhost:5173/oauth2/success
