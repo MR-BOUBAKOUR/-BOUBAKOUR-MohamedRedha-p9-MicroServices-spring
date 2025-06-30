@@ -5,10 +5,18 @@ spring:
   application:
     name: patients
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    driver-class-name: ${DB_DRIVER}
+    url: ${MYSQL_PATIENTS_URL}?allowPublicKeyRetrieval=true&useSSL=false
+    username: ${MYSQL_PATIENTS_USER}
+    password: ${MYSQL_PATIENTS_PASSWORD}
+    driver-class-name: ${MYSQL_PATIENTS_DRIVER}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
 
 management:
   endpoints:
