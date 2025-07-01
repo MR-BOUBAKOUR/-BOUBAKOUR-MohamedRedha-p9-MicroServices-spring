@@ -1,13 +1,16 @@
 package com.MedilaboSolutions.patient;
 
+import com.MedilaboSolutions.patient.config.AbstractMySQLContainerTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class PatientApplicationTests {
+@SpringBootTest(properties = {
+		"eureka.client.enabled=false",
+		"eureka.client.register-with-eureka=false",
+		"eureka.client.fetch-registry=false"
+})
+class PatientApplicationTests extends AbstractMySQLContainerTest {
 
 	@Test
-	void contextLoads() {
-	}
-
+	void contextLoads() {}
 }

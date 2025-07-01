@@ -57,7 +57,7 @@ services:
       retries: 5
 
   mongodb:
-    image: mongo:latest
+    image: mongo:6.0
     container_name: mongodb
     ports:
       - "27017:27017"
@@ -148,7 +148,7 @@ services:
       OAUTH2_GOOGLE_CLIENT_ID: ${OAUTH2_GOOGLE_CLIENT_ID}
       OAUTH2_GOOGLE_CLIENT_SECRET: ${OAUTH2_GOOGLE_CLIENT_SECRET}
       KEY_STORE_PASSWORD: ${KEY_STORE_PASSWORD}
-      SPRING_R2DBC_URL: r2dbc:postgresql://postgres-gateway:5432/${POSTGRES_GATEWAY_DATABASE}
+      SPRING_R2DBC_URL: ${POSTGRES_GATEWAY_URL}
       SPRING_R2DBC_USERNAME: ${POSTGRES_GATEWAY_USER}
       SPRING_R2DBC_PASSWORD: ${POSTGRES_GATEWAY_PASSWORD}
     depends_on:
@@ -166,7 +166,8 @@ services:
       - medilabosolutions-net
     #    restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8071/actuator/health"]
+    # -k used to ignore SSL cert validation for self-signed certs in health check; remove in production environment
+      test: ["CMD", "curl", "-k", "-f", "https://localhost:8071/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 5
