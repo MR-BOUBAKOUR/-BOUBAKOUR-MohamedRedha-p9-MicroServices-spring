@@ -7,6 +7,7 @@ import com.MedilaboSolutions.note.mapper.NoteMapper;
 import com.MedilaboSolutions.note.repository.NoteRepository;
 import com.MedilaboSolutions.note.service.NoteService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -55,6 +56,7 @@ class NoteServiceTest {
     }
 
     @Test
+    @DisplayName("Should return list of notes when patient ID exists")
     void findByPatientId_ShouldReturnNotes() {
         when(noteRepository.findByPatId(1L)).thenReturn(List.of(note));
         when(noteMapper.toNoteDto(note)).thenReturn(noteDto);
@@ -69,6 +71,7 @@ class NoteServiceTest {
     }
 
     @Test
+    @DisplayName("Should save and return note when input is valid")
     void create_ShouldSaveAndReturnNote() {
         when(noteMapper.toNote(noteRequestDto)).thenReturn(note);
         when(noteRepository.save(note)).thenReturn(note);

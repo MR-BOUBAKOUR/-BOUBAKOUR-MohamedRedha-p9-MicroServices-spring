@@ -7,6 +7,7 @@ import com.MedilaboSolutions.patient.exception.ResourceNotFoundException;
 import com.MedilaboSolutions.patient.service.PatientService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -53,6 +54,7 @@ class PatientControllerTest {
     }
 
     @Test
+    @DisplayName("Should return patient list when patients exist")
     void getAllPatients_ShouldReturnPatientsList() throws Exception {
         // Given
         when(patientService.findAll()).thenReturn(List.of(patientDto));
@@ -70,6 +72,7 @@ class PatientControllerTest {
     }
 
     @Test
+    @DisplayName("Should return patient when ID exists")
     void getPatientById_WhenExists_ShouldReturnPatient() throws Exception {
         // Given
         when(patientService.findById(1L)).thenReturn(patientDto);
@@ -87,6 +90,7 @@ class PatientControllerTest {
     }
 
     @Test
+    @DisplayName("Should return 404 when patient with ID does not exist")
     void getPatientById_WhenNotExists_ShouldReturn404() throws Exception {
         // Given
         when(patientService.findById(1L)).thenThrow(new ResourceNotFoundException("Ressource not found."));
@@ -100,6 +104,7 @@ class PatientControllerTest {
     }
 
     @Test
+    @DisplayName("Should create patient when input data is valid")
     void createPatient_WithValidData_ShouldCreatePatient() throws Exception {
         // Given
         when(patientService.create(any(PatientRequestDto.class))).thenReturn(patientDto);
@@ -117,6 +122,7 @@ class PatientControllerTest {
     }
 
     @Test
+    @DisplayName("Should update patient when input data is valid")
     void updatePatient_WithValidData_ShouldUpdatePatient() throws Exception {
         // Given
         when(patientService.update(eq(1L), any(PatientRequestDto.class))).thenReturn(patientDto);

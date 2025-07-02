@@ -8,6 +8,7 @@ import com.MedilaboSolutions.patient.mapper.PatientMapper;
 import com.MedilaboSolutions.patient.repository.PatientRepository;
 import com.MedilaboSolutions.patient.service.PatientService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -63,6 +64,7 @@ class PatientServiceTest {
     }
 
     @Test
+    @DisplayName("Should return list of patient DTOs when patients exist")
     void findAll_ShouldReturnListOfPatients() {
         // Given
         when(patientRepository.findAll()).thenReturn(List.of(patient));
@@ -79,6 +81,7 @@ class PatientServiceTest {
     }
 
     @Test
+    @DisplayName("Should return patient DTO when ID exists")
     void findById_WhenPatientExists_ShouldReturnPatient() {
         // Given
         when(patientRepository.findById(1L)).thenReturn(Optional.of(patient));
@@ -94,6 +97,7 @@ class PatientServiceTest {
     }
 
     @Test
+    @DisplayName("Should throw ResourceNotFoundException when patient with ID does not exist")
     void findById_WhenPatientNotExists_ShouldThrowException() {
         // Given
         when(patientRepository.findById(1L)).thenReturn(Optional.empty());
@@ -108,6 +112,7 @@ class PatientServiceTest {
     }
 
     @Test
+    @DisplayName("Should create and return patient DTO when input is valid")
     void create_ShouldCreateAndReturnPatient() {
         // Given
         when(patientMapper.toPatient(patientRequestDto)).thenReturn(patient);
@@ -125,6 +130,7 @@ class PatientServiceTest {
     }
 
     @Test
+    @DisplayName("Should update and return patient DTO when ID exists")
     void update_WhenPatientExists_ShouldUpdateAndReturnPatient() {
         // Given
         when(patientRepository.findById(1L)).thenReturn(Optional.of(patient));
@@ -144,6 +150,7 @@ class PatientServiceTest {
     }
 
     @Test
+    @DisplayName("Should throw ResourceNotFoundException when updating non-existent patient")
     void update_WhenPatientNotExists_ShouldThrowException() {
         // Given
         when(patientRepository.findById(1L)).thenReturn(Optional.empty());

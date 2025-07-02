@@ -22,8 +22,11 @@ public abstract class AbstractMongoContainerTest {
 
     @DynamicPropertySource
     static void configureProperties(DynamicPropertyRegistry registry) {
-        String address = MONGO_CONTAINER.getHost();
-        Integer port = MONGO_CONTAINER.getMappedPort(27017);
-        registry.add("spring.data.mongodb.uri", () -> "mongodb://" + address + ":" + port + "/medilabosolutions");
+        String host = MONGO_CONTAINER.getHost();
+        int port = MONGO_CONTAINER.getMappedPort(27017);
+        String dbName = "medilabosolutions";
+        String mongoUri = "mongodb://" + host + ":" + port + "/" + dbName;
+
+        registry.add("spring.data.mongodb.uri", () -> mongoUri);
     }
 }

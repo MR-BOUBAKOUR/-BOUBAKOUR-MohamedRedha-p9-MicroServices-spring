@@ -6,6 +6,7 @@ import com.MedilaboSolutions.patient.repository.PatientRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -50,6 +51,7 @@ class PatientIT extends AbstractMySQLContainerTest {
     }
 
     @Test
+    @DisplayName("Should return existing patient by ID")
     void getPatientById_ShouldReturnExistingPatient() throws Exception {
         mockMvc.perform(get("/patients/1")
                         .header("medilabo-solutions-correlation-id", "test-correlation-id"))
@@ -59,6 +61,7 @@ class PatientIT extends AbstractMySQLContainerTest {
     }
 
     @Test
+    @DisplayName("Should return list of all patients")
     void getAllPatients_ShouldReturnPatientsList() throws Exception {
         mockMvc.perform(get("/patients"))
                 .andExpect(status().isOk())
@@ -67,6 +70,7 @@ class PatientIT extends AbstractMySQLContainerTest {
     }
 
     @Test
+    @DisplayName("Should update and return patient when ID exists")
     void updatePatient_WhenExists_ShouldUpdateAndReturnPatient() throws Exception {
         PatientRequestDto updateRequest = new PatientRequestDto();
         updateRequest.setFirstName("UpdatedFirstName");
@@ -86,6 +90,7 @@ class PatientIT extends AbstractMySQLContainerTest {
     }
 
     @Test
+    @DisplayName("Should create patient only if input data is valid")
     void createPatient_WithValidData_ShouldCreatePatient() throws Exception {
         PatientRequestDto createRequest = new PatientRequestDto();
         createRequest.setFirstName("New");
@@ -107,6 +112,7 @@ class PatientIT extends AbstractMySQLContainerTest {
     }
 
     @Test
+    @DisplayName("Should return 404 when patient ID does not exist")
     void getPatientById_WhenNotExists_ShouldReturn404() throws Exception {
         mockMvc.perform(get("/patients/9999")
                         .header("medilabo-solutions-correlation-id", "test-correlation-id"))
@@ -114,6 +120,7 @@ class PatientIT extends AbstractMySQLContainerTest {
     }
 
     @Test
+    @DisplayName("Should return 404 when updating non-existing patient")
     void updatePatient_WhenNotExists_ShouldReturn404() throws Exception {
         PatientRequestDto updateRequest = new PatientRequestDto();
         updateRequest.setFirstName("Jane");

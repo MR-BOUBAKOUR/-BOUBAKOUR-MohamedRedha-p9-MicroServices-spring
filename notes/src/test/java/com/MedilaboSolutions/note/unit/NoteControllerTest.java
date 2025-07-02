@@ -6,6 +6,7 @@ import com.MedilaboSolutions.note.dto.NoteRequestDto;
 import com.MedilaboSolutions.note.service.NoteService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -51,6 +52,7 @@ class NoteControllerTest {
     }
 
     @Test
+    @DisplayName("Should return notes when patient ID exists")
     void getNoteByPatientId_ShouldReturnNotes() throws Exception {
         when(noteService.findByPatientId(1L)).thenReturn(List.of(noteDto));
 
@@ -66,6 +68,7 @@ class NoteControllerTest {
     }
 
     @Test
+    @DisplayName("Should create note when input data is valid")
     void createNote_WithValidData_ShouldCreateNote() throws Exception {
         when(noteService.create(any(NoteRequestDto.class))).thenReturn(noteDto);
 

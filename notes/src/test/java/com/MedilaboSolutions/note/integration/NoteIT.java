@@ -5,6 +5,7 @@ import com.MedilaboSolutions.note.dto.NoteRequestDto;
 import com.MedilaboSolutions.note.repository.NoteRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,6 +44,7 @@ class NoteIT extends AbstractMongoContainerTest {
     }
 
     @Test
+    @DisplayName("Should return notes when patient ID exists")
     void getNoteByPatientId_ShouldReturnNotes() throws Exception {
         mockMvc.perform(get("/notes/1")
                         .header("medilabo-solutions-correlation-id", "test-correlation-id"))
@@ -52,6 +54,7 @@ class NoteIT extends AbstractMongoContainerTest {
     }
 
     @Test
+    @DisplayName("Should create note when input data is valid")
     void createNote_WithValidData_ShouldCreateNote() throws Exception {
         NoteRequestDto createRequest = new NoteRequestDto();
         createRequest.setPatId(99L);

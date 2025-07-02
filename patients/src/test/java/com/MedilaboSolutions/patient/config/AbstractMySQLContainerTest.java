@@ -16,10 +16,6 @@ public abstract class AbstractMySQLContainerTest {
             .withPassword("test")
             .withInitScript("patients.sql");
 
-    static {
-        MYSQL_CONTAINER.start();
-    }
-
     @DynamicPropertySource
     static void configureProperties(DynamicPropertyRegistry registry) {
         registry.add("spring.datasource.url", MYSQL_CONTAINER::getJdbcUrl);

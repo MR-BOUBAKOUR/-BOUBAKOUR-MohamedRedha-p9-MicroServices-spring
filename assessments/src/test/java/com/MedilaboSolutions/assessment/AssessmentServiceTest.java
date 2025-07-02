@@ -7,6 +7,7 @@ import com.MedilaboSolutions.assessment.dto.SuccessResponse;
 import com.MedilaboSolutions.assessment.service.AssessmentService;
 import com.MedilaboSolutions.assessment.service.client.NoteFeignClient;
 import com.MedilaboSolutions.assessment.service.client.PatientFeignClient;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -35,6 +36,7 @@ class AssessmentServiceTest {
     private AssessmentService assessmentService;
 
     @Test
+    @DisplayName("Should return 'None' when no trigger terms are found")
     void generateAssessment_ShouldReturnNone_WhenNoTriggers() {
         PatientDto patientDto = new PatientDto();
         patientDto.setGender("M");
@@ -56,6 +58,7 @@ class AssessmentServiceTest {
     }
 
     @Test
+    @DisplayName("Should return 'Borderline' for a man when age > 30 and 2-5 triggers are found")
     void generateAssessment_ShouldReturnBorderline_WhenAgeAbove30_AndTriggersBetween2And5() {
         PatientDto patientDto = new PatientDto();
         patientDto.setGender("M");
@@ -80,6 +83,7 @@ class AssessmentServiceTest {
     }
 
     @Test
+    @DisplayName("Should return 'In Danger' for a man when age > 30 and 6-7 triggers are found")
     void generateAssessment_ShouldReturnInDanger_WhenAgeAbove30_AndTriggersBetween6And7() {
         PatientDto patientDto = new PatientDto();
         patientDto.setGender("M");
@@ -104,6 +108,7 @@ class AssessmentServiceTest {
     }
 
     @Test
+    @DisplayName("Should return 'Early onset' for a man when age > 30 and 8 or more triggers are found")
     void generateAssessment_ShouldReturnEarlyOnset_WhenAgeAbove30_AndTriggersMoreThen8() {
         PatientDto patientDto = new PatientDto();
         patientDto.setGender("M");
