@@ -1,4 +1,4 @@
-package com.MedilaboSolutions.gateway.service;
+package com.MedilaboSolutions.gateway.security;
 
 import com.MedilaboSolutions.gateway.model.User;
 import com.MedilaboSolutions.gateway.repository.UserRepository;
@@ -9,13 +9,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
 
 import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
-public class ReactiveUserDetailsServiceImpl implements ReactiveUserDetailsService {
+public class UserDetailsServiceImpl implements ReactiveUserDetailsService {
 
     private final UserRepository userRepository;
 
