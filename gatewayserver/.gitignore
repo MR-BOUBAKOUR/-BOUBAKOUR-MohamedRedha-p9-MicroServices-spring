@@ -1,43 +1,41 @@
-HELP.md
+# Builds et dossiers cibles
 target/
+build/
+
+# Maven wrapper
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
+# IntelliJ IDEA
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
+# Spring / STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### VS Code ###
+# VS Code
 .vscode/
 
-cert/
+# Environnement
+.env
+
+# Certificats et clés (à ne pas versionner)
 *.pem
 *.key
 *.p12
-keystore.p12
-
-.env
-!/src/main/resources/keystore.p12
-
+/src/main/resources/keystore.p12
+cert/
