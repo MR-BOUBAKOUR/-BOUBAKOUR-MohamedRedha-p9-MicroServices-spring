@@ -28,7 +28,7 @@ public abstract class AbstractPostgresContainerTest {
         registry.add("spring.r2dbc.password", POSTGRES_CONTAINER::getPassword);
 
         registry.add("jwt.secretKey", () -> "test-secret-key-minimum-256-bits-for-hs256-algorithm");
-        registry.add("jwt.accessTokenExpirationMs", () -> 60_000L);
-        registry.add("jwt.refreshTokenExpirationMs", () -> 300_000L);
+        registry.add("jwt.accessTokenExpirationMs", () -> 10_000L);
+        registry.add("jwt.refreshTokenExpirationMs", () -> 60_000L);
     }
 }
