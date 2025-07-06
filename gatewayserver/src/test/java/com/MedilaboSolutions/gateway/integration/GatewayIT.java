@@ -3,6 +3,7 @@ package com.MedilaboSolutions.gateway.integration;
 import com.MedilaboSolutions.gateway.config.AbstractPostgresContainerTest;
 import com.MedilaboSolutions.gateway.dto.AuthRequest;
 import com.MedilaboSolutions.gateway.util.TokenTestHelper;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;

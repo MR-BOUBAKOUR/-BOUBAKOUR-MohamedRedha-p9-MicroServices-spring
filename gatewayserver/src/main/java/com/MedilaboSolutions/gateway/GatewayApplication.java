@@ -21,21 +21,18 @@ public class GatewayApplication {
 				.route(p -> p
 						.path("/login")
 						.filters(f -> f
-								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
 						)
 						.uri("forward:/login")
 				)
 				.route(p -> p
 						.path("/refresh")
 						.filters(f -> f
-								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
 						)
 						.uri("forward:/refresh")
 				)
 				.route(p -> p
 						.path("/logout")
 						.filters(f -> f
-								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
 						)
 						.uri("forward:/logout")
 				)
@@ -43,35 +40,35 @@ public class GatewayApplication {
 						.path("/v1/assessments/**")
 						.filters( f -> f
 								.rewritePath("/v1/assessments/(?<segment>.*)","/assessments/${segment}")
-								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+						)
 						.uri("lb://assessments")
 				)
 				.route(p -> p
 						.path("/v1/notes")
 						.filters(f -> f
 								.rewritePath("/v1/notes", "/notes")
-								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+						)
 						.uri("lb://notes")
 				)
 				.route(p -> p
 						.path("/v1/notes/**")
 						.filters( f -> f
 								.rewritePath("/v1/notes/(?<segment>.*)","/notes/${segment}")
-								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+						)
 						.uri("lb://notes")
 				)
 				.route(p -> p
 						.path("/v1/patients")
 						.filters(f -> f
 								.rewritePath("/v1/patients", "/patients")
-								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+						)
 						.uri("lb://patients")
 				)
 				.route(p -> p
 						.path("/v1/patients/**")
 						.filters(f -> f
 								.rewritePath("/v1/patients/(?<segment>.*)", "/patients/${segment}")
-								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+						)
 						.uri("lb://patients")
 				)
 				.build();

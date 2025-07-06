@@ -42,4 +42,10 @@ public class NoteController {
                 .body(new SuccessResponse<>(201, "Note created successfully", note));
     }
 
+    @DeleteMapping("/{patId}")
+    public ResponseEntity<Void> deleteNotesByPatientId(@PathVariable Long patId) {
+        noteService.deleteByPatientId(patId);
+        return ResponseEntity.noContent().build();
+    }
+
 }
