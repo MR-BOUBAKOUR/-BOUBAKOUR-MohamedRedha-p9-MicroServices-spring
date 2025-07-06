@@ -45,4 +45,11 @@ public class PatientService {
         Patient saved = patientRepository.save(patientToUpdate);
         return patientMapper.toPatientDto(saved);
     }
+
+    public void deleteById(Long id) {
+        patientRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Ressource not found."));
+
+        patientRepository.deleteById(id);
+    }
 }

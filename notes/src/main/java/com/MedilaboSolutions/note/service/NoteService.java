@@ -3,13 +3,16 @@ package com.MedilaboSolutions.note.service;
 import com.MedilaboSolutions.note.domain.Note;
 import com.MedilaboSolutions.note.dto.NoteRequestDto;
 import com.MedilaboSolutions.note.dto.NoteDto;
+import com.MedilaboSolutions.note.exception.ResourceNotFoundException;
 import com.MedilaboSolutions.note.mapper.NoteMapper;
 import com.MedilaboSolutions.note.repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class NoteService {
@@ -30,4 +33,10 @@ public class NoteService {
         return noteMapper.toNoteDto(saved);
     }
 
+    public void deleteByPatientId(Long patId) {
+        List<Note> notes = noteRepository.findByPatId(patId);
+        if (!notes.isEmpty()) {
+            noteRepository.deleteAll(notes);
+        }
+    }
 }

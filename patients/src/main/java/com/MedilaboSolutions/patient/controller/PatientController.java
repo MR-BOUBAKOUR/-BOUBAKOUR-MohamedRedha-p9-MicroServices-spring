@@ -57,4 +57,10 @@ public class PatientController {
                 .status(HttpStatus.OK)
                 .body(new SuccessResponse<>(200, "Patient updated successfully", patient));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePatient(@PathVariable Long id) {
+        patientService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

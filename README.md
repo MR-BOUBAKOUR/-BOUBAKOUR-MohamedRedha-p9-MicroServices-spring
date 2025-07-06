@@ -6,23 +6,54 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ### 🏗️ Architecture
 
-- **Service discovery**: Eureka Server
-- **API Gateway**: Spring Cloud Gateway - *(routing, auth)*
 - **Frontend**: Vue.js
-- **Patient**: business microservice - MySQL
+- **API Gateway**: Spring Cloud Gateway - PostgreSQL *(routing, auth)*
+- **Service discovery**: Eureka Server
+- **Patients**: business microservice - MySQL
 - **Notes**: business microservice - MongoDB
 - **Assessments**: business microservice - *(aggregation, logic, results)*
+- **E2E Tests**: end-to-end test module simulating full doctor journey to validate system-wide behavior
 
 ---
 
-### 🧰 Technology stack
+### 🧰 Technology stack (If on the roadmap → ⚠️)
 
 - **Backend**: Java 21, Spring Boot 3.4.1, Spring Security, Spring Cloud Gateway, Eureka
 - **Frontend**: Vue.js 3, Pinia (Store Manager), Axios
-- **Databases**: MySQL 8, MongoDB
-- **Communication**: RestAPI, OpenFeign, ⚠️ *Kafka or RabbitMQ (on the roadmap)*
-- **Observability**: ⚠️ *ELK Stack, OpenTelemetry / Prometheus / Grafana (on the roadmap)*
-- **Infrastructure**: Docker, Docker-Compose, ⚠️ *Kubernetes (on the roadmap)*
+- **Databases**: MySQL 8, MongoDB, PostgreSQL
+- **Communication**: RestAPI, OpenFeign, ⚠️ *Kafka or RabbitMQ*
+- **Infrastructure**: Docker, Docker-Compose, ⚠️ *Kubernetes*
+- **Testing**: JUnit 5, TestContainers, RestAssured, Awaitility
+- **Observability**: ⚠️ *ELK Stack or OpenTelemetry/Prometheus/Grafana*
+- **Resiliency**: ⚠️ *Resilience4J*
+
+---
+
+### 🧪 Testing Strategy
+
+#### ✅ Unit & Integration Tests
+
+- Implemented for: **Patients**, **Notes**, **Assessments** and the **Gateway**
+- Covers core business logic, database operations, and Feign communication
+
+#### ✅ End-to-End (E2E) Tests
+
+The full journey test simulates a real doctor's workflow using `DoctorJourneyE2ETest`:
+- Covers a 4-step risk evolution: *None → Borderline → In Danger → Early onset*
+- Validates data flow across all services
+- Verifies patient creation, note insertion and risk assessment logic
+- Uses **Awaitility** to ensure service readiness and propagation
+- Executed in a real environment with **Docker Compose**
+
+### 🔧 Security implementation versions
+
+| Branch | Description | Status |
+|--------|-------------|--------|
+| `jwt-header` | JWT Access Token in Authorization header only | ✅ |
+| `access-header-refresh-httponly` | Access token in header + Refresh token in HttpOnly cookie | ✅ |
+| `all-httponly` | Full HttpOnly for Access & Refresh tokens + CSRF token | ❌ *Abandoned*<br/>Too complex for minimal security gain. Modern SPA setups with SameSite and CORS provide sufficient protection. |
+| `oauth2-access&refresh` | OAuth2 with Google + classic login (Access & Refresh tokens for both) | ✅ *Current* |
+| `keycloak` | Keycloak integration | 🕒 *Postponed*<br/>Will be reconsidered after progress on event-driven design and observability. |
 
 ---
 
@@ -30,63 +61,3 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 - **Spring Cloud Config Server**: No centralized configuration management. *(used in a different project, with RabbitMQ as the refresh trigger and a GitHub repository for versioning and storing configurations)*
 - **Secrets Manager**: Secrets are managed via environment variables.
-
----
-
-### 🔧 In progress
-
-#### Security implementation versions
-- JWT header only (`branch: jwt-header`) ✅
-
-
-- Access token in header + Refresh token in HttpOnly cookie (`branch: access-header-refresh-httponly`) ✅
-
-
-- Access & refresh tokens full HttpOnly implementation + CSRF token (`branch: all-httponly`) ❌
-
-  *Abandoned: adds unnecessary complexity without significant security benefits. Modern SPA architecture with SameSite cookies and proper CORS configuration provides equivalent protection.*
-
-
-- OAuth2/Google + username/password (Access&Refresh tokens for both) (`branch: oauth2-access&refresh`) ✅ current
-
-
-- Keycloak integration (`branch: keycloak`) 🕒
-
-  *Postponed: This integration is currently on hold as I focus on advancing on event-driven and observability. Implementation will be reconsidered if time permits.*
-
-#### Resilience
-- Resilience4J - circuit breakers and retry patterns
-
----
-
-### ✅ Already done
-
-#### Infrastructure
-- Eureka Server for service discovery
-- API Gateway with routing
-- Docker Compose setup
-- Health checks for all services
-- Feign client for inter-service communication
-
-#### Security
-- Services protected behind the gateway
-- Spring Security integration depending on the branch
-
-#### Data layer
-- Patients microservice with MySQL
-- Notes microservice with MongoDB
-
-#### Frontend
-- Vue.js application
-- Pinia state management (Authentication store)
-- Token management depending on the branch
-
-#### Features
-- View/update/add patient information
-- View/add notes
-- Diabetes risk assessments
-- (Notes && Age && gender) based risk rules
-
-#### Monitoring
-- Correlation ID on request/response headers (filter in the Gateway)
-- Distributed tracing logs across the microservices

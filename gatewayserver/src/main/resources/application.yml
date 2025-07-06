@@ -12,7 +12,7 @@ spring:
     name: gatewayserver
   r2dbc:
     url: ${POSTGRES_GATEWAY_URL}
-    username: ${POSTGRES_GATEWAY_USERNAME}
+    username: ${POSTGRES_GATEWAY_USER}
     password: ${POSTGRES_GATEWAY_PASSWORD}
   # Enable the gateway to forward the trafic to the right ms
   cloud:

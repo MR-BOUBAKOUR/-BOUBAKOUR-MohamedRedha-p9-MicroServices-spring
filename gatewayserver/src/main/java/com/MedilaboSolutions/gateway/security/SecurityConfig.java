@@ -1,7 +1,6 @@
 package com.MedilaboSolutions.gateway.security;
 
 import com.MedilaboSolutions.gateway.filters.AuthFilter;
-import com.MedilaboSolutions.gateway.service.ReactiveUserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +29,8 @@ public class SecurityConfig {
     private final UnauthorizedEntryPoint unauthorizedEntryPoint;
     private final OAuth2SuccessHandler oauth2SuccessHandler;
     private final OAuth2FailureHandler oauth2FailureHandler;
-    private final ReactiveUserDetailsServiceImpl reactiveUserDetailsServiceImpl;
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
+
     SecurityContextServerLogoutHandler securityContextLogoutHandler = new SecurityContextServerLogoutHandler();
 
     @Bean
@@ -102,7 +102,7 @@ public class SecurityConfig {
 
     @Bean
     public ReactiveUserDetailsService reactiveUserDetailsService() {
-        return reactiveUserDetailsServiceImpl;
+        return userDetailsServiceImpl;
     }
 
     @Bean
