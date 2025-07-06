@@ -45,7 +45,9 @@ The full journey test simulates a real doctor's workflow using `DoctorJourneyE2E
 - Uses **Awaitility** to ensure service readiness and propagation
 - Executed in a real environment with **Docker Compose**
 
-### 🔧 Security implementation versions
+---
+
+### 🔒 Security implementation versions
 
 | Branch | Description | Status |
 |--------|-------------|--------|
