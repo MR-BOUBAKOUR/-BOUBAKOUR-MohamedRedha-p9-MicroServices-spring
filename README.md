@@ -16,7 +16,7 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ---
 
-### 🧰 Technology stack (If on the roadmap → ⚠️)
+### 🧰 Technology stack (⚠️ → on the roadmap)
 
 - **Backend**: Java 21, Spring Boot 3.4.1, Spring Security, Spring Cloud Gateway, Eureka
 - **Frontend**: Vue.js 3, Pinia (Store Manager), Axios
