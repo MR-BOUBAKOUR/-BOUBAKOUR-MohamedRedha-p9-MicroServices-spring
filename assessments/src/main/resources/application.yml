@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: assessments
+  rabbitmq:
+    host: ${SPRING_RABBITMQ_HOST}
+    port: ${SPRING_RABBITMQ_PORT}
+    username: ${SPRING_RABBITMQ_USERNAME}
+    password: ${SPRING_RABBITMQ_PASSWORD}
 
 management:
   # In production, limit exposure (include: "health,info")

@@ -1,7 +1,42 @@
-mailersend:
-  api:
-    token: ${MAILERSEND_API_TOKEN}
+server:
+  port: 8110
 
-notifications:
-  doctor:
-    email: ${NOTIFICATIONS_DOCTOR_EMAIL}
+spring:
+  application:
+    name: notifications
+  rabbitmq:
+    host: ${SPRING_RABBITMQ_HOST}
+    port: ${SPRING_RABBITMQ_PORT}
+    username: ${SPRING_RABBITMQ_USERNAME}
+    password: ${SPRING_RABBITMQ_PASSWORD}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      access: unrestricted
+  info:
+    env:
+      enabled: true
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+  instance:
+    preferIpAddress: true
+
+info:
+  app:
+    name: notifications
+
+logging:
+  level:
+    com:
+      MedilaboSolutions:
+        assessment: DEBUG
