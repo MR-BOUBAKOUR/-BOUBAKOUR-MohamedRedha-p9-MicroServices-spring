@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 public class EmailService {
 
     public void sendHighRiskEmail(HighRiskAssessmentEvent event) {
-
+        log.info("[SIMULATED EMAIL] Sending HIGH RISK alert email...");
+        log.info("To: medecin.medilabosolutions@gmail.com");
+        log.info("Subject: High Risk Alert - Patient {}", event.getPatLastname());
+        log.info("Body: Patient {} {} has been assessed as '{}'. Please take necessary action.",
+                event.getPatFirstName(), event.getPatLastname(), event.getRiskLevel());
     }
 }
