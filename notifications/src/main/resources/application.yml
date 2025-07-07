@@ -1,0 +1,7 @@
+mailersend:
+  api:
+    token: ${MAILERSEND_API_TOKEN}
+
+notifications:
+  doctor:
+    email: ${NOTIFICATIONS_DOCTOR_EMAIL}
