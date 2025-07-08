@@ -40,13 +40,21 @@ public class AssessmentService {
         String risk = evaluateRiskLevel(gender, age, triggerCount);
 
         if ("Early onset".equals(risk)) {
-            HighRiskAssessmentEvent event = new HighRiskAssessmentEvent(
-                    patId,
-                    patient.getBody().getData().getFirstName(),
-                    patient.getBody().getData().getLastName(),
-                    risk
-            );
-            rabbitTemplate.convertAndSend(RabbitMQConfig.QUEUE_NAME, event);
+            if (!patient.getBody().getData().isEarlyOnsetMailSent()) {
+                HighRiskAssessmentEvent event = new HighRiskAssessmentEvent(
+                        patId,
+                        patient.getBody().getData().getFirstName(),
+                        patient.getBody().getData().getLastName(),
+                        risk
+                );
+                rabbitTemplate.convertAndSend(RabbitMQConfig.QUEUE_NAME, event);
+
+                patientFeignClient.updateEarlyOnsetMailSent(patId, true, correlationId);
+            }
+        } else {
+            if (patient.getBody().getData().isEarlyOnsetMailSent()) {
+                patientFeignClient.updateEarlyOnsetMailSent(patId, false, correlationId);
+            }
         }
 
         return new AssessmentDto(patId, risk);

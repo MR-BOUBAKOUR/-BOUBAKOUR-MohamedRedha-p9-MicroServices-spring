@@ -15,10 +15,10 @@ public interface PatientFeignClient {
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId
     );
 
-    @PutMapping("/patients/{id}/early-onset-alert")
-    void updateEarlyOnsetAlertSent(
+    @PutMapping(value = "/patients/{id}/early-onset-mail")
+    void updateEarlyOnsetMailSent(
             @PathVariable Long id,
-            @RequestParam boolean alertSent,
+            @RequestParam boolean mailSent,
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId);
 
 }

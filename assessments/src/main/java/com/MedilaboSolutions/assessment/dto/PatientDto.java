@@ -20,5 +20,6 @@ public class PatientDto {
     private String gender;
     private String address;
     private String phone;
+    private boolean earlyOnsetMailSent;
 
 }

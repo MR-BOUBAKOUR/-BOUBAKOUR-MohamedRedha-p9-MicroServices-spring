@@ -73,6 +73,7 @@ info:
 
 logging:
   level:
+    feign: DEBUG
     com:
       MedilaboSolutions:
         gateway: DEBUG

@@ -63,4 +63,13 @@ public class PatientController {
         patientService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/{id}/early-onset-mail")
+    public ResponseEntity<Void> updateEarlyOnsetMailSent(
+            @PathVariable Long id,
+            @RequestParam Boolean mailSent
+    ) {
+        patientService.updateEarlyOnsetMailSent(id, mailSent);
+        return ResponseEntity.noContent().build();
+    }
 }
