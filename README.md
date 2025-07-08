@@ -19,28 +19,28 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ### 🧰 Technology stack  (⚠️ → on the roadmap)
 
-| Category         | Technologies / Tools                                                      |
-|------------------|---------------------------------------------------------------------------|
-| **Backend**      | Java 21, Spring Boot 3.4.1, Spring Security, Eureka, Spring Cloud Gateway |
-| **Frontend**     | Vue.js 3, Pinia (Store Manager), Axios                                    |
-| **Databases**    | MySQL, MongoDB, PostgreSQL                                                |
-| **Communication**| REST API, OpenFeign, RabbitMQ                                             |
-| **Testing**      | JUnit, TestContainers, RestAssured, Awaitility                            |
-| **Infrastructure**| Docker, Docker-Compose, ⚠️ *Kubernetes*                                   |
-| **Observability**| ⚠️ *ELK Stack or OpenTelemetry / Prometheus / Grafana*                    |
-| **Resiliency**   | ⚠️ *Resilience4J*                                                         |
+| Category                             | Technologies / Tools                                                                   |
+|--------------------------------------|----------------------------------------------------------------------------------------|
+| **Backend**                          | Java 21, Spring Boot 3.4.1, Spring Security, Eureka, Spring Cloud Gateway *(Reactive)* |
+| **Frontend & State Management**      | Vue.js 3, Pinia, Axios                                                                 |
+| **Data Storage**                     | MySQL, MongoDB, PostgreSQL *(Reactive)*                                                |
+| **Inter-service Communication**      | REST API, OpenFeign, RabbitMQ                                                          |
+| **Testing & Automation**             | JUnit, TestContainers, RestAssured, Awaitility                                         |
+| **Containerisation & Orchestration** | Docker, Docker-Compose, ⚠️ *Kubernetes*                                                |
+| **Observability & Monitoring**       | ⚠️ *ELK Stack or OpenTelemetry / Prometheus / Grafana*                                 |
+| **Resilience & Fault Tolerance**     | ⚠️ *Resilience4J*                                                                      |
 
 ---
 
 ### 🔒 Security implementation versions
 
-| Branch | Description | Status |
-|--------|-------------|--------|
-| `jwt-header` | JWT Access Token in Authorization header only | ✅ |
-| `access-header-refresh-httponly` | Access token in header + Refresh token in HttpOnly cookie | ✅ |
+| Branch | Description | Status                                                                                                                           |
+|--------|-------------|----------------------------------------------------------------------------------------------------------------------------------|
+| `jwt-header` | JWT Access Token in Authorization header only | ✅                                                                                                                                |
+| `access-header-refresh-httponly` | Access token in header + Refresh token in HttpOnly cookie | ✅                                                                                                                                |
 | `all-httponly` | Full HttpOnly for Access & Refresh tokens + CSRF token | ❌ *Abandoned*<br/>Too complex for minimal security gain. Modern SPA setups with SameSite and CORS provide sufficient protection. |
-| `oauth2-access&refresh` | OAuth2 with Google + classic login (Access & Refresh tokens for both) | ✅ *Current* |
-| `keycloak` | Keycloak integration | 🕒 *Postponed*<br/>Will be reconsidered after progress on event-driven design and observability. |
+| `oauth2-access&refresh` | OAuth2 with Google + classic login (Access & Refresh tokens for both) | ✅ *Current*                                                                                                                      |
+| `keycloak` | Keycloak integration | 🕒 *Postponed*<br/>Will be reconsidered after progress on the observability & monitoring part.                                   |
 
 ---
 
@@ -76,4 +76,4 @@ The full journey test simulates a real doctor's workflow using `DoctorJourneyE2E
 ### ❌ Out of scope
 
 - **Spring Cloud Config Server**: No centralized configuration management. *(used in a different project, with RabbitMQ as the refresh trigger and a GitHub repository for versioning and storing configurations)*
-- **Secrets Manager**: Secrets are managed via environment variables.``
+- **Secrets Manager**: Secrets are managed via environment variables.
