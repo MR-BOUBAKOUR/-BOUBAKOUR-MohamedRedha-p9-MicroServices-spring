@@ -40,3 +40,11 @@ logging:
     com:
       MedilaboSolutions:
         assessment: DEBUG
+
+mailtrap:
+  token: ${MAILTRAP_API_TOKEN}
+  inbox-id: ${MAILTRAP_SANDBOX_ID}
+
+email:
+  sender: ${EMAIL_SENDER}
+  recipient: ${EMAIL_RECIPIENT}

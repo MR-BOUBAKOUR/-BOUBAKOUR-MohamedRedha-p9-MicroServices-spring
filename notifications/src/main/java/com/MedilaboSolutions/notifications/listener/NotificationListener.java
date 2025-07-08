@@ -2,14 +2,14 @@ package com.MedilaboSolutions.notifications.listener;
 
 import com.MedilaboSolutions.notifications.Dto.HighRiskAssessmentEvent;
 import com.MedilaboSolutions.notifications.service.EmailService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-@Component
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
+@Component
 public class NotificationListener {
 
     private final EmailService emailService;
