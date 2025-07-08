@@ -64,11 +64,14 @@ public class PatientController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/{id}/early-onset-mail")
+    @PutMapping("/{id}/early-onset-mail")
     public ResponseEntity<Void> updateEarlyOnsetMailSent(
             @PathVariable Long id,
-            @RequestParam Boolean mailSent
+            @RequestParam Boolean mailSent,
+            @RequestHeader("medilabo-solutions-correlation-id") String correlationId
     ) {
+        log.debug("medilabo-solutions-correlation-id found : {}", correlationId);
+
         patientService.updateEarlyOnsetMailSent(id, mailSent);
         return ResponseEntity.noContent().build();
     }

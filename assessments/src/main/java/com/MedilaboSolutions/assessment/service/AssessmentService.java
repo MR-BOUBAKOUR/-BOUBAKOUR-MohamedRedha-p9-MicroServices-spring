@@ -48,6 +48,7 @@ public class AssessmentService {
                         risk
                 );
                 rabbitTemplate.convertAndSend(RabbitMQConfig.QUEUE_NAME, event);
+                log.info("Published high risk assessment event to queue [{}]: {}", RabbitMQConfig.QUEUE_NAME, event);
 
                 patientFeignClient.updateEarlyOnsetMailSent(patId, true, correlationId);
             }
