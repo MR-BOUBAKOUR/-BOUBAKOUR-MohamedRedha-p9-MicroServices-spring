@@ -28,5 +28,12 @@ public class EmailService {
                 subject,
                 body
         );
+
+        log.info("📧 Email sent to {} for patient {} {} with risk level '{}'",
+                emailProperties.getRecipient(),
+                event.getPatFirstName(),
+                event.getPatLastname(),
+                event.getRiskLevel()
+        );
     }
 }

@@ -11,7 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.TestPropertySource;
 
+import java.io.InputStream;
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -73,6 +75,8 @@ public class DoctorJourneyE2ETest {
         String step4Risk = assessPatientRisk();
         assertThat(step4Risk).isEqualTo("Early onset");
         System.out.println("✅ STEP 4 - Risk after adding note3 & updating patient: " + step4Risk);
+
+        waitForNotificationsLog();
 
         verifyPatientDataConsistency();
 
@@ -186,7 +190,7 @@ public class DoctorJourneyE2ETest {
                 {
                     "id": %d,
                     "firstName": "Jane",
-                    "lastName": "Smith",
+                    "lastName": "Smith-TEST",
                     "birthDate": "1999-01-01",
                     "gender": "F",
                     "address": "456 Updated Street",
@@ -197,7 +201,7 @@ public class DoctorJourneyE2ETest {
                 .then()
                 .statusCode(200)
                 .body("data.firstName", equalTo("Jane"))
-                .body("data.lastName", equalTo("Smith"))
+                .body("data.lastName", equalTo("Smith-TEST"))
                 .body("data.gender", equalTo("F"))
                 .body("data.address", equalTo("456 Updated Street"));
 
@@ -258,7 +262,7 @@ public class DoctorJourneyE2ETest {
                 .then()
                 .statusCode(200)
                 .body("data.firstName", equalTo("Jane"))
-                .body("data.lastName", equalTo("Smith"))
+                .body("data.lastName", equalTo("Smith-TEST"))
                 .body("data.address", equalTo("456 Updated Street"))
                 .body("data.gender", equalTo("F"))
                 .body("data.birthDate", equalTo("1999-01-01"));
@@ -297,6 +301,23 @@ public class DoctorJourneyE2ETest {
                 .header("Set-Cookie", containsString("refreshToken=; Max-Age=0"));
 
         System.out.println("Doctor successfully logged out");
+    }
+
+    private void waitForNotificationsLog() {
+        Awaitility.await()
+                .atMost(30, TimeUnit.SECONDS)
+                .pollInterval(2, TimeUnit.SECONDS)
+                .until(() -> {
+                    Process process = new ProcessBuilder("docker", "logs", "notifications", "--since", "10s").start();
+                    try (InputStream is = process.getInputStream()) {
+                        String logs = new String(is.readAllBytes());
+                        boolean found = logs.contains("📧 Email sent to");
+                        if (found) {
+                            System.out.println("🔔 High-risk email successfully sent - Id" + createdPatientId);
+                        }
+                        return found;
+                    }
+                });
     }
 
     @AfterEach
