@@ -48,9 +48,9 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 The system implements asynchronous communication using **RabbitMQ** for critical notifications:
 
-- **High-Risk Assessment Events**: When a patient is assessed as `"Early onset"`, the **Assessments** service publishes an event to the `high-risk-assessments` queue
-- **No duplicates**: The alert is triggered only when the risk changes to `"Early onset"`
-- **Email Notifications**: The **Notifications** service consumes these events and sends automated email alerts to healthcare providers (emails are intercepted using **Mailtrap** during development)
+- **High-Risk Assessment Events**: when a patient is assessed as `"Early onset"`, the **Assessments** service publishes an event to the `high-risk-assessments` queue
+- **No duplicates**: the alert is triggered only when the risk changes to `"Early onset"`
+- **Email Notifications**: the **Notifications** service consumes these events and sends automated email alerts to healthcare providers (emails are intercepted using **Mailtrap** during development)
 
 ---
 
@@ -75,5 +75,6 @@ The full journey test simulates a real doctor's workflow using `DoctorJourneyE2E
 
 ### ❌ Out of scope
 
-- **Spring Cloud Config Server**: No centralized configuration management. *(used in a different project, with RabbitMQ as the refresh trigger and a GitHub repository for versioning and storing configurations)*
-- **Secrets Manager**: Secrets are managed via environment variables.
+- **Spring Cloud Config Server**: no centralized configuration management. *(used in a different project, with RabbitMQ as the refresh trigger and a GitHub repository for versioning and storing configurations)*
+- **Secrets Manager**: secrets are managed via environment variables.
+- **Front-end testing** : deprioritized to focus efforts on back-end reliability and service integration.

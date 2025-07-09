@@ -1,9 +1,10 @@
-package com.MedilaboSolutions.assessment;
+package com.MedilaboSolutions.assessment.unit;
 
 import com.MedilaboSolutions.assessment.dto.AssessmentDto;
 import com.MedilaboSolutions.assessment.dto.NoteDto;
 import com.MedilaboSolutions.assessment.dto.PatientDto;
 import com.MedilaboSolutions.assessment.dto.SuccessResponse;
+import com.MedilaboSolutions.assessment.dto.HighRiskAssessmentEvent;
 import com.MedilaboSolutions.assessment.service.AssessmentService;
 import com.MedilaboSolutions.assessment.service.client.NoteFeignClient;
 import com.MedilaboSolutions.assessment.service.client.PatientFeignClient;
@@ -13,15 +14,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class AssessmentServiceTest {
@@ -31,6 +32,9 @@ class AssessmentServiceTest {
 
     @Mock
     private NoteFeignClient noteFeignClient;
+
+    @Mock
+    private RabbitTemplate rabbitTemplate;
 
     @InjectMocks
     private AssessmentService assessmentService;
@@ -55,6 +59,7 @@ class AssessmentServiceTest {
         AssessmentDto result = assessmentService.generateAssessment(1L, "corrId");
 
         assertThat(result.getAssessmentResult()).isEqualTo("None");
+        verify(rabbitTemplate, never()).convertAndSend(eq("high-risk-assessments"), any(HighRiskAssessmentEvent.class));
     }
 
     @Test
@@ -80,6 +85,7 @@ class AssessmentServiceTest {
         AssessmentDto result = assessmentService.generateAssessment(1L, "corrId");
 
         assertThat(result.getAssessmentResult()).isEqualTo("Borderline");
+        verify(rabbitTemplate, never()).convertAndSend(eq("high-risk-assessments"), any(HighRiskAssessmentEvent.class));
     }
 
     @Test
@@ -105,6 +111,7 @@ class AssessmentServiceTest {
         AssessmentDto result = assessmentService.generateAssessment(1L, "corrId");
 
         assertThat(result.getAssessmentResult()).isEqualTo("In Danger");
+        verify(rabbitTemplate, never()).convertAndSend(eq("high-risk-assessments"), any(HighRiskAssessmentEvent.class));
     }
 
     @Test
@@ -130,5 +137,6 @@ class AssessmentServiceTest {
         AssessmentDto result = assessmentService.generateAssessment(1L, "corrId");
 
         assertThat(result.getAssessmentResult()).isEqualTo("Early onset");
+        verify(rabbitTemplate).convertAndSend(eq("high-risk-assessments"), any(HighRiskAssessmentEvent.class));
     }
 }

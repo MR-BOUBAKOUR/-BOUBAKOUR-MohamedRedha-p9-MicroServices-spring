@@ -25,7 +25,6 @@ public class AssessmentService {
 
     private final RabbitTemplate rabbitTemplate;
 
-
     public AssessmentDto generateAssessment(Long patId, String correlationId) {
 
         ResponseEntity<SuccessResponse<PatientDto>> patient = patientFeignClient.getPatientById(patId, correlationId);
