@@ -4,6 +4,7 @@ import com.MedilaboSolutions.notifications.Dto.HighRiskAssessmentEvent;
 import com.MedilaboSolutions.notifications.config.EmailProperties;
 import com.MedilaboSolutions.notifications.service.EmailService;
 import com.MedilaboSolutions.notifications.service.MailtrapEmailService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,7 +28,8 @@ class EmailServiceTest {
     private EmailService emailService;
 
     @Test
-    void shouldFormatEmailCorrectlyForHighRiskEvent() {
+    @DisplayName("Should format and delegate email content for HighRiskAssessmentEvent")
+    void shouldFormatAndDelegateEmail_ForHighRiskEvent() {
         // Given
         when(emailProperties.getSender()).thenReturn("sender@test.com");
         when(emailProperties.getRecipient()).thenReturn("recipient@test.com");

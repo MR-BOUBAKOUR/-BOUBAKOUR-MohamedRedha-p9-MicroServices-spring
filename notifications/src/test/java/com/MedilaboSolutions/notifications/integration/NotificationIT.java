@@ -3,6 +3,7 @@ package com.MedilaboSolutions.notifications.integration;
 import com.MedilaboSolutions.notifications.Dto.HighRiskAssessmentEvent;
 import com.MedilaboSolutions.notifications.config.AbstractRabbitMQContainerTest;
 import com.MedilaboSolutions.notifications.service.MailtrapEmailService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,8 @@ public class NotificationIT extends AbstractRabbitMQContainerTest {
     private MailtrapEmailService mailtrapEmailService;
 
     @Test
-    void shouldProcessHighRiskEventAndSendEmail() {
+    @DisplayName("Should process HighRiskAssessmentEvent and trigger email sending")
+    void shouldProcessHighRiskEvent_AndTriggerEmailSend() {
         // Given
         HighRiskAssessmentEvent event = new HighRiskAssessmentEvent(
                 123L, "Jane", "Smith", "Early onset"
