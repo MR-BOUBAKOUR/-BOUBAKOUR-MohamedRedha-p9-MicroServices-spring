@@ -308,9 +308,12 @@ public class DoctorJourneyE2ETest {
                 .atMost(30, TimeUnit.SECONDS)
                 .pollInterval(2, TimeUnit.SECONDS)
                 .until(() -> {
+                    // Start a new process to fetch the recent logs from the 'notifications' container (last 10 seconds)
                     Process process = new ProcessBuilder("docker", "logs", "notifications", "--since", "10s").start();
-                    try (InputStream is = process.getInputStream()) {
-                        String logs = new String(is.readAllBytes());
+                    // Open the process output stream to read the logs
+                    try (InputStream processOutput = process.getInputStream()) {
+                        // Read all the logs from the input stream into a single String
+                        String logs = new String(processOutput.readAllBytes());
                         boolean found = logs.contains("📧 Email sent to");
                         if (found) {
                             System.out.println("🔔 High-risk email successfully sent - Id" + createdPatientId);
