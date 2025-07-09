@@ -64,12 +64,12 @@ The system implements asynchronous communication using **RabbitMQ** for critical
 #### ✅ End-to-End (E2E) Tests
 
 The full journey test simulates a real doctor's workflow using `DoctorJourneyE2ETest`:
-- Covers a 4-step risk evolution: *None → Borderline → In Danger → Early onset*
-- Validates data flow across all services
 - Verifies patient creation, note insertion and risk assessment logic
+- Covers a 4-step risk evolution: *None → Borderline → In Danger → Early onset*
+- Confirms high-risk email delivery by checking the notifications service logs
+- Validates data flow across all services
 - Uses **Awaitility** to ensure service readiness and propagation
 - Executed in a real environment with **Docker Compose**
-
 
 ---
 
