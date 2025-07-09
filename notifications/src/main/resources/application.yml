@@ -1,9 +1,9 @@
 server:
-  port: 8080
+  port: 8110
 
 spring:
   application:
-    name: assessments
+    name: notifications
   rabbitmq:
     host: ${SPRING_RABBITMQ_HOST}
     port: ${SPRING_RABBITMQ_PORT}
@@ -11,16 +11,13 @@ spring:
     password: ${SPRING_RABBITMQ_PASSWORD}
 
 management:
-  # In production, limit exposure (include: "health,info")
   endpoints:
     web:
       exposure:
         include: "*"
-  # De-register gracefully from Eureka
   endpoint:
     shutdown:
       access: unrestricted
-  # Enabling the info endpoint
   info:
     env:
       enabled: true
@@ -31,19 +28,23 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://localhost:8070/eureka/
-  # By default, the registration is done with the hostname
-  # (no DNS mapping setup on the local system -> Using the ip address)
   instance:
     preferIpAddress: true
 
-# For the Eureka dashboard (we will see the name of the ms instead of the id address)
-# Exposed via an endpoint of the actuator (not enabled by default)
 info:
   app:
-    name: assessments
+    name: notifications
 
 logging:
   level:
     com:
       MedilaboSolutions:
         assessment: DEBUG
+
+mailtrap:
+  token: ${MAILTRAP_API_TOKEN}
+  inbox-id: ${MAILTRAP_SANDBOX_ID}
+
+email:
+  sender: ${EMAIL_SENDER}
+  recipient: ${EMAIL_RECIPIENT}

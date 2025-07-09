@@ -35,4 +35,7 @@ public class Patient {
 
     @Column(length = 20)
     private String phone;
+
+    @Column(name = "early_onset_mail_sent", nullable = false)
+    private boolean earlyOnsetMailSent = false;
 }

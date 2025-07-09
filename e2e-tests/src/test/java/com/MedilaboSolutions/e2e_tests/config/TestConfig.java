@@ -12,11 +12,6 @@ public class TestConfig {
     public static final String LOGOUT_API = GATEWAY_BASE_URL + "/logout";
     public static final String HEALTH_API = GATEWAY_BASE_URL + "/actuator/health";
 
-    // Credentials
-    public static final String TEST_USER_USERNAME = "prenom_medecin";
-    public static final String TEST_USER_PASSWORD = "123";
-
-
     public static final int DEFAULT_TIMEOUT = 60_000; // 30 sec
 
 }

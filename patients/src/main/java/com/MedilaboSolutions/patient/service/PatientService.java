@@ -52,4 +52,11 @@ public class PatientService {
 
         patientRepository.deleteById(id);
     }
+
+    public void updateEarlyOnsetMailSent(Long id, boolean mailSent) {
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Ressource not found."));
+        patient.setEarlyOnsetMailSent(mailSent);
+        patientRepository.save(patient);
+    }
 }

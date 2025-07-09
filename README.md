@@ -1,4 +1,4 @@
-MediLabo Solutions - Diabetes Risk Assessment
+``MediLabo Solutions - Diabetes Risk Assessment
 
 Microservices application for diabetes risk assessment built with Spring Boot and Vue.js.
 
@@ -12,20 +12,45 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 - **Patients**: business microservice - MySQL
 - **Notes**: business microservice - MongoDB
 - **Assessments**: business microservice - *(aggregation, logic, results)*
+- **Notifications**: business microservice - *(high-risk alerts via email)*
 - **E2E Tests**: end-to-end test module simulating full doctor journey to validate system-wide behavior
 
 ---
 
-### 🧰 Technology stack (⚠️ → on the roadmap)
+### 🧰 Technology stack  (⚠️ → on the roadmap)
 
-- **Backend**: Java 21, Spring Boot 3.4.1, Spring Security, Spring Cloud Gateway, Eureka
-- **Frontend**: Vue.js 3, Pinia (Store Manager), Axios
-- **Databases**: MySQL 8, MongoDB, PostgreSQL
-- **Communication**: RestAPI, OpenFeign, ⚠️ *Kafka or RabbitMQ*
-- **Infrastructure**: Docker, Docker-Compose, ⚠️ *Kubernetes*
-- **Testing**: JUnit 5, TestContainers, RestAssured, Awaitility
-- **Observability**: ⚠️ *ELK Stack or OpenTelemetry/Prometheus/Grafana*
-- **Resiliency**: ⚠️ *Resilience4J*
+| Category                             | Technologies / Tools                                                                   |
+|--------------------------------------|----------------------------------------------------------------------------------------|
+| **Backend**                          | Java 21, Spring Boot 3.4.1, Spring Security, Eureka, Spring Cloud Gateway *(Reactive)* |
+| **Frontend & State Management**      | Vue.js 3, Pinia, Axios                                                                 |
+| **Data Storage**                     | MySQL, MongoDB, PostgreSQL *(Reactive)*                                                |
+| **Inter-service Communication**      | REST API, OpenFeign, RabbitMQ                                                          |
+| **Testing & Automation**             | JUnit, TestContainers, RestAssured, Awaitility                                         |
+| **Containerisation & Orchestration** | Docker, Docker-Compose, ⚠️ *Kubernetes*                                                |
+| **Observability & Monitoring**       | ⚠️ *ELK Stack or OpenTelemetry / Prometheus / Grafana*                                 |
+| **Resilience & Fault Tolerance**     | ⚠️ *Resilience4J*                                                                      |
+
+---
+
+### 🔒 Security implementation versions
+
+| Branch | Description | Status                                                                                                                           |
+|--------|-------------|----------------------------------------------------------------------------------------------------------------------------------|
+| `jwt-header` | JWT Access Token in Authorization header only | ✅                                                                                                                                |
+| `access-header-refresh-httponly` | Access token in header + Refresh token in HttpOnly cookie | ✅                                                                                                                                |
+| `all-httponly` | Full HttpOnly for Access & Refresh tokens + CSRF token | ❌ *Abandoned*<br/>Too complex for minimal security gain. Modern SPA setups with SameSite and CORS provide sufficient protection. |
+| `oauth2-access&refresh` | OAuth2 with Google + classic login (Access & Refresh tokens for both) | ✅ *Current*                                                                                                                      |
+| `keycloak` | Keycloak integration | 🕒 *Postponed*<br/>Will be reconsidered after progress on the observability & monitoring part.                                   |
+
+---
+
+### 🔔 Event-Driven
+
+The system implements asynchronous communication using **RabbitMQ** for critical notifications:
+
+- **High-Risk Assessment Events**: when a patient is assessed as `"Early onset"`, the **Assessments** service publishes an event to the `high-risk-assessments` queue
+- **No duplicates**: the alert is triggered only when the risk changes to `"Early onset"`
+- **Email Notifications**: the **Notifications** service consumes these events and sends automated email alerts to healthcare providers (emails are intercepted using **Mailtrap** during development)
 
 ---
 
@@ -39,27 +64,17 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 #### ✅ End-to-End (E2E) Tests
 
 The full journey test simulates a real doctor's workflow using `DoctorJourneyE2ETest`:
-- Covers a 4-step risk evolution: *None → Borderline → In Danger → Early onset*
-- Validates data flow across all services
 - Verifies patient creation, note insertion and risk assessment logic
+- Covers a 4-step risk evolution: *None → Borderline → In Danger → Early onset*
+- Confirms high-risk email delivery by checking the notifications service logs
+- Validates data flow across all services
 - Uses **Awaitility** to ensure service readiness and propagation
 - Executed in a real environment with **Docker Compose**
 
 ---
 
-### 🔒 Security implementation versions
-
-| Branch | Description | Status |
-|--------|-------------|--------|
-| `jwt-header` | JWT Access Token in Authorization header only | ✅ |
-| `access-header-refresh-httponly` | Access token in header + Refresh token in HttpOnly cookie | ✅ |
-| `all-httponly` | Full HttpOnly for Access & Refresh tokens + CSRF token | ❌ *Abandoned*<br/>Too complex for minimal security gain. Modern SPA setups with SameSite and CORS provide sufficient protection. |
-| `oauth2-access&refresh` | OAuth2 with Google + classic login (Access & Refresh tokens for both) | ✅ *Current* |
-| `keycloak` | Keycloak integration | 🕒 *Postponed*<br/>Will be reconsidered after progress on event-driven design and observability. |
-
----
-
 ### ❌ Out of scope
 
-- **Spring Cloud Config Server**: No centralized configuration management. *(used in a different project, with RabbitMQ as the refresh trigger and a GitHub repository for versioning and storing configurations)*
-- **Secrets Manager**: Secrets are managed via environment variables.
+- **Spring Cloud Config Server**: no centralized configuration management. *(used in a different project, with RabbitMQ as the refresh trigger and a GitHub repository for versioning and storing configurations)*
+- **Secrets Manager**: secrets are managed via environment variables.
+- **Front-end testing** : deprioritized to focus efforts on back-end reliability and service integration.

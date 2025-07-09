@@ -73,6 +73,22 @@ services:
       timeout: 5s
       retries: 5
 
+  rabbitmq:
+    image: rabbitmq:4.1.2
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"  # AMQP Port
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   patients:
     build:
       context: ./patients
@@ -84,9 +100,9 @@ services:
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: ${MYSQL_PATIENTS_DRIVER}
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
     depends_on:
-      mysql:
-        condition: service_healthy
       eurekaserver:
+        condition: service_healthy
+      mysql:
         condition: service_healthy
     networks:
       - medilabosolutions-net
@@ -105,9 +121,9 @@ services:
       SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
     depends_on:
-      mongodb:
-        condition: service_healthy
       eurekaserver:
+        condition: service_healthy
+      mongodb:
         condition: service_healthy
     networks:
       - medilabosolutions-net
@@ -123,15 +139,48 @@ services:
       context: ./assessments
     container_name: assessments
     environment:
+      SPRING_RABBITMQ_HOST: ${SPRING_RABBITMQ_HOST}
+      SPRING_RABBITMQ_PORT: ${SPRING_RABBITMQ_PORT}
+      SPRING_RABBITMQ_USERNAME: ${SPRING_RABBITMQ_USERNAME}
+      SPRING_RABBITMQ_PASSWORD: ${SPRING_RABBITMQ_PASSWORD}
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
     depends_on:
       eurekaserver:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     networks:
       - medilabosolutions-net
     #    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  notifications:
+    build:
+      context: ./notifications
+    container_name: notifications
+    environment:
+      SPRING_RABBITMQ_HOST: ${SPRING_RABBITMQ_HOST}
+      SPRING_RABBITMQ_PORT: ${SPRING_RABBITMQ_PORT}
+      SPRING_RABBITMQ_USERNAME: ${SPRING_RABBITMQ_USERNAME}
+      SPRING_RABBITMQ_PASSWORD: ${SPRING_RABBITMQ_PASSWORD}
+      MAILTRAP_API_TOKEN: ${MAILTRAP_API_TOKEN}
+      MAILTRAP_SANDBOX_ID: ${MAILTRAP_SANDBOX_ID}
+      EMAIL_SENDER: ${EMAIL_SENDER}
+      EMAIL_RECIPIENT: ${EMAIL_RECIPIENT}
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8110/actuator/health" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -152,15 +201,17 @@ services:
       SPRING_R2DBC_USERNAME: ${POSTGRES_GATEWAY_USER}
       SPRING_R2DBC_PASSWORD: ${POSTGRES_GATEWAY_PASSWORD}
     depends_on:
-      assessments:
+      eurekaserver:
+        condition: service_healthy
+      postgres-gateway:
         condition: service_healthy
       patients:
         condition: service_healthy
       notes:
         condition: service_healthy
-      eurekaserver:
+      assessments:
         condition: service_healthy
-      postgres-gateway:
+      notifications:
         condition: service_healthy
     networks:
       - medilabosolutions-net

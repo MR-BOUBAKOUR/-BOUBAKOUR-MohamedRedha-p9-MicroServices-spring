@@ -1,13 +1,12 @@
 package com.MedilaboSolutions.assessment.service;
 
-import com.MedilaboSolutions.assessment.dto.AssessmentDto;
-import com.MedilaboSolutions.assessment.dto.NoteDto;
-import com.MedilaboSolutions.assessment.dto.PatientDto;
-import com.MedilaboSolutions.assessment.dto.SuccessResponse;
+import com.MedilaboSolutions.assessment.config.RabbitMQConfig;
+import com.MedilaboSolutions.assessment.dto.*;
 import com.MedilaboSolutions.assessment.service.client.NoteFeignClient;
 import com.MedilaboSolutions.assessment.service.client.PatientFeignClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +23,8 @@ public class AssessmentService {
     private final PatientFeignClient patientFeignClient;
     private final NoteFeignClient noteFeignClient;
 
+    private final RabbitTemplate rabbitTemplate;
+
     public AssessmentDto generateAssessment(Long patId, String correlationId) {
 
         ResponseEntity<SuccessResponse<PatientDto>> patient = patientFeignClient.getPatientById(patId, correlationId);
@@ -36,6 +37,25 @@ public class AssessmentService {
         int triggerCount = countMedicalTriggers(notes);
 
         String risk = evaluateRiskLevel(gender, age, triggerCount);
+
+        if ("Early onset".equals(risk)) {
+            if (!patient.getBody().getData().isEarlyOnsetMailSent()) {
+                HighRiskAssessmentEvent event = new HighRiskAssessmentEvent(
+                        patId,
+                        patient.getBody().getData().getFirstName(),
+                        patient.getBody().getData().getLastName(),
+                        risk
+                );
+                rabbitTemplate.convertAndSend(RabbitMQConfig.QUEUE_NAME, event);
+                log.info("Published high risk assessment event to queue [{}]: {}", RabbitMQConfig.QUEUE_NAME, event);
+
+                patientFeignClient.updateEarlyOnsetMailSent(patId, true, correlationId);
+            }
+        } else {
+            if (patient.getBody().getData().isEarlyOnsetMailSent()) {
+                patientFeignClient.updateEarlyOnsetMailSent(patId, false, correlationId);
+            }
+        }
 
         return new AssessmentDto(patId, risk);
     }
