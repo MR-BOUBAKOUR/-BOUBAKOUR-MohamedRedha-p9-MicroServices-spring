@@ -26,6 +26,9 @@ import static org.hamcrest.Matchers.*;
 })
 public class DoctorJourneyE2ETest {
 
+    String username = System.getenv("TEST_USER_USERNAME");
+    String password = System.getenv("TEST_USER_PASSWORD");
+
     public RequestSpecification requestSpec;
 
     private Integer createdPatientId;
@@ -108,7 +111,7 @@ public class DoctorJourneyE2ETest {
                             "username": "%s",
                             "password": "%s"
                         }
-                        """.formatted(TestConfig.TEST_USER_USERNAME, TestConfig.TEST_USER_PASSWORD))
+                        """.formatted(username, password))
                 .post(TestConfig.LOGIN_API)
                 .then()
                 .statusCode(200)
