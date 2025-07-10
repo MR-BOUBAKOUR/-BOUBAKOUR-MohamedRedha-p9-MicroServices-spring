@@ -1,6 +1,6 @@
 package com.MedilaboSolutions.patient.mapper;
 
-import com.MedilaboSolutions.patient.domain.Patient;
+import com.MedilaboSolutions.patient.model.Patient;
 import com.MedilaboSolutions.patient.dto.PatientRequestDto;
 import com.MedilaboSolutions.patient.dto.PatientDto;
 import org.mapstruct.Mapper;

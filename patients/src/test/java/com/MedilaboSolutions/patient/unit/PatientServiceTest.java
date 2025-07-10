@@ -1,6 +1,6 @@
 package com.MedilaboSolutions.patient.unit;
 
-import com.MedilaboSolutions.patient.domain.Patient;
+import com.MedilaboSolutions.patient.model.Patient;
 import com.MedilaboSolutions.patient.dto.PatientRequestDto;
 import com.MedilaboSolutions.patient.dto.PatientDto;
 import com.MedilaboSolutions.patient.exception.ResourceNotFoundException;
@@ -162,5 +162,65 @@ class PatientServiceTest {
 
         verify(patientRepository).findById(1L);
         verifyNoMoreInteractions(patientRepository, patientMapper);
+    }
+
+
+    @Test
+    @DisplayName("Should delete patient when ID exists")
+    void deleteById_WhenPatientExists_ShouldDeletePatient() {
+        // Given
+        when(patientRepository.findById(1L)).thenReturn(Optional.of(patient));
+
+        // When
+        patientService.deleteById(1L);
+
+        // Then
+        verify(patientRepository).findById(1L);
+        verify(patientRepository).deleteById(1L);
+    }
+
+    @Test
+    @DisplayName("Should throw ResourceNotFoundException when deleting non-existent patient")
+    void deleteById_WhenPatientNotExists_ShouldThrowException() {
+        // Given
+        when(patientRepository.findById(1L)).thenReturn(Optional.empty());
+
+        // When & Then
+        assertThatThrownBy(() -> patientService.deleteById(1L))
+                .isInstanceOf(ResourceNotFoundException.class)
+                .hasMessage("Ressource not found.");
+
+        verify(patientRepository).findById(1L);
+        verify(patientRepository, never()).deleteById(any());
+    }
+
+    @Test
+    @DisplayName("Should update earlyOnsetMailSent flag when patient exists")
+    void updateEarlyOnsetMailSent_WhenPatientExists_ShouldUpdateAndSave() {
+        // Given
+        when(patientRepository.findById(1L)).thenReturn(Optional.of(patient));
+
+        // When
+        patientService.updateEarlyOnsetMailSent(1L, true);
+
+        // Then
+        assertThat(patient.isEarlyOnsetMailSent()).isTrue();
+        verify(patientRepository).findById(1L);
+        verify(patientRepository).save(patient);
+    }
+
+    @Test
+    @DisplayName("Should throw ResourceNotFoundException when updating earlyOnsetMailSent for non-existent patient")
+    void updateEarlyOnsetMailSent_WhenPatientNotExists_ShouldThrowException() {
+        // Given
+        when(patientRepository.findById(1L)).thenReturn(Optional.empty());
+
+        // When & Then
+        assertThatThrownBy(() -> patientService.updateEarlyOnsetMailSent(1L, true))
+                .isInstanceOf(ResourceNotFoundException.class)
+                .hasMessage("Ressource not found.");
+
+        verify(patientRepository).findById(1L);
+        verify(patientRepository, never()).save(any());
     }
 }

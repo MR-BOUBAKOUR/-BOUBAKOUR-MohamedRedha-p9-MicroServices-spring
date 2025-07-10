@@ -1,6 +1,6 @@
 package com.MedilaboSolutions.patient.service;
 
-import com.MedilaboSolutions.patient.domain.Patient;
+import com.MedilaboSolutions.patient.model.Patient;
 import com.MedilaboSolutions.patient.dto.PatientRequestDto;
 import com.MedilaboSolutions.patient.dto.PatientDto;
 import com.MedilaboSolutions.patient.exception.ResourceNotFoundException;

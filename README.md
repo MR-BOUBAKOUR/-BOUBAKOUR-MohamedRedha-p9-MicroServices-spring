@@ -2,6 +2,8 @@
 
 Microservices application for diabetes risk assessment built with Spring Boot and Vue.js.
 
+📄 [Documentation & Reports](https://mr-boubakour.github.io/-BOUBAKOUR-MohamedRedha-p9-MicroServices-spring/) — includes **Javadoc** and **JaCoCo reports** for the microservices where documentation and test coverage bring the most value.
+
 ---
 
 ### 🏗️ Architecture
@@ -70,6 +72,14 @@ The full journey test simulates a real doctor's workflow using `DoctorJourneyE2E
 - Validates data flow across all services
 - Uses **Awaitility** to ensure service readiness and propagation
 - Executed in a real environment with **Docker Compose**
+
+---
+
+### 🚀 CI/CD Pipelines
+
+- `push_dev_ci.yml`: runs unit tests on modified microservices when pushing to `dev`
+- `pr_main_ci-cd.yml`: builds, tests, generates JaCoCo & JavaDocs, deploys docs to GitHub Pages (on PR to `main`)
+- `merge_main_cd.yml`: pushes Docker images to Docker Hub after PR is merged into `main`
 
 ---
 

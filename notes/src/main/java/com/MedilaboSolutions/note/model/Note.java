@@ -1,4 +1,4 @@
-package com.MedilaboSolutions.note.domain;
+package com.MedilaboSolutions.note.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

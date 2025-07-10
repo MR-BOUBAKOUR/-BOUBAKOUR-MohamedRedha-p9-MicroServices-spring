@@ -1,6 +1,6 @@
 package com.MedilaboSolutions.note.repository;
 
-import com.MedilaboSolutions.note.domain.Note;
+import com.MedilaboSolutions.note.model.Note;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

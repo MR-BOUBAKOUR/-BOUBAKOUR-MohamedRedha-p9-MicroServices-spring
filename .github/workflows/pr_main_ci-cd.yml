@@ -1,0 +1,158 @@
+name: CI/CD - UNIT TESTS & ARTIFACTS (PR main) - (Modified Microservices Only)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'gatewayserver/**'
+      - 'patients/**'
+      - 'notes/**'
+      - 'assessments/**'
+      - 'notifications/**'
+      # eurekaserver/** is intentionally excluded
+
+jobs:
+  detect-build-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      ######################## CHECKOUT ########################
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      ######################## SETUP JAVA ########################
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      ######################## DETECT CHANGES ########################
+
+      - name: 🔍 Detect modified microservices
+        id: changes
+        uses: tj-actions/changed-files@v44
+        with:
+          dir_names: true
+          files: |
+            gatewayserver/**
+            patients/**
+            notes/**
+            assessments/**
+            notifications/**
+
+      ######################## BUILD & TEST ########################
+
+      - name: 🧪 Build, Test & Generate JaCoCo Coverage Report
+        if: steps.changes.outputs.any_changed == 'true'
+        run: |
+          echo "Modified microservices:"
+          echo "${{ steps.changes.outputs.all_changed_files }}"
+          for dir in gatewayserver patients notes assessments notifications ; do
+            if echo "${{ steps.changes.outputs.all_changed_files }}" | grep -q "$dir"; then
+              echo "🚀 Running tests for $dir"
+              mvn -B -f $dir/pom.xml verify
+            fi
+          done
+
+      ######################## UPLOAD ARTIFACTS ########################
+
+      - name: Upload JaCoCo Coverage Reports
+        if: steps.changes.outputs.any_changed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-reports
+          path: |
+            gatewayserver/target/site/jacoco-aggregate/
+            patients/target/site/jacoco-aggregate/
+            notes/target/site/jacoco-aggregate/
+            assessments/target/site/jacoco-aggregate/
+            notifications/target/site/jacoco-aggregate/
+
+      ######################## JAVADOCS ########################
+
+      - name: Generate JavaDocs
+        if: steps.changes.outputs.any_changed == 'true'
+        run: |
+          for dir in gatewayserver patients notes assessments notifications ; do
+            if echo "${{ steps.changes.outputs.all_changed_files }}" | grep -q "$dir"; then
+              echo "📚 Generating JavaDocs for $dir"
+              mvn -B -f $dir/pom.xml javadoc:javadoc
+            fi
+          done
+
+      - name: Upload JavaDocs
+        if: steps.changes.outputs.any_changed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: javadocs
+          path: |
+            gatewayserver/target/reports/apidocs/
+            patients/target/reports/apidocs/
+            notes/target/reports/apidocs/
+            assessments/target/reports/apidocs/
+            notifications/target/reports/apidocs/
+
+      ######################## GITHUB PAGES ########################
+
+      - name: Prepare content GitHub Pages
+        if: steps.changes.outputs.any_changed == 'true'
+        run: |
+          mkdir -p gh-pages-build
+          mkdir -p gh-pages-build/jacoco
+          for dir in gatewayserver patients notes assessments notifications; do
+            cp -r $dir/target/site/jacoco-aggregate gh-pages-build/jacoco/$dir 2>/dev/null || true
+          done
+          mkdir -p gh-pages-build/javadocs
+          for dir in gatewayserver patients notes assessments notifications; do
+            cp -r $dir/target/reports/apidocs gh-pages-build/javadocs/$dir 2>/dev/null || true
+          done
+          cat > gh-pages-build/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>MediLabo Solutions - Documentation</title>
+              <style>
+                  body { font-family: Arial, sans-serif; margin: 40px; }
+                  h1 { color: #333; }
+                  .section { margin: 20px 0; }
+                  .service { margin: 10px 0; padding: 10px; background: #f5f5f5; border-radius: 5px; }
+                  a { color: #0066cc; text-decoration: none; }
+                  a:hover { text-decoration: underline; }
+              </style>
+          </head>
+          <body>
+              <h1>MediLabo Solutions - Documentation</h1>
+              <br>
+              <div class="section">
+                  <h2>📊 JaCoCo Coverage Reports</h2>
+                  <div class="service"><a href="jacoco/gatewayserver/index.html">GatewayServer</a></div>
+                  <div class="service"><a href="jacoco/patients/index.html">Patients</a></div>
+                  <div class="service"><a href="jacoco/notes/index.html">Notes</a></div>
+                  <div class="service"><a href="jacoco/assessments/index.html">Assessments</a></div>
+                  <div class="service"><a href="jacoco/notifications/index.html">Notifications</a></div>
+              </div>
+              <br>
+              <div class="section">
+                  <h2>📚 JavaDocs</h2>
+                  <div class="service"><a href="javadocs/gatewayserver/index.html">GatewayServer</a></div>
+                  <div class="service"><a href="javadocs/patients/index.html">Patients</a></div>
+                  <div class="service"><a href="javadocs/notes/index.html">Notes</a></div>
+                  <div class="service"><a href="javadocs/assessments/index.html">Assessments</a></div>
+                  <div class="service"><a href="javadocs/notifications/index.html">Notifications</a></div>
+              </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Deploy JavaDocs & JaCoCo to GitHub Pages
+        if: steps.changes.outputs.any_changed == 'true'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: gh-pages-build

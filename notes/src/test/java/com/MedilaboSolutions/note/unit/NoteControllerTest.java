@@ -82,5 +82,14 @@ class NoteControllerTest {
 
         verify(noteService).create(any(NoteRequestDto.class));
     }
+
+    @Test
+    @DisplayName("Should delete notes when patient ID exists")
+    void deleteNotesByPatientId_ShouldReturnNoContent() throws Exception {
+        mockMvc.perform(delete("/notes/1"))
+                .andExpect(status().isNoContent());
+
+        verify(noteService).deleteByPatientId(1L);
+    }
 }
 
