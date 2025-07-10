@@ -1,0 +1,6 @@
+com.MedilaboSolutions.assessment
+com.MedilaboSolutions.assessment.config
+com.MedilaboSolutions.assessment.controller
+com.MedilaboSolutions.assessment.dto
+com.MedilaboSolutions.assessment.service
+com.MedilaboSolutions.assessment.service.client

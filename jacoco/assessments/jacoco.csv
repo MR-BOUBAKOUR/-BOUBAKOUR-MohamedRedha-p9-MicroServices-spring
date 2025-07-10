@@ -1,0 +1,4 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+assessment,com.MedilaboSolutions.assessment,AssessmentApplication,5,3,0,0,2,1,1,1,1,1
+assessment,com.MedilaboSolutions.assessment.controller,AssessmentController,20,4,0,0,5,1,1,1,1,1
+assessment,com.MedilaboSolutions.assessment.service,AssessmentService,30,255,14,20,7,42,8,14,0,5
