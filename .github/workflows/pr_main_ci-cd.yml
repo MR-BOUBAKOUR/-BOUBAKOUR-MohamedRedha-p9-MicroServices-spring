@@ -1,4 +1,4 @@
-name: CI/CD - UNIT TESTS & ARTIFACTS (PR main) - (Modified Microservices Only)
+name: CI/CD - UNIT TESTS & INTEGRATION TESTS & ARTIFACTS (PR main) - (Modified Microservices Only)
 
 on:
   pull_request:
