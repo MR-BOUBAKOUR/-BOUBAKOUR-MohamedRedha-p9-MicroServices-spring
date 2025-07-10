@@ -47,17 +47,17 @@ public class PatientService {
     }
 
     public void deleteById(Long id) {
-<span class="nc" id="L50">        patientRepository.findById(id)</span>
-<span class="nc" id="L51">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
+<span class="fc" id="L50">        patientRepository.findById(id)</span>
+<span class="fc" id="L51">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
 
-<span class="nc" id="L53">        patientRepository.deleteById(id);</span>
-<span class="nc" id="L54">    }</span>
+<span class="fc" id="L53">        patientRepository.deleteById(id);</span>
+<span class="fc" id="L54">    }</span>
 
     public void updateEarlyOnsetMailSent(Long id, boolean mailSent) {
-<span class="nc" id="L57">        Patient patient = patientRepository.findById(id)</span>
-<span class="nc" id="L58">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
-<span class="nc" id="L59">        patient.setEarlyOnsetMailSent(mailSent);</span>
-<span class="nc" id="L60">        patientRepository.save(patient);</span>
-<span class="nc" id="L61">    }</span>
+<span class="fc" id="L57">        Patient patient = patientRepository.findById(id)</span>
+<span class="fc" id="L58">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
+<span class="fc" id="L59">        patient.setEarlyOnsetMailSent(mailSent);</span>
+<span class="fc" id="L60">        patientRepository.save(patient);</span>
+<span class="fc" id="L61">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

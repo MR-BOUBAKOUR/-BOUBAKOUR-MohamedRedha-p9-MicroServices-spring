@@ -60,8 +60,8 @@ public class PatientController {
 
     @DeleteMapping(&quot;/{id}&quot;)
     public ResponseEntity&lt;Void&gt; deletePatient(@PathVariable Long id) {
-<span class="nc" id="L63">        patientService.deleteById(id);</span>
-<span class="nc" id="L64">        return ResponseEntity.noContent().build();</span>
+<span class="fc" id="L63">        patientService.deleteById(id);</span>
+<span class="fc" id="L64">        return ResponseEntity.noContent().build();</span>
     }
 
     @PutMapping(&quot;/{id}/early-onset-mail&quot;)
@@ -70,10 +70,10 @@ public class PatientController {
             @RequestParam Boolean mailSent,
             @RequestHeader(&quot;medilabo-solutions-correlation-id&quot;) String correlationId
     ) {
-<span class="nc" id="L73">        log.debug(&quot;medilabo-solutions-correlation-id found : {}&quot;, correlationId);</span>
+<span class="fc" id="L73">        log.debug(&quot;medilabo-solutions-correlation-id found : {}&quot;, correlationId);</span>
 
-<span class="nc" id="L75">        patientService.updateEarlyOnsetMailSent(id, mailSent);</span>
-<span class="nc" id="L76">        return ResponseEntity.noContent().build();</span>
+<span class="fc" id="L75">        patientService.updateEarlyOnsetMailSent(id, mailSent);</span>
+<span class="fc" id="L76">        return ResponseEntity.noContent().build();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

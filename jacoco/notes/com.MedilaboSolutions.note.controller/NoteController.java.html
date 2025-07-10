@@ -44,8 +44,8 @@ public class NoteController {
 
     @DeleteMapping(&quot;/{patId}&quot;)
     public ResponseEntity&lt;Void&gt; deleteNotesByPatientId(@PathVariable Long patId) {
-<span class="nc" id="L47">        noteService.deleteByPatientId(patId);</span>
-<span class="nc" id="L48">        return ResponseEntity.noContent().build();</span>
+<span class="fc" id="L47">        noteService.deleteByPatientId(patId);</span>
+<span class="fc" id="L48">        return ResponseEntity.noContent().build();</span>
     }
 
 }
