@@ -1,4 +1,4 @@
-package com.MedilaboSolutions.patient.domain;
+package com.MedilaboSolutions.patient.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

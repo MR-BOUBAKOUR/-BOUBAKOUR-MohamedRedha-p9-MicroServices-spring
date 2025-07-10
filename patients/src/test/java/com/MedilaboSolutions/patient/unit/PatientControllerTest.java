@@ -138,4 +138,32 @@ class PatientControllerTest {
 
         verify(patientService).update(eq(1L), any(PatientRequestDto.class));
     }
+
+    @Test
+    @DisplayName("Should delete patient when ID exists")
+    void deletePatient_WhenExists_ShouldReturnNoContent() throws Exception {
+        // Given
+        doNothing().when(patientService).deleteById(1L);
+
+        // When & Then
+        mockMvc.perform(delete("/patients/1"))
+                .andExpect(status().isNoContent());
+
+        verify(patientService).deleteById(1L);
+    }
+
+    @Test
+    @DisplayName("Should update earlyOnsetMailSent flag when input is valid")
+    void updateEarlyOnsetMailSent_ShouldReturnNoContent() throws Exception {
+        // Given
+        doNothing().when(patientService).updateEarlyOnsetMailSent(1L, true);
+
+        // When & Then
+        mockMvc.perform(put("/patients/1/early-onset-mail")
+                        .param("mailSent", "true")
+                        .header("medilabo-solutions-correlation-id", "test-correlation-id"))
+                .andExpect(status().isNoContent());
+
+        verify(patientService).updateEarlyOnsetMailSent(1L, true);
+    }
 }

@@ -1,6 +1,6 @@
 package com.MedilaboSolutions.note.unit;
 
-import com.MedilaboSolutions.note.domain.Note;
+import com.MedilaboSolutions.note.model.Note;
 import com.MedilaboSolutions.note.dto.NoteRequestDto;
 import com.MedilaboSolutions.note.dto.NoteDto;
 import com.MedilaboSolutions.note.mapper.NoteMapper;
@@ -84,6 +84,28 @@ class NoteServiceTest {
         verify(noteMapper).toNote(noteRequestDto);
         verify(noteRepository).save(note);
         verify(noteMapper).toNoteDto(note);
+    }
+
+    @Test
+    @DisplayName("Should delete notes when patient ID exists")
+    void deleteByPatientId_ShouldDeleteNotes() {
+        when(noteRepository.findByPatId(1L)).thenReturn(List.of(note));
+
+        noteService.deleteByPatientId(1L);
+
+        verify(noteRepository).findByPatId(1L);
+        verify(noteRepository).deleteAll(List.of(note));
+    }
+
+    @Test
+    @DisplayName("Should not delete when no notes found")
+    void deleteByPatientId_ShouldDoNothingWhenNoNotesFound() {
+        when(noteRepository.findByPatId(1L)).thenReturn(List.of());
+
+        noteService.deleteByPatientId(1L);
+
+        verify(noteRepository).findByPatId(1L);
+        verify(noteRepository, never()).deleteAll(any());
     }
 }
 

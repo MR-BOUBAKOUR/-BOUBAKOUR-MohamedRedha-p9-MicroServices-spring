@@ -1,0 +1,51 @@
+name: CI - UNIT TESTS (Push to dev) - (Modified Microservices Only)
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - 'gatewayserver/**'
+      - 'patients/**'
+      - 'notes/**'
+      - 'assessments/**'
+      - 'notifications/**'
+      # eurekaserver/** is intentionally excluded
+
+jobs:
+  detect-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: 🔍 Detect modified microservices
+        id: changes
+        uses: tj-actions/changed-files@v44
+        with:
+          dir_names: true
+          files: |
+            gatewayserver/**
+            patients/**
+            notes/**
+            assessments/**
+            notifications/**
+
+      - name: 🧪 Run unit tests
+        if: steps.changes.outputs.any_changed == 'true'
+        run: |
+          echo "Modified microservices:"
+          echo "${{ steps.changes.outputs.all_changed_files }}"
+          for dir in gatewayserver patients notes assessments notifications ; do
+            if echo "${{ steps.changes.outputs.all_changed_files }}" | grep -q "$dir"; then
+              echo "🚀 Running tests for $dir"
+              mvn -B -f $dir/pom.xml test
+            fi
+          done

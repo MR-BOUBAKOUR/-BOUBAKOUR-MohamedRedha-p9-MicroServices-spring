@@ -1,6 +1,6 @@
 package com.MedilaboSolutions.note.mapper;
 
-import com.MedilaboSolutions.note.domain.Note;
+import com.MedilaboSolutions.note.model.Note;
 import com.MedilaboSolutions.note.dto.NoteRequestDto;
 import com.MedilaboSolutions.note.dto.NoteDto;
 import org.mapstruct.Mapper;
