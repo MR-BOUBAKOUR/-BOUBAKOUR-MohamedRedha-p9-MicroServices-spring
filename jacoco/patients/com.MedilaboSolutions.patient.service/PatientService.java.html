@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatientService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">patient</a> &gt; <a href="index.source.html" class="el_package">com.MedilaboSolutions.patient.service</a> &gt; <span class="el_source">PatientService.java</span></div><h1>PatientService.java</h1><pre class="source lang-java linenums">package com.MedilaboSolutions.patient.service;
+
+import com.MedilaboSolutions.patient.model.Patient;
+import com.MedilaboSolutions.patient.dto.PatientRequestDto;
+import com.MedilaboSolutions.patient.dto.PatientDto;
+import com.MedilaboSolutions.patient.exception.ResourceNotFoundException;
+import com.MedilaboSolutions.patient.mapper.PatientMapper;
+import com.MedilaboSolutions.patient.repository.PatientRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@RequiredArgsConstructor
+@Service
+public class PatientService {
+
+    private final PatientRepository patientRepository;
+    private final PatientMapper patientMapper;
+
+    public List&lt;PatientDto&gt; findAll() {
+<span class="fc" id="L22">        return patientRepository.findAll().stream()</span>
+<span class="fc" id="L23">                .map(patientMapper::toPatientDto)</span>
+<span class="fc" id="L24">                .toList();</span>
+    }
+
+    public PatientDto findById(Long id) {
+<span class="fc" id="L28">        return patientRepository.findById(id)</span>
+<span class="fc" id="L29">                .map(patientMapper::toPatientDto)</span>
+<span class="fc" id="L30">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
+    }
+
+    public PatientDto create(PatientRequestDto patientDto) {
+<span class="fc" id="L34">        Patient saved = patientRepository.save(patientMapper.toPatient(patientDto));</span>
+<span class="fc" id="L35">        return patientMapper.toPatientDto(saved);</span>
+    }
+
+    public PatientDto update(long id, PatientRequestDto patientDto) {
+<span class="fc" id="L39">        patientRepository.findById(id)</span>
+<span class="fc" id="L40">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
+
+<span class="fc" id="L42">        Patient patientToUpdate = patientMapper.toPatient(patientDto);</span>
+<span class="fc" id="L43">        patientToUpdate.setId(id);</span>
+
+<span class="fc" id="L45">        Patient saved = patientRepository.save(patientToUpdate);</span>
+<span class="fc" id="L46">        return patientMapper.toPatientDto(saved);</span>
+    }
+
+    public void deleteById(Long id) {
+<span class="fc" id="L50">        patientRepository.findById(id)</span>
+<span class="fc" id="L51">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
+
+<span class="fc" id="L53">        patientRepository.deleteById(id);</span>
+<span class="fc" id="L54">    }</span>
+
+    public void updateEarlyOnsetMailSent(Long id, boolean mailSent) {
+<span class="fc" id="L57">        Patient patient = patientRepository.findById(id)</span>
+<span class="fc" id="L58">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
+<span class="fc" id="L59">        patient.setEarlyOnsetMailSent(mailSent);</span>
+<span class="fc" id="L60">        patientRepository.save(patient);</span>
+<span class="fc" id="L61">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
