@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatientController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">patient</a> &gt; <a href="index.source.html" class="el_package">com.MedilaboSolutions.patient.controller</a> &gt; <span class="el_source">PatientController.java</span></div><h1>PatientController.java</h1><pre class="source lang-java linenums">package com.MedilaboSolutions.patient.controller;
+
+import com.MedilaboSolutions.patient.dto.PatientRequestDto;
+import com.MedilaboSolutions.patient.dto.PatientDto;
+import com.MedilaboSolutions.patient.dto.SuccessResponse;
+import com.MedilaboSolutions.patient.service.PatientService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+<span class="fc" id="L16">@Slf4j</span>
+@RequiredArgsConstructor
+@RequestMapping(&quot;/patients&quot;)
+@RestController
+public class PatientController {
+
+    private final PatientService patientService;
+
+    @GetMapping
+    public ResponseEntity&lt;SuccessResponse&lt;List&lt;PatientDto&gt;&gt;&gt; getAllPatients() {
+<span class="fc" id="L26">        List&lt;PatientDto&gt; patients = patientService.findAll();</span>
+<span class="fc" id="L27">        return ResponseEntity</span>
+<span class="fc" id="L28">                .status(HttpStatus.OK)</span>
+<span class="fc" id="L29">                .body(new SuccessResponse&lt;&gt;(200, &quot;Patients fetched successfully&quot;, patients));</span>
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;SuccessResponse&lt;PatientDto&gt;&gt; getPatientById(
+            @PathVariable Long id,
+            @RequestHeader(&quot;medilabo-solutions-correlation-id&quot;) String correlationId
+    ) {
+<span class="fc" id="L37">        log.debug(&quot;medilabo-solutions-correlation-id found : {}&quot;, correlationId);</span>
+
+<span class="fc" id="L39">        PatientDto patient = patientService.findById(id);</span>
+<span class="fc" id="L40">        return ResponseEntity</span>
+<span class="fc" id="L41">                .status(HttpStatus.OK)</span>
+<span class="fc" id="L42">                .body(new SuccessResponse&lt;&gt;(200, &quot;Patient fetched successfully&quot;, patient));</span>
+    }
+
+    @PostMapping
+    public ResponseEntity&lt;SuccessResponse&lt;PatientDto&gt;&gt; createPatient(@Valid @RequestBody PatientRequestDto patientDto) {
+<span class="fc" id="L47">        PatientDto patient = patientService.create(patientDto);</span>
+<span class="fc" id="L48">        return ResponseEntity</span>
+<span class="fc" id="L49">                .status(HttpStatus.CREATED)</span>
+<span class="fc" id="L50">                .body(new SuccessResponse&lt;&gt;(201, &quot;Patient created successfully&quot;, patient));</span>
+    }
+
+    @PutMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;SuccessResponse&lt;PatientDto&gt;&gt; updatePatient(@PathVariable Long id, @Valid @RequestBody PatientRequestDto patientDto) {
+<span class="fc" id="L55">        PatientDto patient = patientService.update(id, patientDto);</span>
+<span class="fc" id="L56">        return ResponseEntity</span>
+<span class="fc" id="L57">                .status(HttpStatus.OK)</span>
+<span class="fc" id="L58">                .body(new SuccessResponse&lt;&gt;(200, &quot;Patient updated successfully&quot;, patient));</span>
+    }
+
+    @DeleteMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deletePatient(@PathVariable Long id) {
+<span class="nc" id="L63">        patientService.deleteById(id);</span>
+<span class="nc" id="L64">        return ResponseEntity.noContent().build();</span>
+    }
+
+    @PutMapping(&quot;/{id}/early-onset-mail&quot;)
+    public ResponseEntity&lt;Void&gt; updateEarlyOnsetMailSent(
+            @PathVariable Long id,
+            @RequestParam Boolean mailSent,
+            @RequestHeader(&quot;medilabo-solutions-correlation-id&quot;) String correlationId
+    ) {
+<span class="nc" id="L73">        log.debug(&quot;medilabo-solutions-correlation-id found : {}&quot;, correlationId);</span>
+
+<span class="nc" id="L75">        patientService.updateEarlyOnsetMailSent(id, mailSent);</span>
+<span class="nc" id="L76">        return ResponseEntity.noContent().build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

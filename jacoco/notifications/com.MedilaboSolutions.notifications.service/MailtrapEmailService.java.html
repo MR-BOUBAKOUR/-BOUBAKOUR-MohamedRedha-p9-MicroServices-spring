@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MailtrapEmailService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">notifications</a> &gt; <a href="index.source.html" class="el_package">com.MedilaboSolutions.notifications.service</a> &gt; <span class="el_source">MailtrapEmailService.java</span></div><h1>MailtrapEmailService.java</h1><pre class="source lang-java linenums">package com.MedilaboSolutions.notifications.service;
+
+import io.mailtrap.config.MailtrapConfig;
+import io.mailtrap.factory.MailtrapClientFactory;
+import io.mailtrap.model.request.emails.Address;
+import io.mailtrap.model.request.emails.MailtrapMail;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+<span class="fc" id="L13">@Slf4j</span>
+@Service
+<span class="nc" id="L15">public class MailtrapEmailService {</span>
+
+    @Value(&quot;${mailtrap.token}&quot;)
+    private String mailtrapToken;
+
+    @Value(&quot;${mailtrap.inbox-id}&quot;)
+    private Long mailtrapInboxId;
+
+    public void sendEmail(String fromEmail, String toEmail, String subject, String content) {
+<span class="nc" id="L24">        MailtrapConfig config = new MailtrapConfig.Builder()</span>
+<span class="nc" id="L25">                .sandbox(true)</span>
+<span class="nc" id="L26">                .inboxId(mailtrapInboxId)</span>
+<span class="nc" id="L27">                .token(mailtrapToken)</span>
+<span class="nc" id="L28">                .build();</span>
+
+<span class="nc" id="L30">        MailtrapMail mail = MailtrapMail.builder()</span>
+<span class="nc" id="L31">                .from(new Address(fromEmail, &quot;MedilaboSolutions Notifications&quot;))</span>
+<span class="nc" id="L32">                .to(List.of(new Address(toEmail)))</span>
+<span class="nc" id="L33">                .subject(subject)</span>
+<span class="nc" id="L34">                .text(content)</span>
+<span class="nc" id="L35">                .category(&quot;High Risk Alert&quot;)</span>
+<span class="nc" id="L36">                .build();</span>
+
+        try {
+<span class="nc" id="L39">            log.info(&quot;Sending email via Mailtrap...&quot;);</span>
+<span class="nc" id="L40">            MailtrapClientFactory.createMailtrapClient(config).send(mail);</span>
+<span class="nc" id="L41">        } catch (Exception e) {</span>
+<span class="nc" id="L42">            log.error(&quot;Failed to send email&quot;, e);</span>
+<span class="nc" id="L43">        }</span>
+<span class="nc" id="L44">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
