@@ -1,0 +1,10 @@
+com.MedilaboSolutions.gateway
+com.MedilaboSolutions.gateway.controller
+com.MedilaboSolutions.gateway.dto
+com.MedilaboSolutions.gateway.exception
+com.MedilaboSolutions.gateway.filters
+com.MedilaboSolutions.gateway.model
+com.MedilaboSolutions.gateway.repository
+com.MedilaboSolutions.gateway.security
+com.MedilaboSolutions.gateway.service
+com.MedilaboSolutions.gateway.utils

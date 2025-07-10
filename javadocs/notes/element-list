@@ -1,0 +1,8 @@
+com.MedilaboSolutions.note
+com.MedilaboSolutions.note.controller
+com.MedilaboSolutions.note.domain
+com.MedilaboSolutions.note.dto
+com.MedilaboSolutions.note.exception
+com.MedilaboSolutions.note.mapper
+com.MedilaboSolutions.note.repository
+com.MedilaboSolutions.note.service
