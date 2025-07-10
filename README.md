@@ -29,8 +29,10 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 | **Inter-service Communication**      | REST API, OpenFeign, RabbitMQ                                                          |
 | **Testing & Automation**             | JUnit, TestContainers, RestAssured, Awaitility                                         |
 | **Containerisation & Orchestration** | Docker, Docker-Compose, ⚠️ *Kubernetes*                                                |
+| **CI/CD**                            | GitHub Actions, GitHub Pages (JaCoCo & JavaDoc), Docker Hub                            |
 | **Observability & Monitoring**       | ⚠️ *ELK Stack or OpenTelemetry / Prometheus / Grafana*                                 |
 | **Resilience & Fault Tolerance**     | ⚠️ *Resilience4J*                                                                      |
+
 
 ---
 
