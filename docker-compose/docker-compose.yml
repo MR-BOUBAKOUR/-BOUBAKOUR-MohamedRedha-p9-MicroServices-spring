@@ -2,12 +2,10 @@ services:
   eurekaserver:
     build:
       context: ../eurekaserver
-    container_name: eurekaserver
     ports:
       - "8070:8070"
     networks:
       - medilabosolutions-net
-    #    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8070/actuator/health"]
       interval: 10s
@@ -17,7 +15,6 @@ services:
   gatewayserver:
     build:
       context: ../gatewayserver
-    container_name: gatewayserver
     ports:
       - "8071:8071"
     environment:
@@ -44,7 +41,6 @@ services:
         condition: service_healthy
     networks:
       - medilabosolutions-net
-    #    restart: unless-stopped
     healthcheck:
       # -k used to ignore SSL cert validation for self-signed certs in health check; remove in production environment
       test: ["CMD", "curl", "-k", "-f", "https://localhost:8071/actuator/health"]
@@ -54,7 +50,6 @@ services:
 
   gatewayserver-db-postgresql:
     image: postgres:15
-    container_name: gatewayserver-db-postgresql
     ports:
       - "5432:5432"
     environment:
@@ -75,7 +70,6 @@ services:
   patients:
     build:
       context: ../patients
-    container_name: patients
     environment:
       SPRING_DATASOURCE_URL: ${MYSQL_PATIENTS_URL}
       SPRING_DATASOURCE_USERNAME: ${MYSQL_PATIENTS_USER}
@@ -89,7 +83,6 @@ services:
         condition: service_healthy
     networks:
       - medilabosolutions-net
-    #    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8100/actuator/health"]
       interval: 10s
@@ -98,7 +91,6 @@ services:
 
   patients-db-mysql:
     image: mysql:8
-    container_name: patients-db-mysql
     ports:
       - "3306:3306"
     environment:
@@ -111,7 +103,6 @@ services:
       - ./data/mysql-init:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
-    #    restart: unless-stopped
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -121,7 +112,6 @@ services:
   notes:
     build:
       context: ../notes
-    container_name: notes
     environment:
       SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
@@ -132,7 +122,6 @@ services:
         condition: service_healthy
     networks:
       - medilabosolutions-net
-    #    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8090/actuator/health"]
       interval: 10s
@@ -141,7 +130,6 @@ services:
 
   notes-db-mongodb:
     image: mongo:6.0
-    container_name: notes-db-mongodb
     ports:
       - "27017:27017"
     volumes:
@@ -149,7 +137,6 @@ services:
       - ./data/mongodb-init:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
-    #    restart: unless-stopped
     healthcheck:
       test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
       interval: 10s
@@ -159,7 +146,6 @@ services:
   assessments:
     build:
       context: ../assessments
-    container_name: assessments
     environment:
       SPRING_RABBITMQ_HOST: ${SPRING_RABBITMQ_HOST}
       SPRING_RABBITMQ_PORT: ${SPRING_RABBITMQ_PORT}
@@ -173,7 +159,6 @@ services:
         condition: service_healthy
     networks:
       - medilabosolutions-net
-    #    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       interval: 10s
@@ -183,7 +168,6 @@ services:
   notifications:
     build:
       context: ../notifications
-    container_name: notifications
     environment:
       SPRING_RABBITMQ_HOST: ${SPRING_RABBITMQ_HOST}
       SPRING_RABBITMQ_PORT: ${SPRING_RABBITMQ_PORT}
@@ -209,7 +193,6 @@ services:
 
   rabbitmq:
     image: rabbitmq:4.1.2
-    container_name: rabbitmq
     ports:
       - "5672:5672"  # AMQP Port
     environment:
@@ -226,7 +209,6 @@ services:
 #  front-vue:
 #    build:
 #      context: ./front-vue
-#    container_name: front-vue
 #    ports:
 #      - "5173:5173"
 #    volumes:
@@ -234,7 +216,6 @@ services:
 #      - /app/node_modules
 #    networks:
 #      - medilabosolutions-net
-##    restart: unless-stopped
 #    depends_on:
 #      gatewayserver:
 #        condition: service_healthy
@@ -320,6 +301,15 @@ services:
     networks:
       - medilabosolutions-net
 
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - medilabosolutions-net
+
   grafana:
     image: grafana/grafana:latest
     environment:
@@ -332,22 +322,11 @@ services:
       - sh
       - -euc
       - |
-        mkdir -p /etc/grafana/provisioning/datasources
-        cat <<EOF > /etc/grafana/provisioning/datasources/ds.yaml
-        apiVersion: 1
-        datasources:
-          - name: Loki
-            type: loki
-            access: proxy
-            url: http://gateway:3100
-            jsonData:
-              httpHeaderName1: "X-Scope-OrgID"
-            secureJsonData:
-              httpHeaderValue1: "tenant1"
-        EOF
         /run.sh
     ports:
       - "3000:3000"
+    volumes:
+      - ./observability/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1" ]
       interval: 10s
@@ -368,7 +347,6 @@ services:
       - gateway
     networks:
       - medilabosolutions-net
-
 
   gateway:
     image: nginx:latest
