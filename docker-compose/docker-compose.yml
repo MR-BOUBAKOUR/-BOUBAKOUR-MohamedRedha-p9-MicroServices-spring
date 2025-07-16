@@ -1,0 +1,449 @@
+services:
+  eurekaserver:
+    build:
+      context: ../eurekaserver
+    container_name: eurekaserver
+    ports:
+      - "8070:8070"
+    networks:
+      - medilabosolutions-net
+    #    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8070/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  gatewayserver:
+    build:
+      context: ../gatewayserver
+    container_name: gatewayserver
+    ports:
+      - "8071:8071"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      OAUTH2_GOOGLE_CLIENT_ID: ${OAUTH2_GOOGLE_CLIENT_ID}
+      OAUTH2_GOOGLE_CLIENT_SECRET: ${OAUTH2_GOOGLE_CLIENT_SECRET}
+      KEY_STORE_PASSWORD: ${KEY_STORE_PASSWORD}
+      SPRING_R2DBC_URL: ${POSTGRES_GATEWAY_URL}
+      SPRING_R2DBC_USERNAME: ${POSTGRES_GATEWAY_USER}
+      SPRING_R2DBC_PASSWORD: ${POSTGRES_GATEWAY_PASSWORD}
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
+      gatewayserver-db-postgresql:
+        condition: service_healthy
+      patients:
+        condition: service_healthy
+      notes:
+        condition: service_healthy
+      assessments:
+        condition: service_healthy
+      notifications:
+        condition: service_healthy
+    networks:
+      - medilabosolutions-net
+    #    restart: unless-stopped
+    healthcheck:
+      # -k used to ignore SSL cert validation for self-signed certs in health check; remove in production environment
+      test: ["CMD", "curl", "-k", "-f", "https://localhost:8071/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  gatewayserver-db-postgresql:
+    image: postgres:15
+    container_name: gatewayserver-db-postgresql
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_GATEWAY_DATABASE}
+      POSTGRES_USER: ${POSTGRES_GATEWAY_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_GATEWAY_PASSWORD}
+    volumes:
+      - gatewayserver-db-postgresql-data:/var/lib/postgresql/data
+      - ./data/postgresql-init:/docker-entrypoint-initdb.d
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_GATEWAY_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  patients:
+    build:
+      context: ../patients
+    container_name: patients
+    environment:
+      SPRING_DATASOURCE_URL: ${MYSQL_PATIENTS_URL}
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_PATIENTS_USER}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PATIENTS_PASSWORD}
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: ${MYSQL_PATIENTS_DRIVER}
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
+      patients-db-mysql:
+        condition: service_healthy
+    networks:
+      - medilabosolutions-net
+    #    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  patients-db-mysql:
+    image: mysql:8
+    container_name: patients-db-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_PATIENTS_DATABASE}
+      MYSQL_USER: ${MYSQL_PATIENTS_USER}
+      MYSQL_PASSWORD: ${MYSQL_PATIENTS_PASSWORD}
+    volumes:
+      - patients-db-mysql-data:/var/lib/mysql
+      - ./data/mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - medilabosolutions-net
+    #    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  notes:
+    build:
+      context: ../notes
+    container_name: notes
+    environment:
+      SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
+      notes-db-mongodb:
+        condition: service_healthy
+    networks:
+      - medilabosolutions-net
+    #    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8090/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  notes-db-mongodb:
+    image: mongo:6.0
+    container_name: notes-db-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - notes-db-mongodb-data:/data/db
+      - ./data/mongodb-init:/docker-entrypoint-initdb.d
+    networks:
+      - medilabosolutions-net
+    #    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  assessments:
+    build:
+      context: ../assessments
+    container_name: assessments
+    environment:
+      SPRING_RABBITMQ_HOST: ${SPRING_RABBITMQ_HOST}
+      SPRING_RABBITMQ_PORT: ${SPRING_RABBITMQ_PORT}
+      SPRING_RABBITMQ_USERNAME: ${SPRING_RABBITMQ_USERNAME}
+      SPRING_RABBITMQ_PASSWORD: ${SPRING_RABBITMQ_PASSWORD}
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - medilabosolutions-net
+    #    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  notifications:
+    build:
+      context: ../notifications
+    container_name: notifications
+    environment:
+      SPRING_RABBITMQ_HOST: ${SPRING_RABBITMQ_HOST}
+      SPRING_RABBITMQ_PORT: ${SPRING_RABBITMQ_PORT}
+      SPRING_RABBITMQ_USERNAME: ${SPRING_RABBITMQ_USERNAME}
+      SPRING_RABBITMQ_PASSWORD: ${SPRING_RABBITMQ_PASSWORD}
+      MAILTRAP_API_TOKEN: ${MAILTRAP_API_TOKEN}
+      MAILTRAP_SANDBOX_ID: ${MAILTRAP_SANDBOX_ID}
+      EMAIL_SENDER: ${EMAIL_SENDER}
+      EMAIL_RECIPIENT: ${EMAIL_RECIPIENT}
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8110/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:4.1.2
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"  # AMQP Port
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+#  front-vue:
+#    build:
+#      context: ./front-vue
+#    container_name: front-vue
+#    ports:
+#      - "5173:5173"
+#    volumes:
+#      - ./front-vue:/app
+#      - /app/node_modules
+#    networks:
+#      - medilabosolutions-net
+##    restart: unless-stopped
+#    depends_on:
+#      gatewayserver:
+#        condition: service_healthy
+
+  # =============================================== OBSERVABILITY STACK ===============================================
+
+  read:
+    image: grafana/loki:latest
+    command: "-config.file=/etc/loki/config.yaml -target=read"
+    ports:
+      - 3101:3100
+      - 7946
+      - 9095
+    volumes:
+      - ./observability/loki/loki-config.yaml:/etc/loki/config.yaml
+    depends_on:
+      - minio
+    healthcheck:
+      test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3100/ready || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks: &loki-dns
+      medilabosolutions-net:
+        aliases:
+          - loki
+
+  write:
+    image: grafana/loki:latest
+    command: "-config.file=/etc/loki/config.yaml -target=write"
+    ports:
+      - 3102:3100
+      - 7946
+      - 9095
+    volumes:
+      - ./observability/loki/loki-config.yaml:/etc/loki/config.yaml
+    healthcheck:
+      test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3100/ready || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      - minio
+    networks:
+      <<: *loki-dns
+
+  alloy:
+    image: grafana/alloy:latest
+    volumes:
+      - ./observability/alloy/alloy-local-config.yaml:/etc/alloy/config.alloy:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
+    ports:
+      - 12345:12345
+    depends_on:
+      - gateway
+    networks:
+      - medilabosolutions-net
+
+  minio:
+    image: minio/minio
+    entrypoint:
+      - sh
+      - -euc
+      - |
+        mkdir -p /data/loki-data && \
+        mkdir -p /data/loki-ruler && \
+        minio server /data
+    environment:
+      - MINIO_ROOT_USER=loki
+      - MINIO_ROOT_PASSWORD=supersecret
+      - MINIO_PROMETHEUS_AUTH_TYPE=public
+      - MINIO_UPDATE=off
+    ports:
+      - 9000
+    volumes:
+      - ./.data/minio:/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 15s
+      timeout: 20s
+      retries: 5
+    networks:
+      - medilabosolutions-net
+
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    depends_on:
+      - gateway
+    entrypoint:
+      - sh
+      - -euc
+      - |
+        mkdir -p /etc/grafana/provisioning/datasources
+        cat <<EOF > /etc/grafana/provisioning/datasources/ds.yaml
+        apiVersion: 1
+        datasources:
+          - name: Loki
+            type: loki
+            access: proxy
+            url: http://gateway:3100
+            jsonData:
+              httpHeaderName1: "X-Scope-OrgID"
+            secureJsonData:
+              httpHeaderValue1: "tenant1"
+        EOF
+        /run.sh
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - medilabosolutions-net
+
+  backend:
+    image: grafana/loki:latest
+    volumes:
+      - ./observability/loki/loki-config.yaml:/etc/loki/config.yaml
+    ports:
+      - "3100"
+      - "7946"
+    command: "-config.file=/etc/loki/config.yaml -target=backend -legacy-read-mode=false"
+    depends_on:
+      - gateway
+    networks:
+      - medilabosolutions-net
+
+
+  gateway:
+    image: nginx:latest
+    depends_on:
+      - read
+      - write
+    entrypoint:
+      - sh
+      - -euc
+      - |
+        cat <<EOF > /etc/nginx/nginx.conf
+        user  nginx;
+        worker_processes  5;  ## Default: 1
+
+        events {
+          worker_connections   1000;
+        }
+
+        http {
+          resolver 127.0.0.11;
+
+          server {
+            listen             3100;
+
+            location = / {
+              return 200 'OK';
+              auth_basic off;
+            }
+
+            location = /api/prom/push {
+              proxy_pass       http://write:3100\$$request_uri;
+            }
+
+            location = /api/prom/tail {
+              proxy_pass       http://read:3100\$$request_uri;
+              proxy_set_header Upgrade \$$http_upgrade;
+              proxy_set_header Connection "upgrade";
+            }
+
+            location ~ /api/prom/.* {
+              proxy_pass       http://read:3100\$$request_uri;
+            }
+
+            location = /loki/api/v1/push {
+              proxy_pass       http://write:3100\$$request_uri;
+            }
+
+            location = /loki/api/v1/tail {
+              proxy_pass       http://read:3100\$$request_uri;
+              proxy_set_header Upgrade \$$http_upgrade;
+              proxy_set_header Connection "upgrade";
+            }
+
+            location ~ /loki/api/.* {
+              proxy_pass       http://read:3100\$$request_uri;
+            }
+          }
+        }
+        EOF
+        /docker-entrypoint.sh nginx -g "daemon off;"
+    ports:
+      - "3100:3100"
+    healthcheck:
+      test: [ "CMD", "service", "nginx", "status" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - medilabosolutions-net
+
+networks:
+  medilabosolutions-net:
+    driver: bridge
+
+volumes:
+  patients-db-mysql-data:
+  gatewayserver-db-postgresql-data:
+  notes-db-mongodb-data:

@@ -57,6 +57,10 @@ management:
   info:
     env:
       enabled: true
+  # Used to identify which metrics belong to which microservice
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 eureka:
   client:
