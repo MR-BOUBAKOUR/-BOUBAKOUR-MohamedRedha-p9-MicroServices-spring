@@ -1,9 +1,18 @@
+x-otel-java-env: &otel-java-env
+  JAVA_TOOL_OPTIONS: "-javaagent:/app/libs/opentelemetry-javaagent-2.11.0.jar"
+  OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
+  OTEL_METRICS_EXPORTER: none
+  OTEL_LOGS_EXPORTER: none
+
 services:
   eurekaserver:
     build:
       context: ../eurekaserver
     ports:
       - "8070:8070"
+    environment:
+      <<: *otel-java-env
+      OTEL_SERVICE_NAME: "eurekaserver"
     networks:
       - medilabosolutions-net
     healthcheck:
@@ -18,14 +27,16 @@ services:
     ports:
       - "8071:8071"
     environment:
+      <<: *otel-java-env
+      OTEL_SERVICE_NAME: "gatewayserver"
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
-      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
-      OAUTH2_GOOGLE_CLIENT_ID: ${OAUTH2_GOOGLE_CLIENT_ID}
-      OAUTH2_GOOGLE_CLIENT_SECRET: ${OAUTH2_GOOGLE_CLIENT_SECRET}
-      KEY_STORE_PASSWORD: ${KEY_STORE_PASSWORD}
       SPRING_R2DBC_URL: ${POSTGRES_GATEWAY_URL}
       SPRING_R2DBC_USERNAME: ${POSTGRES_GATEWAY_USER}
       SPRING_R2DBC_PASSWORD: ${POSTGRES_GATEWAY_PASSWORD}
+      OAUTH2_GOOGLE_CLIENT_ID: ${OAUTH2_GOOGLE_CLIENT_ID}
+      OAUTH2_GOOGLE_CLIENT_SECRET: ${OAUTH2_GOOGLE_CLIENT_SECRET}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      KEY_STORE_PASSWORD: ${KEY_STORE_PASSWORD}
     depends_on:
       eurekaserver:
         condition: service_healthy
@@ -71,11 +82,13 @@ services:
     build:
       context: ../patients
     environment:
+      <<: *otel-java-env
+      OTEL_SERVICE_NAME: "patients"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
       SPRING_DATASOURCE_URL: ${MYSQL_PATIENTS_URL}
       SPRING_DATASOURCE_USERNAME: ${MYSQL_PATIENTS_USER}
       SPRING_DATASOURCE_PASSWORD: ${MYSQL_PATIENTS_PASSWORD}
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: ${MYSQL_PATIENTS_DRIVER}
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
     depends_on:
       eurekaserver:
         condition: service_healthy
@@ -113,8 +126,10 @@ services:
     build:
       context: ../notes
     environment:
-      SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
+      <<: *otel-java-env
+      OTEL_SERVICE_NAME: "notes"
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+      SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
     depends_on:
       eurekaserver:
         condition: service_healthy
@@ -147,11 +162,13 @@ services:
     build:
       context: ../assessments
     environment:
+      <<: *otel-java-env
+      OTEL_SERVICE_NAME: "assessments"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
       SPRING_RABBITMQ_HOST: ${SPRING_RABBITMQ_HOST}
       SPRING_RABBITMQ_PORT: ${SPRING_RABBITMQ_PORT}
       SPRING_RABBITMQ_USERNAME: ${SPRING_RABBITMQ_USERNAME}
       SPRING_RABBITMQ_PASSWORD: ${SPRING_RABBITMQ_PASSWORD}
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
     depends_on:
       eurekaserver:
         condition: service_healthy
@@ -169,6 +186,9 @@ services:
     build:
       context: ../notifications
     environment:
+      <<: *otel-java-env
+      OTEL_SERVICE_NAME: "notifications"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
       SPRING_RABBITMQ_HOST: ${SPRING_RABBITMQ_HOST}
       SPRING_RABBITMQ_PORT: ${SPRING_RABBITMQ_PORT}
       SPRING_RABBITMQ_USERNAME: ${SPRING_RABBITMQ_USERNAME}
@@ -177,7 +197,6 @@ services:
       MAILTRAP_SANDBOX_ID: ${MAILTRAP_SANDBOX_ID}
       EMAIL_SENDER: ${EMAIL_SENDER}
       EMAIL_RECIPIENT: ${EMAIL_RECIPIENT}
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
     depends_on:
       eurekaserver:
         condition: service_healthy
@@ -226,9 +245,9 @@ services:
     image: grafana/loki:latest
     command: "-config.file=/etc/loki/config.yaml -target=read"
     ports:
-      - 3101:3100
-      - 7946
-      - 9095
+      - "3101:3100"
+      - "7946"
+      - "9095"
     volumes:
       - ./observability/loki/loki-config.yaml:/etc/loki/config.yaml
     depends_on:
@@ -247,9 +266,9 @@ services:
     image: grafana/loki:latest
     command: "-config.file=/etc/loki/config.yaml -target=write"
     ports:
-      - 3102:3100
-      - 7946
-      - 9095
+      - "3102:3100"
+      - "7946"
+      - "9095"
     volumes:
       - ./observability/loki/loki-config.yaml:/etc/loki/config.yaml
     healthcheck:
@@ -269,7 +288,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
     ports:
-      - 12345:12345
+      - "12345:12345"
     depends_on:
       - gateway
     networks:
@@ -307,6 +326,18 @@ services:
       - "9090:9090"
     volumes:
       - ./observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - medilabosolutions-net
+
+  tempo:
+    image: grafana/tempo:2.6.1
+    container_name: tempo
+    command: -config.file /etc/tempo-config.yml
+    ports:
+      - "3110:3100"
+      - "4318:4318"
+    volumes:
+      - ./observability/tempo/tempo.yml:/etc/tempo-config.yml
     networks:
       - medilabosolutions-net
 
