@@ -44,6 +44,8 @@ public class AuthController {
     @PostMapping("/login")
     public Mono<ResponseEntity<AuthResponse>> login(@RequestBody AuthRequest authRequest,
                                                     ServerHttpResponse response) {
+        log.debug("login start");
+
         return reactiveUserDetailsService
             .findByUsername(authRequest.getUsername())
             .filter(user -> encoder.matches(authRequest.getPassword(), user.getPassword()))
@@ -54,8 +56,6 @@ public class AuthController {
                 String role = "ROLE_" + user.getRole();
                 String pictureUrl = user.getUrlPicture();
 
-                log.info("Login success for user: {}", username);
-
                 // Generate access and refresh tokens
                 String accessToken = authUtil.generateAccessToken(username, role, null);
                 String refreshToken = authUtil.generateRefreshToken(username);
@@ -64,7 +64,7 @@ public class AuthController {
                 ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", refreshToken)
                     .httpOnly(true)         // Prevent access from JavaScript (XSS protection)
                     .secure(true)          // ⚠️ In production, need to be true (HTTPS)
-                    .sameSite("None")     // Cross-site requests won’t include the cookie, (CSRF attacks protection)
+                    .sameSite("Strict")     // Cross-site requests won’t include the cookie, (CSRF attacks protection)
                     .maxAge(Duration.ofMillis(refreshTokenExpirationMs))
                     .path("/")              // Cookie included in requests to all paths on the same domain
                     .build();
@@ -79,6 +79,8 @@ public class AuthController {
                         user.getUsername(),
                         pictureUrl
                 );
+
+                log.info("Login success for user: {}", username);
                 return Mono.just(ResponseEntity.ok(loginResponse));
             })
             .doOnError(e -> log.warn("Login failed for user {}: {}", authRequest.getUsername(), e.getMessage()));
@@ -86,6 +88,8 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public Mono<ResponseEntity<AuthResponse>> refresh(ServerWebExchange exchange) {
+        log.debug("refresh start");
+
         return Mono
                 // Get refresh token from the cookie, validate it, then extract the username
                 .fromCallable(() -> {
@@ -103,6 +107,8 @@ public class AuthController {
                         log.warn("Invalid refresh token");
                         throw new BadCredentialsException("Invalid refresh token");
                     }
+
+                    log.debug("refresh success");
 
                     return authUtil.getAllClaimsFromToken(refreshToken).getSubject();
                 })

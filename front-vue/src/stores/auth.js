@@ -89,7 +89,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     const loginWithGoogle = () => {
-        window.location.href = 'https://localhost:8071/oauth2/authorization/google'
+        window.location.href = 'https://localhost:8071/oauth2/google'
     }
 
     const logout = async (silent = false) => {
