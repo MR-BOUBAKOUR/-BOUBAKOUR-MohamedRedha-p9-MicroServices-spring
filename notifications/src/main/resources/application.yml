@@ -25,6 +25,10 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
+    # Enable histogram buckets for http.server.requests (required for Prometheus/Grafana)
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
 
 eureka:
   client:

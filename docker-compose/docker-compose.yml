@@ -12,7 +12,7 @@ services:
       - "8070:8070"
     environment:
       <<: *otel-java-env
-      OTEL_SERVICE_NAME: "eurekaserver"
+      OTEL_SERVICE_NAME: "app-eurekaserver"
     networks:
       - medilabosolutions-net
     healthcheck:
@@ -28,7 +28,7 @@ services:
       - "8071:8071"
     environment:
       <<: *otel-java-env
-      OTEL_SERVICE_NAME: "gatewayserver"
+      OTEL_SERVICE_NAME: "app-gatewayserver"
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
       SPRING_R2DBC_URL: ${POSTGRES_GATEWAY_URL}
       SPRING_R2DBC_USERNAME: ${POSTGRES_GATEWAY_USER}
@@ -83,7 +83,7 @@ services:
       context: ../patients
     environment:
       <<: *otel-java-env
-      OTEL_SERVICE_NAME: "patients"
+      OTEL_SERVICE_NAME: "app-patients"
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
       SPRING_DATASOURCE_URL: ${MYSQL_PATIENTS_URL}
       SPRING_DATASOURCE_USERNAME: ${MYSQL_PATIENTS_USER}
@@ -127,7 +127,7 @@ services:
       context: ../notes
     environment:
       <<: *otel-java-env
-      OTEL_SERVICE_NAME: "notes"
+      OTEL_SERVICE_NAME: "app-notes"
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
       SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
     depends_on:
@@ -163,7 +163,7 @@ services:
       context: ../assessments
     environment:
       <<: *otel-java-env
-      OTEL_SERVICE_NAME: "assessments"
+      OTEL_SERVICE_NAME: "app-assessments"
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
       SPRING_RABBITMQ_HOST: ${SPRING_RABBITMQ_HOST}
       SPRING_RABBITMQ_PORT: ${SPRING_RABBITMQ_PORT}
@@ -187,7 +187,7 @@ services:
       context: ../notifications
     environment:
       <<: *otel-java-env
-      OTEL_SERVICE_NAME: "notifications"
+      OTEL_SERVICE_NAME: "app-notifications"
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
       SPRING_RABBITMQ_HOST: ${SPRING_RABBITMQ_HOST}
       SPRING_RABBITMQ_PORT: ${SPRING_RABBITMQ_PORT}
@@ -321,7 +321,7 @@ services:
       - medilabosolutions-net
 
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:latest
     ports:
       - "9090:9090"
     volumes:
@@ -330,7 +330,7 @@ services:
       - medilabosolutions-net
 
   tempo:
-    image: grafana/tempo:2.6.1
+    image: grafana/tempo:latest
     container_name: tempo
     command: -config.file /etc/tempo-config.yml
     ports:
@@ -358,6 +358,7 @@ services:
       - "3000:3000"
     volumes:
       - ./observability/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+      - grafana-data:/var/lib/grafana
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1" ]
       interval: 10s
@@ -456,3 +457,4 @@ volumes:
   patients-db-mysql-data:
   gatewayserver-db-postgresql-data:
   notes-db-mongodb-data:
+  grafana-data:
