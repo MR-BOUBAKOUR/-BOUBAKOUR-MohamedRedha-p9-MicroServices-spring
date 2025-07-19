@@ -60,9 +60,19 @@ The system includes comprehensive observability to ensure reliability and simpli
 
 All data is visualized and analyzed through Grafana.
 
-The customized dashboard is based on the two popular dashboards : JVM (Micrometer) & Spring Boot Observability.
+The custom dashboard is based on the two popular dashboards : **JVM (Micrometer) & Spring Boot Observability**.
 
 ![Custom Observability Dashboard](img/dashboard-image.png)
+
+It highlights critical KPIs to ensure system health and performance:
+
+- **Uptime** — indicates system availability and stability over time
+- **CPU Usage (System and Process)** — monitors resource consumption and detects overloads
+- **Memory Usage (Heap and Non-Heap)** — tracks JVM memory usage to identify leaks or pressure
+- **Request Rate (Requests per Second)** — measures traffic volume handled by the service
+- **Request Duration (99th percentile, 95th percentile, 50th percentile)** — captures latency distributions for real user experience insights
+- **Total Requests and Status Codes (2xx, 5xx)** — tracks success and error rates to monitor reliability
+- **Exception Counts** — identifies unexpected failures not caught by HTTP status codes
 
 ---
 
@@ -92,6 +102,8 @@ The full journey test simulates a real doctor's workflow using `DoctorJourneyE2E
 - Validates data flow across all services
 - Uses **Awaitility** to ensure service readiness and propagation
 - Executed in a real environment with **Docker Compose**
+
+#### ✅ Load Tests (in progress)
 
 ---
 
