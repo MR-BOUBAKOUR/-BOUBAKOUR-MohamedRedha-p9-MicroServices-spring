@@ -57,6 +57,14 @@ management:
   info:
     env:
       enabled: true
+  # Used to identify which metrics belong to which microservice
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    # Enable histogram buckets for http.server.requests (required for histogram_quantile in Prometheus/Grafana)
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
 
 eureka:
   client:
@@ -77,6 +85,8 @@ logging:
     com:
       MedilaboSolutions:
         gateway: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
 
 jwt:
   secretKey: ${JWT_SECRET_KEY}

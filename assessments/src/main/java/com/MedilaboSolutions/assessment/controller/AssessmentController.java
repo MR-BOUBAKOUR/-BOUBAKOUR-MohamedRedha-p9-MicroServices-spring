@@ -24,9 +24,9 @@ public class AssessmentController {
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
             @PathVariable Long patId
     ) {
-        log.debug("medilabo-solutions-correlation-id found : {}", correlationId);
-
+        log.debug("Generating assessment for patientId={}", patId);
         AssessmentDto assessment = assessmentService.generateAssessment(patId, correlationId);
+
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new SuccessResponse<>(200, "Assessment fetched successfully", assessment));

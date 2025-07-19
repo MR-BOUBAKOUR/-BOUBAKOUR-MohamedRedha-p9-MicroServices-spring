@@ -82,7 +82,7 @@ public class SecurityConfig {
                             ResponseCookie clearCookie = ResponseCookie.from("refreshToken", "")
                                     .httpOnly(true)
                                     .secure(true)
-                                    .sameSite("None")
+                                    .sameSite("Strict")
                                     .maxAge(Duration.ZERO)
                                     .path("/")
                                     .build();

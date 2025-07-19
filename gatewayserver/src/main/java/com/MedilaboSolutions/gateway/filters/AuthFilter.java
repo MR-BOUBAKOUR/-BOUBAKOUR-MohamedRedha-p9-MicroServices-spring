@@ -26,12 +26,6 @@ public class AuthFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
 
-        log.debug("AuthFilter called for request id={}, method={}, path={}, headers={}",
-                exchange.getRequest().getId(),
-                exchange.getRequest().getMethod(),
-                exchange.getRequest().getURI().getPath(),
-                exchange.getRequest().getHeaders());
-
         // Skip authentication for public paths
         String path = exchange.getRequest().getURI().getPath();
         if (

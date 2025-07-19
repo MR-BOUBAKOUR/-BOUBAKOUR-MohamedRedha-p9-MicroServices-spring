@@ -34,7 +34,7 @@ public class PatientController {
             @PathVariable Long id,
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId
     ) {
-        log.debug("medilabo-solutions-correlation-id found : {}", correlationId);
+        log.debug("Fetching patient by id={}", id);
 
         PatientDto patient = patientService.findById(id);
         return ResponseEntity
@@ -44,6 +44,8 @@ public class PatientController {
 
     @PostMapping
     public ResponseEntity<SuccessResponse<PatientDto>> createPatient(@Valid @RequestBody PatientRequestDto patientDto) {
+        log.debug("Creating patient for firstName={}", patientDto.getFirstName());
+
         PatientDto patient = patientService.create(patientDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -52,6 +54,8 @@ public class PatientController {
 
     @PutMapping("/{id}")
     public ResponseEntity<SuccessResponse<PatientDto>> updatePatient(@PathVariable Long id, @Valid @RequestBody PatientRequestDto patientDto) {
+        log.debug("Updating patient id={}", id);
+
         PatientDto patient = patientService.update(id, patientDto);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -60,6 +64,8 @@ public class PatientController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePatient(@PathVariable Long id) {
+        log.debug("Deleting patient id={}", id);
+
         patientService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
@@ -70,7 +76,7 @@ public class PatientController {
             @RequestParam Boolean mailSent,
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId
     ) {
-        log.debug("medilabo-solutions-correlation-id found : {}", correlationId);
+        log.debug("Updating early-onset-mail sent status for patient id={}", id);
 
         patientService.updateEarlyOnsetMailSent(id, mailSent);
         return ResponseEntity.noContent().build();

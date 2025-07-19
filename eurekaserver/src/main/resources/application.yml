@@ -19,6 +19,14 @@ management:
       enabled: true
     livenessState:
       enabled: true
+  # Used to identify which metrics belong to which microservice
+  metrics:
+    tags:
+        application: ${spring.application.name}
+    # Enable histogram buckets for http.server.requests (required for histogram_quantile in Prometheus/Grafana)
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
 
 eureka:
   instance:
@@ -28,3 +36,7 @@ eureka:
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://localhost:8070/eureka/
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"

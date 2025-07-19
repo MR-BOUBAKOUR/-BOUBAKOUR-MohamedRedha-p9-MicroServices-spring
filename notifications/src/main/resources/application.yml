@@ -21,6 +21,14 @@ management:
   info:
     env:
       enabled: true
+  # Used to identify which metrics belong to which microservices
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    # Enable histogram buckets for http.server.requests (required for Prometheus/Grafana)
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
 
 eureka:
   client:
@@ -40,6 +48,8 @@ logging:
     com:
       MedilaboSolutions:
         assessment: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
 
 mailtrap:
   token: ${MAILTRAP_API_TOKEN}

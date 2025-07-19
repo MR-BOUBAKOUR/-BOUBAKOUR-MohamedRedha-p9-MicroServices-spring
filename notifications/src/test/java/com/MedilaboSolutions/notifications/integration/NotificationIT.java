@@ -3,6 +3,7 @@ package com.MedilaboSolutions.notifications.integration;
 import com.MedilaboSolutions.notifications.Dto.HighRiskAssessmentEvent;
 import com.MedilaboSolutions.notifications.config.AbstractRabbitMQContainerTest;
 import com.MedilaboSolutions.notifications.service.MailtrapEmailService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
