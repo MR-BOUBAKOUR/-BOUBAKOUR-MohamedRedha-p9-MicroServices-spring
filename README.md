@@ -21,17 +21,19 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ### 🧰 Technology stack  (⚠️ → on the roadmap)
 
-| Category                             | Technologies / Tools                                                                   |
-|--------------------------------------|----------------------------------------------------------------------------------------|
-| **Backend**                          | Java 21, Spring Boot 3.4.1, Spring Security, Eureka, Spring Cloud Gateway *(Reactive)* |
-| **Frontend & State Management**      | Vue.js 3, Pinia, Axios                                                                 |
-| **Data Storage**                     | MySQL, MongoDB, PostgreSQL *(Reactive)*                                                |
-| **Inter-service Communication**      | REST API, OpenFeign, RabbitMQ                                                          |
-| **Testing & Automation**             | JUnit, TestContainers, RestAssured, Awaitility                                         |
-| **Containerisation & Orchestration** | Docker, Docker-Compose, ⚠️ *Kubernetes*                                                |
-| **CI/CD**                            | GitHub Actions, GitHub Pages (JaCoCo & JavaDoc), Docker Hub                            |
-| **Observability & Monitoring**       | ⚠️ *ELK Stack or OpenTelemetry / Prometheus / Grafana*                                 |
-| **Resilience & Fault Tolerance**     | ⚠️ *Resilience4J*                                                                      |
+| Category                             | Technologies / Tools                                                                                                                                                                                  |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Backend**                          | Java 21, Spring Boot 3.4.1, Spring Security, Eureka, Spring Cloud Gateway *(Reactive)*                                                                                                                |
+| **Frontend**                        | Vue.js 3, Pinia, Axios                                                                                                                                                                                |
+| **Data Storage**                     | MySQL, MongoDB, PostgreSQL *(Reactive)*                                                                                                                                                               |
+| **Inter-service Communication**      | REST API, OpenFeign, RabbitMQ                                                                                                                                                                         |
+| **Testing & Automation**             | unit        : Mockito, MockMvc<br>integration : TestContainers, MockMvc<br>e2e         : TestContainers, RestAssured, Awaitility<br>⚠️ load       : K6 (in progress)                                  |
+| **Containerisation & Orchestration** | Docker, Docker-Compose, ⚠️ *Kubernetes*                                                                                                                                                               |
+| **CI/CD**                            | GitHub Actions, GitHub Pages (JaCoCo & JavaDoc), Docker Hub                                                                                                                                           |
+| **Observability & Monitoring**       | logs   : Alloy, Loki, Grafana<br>metrics : Micrometer, Prometheus, Grafana<br>traces  : OpenTelemetry, Tempo, Grafana<br><br>custom dashboard : based on JVM (Micrometer) & Spring Boot obs templates |
+| **Resilience & Fault Tolerance**     | ⚠️ *Resilience4J*                                                                                                                                                                                     |
+| **AI Integration**                  | ⚠️ *Ollama (Llama 3.2 3B)* - Local LLM for basic diabetes risk assessment                                                                                                                             |
+
 
 
 ---
@@ -45,6 +47,22 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 | `all-httponly` | Full HttpOnly for Access & Refresh tokens + CSRF token | ❌ *Abandoned*<br/>Too complex for minimal security gain. Modern SPA setups with SameSite and CORS provide sufficient protection. |
 | `oauth2-access&refresh` | OAuth2 with Google + classic login (Access & Refresh tokens for both) | ✅ *Current*                                                                                                                      |
 | `keycloak` | Keycloak integration | 🕒 *Postponed*<br/>Will be reconsidered after progress on the observability & monitoring part.                                   |
+
+---
+
+### 📊 Observability & Monitoring
+
+The system includes comprehensive observability to ensure reliability and simplify production diagnostics.
+
+- **Logs**: collected via Alloy, centralized and indexed in Loki
+- **Metrics**: exposed by Micrometer, scraped by Prometheus
+- **Distributed Traces**: captured by OpenTelemetry, stored in Tempo
+
+All data is visualized and analyzed through Grafana.
+
+The customized dashboard is based on the two popular dashboards : JVM (Micrometer) & Spring Boot Observability.
+
+![Custom Observability Dashboard](img/dashboard-image.png)
 
 ---
 
