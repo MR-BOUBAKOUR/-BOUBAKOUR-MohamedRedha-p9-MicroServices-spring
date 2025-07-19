@@ -1,4 +1,4 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 patient,com.MedilaboSolutions.patient.service,PatientService,0,119,0,0,0,23,0,10,0,10
 patient,com.MedilaboSolutions.patient,PatientApplication,5,3,0,0,2,1,1,1,1,1
-patient,com.MedilaboSolutions.patient.controller,PatientController,0,89,0,0,0,23,0,7,0,7
+patient,com.MedilaboSolutions.patient.controller,PatientController,0,102,0,0,0,26,0,7,0,7

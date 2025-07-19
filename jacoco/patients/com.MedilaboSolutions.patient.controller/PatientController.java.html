@@ -34,7 +34,7 @@ public class PatientController {
             @PathVariable Long id,
             @RequestHeader(&quot;medilabo-solutions-correlation-id&quot;) String correlationId
     ) {
-<span class="fc" id="L37">        log.debug(&quot;medilabo-solutions-correlation-id found : {}&quot;, correlationId);</span>
+<span class="fc" id="L37">        log.debug(&quot;Fetching patient by id={}&quot;, id);</span>
 
 <span class="fc" id="L39">        PatientDto patient = patientService.findById(id);</span>
 <span class="fc" id="L40">        return ResponseEntity</span>
@@ -44,24 +44,30 @@ public class PatientController {
 
     @PostMapping
     public ResponseEntity&lt;SuccessResponse&lt;PatientDto&gt;&gt; createPatient(@Valid @RequestBody PatientRequestDto patientDto) {
-<span class="fc" id="L47">        PatientDto patient = patientService.create(patientDto);</span>
-<span class="fc" id="L48">        return ResponseEntity</span>
-<span class="fc" id="L49">                .status(HttpStatus.CREATED)</span>
-<span class="fc" id="L50">                .body(new SuccessResponse&lt;&gt;(201, &quot;Patient created successfully&quot;, patient));</span>
+<span class="fc" id="L47">        log.debug(&quot;Creating patient for firstName={}&quot;, patientDto.getFirstName());</span>
+
+<span class="fc" id="L49">        PatientDto patient = patientService.create(patientDto);</span>
+<span class="fc" id="L50">        return ResponseEntity</span>
+<span class="fc" id="L51">                .status(HttpStatus.CREATED)</span>
+<span class="fc" id="L52">                .body(new SuccessResponse&lt;&gt;(201, &quot;Patient created successfully&quot;, patient));</span>
     }
 
     @PutMapping(&quot;/{id}&quot;)
     public ResponseEntity&lt;SuccessResponse&lt;PatientDto&gt;&gt; updatePatient(@PathVariable Long id, @Valid @RequestBody PatientRequestDto patientDto) {
-<span class="fc" id="L55">        PatientDto patient = patientService.update(id, patientDto);</span>
-<span class="fc" id="L56">        return ResponseEntity</span>
-<span class="fc" id="L57">                .status(HttpStatus.OK)</span>
-<span class="fc" id="L58">                .body(new SuccessResponse&lt;&gt;(200, &quot;Patient updated successfully&quot;, patient));</span>
+<span class="fc" id="L57">        log.debug(&quot;Updating patient id={}&quot;, id);</span>
+
+<span class="fc" id="L59">        PatientDto patient = patientService.update(id, patientDto);</span>
+<span class="fc" id="L60">        return ResponseEntity</span>
+<span class="fc" id="L61">                .status(HttpStatus.OK)</span>
+<span class="fc" id="L62">                .body(new SuccessResponse&lt;&gt;(200, &quot;Patient updated successfully&quot;, patient));</span>
     }
 
     @DeleteMapping(&quot;/{id}&quot;)
     public ResponseEntity&lt;Void&gt; deletePatient(@PathVariable Long id) {
-<span class="fc" id="L63">        patientService.deleteById(id);</span>
-<span class="fc" id="L64">        return ResponseEntity.noContent().build();</span>
+<span class="fc" id="L67">        log.debug(&quot;Deleting patient id={}&quot;, id);</span>
+
+<span class="fc" id="L69">        patientService.deleteById(id);</span>
+<span class="fc" id="L70">        return ResponseEntity.noContent().build();</span>
     }
 
     @PutMapping(&quot;/{id}/early-onset-mail&quot;)
@@ -70,10 +76,10 @@ public class PatientController {
             @RequestParam Boolean mailSent,
             @RequestHeader(&quot;medilabo-solutions-correlation-id&quot;) String correlationId
     ) {
-<span class="fc" id="L73">        log.debug(&quot;medilabo-solutions-correlation-id found : {}&quot;, correlationId);</span>
+<span class="fc" id="L79">        log.debug(&quot;Updating early-onset-mail sent status for patient id={}&quot;, id);</span>
 
-<span class="fc" id="L75">        patientService.updateEarlyOnsetMailSent(id, mailSent);</span>
-<span class="fc" id="L76">        return ResponseEntity.noContent().build();</span>
+<span class="fc" id="L81">        patientService.updateEarlyOnsetMailSent(id, mailSent);</span>
+<span class="fc" id="L82">        return ResponseEntity.noContent().build();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
