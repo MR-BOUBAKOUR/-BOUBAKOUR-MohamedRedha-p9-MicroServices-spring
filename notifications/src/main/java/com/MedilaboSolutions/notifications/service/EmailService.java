@@ -22,14 +22,12 @@ public class EmailService {
                 event.getRiskLevel()
         );
 
-        // ⚠️ Enable for demo
-
-//        mailtrapEmailService.sendEmail(
-//                emailProperties.getSender(),
-//                emailProperties.getRecipient(),
-//                subject,
-//                body
-//        );
+        mailtrapEmailService.sendEmail(
+                emailProperties.getSender(),
+                emailProperties.getRecipient(),
+                subject,
+                body
+        );
 
         log.info("📧 Email sent to {} for patient {} {} with risk level '{}'",
                 emailProperties.getRecipient(),

@@ -4,7 +4,6 @@ import com.MedilaboSolutions.notifications.Dto.HighRiskAssessmentEvent;
 import com.MedilaboSolutions.notifications.config.EmailProperties;
 import com.MedilaboSolutions.notifications.service.EmailService;
 import com.MedilaboSolutions.notifications.service.MailtrapEmailService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +27,6 @@ class EmailServiceTest {
     @InjectMocks
     private EmailService emailService;
 
-    @Disabled("Disabled because real email sending is currently commented out in EmailService")
     @Test
     @DisplayName("Should format and delegate email content for HighRiskAssessmentEvent")
     void shouldFormatAndDelegateEmail_ForHighRiskEvent() {
