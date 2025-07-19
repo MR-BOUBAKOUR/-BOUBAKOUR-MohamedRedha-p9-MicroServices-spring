@@ -1,4 +1,4 @@
-``MediLabo Solutions - Diabetes Risk Assessment
+``MediLabo Solutions - Diabetes risk assessment
 
 Microservices application for diabetes risk assessment built with Spring Boot and Vue.js.
 
@@ -8,14 +8,22 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ### 🏗️ Architecture
 
-- **Frontend**: Vue.js
-- **API Gateway**: Spring Cloud Gateway - PostgreSQL *(routing, auth)*
-- **Service discovery**: Eureka Server
-- **Patients**: business microservice - MySQL
-- **Notes**: business microservice - MongoDB
-- **Assessments**: business microservice - *(aggregation, logic, results)*
-- **Notifications**: business microservice - *(high-risk alerts via email)*
-- **E2E Tests**: end-to-end test module simulating full doctor journey to validate system-wide behavior
+- **Microservices architecture**, each service owning a clear business responsibility.
+- **Single page application** built with Vue.js 3, communicating securely with the API gateway.
+- **Reactive API gateway** centralizes routing, authentication, and authorization.
+- **Service discovery** via Eureka enables dynamic routing and scalability.
+- **Synchronous** REST for standard service communication; **asynchronous** messaging via RabbitMQ for critical events.
+- **Core business services**:
+  - Patients service — manages patient records with relational storage.
+  - Notes service — handles medical notes using a NoSQL store.
+  - Assessments service — evaluates diabetes risk, detects risk level changes, and emits high-risk events.
+  - Notifications service — consumes events and sends alert emails to healthcare professionals.
+- **Integrated observability**: logs, metrics, and traces collected and visualized via a custom Grafana dashboard.
+- **Multi-layered testing strategy**:
+  - Unit and integration tests on core services.
+  - End-to-end tests cover full doctor journey across services.
+  - Load testing to assess system performance under stress (in progress).
+- **CI/CD** automates testing, documentation, and image publishing.
 
 ---
 
@@ -50,7 +58,7 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ---
 
-### 📊 Observability & Monitoring
+### 📊 Observability & monitoring
 
 The system includes comprehensive observability to ensure reliability and simplify production diagnostics.
 
@@ -67,33 +75,33 @@ The custom dashboard is based on the two popular dashboards : **JVM (Micrometer)
 It highlights critical KPIs to ensure system health and performance:
 
 - **Uptime** — indicates system availability and stability over time
-- **CPU Usage (System and Process)** — monitors resource consumption and detects overloads
-- **Memory Usage (Heap and Non-Heap)** — tracks JVM memory usage to identify leaks or pressure
-- **Request Rate (Requests per Second)** — measures traffic volume handled by the service
-- **Request Duration (99th percentile, 95th percentile, 50th percentile)** — captures latency distributions for real user experience insights
-- **Total Requests and Status Codes (2xx, 5xx)** — tracks success and error rates to monitor reliability
-- **Exception Counts** — identifies unexpected failures not caught by HTTP status codes
+- **CPU usage (system and process)** — monitors resource consumption and detects overloads
+- **Memory usage (heap and non-heap)** — tracks JVM memory usage to identify leaks or pressure
+- **Request rate (requests per second)** — measures traffic volume handled by the service
+- **Request duration (99th percentile, 95th percentile, 50th percentile)** — captures latency distributions for real user experience insights
+- **Total requests and status codes (2xx, 5xx)** — tracks success and error rates to monitor reliability
+- **Exception counts** — identifies unexpected failures not caught by HTTP status codes
 
 ---
 
-### 🔔 Event-Driven
+### 🔔 Event-driven
 
 The system implements asynchronous communication using **RabbitMQ** for critical notifications:
 
-- **High-Risk Assessment Events**: when a patient is assessed as `"Early onset"`, the **Assessments** service publishes an event to the `high-risk-assessments` queue
+- **High-Risk assessment events**: when a patient is assessed as `"Early onset"`, the **Assessments** service publishes an event to the `high-risk-assessments` queue
 - **No duplicates**: the alert is triggered only when the risk changes to `"Early onset"`
-- **Email Notifications**: the **Notifications** service consumes these events and sends automated email alerts to healthcare providers (emails are intercepted using **Mailtrap** during development)
+- **Email notifications**: the **Notifications** service consumes these events and sends automated email alerts to healthcare providers (emails are intercepted using **Mailtrap** during development)
 
 ---
 
-### 🧪 Testing Strategy
+### 🧪 Testing strategy
 
-#### ✅ Unit & Integration Tests
+#### ✅ Unit & Integration tests
 
 - Implemented for: **Patients**, **Notes**, **Assessments** and the **Gateway**
 - Covers core business logic, database operations, and Feign communication
 
-#### ✅ End-to-End (E2E) Tests
+#### ✅ End-to-End (E2E) tests
 
 The full journey test simulates a real doctor's workflow using `DoctorJourneyE2ETest`:
 - Verifies patient creation, note insertion and risk assessment logic
@@ -103,11 +111,11 @@ The full journey test simulates a real doctor's workflow using `DoctorJourneyE2E
 - Uses **Awaitility** to ensure service readiness and propagation
 - Executed in a real environment with **Docker Compose**
 
-#### ✅ Load Tests (in progress)
+#### ✅ Load tests (in progress)
 
 ---
 
-### 🚀 CI/CD Pipelines
+### 🚀 CI/CD pipelines
 
 - `push_dev_ci.yml`: runs unit tests on modified microservices when pushing to `dev`
 - `pr_main_ci-cd.yml`: builds, tests, generates JaCoCo & JavaDocs, deploys docs to GitHub Pages (on PR to `main`)
@@ -118,5 +126,5 @@ The full journey test simulates a real doctor's workflow using `DoctorJourneyE2E
 ### ❌ Out of scope
 
 - **Spring Cloud Config Server**: no centralized configuration management. *(used in a different project, with RabbitMQ as the refresh trigger and a GitHub repository for versioning and storing configurations)*
-- **Secrets Manager**: secrets are managed via environment variables.
+- **Secrets manager**: secrets are managed via environment variables.
 - **Front-end testing** : deprioritized to focus efforts on back-end reliability and service integration.
