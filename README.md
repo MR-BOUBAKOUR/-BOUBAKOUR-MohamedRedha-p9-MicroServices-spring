@@ -82,6 +82,32 @@ It highlights critical KPIs to ensure system health and performance:
 - **Total requests and status codes (2xx, 5xx)** — tracks success and error rates to monitor reliability
 - **Exception counts** — identifies unexpected failures not caught by HTTP status codes
 
+### 📉 Insights & Results (basic examples — load testing still in progress)
+
+#### Synchronous vs Asynchronous feign calls for ms assessments
+
+**Synchronous (Sequential – 41 ms)**  
+
+![Synchronous](img/synchronous-assessment-feign-calls.png)
+
+**Asynchronous (Parallel – 26 ms)**  
+
+![Asynchronous](img/asynchronous-assessment-feign-calls.png)
+
+#### Distributed tracing - Complete flow for High-Risk Assessment event triggered by a note creation (153 ms)
+
+| Service | Step                                                     | Description |
+| --- |----------------------------------------------------------| --- |
+| Notes | Create note `(triggers reassessment)`                    | Create a note via POST /notes |
+| API Gateway | Proxy requests                                           | Route requests to Assessments |
+| Assessments (Feign Client) | Fetch patient and notes  `(in parallel)`                 | Fetch patient (GET /patients/{id}) and notes (GET /notes?patientId={id}) |
+| Assessments | Assess risk                                              | Calculate risk via generateAssessment (trigger analysis + rules) |
+| Assessments | Publish event                                            | If risk = "Early onset", publish high-risk-assessment event to RabbitMQ |
+| Assessments (Feign Client) | Update patient flag `(prevent sending duplicate emails)` | Update patient's earlyOnsetMailSent flag via PUT /patients/{id}/early-onset-mail |
+| Notifications | Consume event and send email                             | Consume high-risk-assessment event and send alert email via Mailtrap |
+
+![distributed-tracing-high-risk-event.png](img/distributed-tracing-high-risk-event.png)
+
 ---
 
 ### 🔔 Event-driven

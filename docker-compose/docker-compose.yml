@@ -20,6 +20,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    mem_limit: 512m
+    mem_reservation: 256m
 
   gatewayserver:
     build:
@@ -58,6 +60,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    mem_limit: 512m
+    mem_reservation: 256m
 
   gatewayserver-db-postgresql:
     image: postgres:15
@@ -77,6 +81,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    mem_limit: 512m
+    mem_reservation: 256m
 
   patients:
     build:
@@ -101,6 +107,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    mem_limit: 512m
+    mem_reservation: 256m
 
   patients-db-mysql:
     image: mysql:8
@@ -121,6 +129,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    mem_limit: 512m
+    mem_reservation: 256m
 
   notes:
     build:
@@ -142,6 +152,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    mem_limit: 512m
+    mem_reservation: 256m
 
   notes-db-mongodb:
     image: mongo:6.0
@@ -157,6 +169,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    mem_limit: 512m
+    mem_reservation: 256m
 
   assessments:
     build:
@@ -181,6 +195,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    mem_limit: 512m
+    mem_reservation: 256m
 
   notifications:
     build:
@@ -209,6 +225,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    mem_limit: 512m
+    mem_reservation: 256m
 
   rabbitmq:
     image: rabbitmq:4.1.2
@@ -224,20 +242,22 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    mem_limit: 256m
+    mem_reservation: 128m
 
-#  front-vue:
-#    build:
-#      context: ./front-vue
-#    ports:
-#      - "5173:5173"
-#    volumes:
-#      - ./front-vue:/app
-#      - /app/node_modules
-#    networks:
-#      - medilabosolutions-net
-#    depends_on:
-#      gatewayserver:
-#        condition: service_healthy
+  #  front-vue:
+  #    build:
+  #      context: ./front-vue
+  #    ports:
+  #      - "5173:5173"
+  #    volumes:
+  #      - ./front-vue:/app
+  #      - /app/node_modules
+  #    networks:
+  #      - medilabosolutions-net
+  #    depends_on:
+  #      gatewayserver:
+  #        condition: service_healthy
 
   # =============================================== OBSERVABILITY STACK ===============================================
 
@@ -261,6 +281,8 @@ services:
       medilabosolutions-net:
         aliases:
           - loki
+    mem_limit: 256m
+    mem_reservation: 128m
 
   write:
     image: grafana/loki:latest
@@ -280,6 +302,8 @@ services:
       - minio
     networks:
       <<: *loki-dns
+    mem_limit: 256m
+    mem_reservation: 128m
 
   alloy:
     image: grafana/alloy:latest
@@ -293,6 +317,8 @@ services:
       - gateway
     networks:
       - medilabosolutions-net
+    mem_limit: 256m
+    mem_reservation: 128m
 
   minio:
     image: minio/minio
@@ -319,6 +345,8 @@ services:
       retries: 5
     networks:
       - medilabosolutions-net
+    mem_limit: 256m
+    mem_reservation: 128m
 
   prometheus:
     image: prom/prometheus:latest
@@ -328,6 +356,8 @@ services:
       - ./observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
       - medilabosolutions-net
+    mem_limit: 256m
+    mem_reservation: 128m
 
   tempo:
     image: grafana/tempo:latest
@@ -340,6 +370,8 @@ services:
       - ./observability/tempo/tempo.yml:/etc/tempo-config.yml
     networks:
       - medilabosolutions-net
+    mem_limit: 256m
+    mem_reservation: 128m
 
   grafana:
     image: grafana/grafana:latest
@@ -366,6 +398,8 @@ services:
       retries: 5
     networks:
       - medilabosolutions-net
+    mem_limit: 256m
+    mem_reservation: 128m
 
   backend:
     image: grafana/loki:latest
@@ -379,6 +413,8 @@ services:
       - gateway
     networks:
       - medilabosolutions-net
+    mem_limit: 256m
+    mem_reservation: 128m
 
   gateway:
     image: nginx:latest
@@ -448,6 +484,8 @@ services:
       retries: 5
     networks:
       - medilabosolutions-net
+    mem_limit: 256m
+    mem_reservation: 128m
 
 networks:
   medilabosolutions-net:
