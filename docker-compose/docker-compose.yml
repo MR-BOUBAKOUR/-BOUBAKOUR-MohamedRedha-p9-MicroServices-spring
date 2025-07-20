@@ -20,8 +20,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 512m
-    mem_reservation: 256m
+    mem_limit: 700m
+    mem_reservation: 512m
 
   gatewayserver:
     build:
@@ -60,8 +60,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 512m
-    mem_reservation: 256m
+    mem_limit: 700m
+    mem_reservation: 512m
 
   gatewayserver-db-postgresql:
     image: postgres:15
@@ -81,8 +81,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 512m
-    mem_reservation: 256m
+    mem_limit: 700m
+    mem_reservation: 512m
 
   patients:
     build:
@@ -107,8 +107,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 512m
-    mem_reservation: 256m
+    mem_limit: 700m
+    mem_reservation: 512m
 
   patients-db-mysql:
     image: mysql:8
@@ -129,8 +129,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 512m
-    mem_reservation: 256m
+    mem_limit: 700m
+    mem_reservation: 512m
 
   notes:
     build:
@@ -152,8 +152,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 512m
-    mem_reservation: 256m
+    mem_limit: 700m
+    mem_reservation: 512m
 
   notes-db-mongodb:
     image: mongo:6.0
@@ -169,8 +169,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 512m
-    mem_reservation: 256m
+    mem_limit: 700m
+    mem_reservation: 512m
 
   assessments:
     build:
@@ -195,8 +195,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 512m
-    mem_reservation: 256m
+    mem_limit: 700m
+    mem_reservation: 512m
 
   notifications:
     build:
@@ -225,8 +225,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 512m
-    mem_reservation: 256m
+    mem_limit: 700m
+    mem_reservation: 512m
 
   rabbitmq:
     image: rabbitmq:4.1.2
