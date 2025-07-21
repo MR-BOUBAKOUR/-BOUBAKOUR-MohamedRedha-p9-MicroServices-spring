@@ -62,7 +62,7 @@ services:
     mem_limit: 700m
     mem_reservation: 512m
 
-  # ================================================== EVENT DRIVEN ==================================================
+  # ==================================================== EVENT BUS ====================================================
 
   rabbitmq:
     image: rabbitmq:4.1.2
@@ -175,7 +175,8 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      # Targeting the prometheus-min.yml (the business microservices are out of the docker network
+      - ./observability/prometheus/prometheus-min.yml:/etc/prometheus/prometheus.yml
     networks:
       - medilabosolutions-net
     mem_limit: 256m
