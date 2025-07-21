@@ -1,0 +1,129 @@
+services:
+
+  # ======================== DATABASES ========================
+
+  gatewayserver-db-postgresql:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_GATEWAY_DATABASE}
+      POSTGRES_USER: ${POSTGRES_GATEWAY_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_GATEWAY_PASSWORD}
+    volumes:
+      - gatewayserver-db-postgresql-data:/var/lib/postgresql/data
+      - ./data/postgresql-init:/docker-entrypoint-initdb.d
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_GATEWAY_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 500m
+    mem_reservation: 300m
+
+  patients-db-mysql:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_PATIENTS_DATABASE}
+      MYSQL_USER: ${MYSQL_PATIENTS_USER}
+      MYSQL_PASSWORD: ${MYSQL_PATIENTS_PASSWORD}
+    volumes:
+      - patients-db-mysql-data:/var/lib/mysql
+      - ./data/mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 500m
+    mem_reservation: 300m
+
+  notes-db-mongodb:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - notes-db-mongodb-data:/data/db
+      - ./data/mongodb-init:/docker-entrypoint-initdb.d
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 500m
+    mem_reservation: 300m
+
+  # ======================= EVENT BUS ========================
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672" # Management UI (optionnel)
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 300m
+    mem_reservation: 200m
+
+  # ======================== MONITORING ========================
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - medilabosolutions-net
+    mem_limit: 300m
+    mem_reservation: 200m
+
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./observability/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - medilabosolutions-net
+    mem_limit: 300m
+    mem_reservation: 200m
+
+networks:
+  medilabosolutions-net:
+    driver: bridge
+
+volumes:
+  patients-db-mysql-data:
+  gatewayserver-db-postgresql-data:
+  notes-db-mongodb-data:
+  grafana-data:
