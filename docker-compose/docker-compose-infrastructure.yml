@@ -310,6 +310,8 @@ services:
     mem_limit: 256m
     mem_reservation: 128m
 
+  # =============================================== NETWORKS / VOLUMES ================================================
+
 networks:
   medilabosolutions-net:
     driver: bridge

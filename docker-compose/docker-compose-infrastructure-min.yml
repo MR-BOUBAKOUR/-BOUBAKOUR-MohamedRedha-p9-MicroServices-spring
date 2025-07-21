@@ -81,3 +81,14 @@ services:
       retries: 5
     mem_limit: 300m
     mem_reservation: 200m
+
+  # =============================================== NETWORKS / VOLUMES ================================================
+
+networks:
+  medilabosolutions-net:
+    driver: bridge
+
+volumes:
+  patients-db-mysql-data:
+  gatewayserver-db-postgresql-data:
+  notes-db-mongodb-data:
