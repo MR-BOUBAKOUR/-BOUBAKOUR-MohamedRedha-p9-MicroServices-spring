@@ -1,0 +1,9 @@
+services:
+  k6:
+    image: grafana/k6
+    volumes:
+      # Mounts the local 'perf-tests' folder into the container at '/scripts'
+      - ../perf-tests:/scripts
+    networks:
+      - medilabosolutions-net
+    entrypoint: ["k6", "run", "--insecure-skip-tls-verify", "/scripts/load/load-test.js"]
