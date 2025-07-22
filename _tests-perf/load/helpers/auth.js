@@ -1,17 +1,15 @@
 import http from 'k6/http';
-import { BACK_URL } from '../../config.js';
+import { BACK_URL, USERNAME, PASSWORD } from '../../config.js';
 
 export function getAuthToken() {
-    const username = __ENV.USERNAME;
-    const password = __ENV.PASSWORD;
 
-    if (!username || !password) {
+    if (!USERNAME || !PASSWORD) {
         throw new Error('USERNAME and PASSWORD environment variables must be set');
     }
 
     const credentials = JSON.stringify({
-        username: username,
-        password: password,
+        username: USERNAME,
+        password: PASSWORD,
     });
 
     const params = {

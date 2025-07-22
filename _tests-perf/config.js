@@ -1,7 +1,9 @@
-// export const FRONT_URL = 'https://localhost:5173';
 
-export const FRONT_URL = 'https://[::1]:5173';
+export const USERNAME = __ENV.USERNAME;
+export const PASSWORD = __ENV.PASSWORD;
 
-// export const BACK_URL = 'https://localhost:8071';
+export const FRONT_URL = __ENV.FRONT_URL;
+export const BACK_URL = __ENV.BACK_URL;
 
-export const BACK_URL = 'https://[::1]:8071';
+// export const FRONT_URL = 'https://[::1]:5173';
+// export const BACK_URL = 'https://[::1]:8071';

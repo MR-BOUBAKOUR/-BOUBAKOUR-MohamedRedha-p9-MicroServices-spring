@@ -171,19 +171,14 @@ services:
     mem_limit: 700m
     mem_reservation: 512m
 
-  #  front-vue:
-  #    build:
-  #      context: ./front-vue
-  #    ports:
-  #      - "5173:5173"
-  #    volumes:
-  #      - ./front-vue:/app
-  #      - /app/node_modules
-  #    networks:
-  #      - medilabosolutions-net
-  #    depends_on:
-  #      gatewayserver:
-  #        condition: service_healthy
+#  front-vue:
+#    build:
+#      context: ../front-vue
+#    ports:
+#      - "5173:5173"
+#    depends_on:
+#      gatewayserver:
+#        condition: service_healthy
 
   # ==================================================== DATABASES ====================================================
 

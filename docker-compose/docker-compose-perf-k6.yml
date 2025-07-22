@@ -2,12 +2,23 @@ services:
   k6:
     image: grafana/k6
     volumes:
-      # Mounts the local 'perf-tests' folder into the container at '/scripts'
-      - ../_perf-tests:/scripts
+      - ../_tests-perf:/scripts
     entrypoint: ["k6", "run", "--insecure-skip-tls-verify", "/scripts/load/scenarios/loginPage.js"]
-    networks:
-      - medilabosolutions-net
+    environment:
+      USERNAME: ${USERNAME_K6}
+      PASSWORD: ${PASSWORD_K6}
+      FRONT_URL: ${FRONT_URL}
+      BACK_URL: ${BACK_URL}
+    depends_on:
+      front-vue:
+        condition: service_healthy
 
-networks:
-  medilabosolutions-net:
-    external: true
+  front-vue:
+    build:
+      context: ../front-vue
+    ports:
+      - "5173:5173"
+    healthcheck:
+      test: ["CMD", "sh", "-c", "netstat -an | grep :5173 | grep LISTEN"]
+      interval: 5s
+      retries: 5
