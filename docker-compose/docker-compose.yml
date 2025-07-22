@@ -196,7 +196,7 @@ services:
       POSTGRES_USER: ${POSTGRES_GATEWAY_USER}
       POSTGRES_PASSWORD: ${POSTGRES_GATEWAY_PASSWORD}
     volumes:
-      - gatewayserver-db-postgresql-data:/var/lib/postgresql/data
+      # - gatewayserver-db-postgresql-data:/var/lib/postgresql/data
       - ../_data/postgresql-init:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
@@ -218,7 +218,7 @@ services:
       MYSQL_USER: ${MYSQL_PATIENTS_USER}
       MYSQL_PASSWORD: ${MYSQL_PATIENTS_PASSWORD}
     volumes:
-      - patients-db-mysql-data:/var/lib/mysql
+      # - patients-db-mysql-data:/var/lib/mysql
       - ../_data/mysql-init:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
@@ -235,7 +235,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - notes-db-mongodb-data:/data/db
+      # - notes-db-mongodb-data:/data/db
       - ../_data/mongodb-init:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
@@ -501,7 +501,7 @@ networks:
     driver: bridge
 
 volumes:
-  patients-db-mysql-data:
-  gatewayserver-db-postgresql-data:
-  notes-db-mongodb-data:
+#  patients-db-mysql-data:
+#  gatewayserver-db-postgresql-data:
+#  notes-db-mongodb-data:
   grafana-data:
