@@ -70,7 +70,7 @@ All data is visualized and analyzed through Grafana.
 
 The custom dashboard is based on the two popular dashboards : **JVM (Micrometer) & Spring Boot Observability**.
 
-![Custom Observability Dashboard](img/dashboard-image.png)
+![Custom Observability Dashboard](_img/dashboard-image.png)
 
 It highlights critical KPIs to ensure system health and performance:
 
@@ -88,11 +88,11 @@ It highlights critical KPIs to ensure system health and performance:
 
 **Synchronous (Sequential – 41 ms)**  
 
-![Synchronous](img/synchronous-assessment-feign-calls.png)
+![Synchronous](_img/synchronous-assessment-feign-calls.png)
 
 **Asynchronous (Parallel – 26 ms)**  
 
-![Asynchronous](img/asynchronous-assessment-feign-calls.png)
+![Asynchronous](_img/asynchronous-assessment-feign-calls.png)
 
 #### Distributed tracing - Complete flow for High-Risk Assessment event triggered by a note creation (153 ms)
 
@@ -106,7 +106,7 @@ It highlights critical KPIs to ensure system health and performance:
 | Assessments (Feign Client) | Update patient flag `(prevent sending duplicate emails)` | Update patient's earlyOnsetMailSent flag via PUT /patients/{id}/early-onset-mail |
 | Notifications | Consume event and send email                             | Consume high-risk-assessment event and send alert email via Mailtrap |
 
-![distributed-tracing-high-risk-event.png](img/distributed-tracing-high-risk-event.png)
+![distributed-tracing-high-risk-event.png](_img/distributed-tracing-high-risk-event.png)
 
 ---
 

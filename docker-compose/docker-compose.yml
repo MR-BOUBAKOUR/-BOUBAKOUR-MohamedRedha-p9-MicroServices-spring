@@ -197,7 +197,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_GATEWAY_PASSWORD}
     volumes:
       - gatewayserver-db-postgresql-data:/var/lib/postgresql/data
-      - ./data/postgresql-init:/docker-entrypoint-initdb.d
+      - ../_data/postgresql-init:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
     healthcheck:
@@ -219,7 +219,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PATIENTS_PASSWORD}
     volumes:
       - patients-db-mysql-data:/var/lib/mysql
-      - ./data/mysql-init:/docker-entrypoint-initdb.d
+      - ../_data/mysql-init:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
     healthcheck:
@@ -236,7 +236,7 @@ services:
       - "27017:27017"
     volumes:
       - notes-db-mongodb-data:/data/db
-      - ./data/mongodb-init:/docker-entrypoint-initdb.d
+      - ../_data/mongodb-init:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
     healthcheck:

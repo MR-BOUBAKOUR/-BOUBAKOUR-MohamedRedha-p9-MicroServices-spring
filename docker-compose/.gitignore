@@ -40,4 +40,6 @@ keystore.p12
 
 **/.data
 **/.env
+**/.env.test
 .env
+.env.test
