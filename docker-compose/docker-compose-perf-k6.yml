@@ -4,7 +4,7 @@ services:
     volumes:
       # Mounts the local 'perf-tests' folder into the container at '/scripts'
       - ../_perf-tests:/scripts
-    entrypoint: ["k6", "run", "--insecure-skip-tls-verify", "/scripts/load/load-test.js"]
+    entrypoint: ["k6", "run", "--insecure-skip-tls-verify", "/scripts/load/scenarios/loginPage.js"]
     networks:
       - medilabosolutions-net
 

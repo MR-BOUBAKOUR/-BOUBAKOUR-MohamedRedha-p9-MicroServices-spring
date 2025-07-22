@@ -1,6 +1,6 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import { BASE_URL } from '../config.js';
+import { FRONT_URL } from '../../config.js';
 
 export let options = {
     scenarios: {
@@ -22,7 +22,9 @@ export let options = {
 };
 
 export default function () {
-    const res = http.get(`${BASE_URL}/login`);
+    const res = http.get(`${FRONT_URL}/login`);
+
     check(res, { 'status is 200': (r) => r.status === 200 });
+
     sleep(Math.random() * 2 + 1);
 }

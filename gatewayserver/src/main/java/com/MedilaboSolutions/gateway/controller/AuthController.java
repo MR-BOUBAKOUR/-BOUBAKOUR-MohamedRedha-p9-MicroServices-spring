@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -83,7 +84,14 @@ public class AuthController {
                 log.info("Login success for user: {}", username);
                 return Mono.just(ResponseEntity.ok(loginResponse));
             })
-            .doOnError(e -> log.warn("Login failed for user {}: {}", authRequest.getUsername(), e.getMessage()));
+            .doOnError(e -> log.warn("Login failed for user {}: {}", authRequest.getUsername(), e.getMessage()))
+            .onErrorResume(e -> {
+                if (e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
+                    return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+                }
+
+                return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+            });
     }
 
     @PostMapping("/refresh")
