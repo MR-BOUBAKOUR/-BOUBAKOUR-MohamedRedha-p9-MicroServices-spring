@@ -1,5 +1,5 @@
 import http from 'k6/http';
-import { BACK_URL, USERNAME, PASSWORD } from '../../config.js';
+import { BACK_URL, USERNAME, PASSWORD } from '../config.js';
 
 export function getAuthToken() {
 

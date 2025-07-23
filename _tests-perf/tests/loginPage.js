@@ -1,6 +1,6 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import { FRONT_URL } from '../../config.js';
+import { FRONT_URL } from '../config.js';
 
 export let options = {
     scenarios: {

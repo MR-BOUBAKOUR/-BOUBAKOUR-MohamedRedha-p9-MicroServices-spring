@@ -1,6 +1,6 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import { BACK_URL } from '../../config.js';
+import { BACK_URL } from '../config.js';
 import { getAuthToken } from '../helpers/auth.js';
 
 export let options = {
