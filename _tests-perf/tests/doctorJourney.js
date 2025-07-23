@@ -1,11 +1,11 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import { BACK_URL } from '../config.js';
+import { config } from '../config.js';
 import { getAuthToken } from '../helpers/auth.js';
 
 export let options = {
-    vus: 20,
-    duration: '1m',
+    stages: config.profiles.load.stages,
+    thresholds: config.profiles.load.thresholds,
 };
 
 export function setup() {
@@ -16,12 +16,13 @@ export function setup() {
 export default function (data) {
     const headers = {
         Authorization: `Bearer ${data.token}`,
+        ...config.httpConfig.headers,
     };
 
     const responses = http.batch([
-        ['GET', `${BACK_URL}/v1/patients/2`, null, { headers }],
-        ['GET', `${BACK_URL}/v1/notes/2`, null, { headers }],
-        ['GET', `${BACK_URL}/v1/assessments/2`, null, { headers }],
+        ['GET', `${config.backUrl}/v1/patients/2`, null, { headers }],
+        ['GET', `${config.backUrl}/v1/notes/2`, null, { headers }],
+        ['GET', `${config.backUrl}/v1/assessments/2`, null, { headers }],
     ]);
 
     check(responses[0], { 'patients 200': (r) => r.status === 200 });

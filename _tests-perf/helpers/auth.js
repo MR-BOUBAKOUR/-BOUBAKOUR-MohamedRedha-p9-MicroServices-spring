@@ -1,29 +1,26 @@
 import http from 'k6/http';
-import { BACK_URL, USERNAME, PASSWORD } from '../config.js';
+import { config } from '../config.js';
 
 export function getAuthToken() {
-
-    if (!USERNAME || !PASSWORD) {
+    if (!config.username || !config.password) {
         throw new Error('USERNAME and PASSWORD environment variables must be set');
     }
 
     const credentials = JSON.stringify({
-        username: USERNAME,
-        password: PASSWORD,
+        username: config.username,
+        password: config.password,
     });
 
     const params = {
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: config.httpConfig.headers,
+        timeout: config.httpConfig.timeout,
     };
 
-    const res = http.post(`${BACK_URL}/login`, credentials, params);
+    const res = http.post(`${config.backUrl}/login`, credentials, params);
 
     if (res.status !== 200) {
         throw new Error(`login error: ${res.status} ${res.body}`);
     }
 
-    const body = JSON.parse(res.body);
-    return body.accessToken;
+    return res.json().accessToken;
 }

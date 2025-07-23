@@ -5,7 +5,7 @@ services:
     image: grafana/k6
     volumes:
       - ../_tests-perf:/scripts
-    entrypoint: ["k6", "run", "--insecure-skip-tls-verify", "/scripts/tests/patientPage.js"]
+    entrypoint: ["k6", "run", "--insecure-skip-tls-verify", "/scripts/tests/doctorJourney.js"]
     environment:
       USERNAME: ${USERNAME_K6}
       PASSWORD: ${PASSWORD_K6}
