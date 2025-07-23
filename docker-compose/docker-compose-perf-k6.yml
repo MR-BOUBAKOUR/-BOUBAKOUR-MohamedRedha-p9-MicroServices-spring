@@ -1,14 +1,18 @@
+# FOR NOW, ALL THE CONTAINERS ARE IN THE SAME NETWORK
+
 services:
   k6:
     image: grafana/k6
     volumes:
       - ../_tests-perf:/scripts
-    entrypoint: ["k6", "run", "--insecure-skip-tls-verify", "/scripts/load/scenarios/loginPage.js"]
+    entrypoint: ["k6", "run", "--insecure-skip-tls-verify", "/scripts/load/scenarios/patientPage.js"]
     environment:
       USERNAME: ${USERNAME_K6}
       PASSWORD: ${PASSWORD_K6}
       FRONT_URL: ${FRONT_URL}
       BACK_URL: ${BACK_URL}
+    networks:
+      - docker-compose_medilabosolutions-net
     depends_on:
       front-vue:
         condition: service_healthy
@@ -22,3 +26,9 @@ services:
       test: ["CMD", "sh", "-c", "netstat -an | grep :5173 | grep LISTEN"]
       interval: 5s
       retries: 5
+    networks:
+      - docker-compose_medilabosolutions-net
+
+networks:
+  docker-compose_medilabosolutions-net:
+    external: true
