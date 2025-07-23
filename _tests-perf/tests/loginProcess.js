@@ -1,30 +1,25 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import { FRONT_URL } from '../config.js';
+import { config } from '../config.js';
+import { getAuthToken } from '../helpers/auth.js';
 
 export let options = {
-    scenarios: {
-        normal_users: {
-            executor: 'constant-vus',
-            vus: 10,
-            duration: '30s',
-        },
-        spike: {
-            executor: 'ramping-vus',
-            startVUs: 0,
-            stages: [
-                { duration: '10s', target: 20 },
-                { duration: '10s', target: 20 },
-                { duration: '10s', target: 0 },
-            ],
-        },
-    },
+    stages: config.profiles.load.stages,
+    thresholds: config.profiles.load.thresholds,
 };
 
 export default function () {
-    const res = http.get(`${FRONT_URL}/login`);
+    // Perform POST /login on each VU iteration to simulate full login process
+    const token = getAuthToken();
 
-    check(res, { 'status is 200': (r) => r.status === 200 });
+    const headers = {
+        Authorization: `Bearer ${token}`,
+        ...config.httpConfig.headers,
+    };
+
+    const res = http.get(`${config.backUrl}/v1/patients`, { headers });
+
+    check(res, { 'patients 200': (r) => r.status === 200 });
 
     sleep(Math.random() * 2 + 1);
 }

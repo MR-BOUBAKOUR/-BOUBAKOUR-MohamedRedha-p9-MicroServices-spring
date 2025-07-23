@@ -16,6 +16,8 @@ services:
     depends_on:
       front-vue:
         condition: service_healthy
+    mem_limit: 1g
+    mem_reservation: 512m
 
   front-vue:
     build:
@@ -28,6 +30,8 @@ services:
       retries: 5
     networks:
       - docker-compose_medilabosolutions-net
+    mem_limit: 512m
+    mem_reservation: 256m
 
 networks:
   docker-compose_medilabosolutions-net:

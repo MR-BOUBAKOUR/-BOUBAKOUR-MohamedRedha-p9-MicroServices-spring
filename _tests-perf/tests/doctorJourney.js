@@ -19,10 +19,13 @@ export default function (data) {
         ...config.httpConfig.headers,
     };
 
+    const validIds = [1, 2, 3, 4];
+    const patientId = validIds[Math.floor(Math.random() * validIds.length)];
+
     const responses = http.batch([
-        ['GET', `${config.backUrl}/v1/patients/2`, null, { headers }],
-        ['GET', `${config.backUrl}/v1/notes/2`, null, { headers }],
-        ['GET', `${config.backUrl}/v1/assessments/2`, null, { headers }],
+        ['GET', `${config.backUrl}/v1/patients/${patientId}`, null, { headers }],
+        ['GET', `${config.backUrl}/v1/notes/${patientId}`, null, { headers }],
+        ['GET', `${config.backUrl}/v1/assessments/${patientId}`, null, { headers }],
     ]);
 
     check(responses[0], { 'patients 200': (r) => r.status === 200 });
