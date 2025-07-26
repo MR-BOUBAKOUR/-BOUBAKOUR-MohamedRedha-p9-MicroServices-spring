@@ -53,9 +53,9 @@ info:
 
 logging:
   level:
-    feign: DEBUG
+    feign: INFO
     com:
       MedilaboSolutions:
-        patient: DEBUG
+        patient: INFO
   pattern:
     level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"

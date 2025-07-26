@@ -1,17 +1,23 @@
 package com.MedilaboSolutions.gateway.utils;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.time.Duration;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Component
 public class AuthUtil {
 
@@ -98,5 +104,20 @@ public class AuthUtil {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    private final Cache<String, Claims> tokenCache = Caffeine.newBuilder()
+            .expireAfterWrite(Duration.ofMinutes(10))
+            .maximumSize(10000)
+            .build();
+
+    private Claims parseAndValidateToken(String token) {
+        log.info("Parsing and validating token (cache MISS) for token: {}", token.substring(0, 10) + "...");
+        if (!isValidToken(token)) throw new JwtException("Invalid token");
+        return getAllClaimsFromToken(token);
+    }
+
+    public Claims getCachedClaims(String token) {
+        return tokenCache.get(token, this::parseAndValidateToken);
     }
 }

@@ -2,6 +2,7 @@ package com.MedilaboSolutions.gateway.filters;
 
 import com.MedilaboSolutions.gateway.utils.AuthUtil;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -44,22 +45,27 @@ public class AuthFilter implements WebFilter {
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7);
 
-            if (authUtil.isValidToken(token)) {
-                Claims claims = authUtil.getAllClaimsFromToken(token);
-                String username = claims.get("username", String.class);
-                String role = claims.get("role", String.class);
-
-                var auth = new UsernamePasswordAuthenticationToken(
-                        username,
-                        null,
-                        List.of(new SimpleGrantedAuthority(role))
-                );
-
-                return chain.filter(exchange)
-                        .contextWrite(ReactiveSecurityContextHolder.withAuthentication(auth));
-            } else {
-                log.warn("Invalid or expired token");
+            Claims claims;
+            try {
+                claims = authUtil.getCachedClaims(token);
+            } catch (JwtException e) {
+                log.warn("Token rejected: {}", e.getMessage());
+                exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                return exchange.getResponse().setComplete();
             }
+
+            String username = claims.get("username", String.class);
+            String role = claims.get("role", String.class);
+
+            var auth = new UsernamePasswordAuthenticationToken(
+                    username,
+                    null,
+                    List.of(new SimpleGrantedAuthority(role))
+            );
+
+            return chain.filter(exchange)
+                    .contextWrite(ReactiveSecurityContextHolder.withAuthentication(auth));
+
         } else {
             log.warn("Missing token");
         }

@@ -9,6 +9,7 @@ services:
   # ============================================= Business Microservices ==============================================
 
   eurekaserver:
+    container_name: eurekaserver
     build:
       context: ../eurekaserver
     ports:
@@ -27,6 +28,7 @@ services:
     mem_reservation: 1g
 
   gatewayserver:
+    container_name: gatewayserver
     build:
       context: ../gatewayserver
     ports:
@@ -67,6 +69,7 @@ services:
     mem_reservation: 1g
 
   patients:
+    container_name: patients
     build:
       context: ../patients
     environment:
@@ -93,6 +96,7 @@ services:
     mem_reservation: 1g
 
   notes:
+    container_name: notes
     build:
       context: ../notes
     environment:
@@ -116,6 +120,7 @@ services:
     mem_reservation: 1g
 
   assessments:
+    container_name: assessments
     build:
       context: ../assessments
     environment:
@@ -142,6 +147,7 @@ services:
     mem_reservation: 1g
 
   notifications:
+    container_name: notifications
     build:
       context: ../notifications
     environment:
@@ -183,6 +189,7 @@ services:
   # ==================================================== DATABASES ====================================================
 
   gatewayserver-db-postgresql:
+    container_name: gatewayserver-db-postgresql
     image: postgres:15
     ports:
       - "5432:5432"
@@ -204,6 +211,7 @@ services:
     mem_reservation: 512m
 
   patients-db-mysql:
+    container_name: patients-db-mysql
     image: mysql:8
     ports:
       - "3306:3306"
@@ -226,6 +234,7 @@ services:
     mem_reservation: 512m
 
   notes-db-mongodb:
+    container_name: notes-db-mongodb
     image: mongo:6.0
     ports:
       - "27017:27017"
@@ -245,6 +254,7 @@ services:
   # ==================================================== EVENT BUS ====================================================
 
   rabbitmq:
+    container_name: rabbitmq
     image: rabbitmq:4.1.2
     ports:
       - "5672:5672"  # AMQP Port
@@ -264,6 +274,7 @@ services:
   # =============================================== OBSERVABILITY STACK ===============================================
 
   read:
+    container_name: read
     image: grafana/loki:latest
     command: "-config.file=/etc/loki/config.yaml -target=read"
     ports:
@@ -287,6 +298,7 @@ services:
     mem_reservation: 128m
 
   write:
+    container_name: write
     image: grafana/loki:latest
     command: "-config.file=/etc/loki/config.yaml -target=write"
     ports:
@@ -308,6 +320,7 @@ services:
     mem_reservation: 128m
 
   alloy:
+    container_name: alloy
     image: grafana/alloy:latest
     volumes:
       - ./observability/alloy/alloy-local-config.yaml:/etc/alloy/config.alloy:ro
@@ -323,6 +336,7 @@ services:
     mem_reservation: 128m
 
   minio:
+    container_name: minio
     image: minio/minio
     entrypoint:
       - sh
@@ -351,6 +365,7 @@ services:
     mem_reservation: 128m
 
   prometheus:
+    container_name: prometheus
     image: prom/prometheus:latest
     ports:
       - "9090:9090"
@@ -362,8 +377,8 @@ services:
     mem_reservation: 128m
 
   tempo:
-    image: grafana/tempo:latest
     container_name: tempo
+    image: grafana/tempo:latest
     command: -config.file /etc/tempo-config.yml
     ports:
       - "3110:3100"
@@ -376,6 +391,7 @@ services:
     mem_reservation: 512m
 
   grafana:
+    container_name: grafana
     image: grafana/grafana:latest
     environment:
       - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
@@ -404,6 +420,7 @@ services:
     mem_reservation: 128m
 
   backend:
+    container_name: backend
     image: grafana/loki:latest
     volumes:
       - ./observability/loki/loki-config.yaml:/etc/loki/config.yaml
@@ -419,6 +436,7 @@ services:
     mem_reservation: 128m
 
   gateway:
+    container_name: gateway
     image: nginx:latest
     depends_on:
       - read

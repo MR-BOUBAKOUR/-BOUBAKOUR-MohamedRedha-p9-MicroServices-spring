@@ -26,11 +26,11 @@ public class RequestTraceFilter implements GlobalFilter {
         String correlationId = traceUtil.getCorrelationId(requestHeaders);
 
         if (correlationId != null) {
-            log.debug("medilabo-solutions-correlation-id found in RequestTraceFilter: {}", correlationId);
+            log.info("medilabo-solutions-correlation-id found in RequestTraceFilter: {}", correlationId);
         } else {
             correlationId = generateCorrelationId();
             exchange = traceUtil.setCorrelationId(exchange, correlationId);
-            log.debug("medilabo-solutions-correlation-id generated in RequestTraceFilter: {}", correlationId);
+            log.info("medilabo-solutions-correlation-id generated in RequestTraceFilter: {}", correlationId);
         }
         return chain.filter(exchange);
     }

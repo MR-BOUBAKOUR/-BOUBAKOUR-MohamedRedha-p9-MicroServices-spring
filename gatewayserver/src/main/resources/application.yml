@@ -22,6 +22,10 @@ spring:
           enabled: false
           # Activate the lowerCase for the URIs ( -> upperCase: false)
           lowerCaseServiceId: true
+      httpclient:
+        connect-timeout: 3000
+        response-timeout: 5s
+
   security:
     oauth2:
       client:
@@ -81,10 +85,10 @@ info:
 
 logging:
   level:
-    feign: DEBUG
+    feign: INFO
     com:
       MedilaboSolutions:
-        gateway: DEBUG
+        gateway: INFO
   pattern:
     level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
 

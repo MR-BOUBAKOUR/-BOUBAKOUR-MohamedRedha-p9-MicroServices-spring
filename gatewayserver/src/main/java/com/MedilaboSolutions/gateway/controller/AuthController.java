@@ -45,7 +45,7 @@ public class AuthController {
     @PostMapping("/login")
     public Mono<ResponseEntity<AuthResponse>> login(@RequestBody AuthRequest authRequest,
                                                     ServerHttpResponse response) {
-        log.debug("login start");
+        log.info("login start");
 
         return reactiveUserDetailsService
             .findByUsername(authRequest.getUsername())
@@ -96,7 +96,7 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public Mono<ResponseEntity<AuthResponse>> refresh(ServerWebExchange exchange) {
-        log.debug("refresh start");
+        log.info("refresh start");
 
         return Mono
                 // Get refresh token from the cookie, validate it, then extract the username
@@ -116,7 +116,7 @@ public class AuthController {
                         throw new BadCredentialsException("Invalid refresh token");
                     }
 
-                    log.debug("refresh success");
+                    log.info("refresh success");
 
                     return authUtil.getAllClaimsFromToken(refreshToken).getSubject();
                 })
