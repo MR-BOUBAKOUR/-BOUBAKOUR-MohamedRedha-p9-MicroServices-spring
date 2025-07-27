@@ -26,7 +26,7 @@ public class NoteController {
             @PathVariable Long patId,
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId
     ) {
-        log.debug("Fetching notes for patientId={}", patId);
+        log.info("Fetching notes for patientId={}", patId);
         List<NoteDto> notes = noteService.findByPatientId(patId);
 
         return ResponseEntity
@@ -36,7 +36,7 @@ public class NoteController {
 
     @PostMapping
     public ResponseEntity<SuccessResponse<NoteDto>> createNote(@Valid @RequestBody NoteRequestDto noteDto) {
-        log.debug("Creating note for patientId={}", noteDto.getPatId());
+        log.info("Creating note for patientId={}", noteDto.getPatId());
         NoteDto note = noteService.create(noteDto);
 
         return ResponseEntity
@@ -46,7 +46,7 @@ public class NoteController {
 
     @DeleteMapping("/{patId}")
     public ResponseEntity<Void> deleteNotesByPatientId(@PathVariable Long patId) {
-        log.debug("Deleting notes for patientId={}", patId);
+        log.info("Deleting notes for patientId={}", patId);
         noteService.deleteByPatientId(patId);
 
         return ResponseEntity.noContent().build();

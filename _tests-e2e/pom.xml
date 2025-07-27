@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.MedilaboSolutions</groupId>
-	<artifactId>e2e-tests</artifactId>
+	<artifactId>_tests-e2e</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>e2e-tests</name>
 	<description>End to end testing for MedilaboSolutions</description>

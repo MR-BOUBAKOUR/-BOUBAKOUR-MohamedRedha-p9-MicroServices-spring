@@ -38,7 +38,8 @@ cert/
 *.p12
 keystore.p12
 
-**/data/
 **/.data
 **/.env
+**/.env.test
 .env
+.env.test

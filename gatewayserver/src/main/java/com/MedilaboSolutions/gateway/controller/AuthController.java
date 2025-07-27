@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,7 +45,7 @@ public class AuthController {
     @PostMapping("/login")
     public Mono<ResponseEntity<AuthResponse>> login(@RequestBody AuthRequest authRequest,
                                                     ServerHttpResponse response) {
-        log.debug("login start");
+        log.info("login start");
 
         return reactiveUserDetailsService
             .findByUsername(authRequest.getUsername())
@@ -83,12 +84,19 @@ public class AuthController {
                 log.info("Login success for user: {}", username);
                 return Mono.just(ResponseEntity.ok(loginResponse));
             })
-            .doOnError(e -> log.warn("Login failed for user {}: {}", authRequest.getUsername(), e.getMessage()));
+            .doOnError(e -> log.warn("Login failed for user {}: {}", authRequest.getUsername(), e.getMessage()))
+            .onErrorResume(e -> {
+                if (e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
+                    return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+                }
+
+                return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+            });
     }
 
     @PostMapping("/refresh")
     public Mono<ResponseEntity<AuthResponse>> refresh(ServerWebExchange exchange) {
-        log.debug("refresh start");
+        log.info("refresh start");
 
         return Mono
                 // Get refresh token from the cookie, validate it, then extract the username
@@ -108,7 +116,7 @@ public class AuthController {
                         throw new BadCredentialsException("Invalid refresh token");
                     }
 
-                    log.debug("refresh success");
+                    log.info("refresh success");
 
                     return authUtil.getAllClaimsFromToken(refreshToken).getSubject();
                 })

@@ -23,7 +23,7 @@ public class ResponseTraceFilter {
                     // Copy correlation ID from the request headers to the response headers for end-to-end tracing
                     String correlationId = traceUtil.getCorrelationId(exchange.getRequest().getHeaders());
 
-                    log.debug("Updated the correlation id to the response headers: {}", correlationId);
+                    // log.info("Updated the correlation id to the response headers: {}", correlationId);
                     exchange.getResponse().getHeaders()
                         .add(TraceUtil.CORRELATION_ID_HEADER, correlationId);
         }));

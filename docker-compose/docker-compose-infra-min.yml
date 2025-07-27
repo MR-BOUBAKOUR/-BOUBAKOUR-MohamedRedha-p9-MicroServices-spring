@@ -1,0 +1,94 @@
+services:
+
+  # ==================================================== DATABASES ====================================================
+
+  gatewayserver-db-postgresql:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_GATEWAY_DATABASE}
+      POSTGRES_USER: ${POSTGRES_GATEWAY_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_GATEWAY_PASSWORD}
+    volumes:
+      # - gatewayserver-db-postgresql-data:/var/lib/postgresql/data
+      - ../_data/postgresql-init:/docker-entrypoint-initdb.d
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_GATEWAY_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 500m
+    mem_reservation: 300m
+
+  patients-db-mysql:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_PATIENTS_DATABASE}
+      MYSQL_USER: ${MYSQL_PATIENTS_USER}
+      MYSQL_PASSWORD: ${MYSQL_PATIENTS_PASSWORD}
+    volumes:
+      # - patients-db-mysql-data:/var/lib/mysql
+      - ../_data/mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 500m
+    mem_reservation: 300m
+
+  notes-db-mongodb:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      # - notes-db-mongodb-data:/data/db
+      - ../_data/mongodb-init:/docker-entrypoint-initdb.d
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 500m
+    mem_reservation: 300m
+
+  # ==================================================== EVENT BUS ====================================================
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672" # Management UI (optionnel)
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 300m
+    mem_reservation: 200m
+
+  # =============================================== NETWORKS / VOLUMES ================================================
+
+networks:
+  medilabosolutions-net:
+    driver: bridge
+
+#volumes:
+#  patients-db-mysql-data:
+#  gatewayserver-db-postgresql-data:
+#  notes-db-mongodb-data:

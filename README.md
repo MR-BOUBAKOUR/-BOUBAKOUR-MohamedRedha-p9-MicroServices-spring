@@ -2,6 +2,8 @@
 
 Microservices application for diabetes risk assessment built with Spring Boot and Vue.js.
 
+🔍 [Performance analysis](_doc/perf-analysis.md) — the main performance bottleneck was system resource contention caused by running the app, monitoring, and load tests on the same machine — not the application itself.
+
 📄 [Documentation & Reports](https://mr-boubakour.github.io/-BOUBAKOUR-MohamedRedha-p9-MicroServices-spring/) — includes **Javadoc** and **JaCoCo reports** for the microservices where documentation and test coverage bring the most value.
 
 ---
@@ -70,7 +72,7 @@ All data is visualized and analyzed through Grafana.
 
 The custom dashboard is based on the two popular dashboards : **JVM (Micrometer) & Spring Boot Observability**.
 
-![Custom Observability Dashboard](img/dashboard-image.png)
+![Custom Observability Dashboard](_img/dashboard-image.png)
 
 It highlights critical KPIs to ensure system health and performance:
 
@@ -88,11 +90,11 @@ It highlights critical KPIs to ensure system health and performance:
 
 **Synchronous (Sequential – 41 ms)**  
 
-![Synchronous](img/synchronous-assessment-feign-calls.png)
+![Synchronous](_img/synchronous-assessment-feign-calls.png)
 
 **Asynchronous (Parallel – 26 ms)**  
 
-![Asynchronous](img/asynchronous-assessment-feign-calls.png)
+![Asynchronous](_img/asynchronous-assessment-feign-calls.png)
 
 #### Distributed tracing - Complete flow for High-Risk Assessment event triggered by a note creation (153 ms)
 
@@ -106,7 +108,7 @@ It highlights critical KPIs to ensure system health and performance:
 | Assessments (Feign Client) | Update patient flag `(prevent sending duplicate emails)` | Update patient's earlyOnsetMailSent flag via PUT /patients/{id}/early-onset-mail |
 | Notifications | Consume event and send email                             | Consume high-risk-assessment event and send alert email via Mailtrap |
 
-![distributed-tracing-high-risk-event.png](img/distributed-tracing-high-risk-event.png)
+![distributed-tracing-high-risk-event.png](_img/distributed-tracing-high-risk-event.png)
 
 ---
 
@@ -137,7 +139,10 @@ The full journey test simulates a real doctor's workflow using `DoctorJourneyE2E
 - Uses **Awaitility** to ensure service readiness and propagation
 - Executed in a real environment with **Docker Compose**
 
-#### ✅ Load tests (in progress)
+#### ✅ Performance tests (load)
+- A full investigation was conducted to understand the system's saturation behavior.  
+  👉 [Read the full performance analysis](_doc/perf-investigation.md)
+
 
 ---
 

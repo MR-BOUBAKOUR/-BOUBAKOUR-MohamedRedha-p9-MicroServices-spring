@@ -30,8 +30,6 @@ public class AssessmentService {
         ResponseEntity<SuccessResponse<PatientDto>> patient = patientFeignClient.getPatientById(patId, correlationId);
         String gender = Objects.requireNonNull(patient.getBody()).getData().getGender().toLowerCase();
         int age = calculateAge(patient.getBody().getData().getBirthDate());
-        log.info("Gender : {}", gender);
-        log.info("Age : {}", age);
 
         ResponseEntity<SuccessResponse<List<NoteDto>>> notes = noteFeignClient.getNoteByPatientId(patId, correlationId);
         int triggerCount = countMedicalTriggers(notes);
@@ -72,15 +70,12 @@ public class AssessmentService {
 
         for (NoteDto note : allNotes) {
             String noteContent = note.getNote().toLowerCase();
-            log.info("Analyzing note: {}", noteContent);
             for (String trigger : triggers) {
                 if (noteContent.contains(trigger.toLowerCase())) {
                     count++;
-                    log.info("Found trigger: {} in note", trigger);
                 }
             }
         }
-        log.info("Total trigger count: {}", count);
         return count;
     }
 

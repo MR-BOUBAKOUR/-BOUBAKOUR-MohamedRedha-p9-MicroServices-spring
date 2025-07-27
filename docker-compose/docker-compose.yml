@@ -5,7 +5,11 @@ x-otel-java-env: &otel-java-env
   OTEL_LOGS_EXPORTER: none
 
 services:
+
+  # ============================================= Business Microservices ==============================================
+
   eurekaserver:
+    container_name: eurekaserver
     build:
       context: ../eurekaserver
     ports:
@@ -20,10 +24,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 700m
-    mem_reservation: 512m
+    mem_limit: 1g
+    mem_reservation: 1g
 
   gatewayserver:
+    container_name: gatewayserver
     build:
       context: ../gatewayserver
     ports:
@@ -60,31 +65,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 700m
-    mem_reservation: 512m
-
-  gatewayserver-db-postgresql:
-    image: postgres:15
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_DB: ${POSTGRES_GATEWAY_DATABASE}
-      POSTGRES_USER: ${POSTGRES_GATEWAY_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_GATEWAY_PASSWORD}
-    volumes:
-      - gatewayserver-db-postgresql-data:/var/lib/postgresql/data
-      - ./data/postgresql-init:/docker-entrypoint-initdb.d
-    networks:
-      - medilabosolutions-net
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_GATEWAY_USER}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    mem_limit: 700m
-    mem_reservation: 512m
+    mem_limit: 1g
+    mem_reservation: 1g
 
   patients:
+    container_name: patients
     build:
       context: ../patients
     environment:
@@ -107,32 +92,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 700m
-    mem_reservation: 512m
-
-  patients-db-mysql:
-    image: mysql:8
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_PATIENTS_DATABASE}
-      MYSQL_USER: ${MYSQL_PATIENTS_USER}
-      MYSQL_PASSWORD: ${MYSQL_PATIENTS_PASSWORD}
-    volumes:
-      - patients-db-mysql-data:/var/lib/mysql
-      - ./data/mysql-init:/docker-entrypoint-initdb.d
-    networks:
-      - medilabosolutions-net
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    mem_limit: 700m
-    mem_reservation: 512m
+    mem_limit: 1g
+    mem_reservation: 1g
 
   notes:
+    container_name: notes
     build:
       context: ../notes
     environment:
@@ -152,27 +116,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 700m
-    mem_reservation: 512m
-
-  notes-db-mongodb:
-    image: mongo:6.0
-    ports:
-      - "27017:27017"
-    volumes:
-      - notes-db-mongodb-data:/data/db
-      - ./data/mongodb-init:/docker-entrypoint-initdb.d
-    networks:
-      - medilabosolutions-net
-    healthcheck:
-      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    mem_limit: 700m
-    mem_reservation: 512m
+    mem_limit: 1g
+    mem_reservation: 1g
 
   assessments:
+    container_name: assessments
     build:
       context: ../assessments
     environment:
@@ -195,10 +143,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 700m
-    mem_reservation: 512m
+    mem_limit: 1g
+    mem_reservation: 1g
 
   notifications:
+    container_name: notifications
     build:
       context: ../notifications
     environment:
@@ -225,10 +174,87 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 700m
+    mem_limit: 1g
+    mem_reservation: 1g
+
+#  front-vue:
+#    build:
+#      context: ../front-vue
+#    ports:
+#      - "5173:5173"
+#    depends_on:
+#      gatewayserver:
+#        condition: service_healthy
+
+  # ==================================================== DATABASES ====================================================
+
+  gatewayserver-db-postgresql:
+    container_name: gatewayserver-db-postgresql
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_GATEWAY_DATABASE}
+      POSTGRES_USER: ${POSTGRES_GATEWAY_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_GATEWAY_PASSWORD}
+    volumes:
+      # - gatewayserver-db-postgresql-data:/var/lib/postgresql/data
+      - ../_data/postgresql-init:/docker-entrypoint-initdb.d
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_GATEWAY_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 1g
     mem_reservation: 512m
 
+  patients-db-mysql:
+    container_name: patients-db-mysql
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_PATIENTS_DATABASE}
+      MYSQL_USER: ${MYSQL_PATIENTS_USER}
+      MYSQL_PASSWORD: ${MYSQL_PATIENTS_PASSWORD}
+    volumes:
+      # - patients-db-mysql-data:/var/lib/mysql
+      - ../_data/mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 1g
+    mem_reservation: 512m
+
+  notes-db-mongodb:
+    container_name: notes-db-mongodb
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      # - notes-db-mongodb-data:/data/db
+      - ../_data/mongodb-init:/docker-entrypoint-initdb.d
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 1g
+    mem_reservation: 512m
+
+  # ==================================================== EVENT BUS ====================================================
+
   rabbitmq:
+    container_name: rabbitmq
     image: rabbitmq:4.1.2
     ports:
       - "5672:5672"  # AMQP Port
@@ -245,23 +271,10 @@ services:
     mem_limit: 256m
     mem_reservation: 128m
 
-  #  front-vue:
-  #    build:
-  #      context: ./front-vue
-  #    ports:
-  #      - "5173:5173"
-  #    volumes:
-  #      - ./front-vue:/app
-  #      - /app/node_modules
-  #    networks:
-  #      - medilabosolutions-net
-  #    depends_on:
-  #      gatewayserver:
-  #        condition: service_healthy
-
   # =============================================== OBSERVABILITY STACK ===============================================
 
   read:
+    profiles: [monitoring]
     image: grafana/loki:latest
     command: "-config.file=/etc/loki/config.yaml -target=read"
     ports:
@@ -285,6 +298,8 @@ services:
     mem_reservation: 128m
 
   write:
+    profiles: [monitoring]
+    container_name: write
     image: grafana/loki:latest
     command: "-config.file=/etc/loki/config.yaml -target=write"
     ports:
@@ -306,6 +321,8 @@ services:
     mem_reservation: 128m
 
   alloy:
+    profiles: [monitoring]
+    container_name: alloy
     image: grafana/alloy:latest
     volumes:
       - ./observability/alloy/alloy-local-config.yaml:/etc/alloy/config.alloy:ro
@@ -321,6 +338,8 @@ services:
     mem_reservation: 128m
 
   minio:
+    profiles: [monitoring]
+    container_name: minio
     image: minio/minio
     entrypoint:
       - sh
@@ -335,7 +354,7 @@ services:
       - MINIO_PROMETHEUS_AUTH_TYPE=public
       - MINIO_UPDATE=off
     ports:
-      - 9000
+      - "9000"
     volumes:
       - ./.data/minio:/data
     healthcheck:
@@ -349,6 +368,8 @@ services:
     mem_reservation: 128m
 
   prometheus:
+    profiles: [monitoring]
+    container_name: prometheus
     image: prom/prometheus:latest
     ports:
       - "9090:9090"
@@ -360,8 +381,9 @@ services:
     mem_reservation: 128m
 
   tempo:
-    image: grafana/tempo:latest
+    profiles: [monitoring]
     container_name: tempo
+    image: grafana/tempo:latest
     command: -config.file /etc/tempo-config.yml
     ports:
       - "3110:3100"
@@ -370,10 +392,12 @@ services:
       - ./observability/tempo/tempo.yml:/etc/tempo-config.yml
     networks:
       - medilabosolutions-net
-    mem_limit: 256m
-    mem_reservation: 128m
+    mem_limit: 1g
+    mem_reservation: 512m
 
   grafana:
+    profiles: [monitoring]
+    container_name: grafana
     image: grafana/grafana:latest
     environment:
       - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
@@ -402,6 +426,8 @@ services:
     mem_reservation: 128m
 
   backend:
+    profiles: [monitoring]
+    container_name: backend
     image: grafana/loki:latest
     volumes:
       - ./observability/loki/loki-config.yaml:/etc/loki/config.yaml
@@ -417,6 +443,8 @@ services:
     mem_reservation: 128m
 
   gateway:
+    profiles: [monitoring]
+    container_name: gateway
     image: nginx:latest
     depends_on:
       - read
@@ -487,12 +515,14 @@ services:
     mem_limit: 256m
     mem_reservation: 128m
 
+  # =============================================== NETWORKS / VOLUMES ================================================
+
 networks:
   medilabosolutions-net:
     driver: bridge
 
 volumes:
-  patients-db-mysql-data:
-  gatewayserver-db-postgresql-data:
-  notes-db-mongodb-data:
+#  patients-db-mysql-data:
+#  gatewayserver-db-postgresql-data:
+#  notes-db-mongodb-data:
   grafana-data:
