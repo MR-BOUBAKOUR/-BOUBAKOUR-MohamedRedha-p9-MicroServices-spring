@@ -1,13 +1,13 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 gateway,com.MedilaboSolutions.gateway.controller,OAuth2Controller,14,4,0,0,4,1,1,1,1,1
-gateway,com.MedilaboSolutions.gateway.controller,AuthController,0,255,2,6,0,58,2,14,0,12
+gateway,com.MedilaboSolutions.gateway.controller,AuthController,5,268,4,8,1,61,4,15,0,13
 gateway,com.MedilaboSolutions.gateway.service,UserService,0,19,0,0,0,4,0,2,0,2
 gateway,com.MedilaboSolutions.gateway.security,UserDetailsServiceImpl,0,32,0,0,0,8,0,2,0,2
 gateway,com.MedilaboSolutions.gateway.security,UnauthorizedEntryPoint,10,3,0,0,3,1,1,1,1,1
 gateway,com.MedilaboSolutions.gateway.security,SecurityConfig,1,170,1,1,0,40,1,11,0,11
 gateway,com.MedilaboSolutions.gateway,GatewayApplication,5,158,0,0,2,40,1,18,1,18
-gateway,com.MedilaboSolutions.gateway.utils,AuthUtil,3,132,1,3,2,40,1,8,0,7
+gateway,com.MedilaboSolutions.gateway.utils,AuthUtil,15,162,2,4,4,47,3,10,1,9
 gateway,com.MedilaboSolutions.gateway.utils,TraceUtil,27,3,0,0,10,1,3,1,3,1
 gateway,com.MedilaboSolutions.gateway.filters,RequestTraceFilter,36,4,2,0,9,1,3,1,2,1
-gateway,com.MedilaboSolutions.gateway.filters,ResponseTraceFilter,27,10,0,0,7,3,2,3,2,3
-gateway,com.MedilaboSolutions.gateway.filters,AuthFilter,35,78,6,14,7,19,6,6,0,2
+gateway,com.MedilaboSolutions.gateway.filters,ResponseTraceFilter,23,10,0,0,6,3,2,3,2,3
+gateway,com.MedilaboSolutions.gateway.filters,AuthFilter,36,84,5,13,8,21,5,6,0,2

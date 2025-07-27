@@ -23,7 +23,7 @@ import reactor.core.publisher.Mono;
                     // Copy correlation ID from the request headers to the response headers for end-to-end tracing
 <span class="nc" id="L24">                    String correlationId = traceUtil.getCorrelationId(exchange.getRequest().getHeaders());</span>
 
-<span class="nc" id="L26">                    log.debug(&quot;Updated the correlation id to the response headers: {}&quot;, correlationId);</span>
+                    // log.info(&quot;Updated the correlation id to the response headers: {}&quot;, correlationId);
 <span class="nc" id="L27">                    exchange.getResponse().getHeaders()</span>
 <span class="nc" id="L28">                        .add(TraceUtil.CORRELATION_ID_HEADER, correlationId);</span>
 <span class="nc" id="L29">        }));</span>

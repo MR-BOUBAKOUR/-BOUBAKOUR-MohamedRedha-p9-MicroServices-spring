@@ -1,4 +1,5 @@
 com.MedilaboSolutions.gateway
+com.MedilaboSolutions.gateway.config
 com.MedilaboSolutions.gateway.controller
 com.MedilaboSolutions.gateway.dto
 com.MedilaboSolutions.gateway.exception

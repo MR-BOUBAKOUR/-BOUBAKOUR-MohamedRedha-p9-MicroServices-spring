@@ -34,7 +34,7 @@ public class PatientController {
             @PathVariable Long id,
             @RequestHeader(&quot;medilabo-solutions-correlation-id&quot;) String correlationId
     ) {
-<span class="fc" id="L37">        log.debug(&quot;Fetching patient by id={}&quot;, id);</span>
+<span class="fc" id="L37">        log.info(&quot;Fetching patient by id={}&quot;, id);</span>
 
 <span class="fc" id="L39">        PatientDto patient = patientService.findById(id);</span>
 <span class="fc" id="L40">        return ResponseEntity</span>
@@ -44,7 +44,7 @@ public class PatientController {
 
     @PostMapping
     public ResponseEntity&lt;SuccessResponse&lt;PatientDto&gt;&gt; createPatient(@Valid @RequestBody PatientRequestDto patientDto) {
-<span class="fc" id="L47">        log.debug(&quot;Creating patient for firstName={}&quot;, patientDto.getFirstName());</span>
+<span class="fc" id="L47">        log.info(&quot;Creating patient for firstName={}&quot;, patientDto.getFirstName());</span>
 
 <span class="fc" id="L49">        PatientDto patient = patientService.create(patientDto);</span>
 <span class="fc" id="L50">        return ResponseEntity</span>
@@ -54,7 +54,7 @@ public class PatientController {
 
     @PutMapping(&quot;/{id}&quot;)
     public ResponseEntity&lt;SuccessResponse&lt;PatientDto&gt;&gt; updatePatient(@PathVariable Long id, @Valid @RequestBody PatientRequestDto patientDto) {
-<span class="fc" id="L57">        log.debug(&quot;Updating patient id={}&quot;, id);</span>
+<span class="fc" id="L57">        log.info(&quot;Updating patient id={}&quot;, id);</span>
 
 <span class="fc" id="L59">        PatientDto patient = patientService.update(id, patientDto);</span>
 <span class="fc" id="L60">        return ResponseEntity</span>
@@ -64,7 +64,7 @@ public class PatientController {
 
     @DeleteMapping(&quot;/{id}&quot;)
     public ResponseEntity&lt;Void&gt; deletePatient(@PathVariable Long id) {
-<span class="fc" id="L67">        log.debug(&quot;Deleting patient id={}&quot;, id);</span>
+<span class="fc" id="L67">        log.info(&quot;Deleting patient id={}&quot;, id);</span>
 
 <span class="fc" id="L69">        patientService.deleteById(id);</span>
 <span class="fc" id="L70">        return ResponseEntity.noContent().build();</span>
@@ -76,7 +76,7 @@ public class PatientController {
             @RequestParam Boolean mailSent,
             @RequestHeader(&quot;medilabo-solutions-correlation-id&quot;) String correlationId
     ) {
-<span class="fc" id="L79">        log.debug(&quot;Updating early-onset-mail sent status for patient id={}&quot;, id);</span>
+<span class="fc" id="L79">        log.info(&quot;Updating early-onset-mail sent status for patient id={}&quot;, id);</span>
 
 <span class="fc" id="L81">        patientService.updateEarlyOnsetMailSent(id, mailSent);</span>
 <span class="fc" id="L82">        return ResponseEntity.noContent().build();</span>

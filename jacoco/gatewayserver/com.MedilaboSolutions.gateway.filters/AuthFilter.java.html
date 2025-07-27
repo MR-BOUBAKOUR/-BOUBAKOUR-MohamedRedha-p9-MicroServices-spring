@@ -2,6 +2,7 @@
 
 import com.MedilaboSolutions.gateway.utils.AuthUtil;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-<span class="fc" id="L19">@Slf4j</span>
+<span class="fc" id="L20">@Slf4j</span>
 @RequiredArgsConstructor
 @Component
 public class AuthFilter implements WebFilter {
@@ -27,45 +28,50 @@ public class AuthFilter implements WebFilter {
     public Mono&lt;Void&gt; filter(ServerWebExchange exchange, WebFilterChain chain) {
 
         // Skip authentication for public paths
-<span class="fc" id="L30">        String path = exchange.getRequest().getURI().getPath();</span>
-<span class="fc" id="L31">        if (</span>
-<span class="fc bfc" id="L32" title="All 2 branches covered.">                path.startsWith(&quot;/login&quot;) ||</span>
-<span class="pc bpc" id="L33" title="1 of 2 branches missed.">                path.startsWith(&quot;/login/oauth2/code/&quot;) ||</span>
-<span class="pc bpc" id="L34" title="1 of 2 branches missed.">                path.startsWith(&quot;/oauth2/&quot;) ||</span>
-<span class="fc bfc" id="L35" title="All 2 branches covered.">                path.startsWith(&quot;/refresh&quot;) ||</span>
-<span class="fc bfc" id="L36" title="All 2 branches covered.">                path.startsWith(&quot;/logout&quot;) ||</span>
-<span class="pc bpc" id="L37" title="1 of 2 branches missed.">                path.startsWith(&quot;/eureka&quot;) ||</span>
-<span class="pc bpc" id="L38" title="1 of 2 branches missed.">                path.startsWith(&quot;/actuator&quot;)</span>
+<span class="fc" id="L31">        String path = exchange.getRequest().getURI().getPath();</span>
+<span class="fc" id="L32">        if (</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">                path.startsWith(&quot;/login&quot;) ||</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">                path.startsWith(&quot;/login/oauth2/code/&quot;) ||</span>
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">                path.startsWith(&quot;/oauth2/&quot;) ||</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">                path.startsWith(&quot;/refresh&quot;) ||</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">                path.startsWith(&quot;/logout&quot;) ||</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">                path.startsWith(&quot;/eureka&quot;) ||</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">                path.startsWith(&quot;/actuator&quot;)</span>
         ) {
-<span class="fc" id="L40">            return chain.filter(exchange);</span>
+<span class="fc" id="L41">            return chain.filter(exchange);</span>
         }
 
-<span class="fc" id="L43">        String token = exchange.getRequest().getHeaders().getFirst(&quot;Authorization&quot;);</span>
-<span class="pc bpc" id="L44" title="1 of 4 branches missed.">        if (token != null &amp;&amp; token.startsWith(&quot;Bearer &quot;)) {</span>
-<span class="fc" id="L45">            token = token.substring(7);</span>
+<span class="fc" id="L44">        String token = exchange.getRequest().getHeaders().getFirst(&quot;Authorization&quot;);</span>
+<span class="pc bpc" id="L45" title="1 of 4 branches missed.">        if (token != null &amp;&amp; token.startsWith(&quot;Bearer &quot;)) {</span>
+<span class="fc" id="L46">            token = token.substring(7);</span>
 
-<span class="pc bpc" id="L47" title="1 of 2 branches missed.">            if (authUtil.isValidToken(token)) {</span>
-<span class="nc" id="L48">                Claims claims = authUtil.getAllClaimsFromToken(token);</span>
-<span class="nc" id="L49">                String username = claims.get(&quot;username&quot;, String.class);</span>
-<span class="nc" id="L50">                String role = claims.get(&quot;role&quot;, String.class);</span>
+            Claims claims;
+            try {
+<span class="nc" id="L50">                claims = authUtil.getCachedClaims(token);</span>
+<span class="fc" id="L51">            } catch (JwtException e) {</span>
+<span class="fc" id="L52">                log.warn(&quot;Token rejected: {}&quot;, e.getMessage());</span>
+<span class="fc" id="L53">                exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);</span>
+<span class="fc" id="L54">                return exchange.getResponse().setComplete();</span>
+<span class="nc" id="L55">            }</span>
 
-<span class="nc" id="L52">                var auth = new UsernamePasswordAuthenticationToken(</span>
-                        username,
-                        null,
-<span class="nc" id="L55">                        List.of(new SimpleGrantedAuthority(role))</span>
-                );
+<span class="nc" id="L57">            String username = claims.get(&quot;username&quot;, String.class);</span>
+<span class="nc" id="L58">            String role = claims.get(&quot;role&quot;, String.class);</span>
 
-<span class="nc" id="L58">                return chain.filter(exchange)</span>
-<span class="nc" id="L59">                        .contextWrite(ReactiveSecurityContextHolder.withAuthentication(auth));</span>
-            } else {
-<span class="fc" id="L61">                log.warn(&quot;Invalid or expired token&quot;);</span>
-            }
+<span class="nc" id="L60">            var auth = new UsernamePasswordAuthenticationToken(</span>
+                    username,
+                    null,
+<span class="nc" id="L63">                    List.of(new SimpleGrantedAuthority(role))</span>
+            );
+
+<span class="nc" id="L66">            return chain.filter(exchange)</span>
+<span class="nc" id="L67">                    .contextWrite(ReactiveSecurityContextHolder.withAuthentication(auth));</span>
+
         } else {
-<span class="fc" id="L64">            log.warn(&quot;Missing token&quot;);</span>
+<span class="fc" id="L70">            log.warn(&quot;Missing token&quot;);</span>
         }
 
-<span class="fc" id="L67">        exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);</span>
-<span class="fc" id="L68">        return exchange.getResponse().setComplete();</span>
+<span class="fc" id="L73">        exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);</span>
+<span class="fc" id="L74">        return exchange.getResponse().setComplete();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

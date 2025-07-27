@@ -30,84 +30,79 @@ public class AssessmentService {
 <span class="fc" id="L30">        ResponseEntity&lt;SuccessResponse&lt;PatientDto&gt;&gt; patient = patientFeignClient.getPatientById(patId, correlationId);</span>
 <span class="fc" id="L31">        String gender = Objects.requireNonNull(patient.getBody()).getData().getGender().toLowerCase();</span>
 <span class="fc" id="L32">        int age = calculateAge(patient.getBody().getData().getBirthDate());</span>
-<span class="fc" id="L33">        log.info(&quot;Gender : {}&quot;, gender);</span>
-<span class="fc" id="L34">        log.info(&quot;Age : {}&quot;, age);</span>
 
-<span class="fc" id="L36">        ResponseEntity&lt;SuccessResponse&lt;List&lt;NoteDto&gt;&gt;&gt; notes = noteFeignClient.getNoteByPatientId(patId, correlationId);</span>
-<span class="fc" id="L37">        int triggerCount = countMedicalTriggers(notes);</span>
+<span class="fc" id="L34">        ResponseEntity&lt;SuccessResponse&lt;List&lt;NoteDto&gt;&gt;&gt; notes = noteFeignClient.getNoteByPatientId(patId, correlationId);</span>
+<span class="fc" id="L35">        int triggerCount = countMedicalTriggers(notes);</span>
 
-<span class="fc" id="L39">        String risk = evaluateRiskLevel(gender, age, triggerCount);</span>
+<span class="fc" id="L37">        String risk = evaluateRiskLevel(gender, age, triggerCount);</span>
 
-<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (&quot;Early onset&quot;.equals(risk)) {</span>
-<span class="fc bfc" id="L42" title="All 2 branches covered.">            if (!patient.getBody().getData().isEarlyOnsetMailSent()) {</span>
-<span class="fc" id="L43">                HighRiskAssessmentEvent event = new HighRiskAssessmentEvent(</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (&quot;Early onset&quot;.equals(risk)) {</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">            if (!patient.getBody().getData().isEarlyOnsetMailSent()) {</span>
+<span class="fc" id="L41">                HighRiskAssessmentEvent event = new HighRiskAssessmentEvent(</span>
                         patId,
-<span class="fc" id="L45">                        patient.getBody().getData().getFirstName(),</span>
-<span class="fc" id="L46">                        patient.getBody().getData().getLastName(),</span>
+<span class="fc" id="L43">                        patient.getBody().getData().getFirstName(),</span>
+<span class="fc" id="L44">                        patient.getBody().getData().getLastName(),</span>
                         risk
                 );
-<span class="fc" id="L49">                rabbitTemplate.convertAndSend(RabbitMQConfig.QUEUE_NAME, event);</span>
-<span class="fc" id="L50">                log.info(&quot;Published high risk assessment event to queue [{}]: {}&quot;, RabbitMQConfig.QUEUE_NAME, event);</span>
+<span class="fc" id="L47">                rabbitTemplate.convertAndSend(RabbitMQConfig.QUEUE_NAME, event);</span>
+<span class="fc" id="L48">                log.info(&quot;Published high risk assessment event to queue [{}]: {}&quot;, RabbitMQConfig.QUEUE_NAME, event);</span>
 
-<span class="fc" id="L52">                patientFeignClient.updateEarlyOnsetMailSent(patId, true, correlationId);</span>
-<span class="fc" id="L53">            }</span>
+<span class="fc" id="L50">                patientFeignClient.updateEarlyOnsetMailSent(patId, true, correlationId);</span>
+<span class="fc" id="L51">            }</span>
         } else {
-<span class="fc bfc" id="L55" title="All 2 branches covered.">            if (patient.getBody().getData().isEarlyOnsetMailSent()) {</span>
-<span class="fc" id="L56">                patientFeignClient.updateEarlyOnsetMailSent(patId, false, correlationId);</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            if (patient.getBody().getData().isEarlyOnsetMailSent()) {</span>
+<span class="fc" id="L54">                patientFeignClient.updateEarlyOnsetMailSent(patId, false, correlationId);</span>
             }
         }
 
-<span class="fc" id="L60">        return new AssessmentDto(patId, risk);</span>
+<span class="fc" id="L58">        return new AssessmentDto(patId, risk);</span>
     }
 
     private int countMedicalTriggers(ResponseEntity&lt;SuccessResponse&lt;List&lt;NoteDto&gt;&gt;&gt; notes) {
-<span class="fc" id="L64">        int count = 0;</span>
-<span class="fc" id="L65">        List&lt;NoteDto&gt; allNotes = Objects.requireNonNull(notes.getBody()).getData();</span>
+<span class="fc" id="L62">        int count = 0;</span>
+<span class="fc" id="L63">        List&lt;NoteDto&gt; allNotes = Objects.requireNonNull(notes.getBody()).getData();</span>
 
-<span class="fc" id="L67">        List&lt;String&gt; triggers = List.of(</span>
+<span class="fc" id="L65">        List&lt;String&gt; triggers = List.of(</span>
                 &quot;Hémoglobine A1C&quot;, &quot;Microalbumine&quot;, &quot;Taille&quot;, &quot;Poids&quot;,
                 &quot;Fumeur&quot;, &quot;Fumeuse&quot;, &quot;Anormal&quot;, &quot;Cholestérol&quot;,
                 &quot;Vertiges&quot;, &quot;Rechute&quot;, &quot;Réaction&quot;, &quot;Anticorps&quot;
         );
 
-<span class="fc bfc" id="L73" title="All 2 branches covered.">        for (NoteDto note : allNotes) {</span>
-<span class="fc" id="L74">            String noteContent = note.getNote().toLowerCase();</span>
-<span class="fc" id="L75">            log.info(&quot;Analyzing note: {}&quot;, noteContent);</span>
-<span class="fc bfc" id="L76" title="All 2 branches covered.">            for (String trigger : triggers) {</span>
-<span class="fc bfc" id="L77" title="All 2 branches covered.">                if (noteContent.contains(trigger.toLowerCase())) {</span>
-<span class="fc" id="L78">                    count++;</span>
-<span class="fc" id="L79">                    log.info(&quot;Found trigger: {} in note&quot;, trigger);</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        for (NoteDto note : allNotes) {</span>
+<span class="fc" id="L72">            String noteContent = note.getNote().toLowerCase();</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">            for (String trigger : triggers) {</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">                if (noteContent.contains(trigger.toLowerCase())) {</span>
+<span class="fc" id="L75">                    count++;</span>
                 }
-<span class="fc" id="L81">            }</span>
-<span class="fc" id="L82">        }</span>
-<span class="fc" id="L83">        log.info(&quot;Total trigger count: {}&quot;, count);</span>
-<span class="fc" id="L84">        return count;</span>
+<span class="fc" id="L77">            }</span>
+<span class="fc" id="L78">        }</span>
+<span class="fc" id="L79">        return count;</span>
     }
 
     private String evaluateRiskLevel(String gender, int age, int triggerCount) {
-<span class="fc bfc" id="L88" title="All 2 branches covered.">        if (triggerCount == 0) {</span>
-<span class="fc" id="L89">            return &quot;None&quot;;</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (triggerCount == 0) {</span>
+<span class="fc" id="L84">            return &quot;None&quot;;</span>
         }
-<span class="pc bpc" id="L91" title="1 of 2 branches missed.">        if (age &gt; 30) {</span>
-<span class="fc bfc" id="L92" title="All 2 branches covered.">            if (triggerCount &gt;= 8) return &quot;Early onset&quot;;</span>
-<span class="fc bfc" id="L93" title="All 2 branches covered.">            if (triggerCount &gt;= 6) return &quot;In Danger&quot;;</span>
-<span class="pc bpc" id="L94" title="1 of 2 branches missed.">            if (triggerCount &gt;= 2) return &quot;Borderline&quot;;</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">        if (age &gt; 30) {</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">            if (triggerCount &gt;= 8) return &quot;Early onset&quot;;</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">            if (triggerCount &gt;= 6) return &quot;In Danger&quot;;</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">            if (triggerCount &gt;= 2) return &quot;Borderline&quot;;</span>
         }
         else {
-<span class="nc bnc" id="L97" title="All 2 branches missed.">            if (&quot;m&quot;.equals(gender)) {</span>
-<span class="nc bnc" id="L98" title="All 2 branches missed.">                if (triggerCount &gt;= 5) return &quot;Early onset&quot;;</span>
-<span class="nc bnc" id="L99" title="All 2 branches missed.">                if (triggerCount &gt;= 3) return &quot;In Danger&quot;;</span>
-<span class="nc bnc" id="L100" title="All 2 branches missed.">            } else if (&quot;f&quot;.equals(gender)) {</span>
-<span class="nc bnc" id="L101" title="All 2 branches missed.">                if (triggerCount &gt;= 7) return &quot;Early onset&quot;;</span>
-<span class="nc bnc" id="L102" title="All 2 branches missed.">                if (triggerCount &gt;= 4) return &quot;In Danger&quot;;</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            if (&quot;m&quot;.equals(gender)) {</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">                if (triggerCount &gt;= 5) return &quot;Early onset&quot;;</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                if (triggerCount &gt;= 3) return &quot;In Danger&quot;;</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">            } else if (&quot;f&quot;.equals(gender)) {</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                if (triggerCount &gt;= 7) return &quot;Early onset&quot;;</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">                if (triggerCount &gt;= 4) return &quot;In Danger&quot;;</span>
             }
         }
 
-<span class="nc" id="L106">        return &quot;None&quot;;</span>
+<span class="nc" id="L101">        return &quot;None&quot;;</span>
     }
 
     private int calculateAge(LocalDate birthday) {
-<span class="fc" id="L110">        return Period.between(birthday, LocalDate.now()).getYears();</span>
+<span class="fc" id="L105">        return Period.between(birthday, LocalDate.now()).getYears();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
