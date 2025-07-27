@@ -8,7 +8,7 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ---
 
-## 🏗️ Architecture
+### 🏗️ Architecture
 
 - **Microservices architecture**, each service owning a clear business responsibility.
 - **Single page application** built with Vue.js 3, communicating securely with the API gateway.
@@ -29,7 +29,7 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ---
 
-## 🧰 Technology stack
+### 🧰 Technology stack
 
 | Category                             | Technologies / Tools (⚠️ on the roadmap - 🕒 Postponed)                                                                                                                                              |
 |--------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -48,7 +48,7 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ---
 
-## 🔒 Security implementation versions
+### 🔒 Security implementation versions
 
 | Branch | Description | Status                                                                                                                           |
 |--------|-------------|----------------------------------------------------------------------------------------------------------------------------------|
@@ -60,7 +60,7 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ---
 
-## 📊 Observability & monitoring
+### 📊 Observability & monitoring
 
 The system includes comprehensive observability to ensure reliability and simplify production diagnostics.
 
@@ -112,7 +112,7 @@ It highlights critical KPIs to ensure system health and performance:
 
 ---
 
-## 🔔 Event-driven
+### 🔔 Event-driven
 
 The system implements asynchronous communication using **RabbitMQ** for critical notifications:
 
@@ -122,7 +122,7 @@ The system implements asynchronous communication using **RabbitMQ** for critical
 
 ---
 
-## 🧪 Testing strategy
+### 🧪 Testing strategy
 
 #### ✅ Unit & Integration tests
 
