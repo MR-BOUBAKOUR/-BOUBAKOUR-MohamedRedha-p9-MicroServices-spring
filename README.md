@@ -2,6 +2,8 @@
 
 Microservices application for diabetes risk assessment built with Spring Boot and Vue.js.
 
+🔍 [Performance analysis](_doc/perf-analysis.md) — the main performance bottleneck was system resource contention caused by running the app, monitoring, and load tests on the same machine — not the application itself.
+
 📄 [Documentation & Reports](https://mr-boubakour.github.io/-BOUBAKOUR-MohamedRedha-p9-MicroServices-spring/) — includes **Javadoc** and **JaCoCo reports** for the microservices where documentation and test coverage bring the most value.
 
 ---
@@ -137,7 +139,10 @@ The full journey test simulates a real doctor's workflow using `DoctorJourneyE2E
 - Uses **Awaitility** to ensure service readiness and propagation
 - Executed in a real environment with **Docker Compose**
 
-#### ✅ Load tests (in progress)
+#### ✅ Performance tests (load)
+- A full investigation was conducted to understand the system's saturation behavior.  
+  👉 [Read the full performance analysis](_doc/perf-investigation.md)
+
 
 ---
 

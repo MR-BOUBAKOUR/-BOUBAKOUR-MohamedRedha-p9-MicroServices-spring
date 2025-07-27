@@ -19,14 +19,23 @@ export default function (data) {
         ...config.httpConfig.headers,
     };
 
+    // const headers = {
+    //     Authorization: `Bearer 1`,
+    //     'medilabo-solutions-correlation-id': 1,
+    //     ...config.httpConfig.headers,
+    // };
+
     const validIds = [1, 2, 3, 4];
     const patientId = validIds[Math.floor(Math.random() * validIds.length)];
 
     const res = http.get(`${config.backUrl}/v1/patients/${patientId}`, { headers });
+    // const res = http.get(`http://assessments:8080/assessments/${patientId}`, { headers });
+    // const res = http.get(`http://patients:8100/patients/${patientId}`, { headers });
 
     check(res, {
         'status is 200': (r) => r.status === 200,
     });
 
-    sleep(1);
+    sleep(Math.random() * 2 + 1);
+    // sleep(1);
 }

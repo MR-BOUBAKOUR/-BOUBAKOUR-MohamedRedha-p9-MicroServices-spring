@@ -274,7 +274,7 @@ services:
   # =============================================== OBSERVABILITY STACK ===============================================
 
   read:
-    container_name: read
+    profiles: [monitoring]
     image: grafana/loki:latest
     command: "-config.file=/etc/loki/config.yaml -target=read"
     ports:
@@ -298,6 +298,7 @@ services:
     mem_reservation: 128m
 
   write:
+    profiles: [monitoring]
     container_name: write
     image: grafana/loki:latest
     command: "-config.file=/etc/loki/config.yaml -target=write"
@@ -320,6 +321,7 @@ services:
     mem_reservation: 128m
 
   alloy:
+    profiles: [monitoring]
     container_name: alloy
     image: grafana/alloy:latest
     volumes:
@@ -336,6 +338,7 @@ services:
     mem_reservation: 128m
 
   minio:
+    profiles: [monitoring]
     container_name: minio
     image: minio/minio
     entrypoint:
@@ -365,6 +368,7 @@ services:
     mem_reservation: 128m
 
   prometheus:
+    profiles: [monitoring]
     container_name: prometheus
     image: prom/prometheus:latest
     ports:
@@ -377,6 +381,7 @@ services:
     mem_reservation: 128m
 
   tempo:
+    profiles: [monitoring]
     container_name: tempo
     image: grafana/tempo:latest
     command: -config.file /etc/tempo-config.yml
@@ -391,6 +396,7 @@ services:
     mem_reservation: 512m
 
   grafana:
+    profiles: [monitoring]
     container_name: grafana
     image: grafana/grafana:latest
     environment:
@@ -420,6 +426,7 @@ services:
     mem_reservation: 128m
 
   backend:
+    profiles: [monitoring]
     container_name: backend
     image: grafana/loki:latest
     volumes:
@@ -436,6 +443,7 @@ services:
     mem_reservation: 128m
 
   gateway:
+    profiles: [monitoring]
     container_name: gateway
     image: nginx:latest
     depends_on:

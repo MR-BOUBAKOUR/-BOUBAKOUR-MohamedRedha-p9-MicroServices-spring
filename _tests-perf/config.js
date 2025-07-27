@@ -35,9 +35,13 @@ export const config = {
 
         load: {
             stages: [
+                { duration: '1m', target: 150 },
+                { duration: '3m', target: 150 },
                 { duration: '1m', target: 300 },
                 { duration: '3m', target: 300 },
-                { duration: '30s', target: 0 },
+                { duration: "1m", target: 450 },
+                { duration: '3m', target: 450 },
+                { duration: '1m', target: 0 },
             ],
             thresholds: {
                 http_req_duration: ['p(95)<2000'],
