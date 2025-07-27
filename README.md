@@ -2,13 +2,13 @@
 
 Microservices application for diabetes risk assessment built with Spring Boot and Vue.js.
 
-🔍 [Performance analysis](_doc/perf-analysis.md) — the main performance bottleneck was system resource contention caused by running the app, monitoring, and load tests on the same machine — not the application itself.
+🔍 [Performance analysis](_doc/performance-analysis.md) — the main performance bottleneck was the system resource contention caused by running the app, monitoring, and load tests on the same machine — not the application itself.
 
 📄 [Documentation & Reports](https://mr-boubakour.github.io/-BOUBAKOUR-MohamedRedha-p9-MicroServices-spring/) — includes **Javadoc** and **JaCoCo reports** for the microservices where documentation and test coverage bring the most value.
 
 ---
 
-### 🏗️ Architecture
+## 🏗️ Architecture
 
 - **Microservices architecture**, each service owning a clear business responsibility.
 - **Single page application** built with Vue.js 3, communicating securely with the API gateway.
@@ -29,26 +29,26 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ---
 
-### 🧰 Technology stack  (⚠️ → on the roadmap)
+## 🧰 Technology stack
 
-| Category                             | Technologies / Tools                                                                                                                                                                                  |
-|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Backend**                          | Java 21, Spring Boot 3.4.1, Spring Security, Eureka, Spring Cloud Gateway *(Reactive)*                                                                                                                |
-| **Frontend**                        | Vue.js 3, Pinia, Axios                                                                                                                                                                                |
-| **Data Storage**                     | MySQL, MongoDB, PostgreSQL *(Reactive)*                                                                                                                                                               |
-| **Inter-service Communication**      | REST API, OpenFeign, RabbitMQ                                                                                                                                                                         |
-| **Testing & Automation**             | unit        : Mockito, MockMvc<br>integration : TestContainers, MockMvc<br>e2e         : TestContainers, RestAssured, Awaitility<br>⚠️ load       : K6 (in progress)                                  |
-| **Containerisation & Orchestration** | Docker, Docker-Compose, ⚠️ *Kubernetes*                                                                                                                                                               |
-| **CI/CD**                            | GitHub Actions, GitHub Pages (JaCoCo & JavaDoc), Docker Hub                                                                                                                                           |
+| Category                             | Technologies / Tools (⚠️ on the roadmap - 🕒 Postponed)                                                                                                                                              |
+|--------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Backend**                          | Java 21, Spring Boot 3.4.1, Spring Security, Eureka, Spring Cloud Gateway *(Reactive)*                                                                                                               |
+| **Frontend**                        | Vue.js 3, Pinia, Axios                                                                                                                                                                               |
+| **Data Storage**                     | MySQL, MongoDB, PostgreSQL *(Reactive)*                                                                                                                                                              |
+| **Inter-service Communication**      | REST API, OpenFeign, RabbitMQ                                                                                                                                                                        |
+| **Testing & Automation**             | unit        : Mockito, MockMvc<br>integration : TestContainers, MockMvc<br>e2e         : TestContainers, RestAssured, Awaitility<br> performance       : K6                                          |
+| **Containerisation & Orchestration** | Docker, Docker-Compose, 🕒 *Kubernetes*                                                                                                                                                              |
+| **CI/CD**                            | GitHub Actions, GitHub Pages (JaCoCo & JavaDoc), Docker Hub                                                                                                                                          |
 | **Observability & Monitoring**       | logs   : Alloy, Loki, Grafana<br>metrics : Micrometer, Prometheus, Grafana<br>traces  : OpenTelemetry, Tempo, Grafana<br><br>custom dashboard : based on JVM (Micrometer) & Spring Boot obs templates |
-| **Resilience & Fault Tolerance**     | ⚠️ *Resilience4J*                                                                                                                                                                                     |
-| **AI Integration**                  | ⚠️ *Ollama (Llama 3.2 3B)* - Local LLM for basic diabetes risk assessment                                                                                                                             |
+| **Resilience & Fault Tolerance**     | ⚠️ *Resilience4J*                                                                                                                                                                                    |
+| **AI Integration**                  | ⚠️ *Ollama (Llama 3.2 3B)* - Local LLM for basic diabetes risk assessment                                                                                                                            |
 
 
 
 ---
 
-### 🔒 Security implementation versions
+## 🔒 Security implementation versions
 
 | Branch | Description | Status                                                                                                                           |
 |--------|-------------|----------------------------------------------------------------------------------------------------------------------------------|
@@ -56,11 +56,11 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 | `access-header-refresh-httponly` | Access token in header + Refresh token in HttpOnly cookie | ✅                                                                                                                                |
 | `all-httponly` | Full HttpOnly for Access & Refresh tokens + CSRF token | ❌ *Abandoned*<br/>Too complex for minimal security gain. Modern SPA setups with SameSite and CORS provide sufficient protection. |
 | `oauth2-access&refresh` | OAuth2 with Google + classic login (Access & Refresh tokens for both) | ✅ *Current*                                                                                                                      |
-| `keycloak` | Keycloak integration | 🕒 *Postponed*<br/>Will be reconsidered after progress on the observability & monitoring part.                                   |
+| `keycloak` | Keycloak integration | 🕒 *Postponed*                                  |
 
 ---
 
-### 📊 Observability & monitoring
+## 📊 Observability & monitoring
 
 The system includes comprehensive observability to ensure reliability and simplify production diagnostics.
 
@@ -84,19 +84,19 @@ It highlights critical KPIs to ensure system health and performance:
 - **Total requests and status codes (2xx, 5xx)** — tracks success and error rates to monitor reliability
 - **Exception counts** — identifies unexpected failures not caught by HTTP status codes
 
-### 📉 Insights & Results (basic examples — load testing still in progress)
+### 📉 Additional insights (click to expand)
 
-#### Synchronous vs Asynchronous feign calls for ms assessments
+<details>
+<summary>Synchronous vs Asynchronous feign calls for ms assessments</summary>
 
-**Synchronous (Sequential – 41 ms)**  
-
+**Synchronous (Sequential – 41 ms)**
 ![Synchronous](_img/synchronous-assessment-feign-calls.png)
-
-**Asynchronous (Parallel – 26 ms)**  
-
+**Asynchronous (Parallel – 26 ms)**
 ![Asynchronous](_img/asynchronous-assessment-feign-calls.png)
+</details>
 
-#### Distributed tracing - Complete flow for High-Risk Assessment event triggered by a note creation (153 ms)
+<details>
+<summary>Distributed tracing - Complete flow for High-Risk Assessment event triggered by a note creation</summary>
 
 | Service | Step                                                     | Description |
 | --- |----------------------------------------------------------| --- |
@@ -107,12 +107,12 @@ It highlights critical KPIs to ensure system health and performance:
 | Assessments | Publish event                                            | If risk = "Early onset", publish high-risk-assessment event to RabbitMQ |
 | Assessments (Feign Client) | Update patient flag `(prevent sending duplicate emails)` | Update patient's earlyOnsetMailSent flag via PUT /patients/{id}/early-onset-mail |
 | Notifications | Consume event and send email                             | Consume high-risk-assessment event and send alert email via Mailtrap |
-
 ![distributed-tracing-high-risk-event.png](_img/distributed-tracing-high-risk-event.png)
+</details>
 
 ---
 
-### 🔔 Event-driven
+## 🔔 Event-driven
 
 The system implements asynchronous communication using **RabbitMQ** for critical notifications:
 
@@ -122,7 +122,7 @@ The system implements asynchronous communication using **RabbitMQ** for critical
 
 ---
 
-### 🧪 Testing strategy
+## 🧪 Testing strategy
 
 #### ✅ Unit & Integration tests
 
@@ -140,8 +140,8 @@ The full journey test simulates a real doctor's workflow using `DoctorJourneyE2E
 - Executed in a real environment with **Docker Compose**
 
 #### ✅ Performance tests (load)
-- A full investigation was conducted to understand the system's saturation behavior.  
-  👉 [Read the full performance analysis](_doc/perf-investigation.md)
+- A full analysis was conducted to understand the system's saturation behavior.  
+  👉 [Read the full performance analysis](_doc/performance-analysis.md)
 
 
 ---
