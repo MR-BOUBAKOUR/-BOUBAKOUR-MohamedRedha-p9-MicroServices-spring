@@ -98,15 +98,18 @@ It highlights critical KPIs to ensure system health and performance:
 <details>
 <summary>Distributed tracing - Complete flow for High-Risk Assessment event triggered by a note creation</summary>
 
-| Service | Step                                                     | Description |
-| --- |----------------------------------------------------------| --- |
-| Notes | Create note `(triggers reassessment)`                    | Create a note via POST /notes |
-| API Gateway | Proxy requests                                           | Route requests to Assessments |
-| Assessments (Feign Client) | Fetch patient and notes  `(in parallel)`                 | Fetch patient (GET /patients/{id}) and notes (GET /notes?patientId={id}) |
-| Assessments | Assess risk                                              | Calculate risk via generateAssessment (trigger analysis + rules) |
-| Assessments | Publish event                                            | If risk = "Early onset", publish high-risk-assessment event to RabbitMQ |
+| Service | Step                                                     | Description                                                                      |
+| --- |----------------------------------------------------------|----------------------------------------------------------------------------------|
+| Notes | Create note `(triggers reassessment)`                    | Create a note via POST /notes                                                    |
+| API Gateway | Proxy requests                                           | Route requests to Assessments                                                    |
+| Assessments (Feign Client) | Fetch patient and notes  `(in parallel)`                 | Fetch patient (GET /patients/{id}) and notes (GET /notes?patientId={id})         |
+| Assessments | Assess risk                                              | Calculate risk via generateAssessment (trigger analysis + rules)                 |
+| Assessments | Publish event                                            | If risk = "Early onset", publish high-risk-assessment event to RabbitMQ          |
 | Assessments (Feign Client) | Update patient flag `(prevent sending duplicate emails)` | Update patient's earlyOnsetMailSent flag via PUT /patients/{id}/early-onset-mail |
-| Notifications | Consume event and send email                             | Consume high-risk-assessment event and send alert email via Mailtrap |
+| Notifications | Consume event and send email                             | Consume high-risk-assessment event and send alert email via Mailtrap             |
+
+---
+
 ![distributed-tracing-high-risk-event.png](_img/distributed-tracing-high-risk-event.png)
 </details>
 
