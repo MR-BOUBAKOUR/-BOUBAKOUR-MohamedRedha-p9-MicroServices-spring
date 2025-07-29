@@ -28,9 +28,9 @@ export default function (data) {
         ['GET', `${config.backUrl}/v1/assessments/${patientId}`, null, { headers }],
     ]);
 
-    check(responses[0], { 'patients 200': (r) => r.status === 200 });
-    check(responses[1], { 'notes 200': (r) => r.status === 200 });
-    check(responses[2], { 'assessments 200': (r) => r.status === 200 });
+    check(responses[0], { 'GET patients 200': (r) => r.status === 200 });
+    check(responses[1], { 'GET notes 200': (r) => r.status === 200 });
+    check(responses[2], { 'GET assessments 200': (r) => r.status === 200 });
 
     sleep(Math.random() * 2 + 1);
 }
