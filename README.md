@@ -14,6 +14,7 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 <details>
 <summary>Architecture details (click to expand)</summary>
+
 - **Microservices architecture**, each service owning a clear business responsibility.
 - **Single page application** built with Vue.js 3, communicating securely with the API gateway.
 - **Reactive API gateway** centralizes routing, authentication, and authorization.
@@ -30,6 +31,7 @@ Microservices application for diabetes risk assessment built with Spring Boot an
   - End-to-end tests cover full doctor journey across services.
   - Performance testing to evaluate system behavior under load
 - **CI/CD** automates testing, documentation, and image publishing.
+
 </details>
 
 
