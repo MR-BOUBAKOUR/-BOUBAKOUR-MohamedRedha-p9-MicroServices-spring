@@ -10,6 +10,11 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ### 🏗️ Architecture
 
+![big_picture.png](_img/big_picture.png)
+
+<details>
+<summary>Architecture details (click to expand)</summary>
+
 - **Microservices architecture**, each service owning a clear business responsibility.
 - **Single page application** built with Vue.js 3, communicating securely with the API gateway.
 - **Reactive API gateway** centralizes routing, authentication, and authorization.
@@ -24,8 +29,12 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 - **Multi-layered testing strategy**:
   - Unit and integration tests on core services.
   - End-to-end tests cover full doctor journey across services.
-  - Load testing to assess system performance under stress (in progress).
+  - Performance testing to evaluate system behavior under load
 - **CI/CD** automates testing, documentation, and image publishing.
+
+</details>
+
+
 
 ---
 
@@ -48,7 +57,12 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ---
 
-### 🔒 Security implementation versions
+### 🔒 Security implementation
+
+![security_flow.png](_img/security_flow.png)
+
+<details>
+<summary>Security versions and associated Git branches (click to expand)</summary>
 
 | Branch | Description | Status                                                                                                                           |
 |--------|-------------|----------------------------------------------------------------------------------------------------------------------------------|
@@ -57,6 +71,7 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 | `all-httponly` | Full HttpOnly for Access & Refresh tokens + CSRF token | ❌ *Abandoned*<br/>Too complex for minimal security gain. Modern SPA setups with SameSite and CORS provide sufficient protection. |
 | `oauth2-access&refresh` | OAuth2 with Google + classic login (Access & Refresh tokens for both) | ✅ *Current*                                                                                                                      |
 | `keycloak` | Keycloak integration | 🕒 *Postponed*                                  |
+</details>
 
 ---
 
@@ -115,16 +130,6 @@ It highlights critical KPIs to ensure system health and performance:
 
 ---
 
-### 🔔 Event-driven
-
-The system implements asynchronous communication using **RabbitMQ** for critical notifications:
-
-- **High-Risk assessment events**: when a patient is assessed as `"Early onset"`, the **Assessments** service publishes an event to the `high-risk-assessments` queue
-- **No duplicates**: the alert is triggered only when the risk changes to `"Early onset"`
-- **Email notifications**: the **Notifications** service consumes these events and sends automated email alerts to healthcare providers (emails are intercepted using **Mailtrap** during development)
-
----
-
 ### 🧪 Testing strategy
 
 #### ✅ Unit & Integration tests
@@ -145,6 +150,16 @@ The full journey test simulates a real doctor's workflow using `DoctorJourneyE2E
 #### ✅ Performance tests (load)
 - A full analysis was conducted to understand the system's saturation behavior.  
   👉 [Read the full performance analysis](_doc/performance-analysis.md)
+
+---
+
+### 🔔 Event-driven
+
+The system implements asynchronous communication using **RabbitMQ** for critical notifications:
+
+- **High-Risk assessment events**: when a patient is assessed as `"Early onset"`, the **Assessments** service publishes an event to the `high-risk-assessments` queue
+- **No duplicates**: the alert is triggered only when the risk changes to `"Early onset"`
+- **Email notifications**: the **Notifications** service consumes these events and sends automated email alerts to healthcare providers (emails are intercepted using **Mailtrap** during development)
 
 
 ---
