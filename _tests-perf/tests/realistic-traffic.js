@@ -11,10 +11,29 @@ export const createPatientCount = new Counter('createPatient');
 export const createNoteCount = new Counter('createNote');
 export const createCriticalNoteCount = new Counter('createCriticalNote');
 
+let token;
+let tokenIssuedAt;
+const TOKEN_REFRESH_THRESHOLD_MS = 14 * 60 * 1000; // 14 minutes
+
+// Ensure the refresh of the token to avoid expiration during long-running tests (expire after 15 minutes)
+function ensureFreshToken(initialToken) {
+
+    const tokenAge = Date.now() - tokenIssuedAt;
+
+    if (!token || tokenAge > TOKEN_REFRESH_THRESHOLD_MS) {
+        token = getAuthToken();
+        tokenIssuedAt = Date.now();
+    }
+    return token || initialToken;
+}
+
+
 export default function (data) {
 
+    const authToken = ensureFreshToken(data.token);
+
     const headers = {
-        Authorization: `Bearer ${data.token}`,
+        Authorization: `Bearer ${authToken}`,
         ...config.httpConfig.headers,
     };
 

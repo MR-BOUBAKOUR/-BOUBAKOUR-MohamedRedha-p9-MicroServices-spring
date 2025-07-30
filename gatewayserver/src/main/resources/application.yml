@@ -69,6 +69,11 @@ management:
     distribution:
       percentiles-histogram:
         http.server.requests: true
+  observations:
+    http:
+      server:
+        requests:
+          name: http.server.requests
 
 eureka:
   client:
