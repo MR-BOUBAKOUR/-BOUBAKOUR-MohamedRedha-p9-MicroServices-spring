@@ -43,3 +43,5 @@ keystore.p12
 **/.env.test
 .env
 .env.test
+
+/results/

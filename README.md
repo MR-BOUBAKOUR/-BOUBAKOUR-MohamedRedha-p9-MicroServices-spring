@@ -147,7 +147,122 @@ The full journey test simulates a real doctor's workflow using `DoctorJourneyE2E
 - Uses **Awaitility** to ensure service readiness and propagation
 - Executed in a real environment with **Docker Compose**
 
-#### ✅ Performance tests (load)
+#### ✅ Performance tests (in progress)
+
+Each test is launched dynamically via environment variables, enabling modular and reproducible testing with different test types and performance profiles. (using `k6` via a dedicated Docker Compose)
+
+**Example command:**
+
+```bash
+TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.yml up 
+```
+
+<details open>
+<summary>📄 1. Load testing</summary>
+
+>| **Item**             | **Description**                                                                                                                                                         |
+>|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+>| Test profile         | [load] <br>- reaching up to 160 virtual users, then ramping down. <br>- total time : 11 minutes                                                                         |
+>| Test type (scenario) | [realistic-traffic] <br>- login <br>- patient list view (home page) <br>- patient record <br>- patient creation <br>- simple note creation <br>- critical note creation |
+>| Goal                 | Measure Gateway performance under a realistic load, simulating <u>a number and pace of users close to a normal usage</u>, with and without monitoring.                  |
+>| Date                 | [YYYY-MM-DD]                                                                                                                                                            |
+>
+>
+> ##### Key Results
+>
+> | KPI                   | Without Monitoring | With Monitoring  |
+> |-----------------------|--------------------|------------------|
+> | Avg response time     | [X] ms             | [X] ms           |
+> | 95th percentile (p95) | [X] ms             | [X] ms           |
+> | Request rate          | [X] req/s          | [X] req/s        |
+> | Error rate            | [X]%               | [X]%             |
+> | Completed iterations  | [X]                | [X]              |
+>
+>
+> ##### Dashboard Overview
+>
+> ![load testing results](../_img/load-testing-results.png)
+
+</details>
+
+<details>
+<summary>📄 2. Stress testing</summary>
+
+> | **Item**             | **Description**                                                                                                                                                         |
+> |----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+> | Test profile         | [stress] <br>- reaching up to 400 virtual users, then ramping down. <br>- total time: 11 minutes                                                                        |
+> | Test type (scenario) | [realistic-traffic] <br>- login <br>- patient list view (home page) <br>- patient record <br>- patient creation <br>- simple note creation <br>- critical note creation |
+> | Goal                 | Assess Gateway stability and performance limits under <u>increasing load, pushing beyond normal usage</u>, with and without monitoring.                                 |
+> | Date                 | [YYYY-MM-DD]                                                                                                                                                            |
+>
+> ##### Key Results
+>
+> | KPI                   | Without Monitoring | With Monitoring  |
+> |-----------------------|--------------------|------------------|
+> | Avg response time     | [X] ms             | [X] ms           |
+> | 95th percentile (p95) | [X] ms             | [X] ms           |
+> | Request rate          | [X] req/s          | [X] req/s        |
+> | Error rate            | [X]%               | [X]%             |
+> | Completed iterations  | [X]                | [X]              |
+>
+> ##### Dashboard Overview
+> 
+> ![stress testing results](../_img/stress-testing-results.png)
+
+</details>
+
+<details>
+<summary>📄 3. Spike testing</summary>
+
+> | **Item**             | **Description**                                                                                                                                                         |
+> |----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+> | Test profile         | [spike] <br>- sudden jump to 400 virtual users, short bursts, then quick ramp down. <br>- total time: ~6.5 minutes                                                      |
+> | Test type (scenario) | [realistic-traffic] <br>- login <br>- patient list view (home page) <br>- patient record <br>- patient creation <br>- simple note creation <br>- critical note creation |
+> | Goal                 | Evaluate Gateway’s capacity to handle <u>sudden traffic spikes</u> and recovery behavior, with and without monitoring.                                                  |
+> | Date                 | [YYYY-MM-DD]                                                                                                                                                            |
+>
+> ##### Key Results
+>
+> | KPI                   | Without Monitoring | With Monitoring  |
+> |-----------------------|--------------------|------------------|
+> | Avg response time     | [X] ms             | [X] ms           |
+> | 95th percentile (p95) | [X] ms             | [X] ms           |
+> | Request rate          | [X] req/s          | [X] req/s        |
+> | Error rate            | [X]%               | [X]%             |
+> | Completed iterations  | [X]                | [X]              |
+>
+> ##### Dashboard Overview
+>
+> ![spike testing results](../_img/spike-testing-results.png)
+
+</details>
+
+<details>
+<summary>📄 4. Soak testing</summary>
+
+> | **Item**             | **Description**                                                                                                                                                         |
+> |----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+> | Test profile         | [soak] <br>- steady load of 40 virtual, ramp up and down included. <br>- total time: 64 minutes                                                                         |
+> | Test type (scenario) | [realistic-traffic] <br>- login <br>- patient list view (home page) <br>- patient record <br>- patient creation <br>- simple note creation <br>- critical note creation |
+> | Goal                 | Verify Gateway stability and <u>resource usage under sustained load over an extended period</u>, with and without monitoring.                                           |
+> | Date                 | [YYYY-MM-DD]                                                                                                                                                            |
+>
+> ##### Key Results
+>
+> | KPI                   | Without Monitoring | With Monitoring  |
+> |-----------------------|--------------------|------------------|
+> | Avg response time     | [X] ms             | [X] ms           |
+> | 95th percentile (p95) | [X] ms             | [X] ms           |
+> | Request rate          | [X] req/s          | [X] req/s        |
+> | Error rate            | [X]%               | [X]%             |
+> | Completed iterations  | [X]                | [X]              |
+>
+> ##### Dashboard Overview
+>
+> ![soak testing results](../_img/soak-testing-results.png)
+
+</details>
+
 - A full analysis was conducted to understand the system's saturation behavior.  
   👉 [Read the full performance analysis](_doc/performance-analysis.md)
 
@@ -160,7 +275,6 @@ The system implements asynchronous communication using **RabbitMQ** for critical
 - **High-Risk assessment events**: when a patient is assessed as `"Early onset"`, the **Assessments** service publishes an event to the `high-risk-assessments` queue
 - **No duplicates**: the alert is triggered only when the risk changes to `"Early onset"`
 - **Email notifications**: the **Notifications** service consumes these events and sends automated email alerts to healthcare providers (emails are intercepted using **Mailtrap** during development)
-
 
 ---
 

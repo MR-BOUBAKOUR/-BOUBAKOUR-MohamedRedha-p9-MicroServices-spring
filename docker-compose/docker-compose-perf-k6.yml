@@ -15,25 +15,25 @@ services:
       TEST_PROFILE: ${TEST_PROFILE}
     networks:
       - docker-compose_medilabosolutions-net
-    depends_on:
-      front-vue:
-        condition: service_healthy
+#    depends_on:
+#      front-vue:
+#        condition: service_healthy
     mem_limit: 1g
     mem_reservation: 512m
 
-  front-vue:
-    build:
-      context: ../front-vue
-    ports:
-      - "5173:5173"
-    healthcheck:
-      test: ["CMD", "sh", "-c", "netstat -an | grep :5173 | grep LISTEN"]
-      interval: 5s
-      retries: 5
-    networks:
-      - docker-compose_medilabosolutions-net
-    mem_limit: 512m
-    mem_reservation: 256m
+#  front-vue:
+#    build:
+#      context: ../front-vue
+#    ports:
+#      - "5173:5173"
+#    healthcheck:
+#      test: ["CMD", "sh", "-c", "netstat -an | grep :5173 | grep LISTEN"]
+#      interval: 5s
+#      retries: 5
+#    networks:
+#      - docker-compose_medilabosolutions-net
+#    mem_limit: 512m
+#    mem_reservation: 256m
 
 networks:
   docker-compose_medilabosolutions-net:
