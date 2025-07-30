@@ -91,27 +91,24 @@ The custom dashboard is based on the two popular dashboards : **JVM (Micrometer)
 
 It highlights critical KPIs to ensure system health and performance:
 
-- **Uptime** — indicates system availability and stability over time
-- **CPU usage (system and process)** — monitors resource consumption and detects overloads
-- **Memory usage (heap and non-heap)** — tracks JVM memory usage to identify leaks or pressure
-- **Request rate (requests per second)** — measures traffic volume handled by the service
-- **Request duration (99th percentile, 95th percentile, 50th percentile)** — captures latency distributions for real user experience insights
-- **Total requests and status codes (2xx, 5xx)** — tracks success and error rates to monitor reliability
-- **Exception counts** — identifies unexpected failures not caught by HTTP status codes
+| **KPI**                                 | **Description**                                                                                  |
+|----------------------------------------|--------------------------------------------------------------------------------------------------|
+| **Uptime**                              | Indicates system availability and stability over time                                            |
+| **CPU usage (system and process)**      | Monitors resource consumption and detects overloads                                              |
+| **Memory usage (heap and non-heap)**    | Tracks JVM memory usage to identify leaks or memory pressure                                     |
+| **Request rate (requests per second)**  | Measures traffic volume handled by the service                                                   |
+| **Request duration (p99, p95, p50)**    | Captures latency distributions for real user experience insights                                 |
+| **Total requests and status codes**     | Tracks success and error rates (e.g. 2xx, 5xx) to monitor reliability                            |
+| **Exception counts**                    | Identifies unexpected failures not reflected in HTTP status codes                                |
 
-### 📉 Additional insights (click to expand)
 
-<details>
-<summary>Synchronous vs Asynchronous feign calls for ms assessments</summary>
+### 📉 Additional insights
 
-**Synchronous (Sequential – 41 ms)**
-![Synchronous](_img/synchronous-assessment-feign-calls.png)
-**Asynchronous (Parallel – 26 ms)**
-![Asynchronous](_img/asynchronous-assessment-feign-calls.png)
-</details>
+![distributed-tracing-high-risk-event.png](_img/distributed-tracing-high-risk-event.png)
+
 
 <details>
-<summary>Distributed tracing - Complete flow for High-Risk Assessment event triggered by a note creation</summary>
+<summary>Distributed tracing - full flow details matching the screenshot (click to expand)</summary>
 
 | Service | Step                                                     | Description                                                                      |
 | --- |----------------------------------------------------------|----------------------------------------------------------------------------------|
@@ -123,9 +120,15 @@ It highlights critical KPIs to ensure system health and performance:
 | Assessments (Feign Client) | Update patient flag `(prevent sending duplicate emails)` | Update patient's earlyOnsetMailSent flag via PUT /patients/{id}/early-onset-mail |
 | Notifications | Consume event and send email                             | Consume high-risk-assessment event and send alert email via Mailtrap             |
 
----
+</details>
 
-![distributed-tracing-high-risk-event.png](_img/distributed-tracing-high-risk-event.png)
+<details>
+<summary>Other example - synchronous vs asynchronous feign calls for ms assessments (click to expand)</summary>
+
+**Synchronous (Sequential – 41 ms)**
+![Synchronous](_img/synchronous-assessment-feign-calls.png)
+**Asynchronous (Parallel – 26 ms)**
+![Asynchronous](_img/asynchronous-assessment-feign-calls.png)
 </details>
 
 ---
@@ -170,16 +173,16 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 >
 > ##### Key Results
 >
-> | KPI                   | Without Monitoring | With Monitoring  |
-> |-----------------------|--------------------|------------------|
-> | Avg response time     | [X] ms             | [X] ms           |
-> | 95th percentile (p95) | [X] ms             | [X] ms           |
-> | Request rate          | [X] req/s          | [X] req/s        |
-> | Error rate            | [X]%               | [X]%             |
-> | Completed iterations  | [X]                | [X]              |
+> | KPI                   | Without monitoring | With monitoring |
+> |-----------------------|--------------------|-----------------|
+> | Avg response time     | [X] ms             | [X] ms          |
+> | 95th percentile (p95) | [X] ms             | [X] ms          |
+> | Request rate          | [X] req/s          | [X] req/s       |
+> | Error rate            | [X]%               | [X]%            |
+> | Completed iterations  | [X]                | [X]             |
 >
 >
-> ##### Dashboard Overview
+> ##### Dashboard Overview (live monitoring)
 >
 > ![load testing results](../_img/load-testing-results.png)
 
@@ -197,15 +200,15 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 >
 > ##### Key Results
 >
-> | KPI                   | Without Monitoring | With Monitoring  |
-> |-----------------------|--------------------|------------------|
-> | Avg response time     | [X] ms             | [X] ms           |
-> | 95th percentile (p95) | [X] ms             | [X] ms           |
-> | Request rate          | [X] req/s          | [X] req/s        |
-> | Error rate            | [X]%               | [X]%             |
-> | Completed iterations  | [X]                | [X]              |
+> | KPI                   | Without monitoring | With monitoring |
+> |-----------------------|--------------------|-----------------|
+> | Avg response time     | [X] ms             | [X] ms          |
+> | 95th percentile (p95) | [X] ms             | [X] ms          |
+> | Request rate          | [X] req/s          | [X] req/s       |
+> | Error rate            | [X]%               | [X]%            |
+> | Completed iterations  | [X]                | [X]             |
 >
-> ##### Dashboard Overview
+> ##### Dashboard Overview (live monitoring)
 > 
 > ![stress testing results](../_img/stress-testing-results.png)
 
@@ -223,15 +226,15 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 >
 > ##### Key Results
 >
-> | KPI                   | Without Monitoring | With Monitoring  |
-> |-----------------------|--------------------|------------------|
-> | Avg response time     | [X] ms             | [X] ms           |
-> | 95th percentile (p95) | [X] ms             | [X] ms           |
-> | Request rate          | [X] req/s          | [X] req/s        |
-> | Error rate            | [X]%               | [X]%             |
-> | Completed iterations  | [X]                | [X]              |
+> | KPI                   | Without monitoring | With monitoring |
+> |-----------------------|--------------------|-----------------|
+> | Avg response time     | [X] ms             | [X] ms          |
+> | 95th percentile (p95) | [X] ms             | [X] ms          |
+> | Request rate          | [X] req/s          | [X] req/s       |
+> | Error rate            | [X]%               | [X]%            |
+> | Completed iterations  | [X]                | [X]             |
 >
-> ##### Dashboard Overview
+> ##### Dashboard Overview (live monitoring)
 >
 > ![spike testing results](../_img/spike-testing-results.png)
 
@@ -249,15 +252,15 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 >
 > ##### Key Results
 >
-> | KPI                   | Without Monitoring | With Monitoring  |
-> |-----------------------|--------------------|------------------|
-> | Avg response time     | [X] ms             | [X] ms           |
-> | 95th percentile (p95) | [X] ms             | [X] ms           |
-> | Request rate          | [X] req/s          | [X] req/s        |
-> | Error rate            | [X]%               | [X]%             |
-> | Completed iterations  | [X]                | [X]              |
+> | KPI                   | Without monitoring | With monitoring |
+> |-----------------------|--------------------|-----------------|
+> | Avg response time     | [X] ms             | [X] ms          |
+> | 95th percentile (p95) | [X] ms             | [X] ms          |
+> | Request rate          | [X] req/s          | [X] req/s       |
+> | Error rate            | [X]%               | [X]%            |
+> | Completed iterations  | [X]                | [X]             |
 >
-> ##### Dashboard Overview
+> ##### Dashboard Overview (live monitoring)
 >
 > ![soak testing results](../_img/soak-testing-results.png)
 
