@@ -5,12 +5,14 @@ services:
     image: grafana/k6
     volumes:
       - ../_tests-perf:/scripts
-    entrypoint: ["k6", "run", "--insecure-skip-tls-verify", "/scripts/tests/realistic-traffic.js"]
+    entrypoint: ["k6", "run", "--insecure-skip-tls-verify", "/scripts/main.js"]
     environment:
       USERNAME: ${USERNAME_K6}
       PASSWORD: ${PASSWORD_K6}
       FRONT_URL: ${FRONT_URL}
       BACK_URL: ${BACK_URL}
+      TEST_TYPE: ${TEST_TYPE}
+      TEST_PROFILE: ${TEST_PROFILE}
     networks:
       - docker-compose_medilabosolutions-net
     depends_on:

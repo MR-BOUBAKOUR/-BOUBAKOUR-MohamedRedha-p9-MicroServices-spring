@@ -4,16 +4,6 @@ import { config } from '../config.js';
 import { getAuthToken } from '../helpers/auth.js';
 import { Counter } from 'k6/metrics';
 
-export let options = {
-    stages: config.profiles.load.stages,
-    thresholds: config.profiles.load.thresholds,
-};
-
-export function setup() {
-    const token = getAuthToken();
-    return { token };
-}
-
 export const loginCount = new Counter('login');
 export const homeCount = new Counter('home');
 export const patientRecordCount = new Counter('patientRecord');

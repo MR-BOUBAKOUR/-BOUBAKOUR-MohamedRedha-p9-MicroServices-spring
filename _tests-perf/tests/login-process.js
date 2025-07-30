@@ -3,11 +3,6 @@ import { check, sleep } from 'k6';
 import { config } from '../config.js';
 import { getAuthToken } from '../helpers/auth.js';
 
-export let options = {
-    stages: config.profiles.load.stages,
-    thresholds: config.profiles.load.thresholds,
-};
-
 export default function () {
     // Perform POST /login on each VU iteration to simulate full login process
     const token = getAuthToken();

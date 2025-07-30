@@ -1,11 +1,8 @@
-
 export const config = {
-    // URLs
-    frontUrl: __ENV.FRONT_URL,
+
     backUrl: __ENV.BACK_URL,
 
     // Used only on the local dev process
-    // frontUrl: 'https://[::1]:5173',
     // backUrl: 'https://[::1]:8071',
 
     // Credentials for the auth
