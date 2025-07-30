@@ -1,17 +1,6 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 import { config } from '../config.js';
-import { getAuthToken } from '../helpers/auth.js';
-
-export let options = {
-    stages: config.profiles.load.stages,
-    thresholds: config.profiles.load.thresholds,
-};
-
-export function setup() {
-    const token = getAuthToken();
-    return { token };
-}
 
 export default function (data) {
     const headers = {
