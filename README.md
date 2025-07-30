@@ -163,26 +163,29 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 <details open>
 <summary>📄 1. Load testing</summary>
 
+> ### Context
+>
 >| **Item**             | **Description**                                                                                                                                                                                                                                                                           |
 >|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 >| Test profile         | [load] <br>- reaching up to 160 virtual users, then ramping down <br>- total time : 11 minutes<br>- thresholds: <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 95% of requests complete in under 2000 milliseconds <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - less than 5% of requests fail |
->| Test type (scenario) | [realistic-traffic] <br>- login <br>- patient list view (home page) <br>- patient record <br>- patient creation <br>- simple note creation <br>- critical note creation                                                                                                                   |
+>| Test type (scenario) | [realistic-traffic] <br>- login (15%)<br>- home / patients list (20%)<br>- patient record (30%)<br>- patient creation (10%)<br>- simple note creation (20%)<br>- critical note creation (5%)                                                                                              |
 >| Goal                 | Measure Gateway performance under a realistic load, simulating <u>a number and pace of users close to a normal usage</u>, with and without monitoring.                                                                                                                                    |
->| Date                 | [YYYY-MM-DD]                                                                                                                                                                                                                                                                              |
+>| Date                 | [30-07-2025]                                                                                                                                                                                                                                                                              |
 >
 >
-> ##### Key Results
+> ### Key Results
 >
-> | KPI                   | Without monitoring | With monitoring |
-> |-----------------------|--------------------|-----------------|
-> | Avg response time     | [X] ms             | [X] ms          |
-> | 95th percentile (p95) | [X] ms             | [X] ms          |
-> | Request rate          | [X] req/s          | [X] req/s       |
-> | Error rate            | [X]%               | [X]%            |
-> | Completed iterations  | [X]                | [X]             |
+>| KPI                            | Without monitoring | With monitoring |
+>|--------------------------------|--------------------|-----------------|
+>| Avg response time              | 20.8 ms            | [X] ms          |
+>| 50th percentile (p50 / median) | 11.39 ms           | [X] ms          |
+>| 95th percentile (p95)          | 82.12 ms ✅         | [X] ms          |
+>| Error rate                     | 0.00% ✅            | [X]%            |
+>| Exception counts               | 0                  | [X]             |
+>| Request rate                   | 74.63 req/s        | [X] req/s       |
+>| Total requests                 | 51,641             | [X]             |
 >
->
-> ##### Dashboard Overview (live monitoring)
+> ### Dashboard Overview (live monitoring)
 >
 > ![load testing results](../_img/load-testing-results.png)
 
@@ -191,24 +194,29 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 <details>
 <summary>📄 2. Stress testing</summary>
 
+> ### Context
+>
 > | **Item**             | **Description**                                                                                                                                                                                                                                                                              |
 > |----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 > | Test profile         | [stress] <br>- reaching up to 400 virtual users, then ramping down <br>- total time: 11 minutes <br>- thresholds: <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 95% of requests complete in under 8000 milliseconds <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - less than 20% of requests fail |
-> | Test type (scenario) | [realistic-traffic] <br>- login <br>- patient list view (home page) <br>- patient record <br>- patient creation <br>- simple note creation <br>- critical note creation                                                                                                                      |
+> | Test type (scenario) | [realistic-traffic] <br>- login (15%)<br>- home / patients list (20%)<br>- patient record (30%)<br>- patient creation (10%)<br>- simple note creation (20%)<br>- critical note creation (5%)                                                                                                 |
 > | Goal                 | Assess Gateway stability and performance limits under <u>increasing load, pushing beyond normal usage</u>, with and without monitoring.                                                                                                                                                      |
-> | Date                 | [YYYY-MM-DD]                                                                                                                                                                                                                                                                                 |
+> | Date                 | [30-07-2025]                                                                                                                                                                                                                                                                                 |
 >
-> ##### Key Results
+> ### Key Results
 >
-> | KPI                   | Without monitoring | With monitoring |
-> |-----------------------|--------------------|-----------------|
-> | Avg response time     | [X] ms             | [X] ms          |
-> | 95th percentile (p95) | [X] ms             | [X] ms          |
-> | Request rate          | [X] req/s          | [X] req/s       |
-> | Error rate            | [X]%               | [X]%            |
-> | Completed iterations  | [X]                | [X]             |
+>| KPI                            | Without monitoring | With monitoring |
+>|--------------------------------|--------------------|-----------------|
+>| Avg response time              | 190.64 ms          | [X] ms          |
+>| 50th percentile (p50 / median) | 22.4 ms            | [X] ms          |
+>| 95th percentile (p95)          | 1.19 s ✅           | [X] ms          |
+>| Error rate                     | 0.0038% (4) ✅      | [X]%            |
+>| Exception counts               | 0                  | [X]             |
+>| Request rate                   | 153.35 req/s       | [X] req/s       |
+>| Total requests                 | 106,301            | [X]             |
 >
-> ##### Dashboard Overview (live monitoring)
+>
+> ### Dashboard Overview (live monitoring)
 > 
 > ![stress testing results](../_img/stress-testing-results.png)
 
@@ -217,24 +225,29 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 <details>
 <summary>📄 3. Spike testing</summary>
 
+> ### Context
+>
 > | **Item**             | **Description**                                                                                                                                                                                                                                                                                                 |
 > |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 > | Test profile         | [spike] <br>- sudden jump to 400 virtual users, short bursts, then quick ramp down <br>- total time: ~6.5 minutes <br>- thresholds: <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 95% of requests complete in under 10000 milliseconds <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - less than 30% of requests fail |
-> | Test type (scenario) | [realistic-traffic] <br>- login <br>- patient list view (home page) <br>- patient record <br>- patient creation <br>- simple note creation <br>- critical note creation                                                                                                                                         |
+> | Test type (scenario) | [realistic-traffic] <br>- login (15%)<br>- home / patients list (20%)<br>- patient record (30%)<br>- patient creation (10%)<br>- simple note creation (20%)<br>- critical note creation (5%)                                                                                                                    |
 > | Goal                 | Evaluate Gateway’s capacity to handle <u>sudden traffic spikes</u> and recovery behavior, with and without monitoring.                                                                                                                                                                                          |
-> | Date                 | [YYYY-MM-DD]                                                                                                                                                                                                                                                                                                    |
+> | Date                 | [30-07-2025]                                                                                                                                                                                                                                                                                                    |
 >
-> ##### Key Results
+> ### Key Results
 >
-> | KPI                   | Without monitoring | With monitoring |
-> |-----------------------|--------------------|-----------------|
-> | Avg response time     | [X] ms             | [X] ms          |
-> | 95th percentile (p95) | [X] ms             | [X] ms          |
-> | Request rate          | [X] req/s          | [X] req/s       |
-> | Error rate            | [X]%               | [X]%            |
-> | Completed iterations  | [X]                | [X]             |
+>| KPI                            | Without monitoring | With monitoring |
+>|--------------------------------|--------------------|-----------------|
+>| Avg response time              | 37.46 ms           | [X] ms          |
+>| 50th percentile (p50 / median) | 14.15 ms           | [X] ms          |
+>| 95th percentile (p95)          | 153.28 ms ✅        | [X] ms          |
+>| Error rate                     | 0.00% ✅            | [X]%            |
+>| Exception counts               | 0                  | [X]             |
+>| Request rate                   | 78.95 req/s        | [X] req/s       |
+>| Total requests                 | 32,425             | [X]             |
 >
-> ##### Dashboard Overview (live monitoring)
+>
+> ### Dashboard Overview (live monitoring)
 >
 > ![spike testing results](../_img/spike-testing-results.png)
 
@@ -243,24 +256,28 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 <details>
 <summary>📄 4. Soak testing</summary>
 
+> ### Context
+>
 > | **Item**             | **Description**                                                                                                                                                                                                                                                                            |
 > |----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 > | Test profile         | [soak] <br>- steady load of 40 virtual, ramp up and down included <br>- total time: 64 minutes <br>- thresholds: <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 95% of requests complete in under 3000 milliseconds <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - less than 5% of requests fail | 
-> | Test type (scenario) | [realistic-traffic] <br>- login <br>- patient list view (home page) <br>- patient record <br>- patient creation <br>- simple note creation <br>- critical note creation                                                                                                                    |
+> | Test type (scenario) | [realistic-traffic] <br>- login (15%)<br>- home / patients list (20%)<br>- patient record (30%)<br>- patient creation (10%)<br>- simple note creation (20%)<br>- critical note creation (5%)                                                                                               |
 > | Goal                 | Verify Gateway stability and <u>resource usage under sustained load over an extended period</u>, with and without monitoring.                                                                                                                                                              |
-> | Date                 | [YYYY-MM-DD]                                                                                                                                                                                                                                                                               |
+> | Date                 | [30-07-2025]                                                                                                                                                                                                                                                                               |
 >
-> ##### Key Results
+> ### Key Results
 >
-> | KPI                   | Without monitoring | With monitoring |
-> |-----------------------|--------------------|-----------------|
-> | Avg response time     | [X] ms             | [X] ms          |
-> | 95th percentile (p95) | [X] ms             | [X] ms          |
-> | Request rate          | [X] req/s          | [X] req/s       |
-> | Error rate            | [X]%               | [X]%            |
-> | Completed iterations  | [X]                | [X]             |
+>| KPI                            | Without monitoring | With monitoring |
+>|--------------------------------|--------------------|-----------------|
+>| Avg response time              | 21.91 ms           | [X] ms          |
+>| 50th percentile (p50 / median) | 13.63 ms           | [X] ms          |
+>| 95th percentile (p95)          | 73.55 ms ✅         | [X] ms          |
+>| Error rate                     | 0.00% ✅            | [X]%            |
+>| Exception counts               | 0                  | [X]             |
+>| Request rate                   | 29.17 req/s        | [X] req/s       |
+>| Total requests                 | 117,966            | [X]             |
 >
-> ##### Dashboard Overview (live monitoring)
+> ### Dashboard Overview (live monitoring)
 >
 > ![soak testing results](../_img/soak-testing-results.png)
 
