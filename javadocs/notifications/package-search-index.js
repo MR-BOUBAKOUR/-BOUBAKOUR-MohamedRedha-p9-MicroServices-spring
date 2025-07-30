@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.MedilaboSolutions.notifications"},{"l":"com.MedilaboSolutions.notifications.config"},{"l":"com.MedilaboSolutions.notifications.Dto"},{"l":"com.MedilaboSolutions.notifications.listener"},{"l":"com.MedilaboSolutions.notifications.service"}];updateSearchResults();

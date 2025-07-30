@@ -1,8 +1,0 @@
-com.MedilaboSolutions.patient
-com.MedilaboSolutions.patient.controller
-com.MedilaboSolutions.patient.dto
-com.MedilaboSolutions.patient.exception
-com.MedilaboSolutions.patient.mapper
-com.MedilaboSolutions.patient.model
-com.MedilaboSolutions.patient.repository
-com.MedilaboSolutions.patient.service
