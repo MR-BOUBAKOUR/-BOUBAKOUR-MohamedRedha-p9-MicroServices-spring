@@ -37,14 +37,14 @@ The goal of this exercise was primarily to isolate and understand the root cause
 ### Investigating beyond the Gateway: isolated service testing
 
 - **Approach**: test each microservice individually, including their own downstream calls
-- **Observation**: each component — Gateway, Assessment, and Patients microservices — independently reaches 100% CPU under load
+- **Observation**: each component - Gateway, Assessment, and Patients microservices - independently reaches 100% CPU under load
 - **Key discovery**: performance issues persist even when bypassing the Gateway
 
-### Investigating beyond the application: Observability impact analysis
+### Investigating beyond the application: observability impact analysis
 
 - **Observation**: significant impact on the results when testing with and without the observability stack
 
-### Test Configuration
+### Test configuration
 
 ```yaml
 load: {
@@ -64,12 +64,12 @@ load: {
 }
 ```
 
-### Load Equivalence Analysis:
+### Load equivalence analysis:
 
 > This rough comparison aims to estimate how much load each service generates, based on how many backend calls are made per virtual user. It’s not exact, but it gives a useful sense of the relative impact between services with different request paths.
 
 | Target      | Backend calls per VU | Equivalent load    |
-| ----------- |----------------------|--------------------|
+|-------------|----------------------|--------------------|
 | Gateway     | 5                    | 450 VUs (baseline) |
 | Assessments | 3                    | 1000 VUs           |
 | Patients    | 1                    | 3000 VUs           |
@@ -78,70 +78,70 @@ load: {
 
 ### Gateway (max 450 VUs, 13 min test)
 
-| 📌 Gateway metrics      | Without monitoring | With monitoring     |
-|-------------------------|--------------------|---------------------|
-| http_req_duration (avg) | 69.73 ms           | 813.02 ms           |
-| http_req_duration (p90) | 138.73 ms          | 2.13 s              |
-| http_req_duration (p95) | 228.97 ms ✅        | 2.73 s 🚨           |
-| http_reqs (per second)  | 373.23 req/s       | 254.61 req/s        |
-| http_req_failed         | 0.00% (0/311,584)  | 0.04% (101/209,581) |
-| Completed iterations    | 103,861            | 69,860              |
+| 📌 Gateway metrics      | Without observability stack | With observability stack |
+|-------------------------|-----------------------------|--------------------------|
+| http_req_duration (avg) | 69.73 ms                    | 813.02 ms                |
+| http_req_duration (p90) | 138.73 ms                   | 2.13 s                   |
+| http_req_duration (p95) | 228.97 ms ✅                 | 2.73 s 🚨                |
+| http_reqs (per second)  | 373.23 req/s                | 254.61 req/s             |
+| http_req_failed         | 0.00% (0/311,584)           | 0.04% (101/209,581)      |
+| Completed iterations    | 103,861                     | 69,860                   |
 
 ![with-monitoring-gateway-13mn-450max.png](../_img/with-monitoring-gateway-13mn-450max.png)
 
-### Assessments Service (max 1000 VUs, 13 min test)
+### Assessments service (max 1000 VUs, 13 min test)
 
-| 📌 Assessments metrics  | Without monitoring | With monitoring |
-|-------------------------|--------------------|-----------------|
-| http_req_duration (avg) | 60.15 ms           | 183.58 ms       |
-| http_req_duration (p90) | 123.36 ms          | 502.13 ms       |
-| http_req_duration (p95) | 237.7 ms ✅         | 740.57 ms ✅     |
-| http_reqs (per second)  | 296.72 req/s       | 279.10 req/s    |
-| http_req_failed         | 0.00%              | 0.00%           |
-| Completed iterations    | 245,715            | 231,568         |
+| 📌 Assessments metrics  | Without observability stack | With observability stack |
+|-------------------------|-----------------------------|--------------------------|
+| http_req_duration (avg) | 60.15 ms                    | 183.58 ms                |
+| http_req_duration (p90) | 123.36 ms                   | 502.13 ms                |
+| http_req_duration (p95) | 237.7 ms ✅                  | 740.57 ms ✅              |
+| http_reqs (per second)  | 296.72 req/s                | 279.10 req/s             |
+| http_req_failed         | 0.00%                       | 0.00%                    |
+| Completed iterations    | 245,715                     | 231,568                  |
 
 ![with-monitoring-assessments-13mn-1000max.png](../_img/with-monitoring-assessments-13mn-1000max.png)
 
-### Patients Service (max 3000 VUs, 13 min test)
+### Patients service (max 3000 VUs, 13 min test)
 
-| 📌 Patients metrics            | Without monitoring | With monitoring   |
-|--------------------------------|--------------------|-------------------|
-| http_req_duration (avg)        | 45.14 ms           | 244.56 ms         |
-| http_req_duration (p90)        | 124.34 ms          | 740.16 ms         |
-| http_req_duration (p95)        | 269.37 ms ✅        | 941 ms ✅          |
-| http_reqs (per second)         | 854.57 req/s       | 777.51 req/s      |
-| http_req_failed                | 0.00% (0/703,709)  | 0.00% (0/642,708) |
-| Completed iterations | 703,708            | 642,707           |
+| 📌 Patients metrics     | Without observability stack | With observability stack |
+|-------------------------|-----------------------------|--------------------------|
+| http_req_duration (avg) | 45.14 ms                    | 244.56 ms                |
+| http_req_duration (p90) | 124.34 ms                   | 740.16 ms                |
+| http_req_duration (p95) | 269.37 ms ✅                 | 941 ms ✅                 |
+| http_reqs (per second)  | 854.57 req/s                | 777.51 req/s             |
+| http_req_failed         | 0.00% (0/703,709)           | 0.00% (0/642,708)        |
+| Completed iterations    | 703,708                     | 642,707                  |
 
 ![with-monitoring-patients-13mn-3000max.png](../_img/with-monitoring-patients-13mn-3000max.png)
 
 ---
 
-# Root Cause Analysis
+# Root cause analysis
 
 ## 🎯 Identification
 
 **Primary bottleneck**: system resource overload, not application or code issues.
-The performance drop happens because the application, monitoring stack and load testing tool run together on the same machine, causing competition for hardware resources.
+The performance drop happens because the application, observability stack and load testing tool run together on the same machine, causing competition for hardware resources.
 
-## 📋 Supporting Evidence
+## 📋 Supporting evidence
 
-### Resource Utilization Analysis
+### Resource utilization
 
 - Target services CPU usage: maximum of 15–20%
 - Downstream services CPU usage: <5% each
 - Total application CPU consumption: 30–40%
 - System CPU utilization: consistently 100%
 
-### Performance Impact Correlation
+### Performance with vs. without observability stack
 
-- **Without monitoring stack**: all services meet performance thresholds (p95 < 2s)
-- **With monitoring stack**: significant degradation across all metrics
+- **Without observability stack**: all services meet performance thresholds (p95 < 2s)
+- **With observability stack**: significant degradation across all metrics
 
 ---
 
-## 💡 Key Conclusions
+## 💡 Key conclusions
 
-- Microservices architecture is sound — Individual services demonstrate excellent performance characteristics
+- Microservices architecture is sound : individual services demonstrate excellent performance characteristics
 - Observability (& load testing) overhead is significant
-- Infrastructure separation is critical — Co-location of application, load testing, and monitoring creates resource contention
+- Infrastructure separation is critical : co-location of application, load testing, and the observability stack creates resource contention
