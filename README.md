@@ -77,17 +77,16 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ### 📊 Observability & monitoring
 
-The system includes comprehensive observability to ensure reliability and simplify production diagnostics.
+![observability_stack_flow.png](_img/observability_stack_flow.png)
 
-- **Logs**: collected via Alloy, centralized and indexed in Loki
-- **Metrics**: exposed by Micrometer, scraped by Prometheus
-- **Distributed Traces**: captured by OpenTelemetry, stored in Tempo
+>The current observability stack covers logs, metrics, and distributed traces, but does not yet include alerting for containers health or resources anomalies.   
+> 
+>This can be implemented later by defining alerting rules in Prometheus and managing notifications using Alertmanager.
 
-All data is visualized and analyzed through Grafana.
-
-The custom dashboard is based on the two popular dashboards : **JVM (Micrometer) & Spring Boot Observability**.
 
 ![Custom Observability Dashboard](_img/dashboard-image.png)
+
+The custom dashboard is based on the two popular dashboards : **JVM (Micrometer) & Spring Boot Observability**.
 
 It highlights critical KPIs to ensure system health and performance:
 
