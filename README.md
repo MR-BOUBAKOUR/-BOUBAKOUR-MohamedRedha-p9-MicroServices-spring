@@ -10,7 +10,7 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ### 🏗️ Architecture
 
-![big_picture.png](_img/big_picture.png)
+![Big picture.png](_img/big_picture.png)
 
 <details>
 <summary>Architecture details (click to expand)</summary>
@@ -59,7 +59,7 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ### 🔒 Security implementation
 
-![security_flow.png](_img/security_flow.png)
+![Security auth flow.png](_img/security_auth_flow.png)
 
 <details>
 <summary>Security versions and associated Git branches (click to expand)</summary>
@@ -77,14 +77,14 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ### 📊 Observability & monitoring
 
-![observability_stack_flow.png](_img/observability_stack_flow.png)
+![Observability stack flows.png](_img/observability_stack_flows.png)
 
 >The current observability stack covers logs, metrics, and distributed traces, but does not yet include alerting for containers health or resources anomalies.   
 > 
 >This can be implemented later by defining alerting rules in Prometheus and managing notifications using Alertmanager.
 
 
-![Custom Observability Dashboard](_img/dashboard-image.png)
+![Custom observability dashboard](_img/dashboard-image.png)
 
 The custom dashboard is based on the two popular dashboards : **JVM (Micrometer) & Spring Boot Observability**.
 
@@ -103,7 +103,7 @@ It highlights critical KPIs to ensure system health and performance:
 
 ### 📉 Additional insights
 
-![distributed-tracing-high-risk-event.png](_img/distributed-tracing-high-risk-event.png)
+![Distributed tracing high-risk-event.png](_img/distributed-tracing-high-risk-event.png)
 
 
 <details>
