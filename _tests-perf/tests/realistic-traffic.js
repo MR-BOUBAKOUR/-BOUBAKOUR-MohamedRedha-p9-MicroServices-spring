@@ -10,6 +10,7 @@ export const patientRecordCount = new Counter('patientRecord');
 export const createPatientCount = new Counter('createPatient');
 export const createNoteCount = new Counter('createNote');
 export const createCriticalNoteCount = new Counter('createCriticalNote');
+export const assessmentCount = new Counter('assessment');
 
 let token;
 let tokenIssuedAt;
@@ -27,6 +28,12 @@ function ensureFreshToken(initialToken) {
     return token || initialToken;
 }
 
+function triggerAssessment(patientId, headers) {
+    assessmentCount.add(1);
+    const response = http.get(`${config.backUrl}/v1/assessments/${patientId}`, { headers });
+    check(response, { 'GET assessment 200': (r) => r.status === 200 });
+    return response;
+}
 
 export default function (data) {
 
@@ -52,8 +59,8 @@ export default function (data) {
     } else if (scenario < 0.35) {
         homeCount.add(1);
         group('Home - Patient list', () => {
-            const res = http.get(`${config.backUrl}/v1/patients`, { headers });
-            check(res, { 'GET patients 200': (r) => r.status === 200 });
+            const response = http.get(`${config.backUrl}/v1/patients`, { headers });
+            check(response, { 'GET patients 200': (r) => r.status === 200 });
         });
     // 30%
     } else if (scenario < 0.65) {
@@ -62,11 +69,13 @@ export default function (data) {
             const responses = http.batch([
                 ['GET', `${config.backUrl}/v1/patients/${patientId}`, null, { headers }],
                 ['GET', `${config.backUrl}/v1/notes/${patientId}`, null, { headers }],
-                ['GET', `${config.backUrl}/v1/assessments/${patientId}`, null, { headers }],
             ]);
             check(responses[0], { 'GET patients 200': (r) => r.status === 200 });
             check(responses[1], { 'GET notes 200': (r) => r.status === 200 });
-            check(responses[2], { 'GET assessments 200': (r) => r.status === 200 });
+
+            if (responses[0].status === 200 && responses[1].status === 200) {
+                triggerAssessment(patientId, headers);
+            }
         });
     // 10%
     } else if (scenario < 0.75) {
@@ -80,8 +89,8 @@ export default function (data) {
                 address: '',
                 phone: '',
             });
-            const res = http.post(`${config.backUrl}/v1/patients`, payloadPatient, { headers });
-            check(res, { 'POST patient 201': (r) => r.status === 201 });
+            const response = http.post(`${config.backUrl}/v1/patients`, payloadPatient, { headers });
+            check(response, { 'POST patient 201': (r) => r.status === 201 });
         });
     // 20%
     } else if (scenario < 0.95) {
@@ -91,8 +100,12 @@ export default function (data) {
                 patId: patientId,
                 note: 'Le patient se sent fatigué ces derniers temps, sans signes de risque.',
             });
-            const res = http.post(`${config.backUrl}/v1/notes`, payloadNote, { headers });
-            check(res, { 'POST note 201': (r) => r.status === 201 });
+            const response = http.post(`${config.backUrl}/v1/notes`, payloadNote, { headers });
+            check(response, { 'POST note 201': (r) => r.status === 201 });
+
+            if (response.status === 201) {
+                triggerAssessment(patientId, headers);
+            }
         });
     // 5%
     } else {
@@ -102,8 +115,12 @@ export default function (data) {
                 patId: patientId,
                 note: 'Patient présente une Hémoglobine A1C élevée, Microalbumine positive, Taille normale, Poids stable, Fumeur actif, taux de Cholestérol anormal, épisodes de Vertiges fréquents, récente Rechute, et Réaction allergique suspectée.\n',
             });
-            const res = http.post(`${config.backUrl}/v1/notes`, payloadNote, { headers });
-            check(res, { 'POST note (critical) 201': (r) => r.status === 201 });
+            const response = http.post(`${config.backUrl}/v1/notes`, payloadNote, { headers });
+            check(response, { 'POST note (critical) 201': (r) => r.status === 201 });
+
+            if (response.status === 201) {
+                triggerAssessment(patientId, headers);
+            }
         });
     }
 

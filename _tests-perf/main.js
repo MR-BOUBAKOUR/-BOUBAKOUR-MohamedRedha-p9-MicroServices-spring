@@ -14,7 +14,7 @@ export let options = {
 
 // K6 lifecycle: setup() runs ONCE at test start and returns shared data.
 export function setup() {
-    console.log(`Starting ${TEST_TYPE} test with ${TEST_PROFILE} profile`);
+    console.log(`Starting [${TEST_TYPE}] test with [${TEST_PROFILE}] profile`);
     console.log(`Target URL: ${config.backUrl}`);
 
     const token = getAuthToken();
