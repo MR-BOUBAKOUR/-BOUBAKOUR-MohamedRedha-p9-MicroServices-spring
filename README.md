@@ -175,13 +175,13 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 >
 > | KPI                            | Without the observability stack | With the observability stack |  
 > |--------------------------------|---------------------------------|------------------------------|  
-> | Avg response time              | 20.33 ms                        |                              |  
-> | 50th percentile (p50 / median) | 11.81 ms                        |                              |  
-> | 95th percentile (p95)          | 83.05 ms ✅                      |                              |  
-> | Error rate                     | 0.00% ✅                         |                              |  
-> | Exception counts               | N/A                             |                              |  
-> | Request rate                   | 87.13 req/s                     |                              |  
-> | Total requests                 | 59,731                          |                              |
+> | Avg response time              | 20.33 ms                        | 23.04 ms                     |  
+> | 50th percentile (p50 / median) | 11.81 ms                        | 13.31 ms                     |  
+> | 95th percentile (p95)          | 83.05 ms ✅                      | 90.07 ms ✅                   |  
+> | Error rate                     | 0.00% ✅                         | 0.00% ✅                      |  
+> | Exception counts               | N/A                             | 0                            |  
+> | Request rate                   | 87.13 req/s                     | 86.71 req/s                  |  
+> | Total requests                 | 59.731                          | 59.539                       |
 > 
 > ### Dashboard Overview
 >
@@ -205,18 +205,18 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 >
 > | KPI                            | Without the observability stack | With the observability stack |  
 > |--------------------------------|---------------------------------|------------------------------|  
-> | Avg response time              | 272.81 ms                       |                              |  
-> | 50th percentile (p50 / median) | 36.87 ms                        |                              |  
-> | 95th percentile (p95)          | 1.45 s ✅                        |                              |  
-> | Error rate                     | 0.03% ✅                         |                              |  
-> | Exception counts               | N/A                             |                              |  
-> | Request rate                   | 160.25 req/s                    |                              |  
-> | Total requests                 | 110,418                         |                              |
+> | Avg response time              | 272.81 ms                       | 321.09 ms                    |  
+> | 50th percentile (p50 / median) | 36.87 ms                        | 57.10 ms                     |  
+> | 95th percentile (p95)          | 1.45 s ✅                        | 1.49 s ✅                     |  
+> | Error rate                     | 0.03% (38) ✅                    | 0.04% (52) ✅                 |  
+> | Exception counts               | N/A                             | 64                           |  
+> | Request rate                   | 160.25 req/s                    | 154.39 req/s                 |  
+> | Total requests                 | 110.418                         | 106.979                      |
 > 
 > 
 > ### Dashboard Overview
 > 
-> ![stress testing results](../_img/stress-testing-results.png)
+> ![stress testing results](_img/stress-testing-results.png)
 
 </details>
 
@@ -236,17 +236,17 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 >
 > | KPI                            | Without the observability stack | With the observability stack |  
 > |--------------------------------|---------------------------------|------------------------------|  
-> | Avg response time              | 162.35 ms                       |                              |  
-> | 50th percentile (p50 / median) | 22.11 ms                        |                              |  
-> | 95th percentile (p95)          | 455 ms ✅                        |                              |  
-> | Error rate                     | 0.00% ✅                         |                              |  
-> | Exception counts               | N/A                             |                              |  
-> | Request rate                   | 82.78 req/s                     |                              |  
-> | Total requests                 | 33,888                          |                              |
+> | Avg response time              | 54.85 ms                        | 92.49 ms                     |  
+> | 50th percentile (p50 / median) | 14.89 ms                        | 18.46 ms                     |  
+> | 95th percentile (p95)          | 214.34 ms ✅                     | 377.03 ms ✅                  |  
+> | Error rate                     | 0.00% ✅                         | 0.00% ✅                      |  
+> | Exception counts               | N/A                             | 0                            |  
+> | Request rate                   | 90.19 req/s                     | 87.15 req/s                  |  
+> | Total requests                 | 36,986                          | 35,803                       |
 >
 > ### Dashboard Overview
 >
-> ![spike testing results](../_img/spike-testing-results.png)
+> ![spike testing results](_img/spike-testing-results.png)
 
 </details>
 
@@ -276,7 +276,7 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 >
 > ### Dashboard Overview
 >
-> ![soak testing results](../_img/soak-testing-results.png)
+> ![soak testing results](_img/soak-testing-results.png)
 
 </details>
 
