@@ -1,10 +1,10 @@
-``MediLabo Solutions - Diabetes risk assessment
+MediLabo Solutions - Diabetes risk assessment
 
 Microservices application for diabetes risk assessment built with Spring Boot and Vue.js.
 
-🔍 [Performance analysis](_doc/performance-analysis.md) — the main performance bottleneck was the system resource contention caused by running the app, monitoring, and load tests on the same machine — not the application itself.
+🔍 [Performance analysis](_doc/performance-analysis.md) : the main performance bottleneck was the system resource contention caused by running the app, monitoring, and load tests on the same machine - not the application itself.
 
-📄 [Documentation & Reports](https://mr-boubakour.github.io/-BOUBAKOUR-MohamedRedha-p9-MicroServices-spring/) — includes **Javadoc** and **JaCoCo reports** for the microservices where documentation and test coverage bring the most value.
+📄 [Documentation & Reports](https://mr-boubakour.github.io/-BOUBAKOUR-MohamedRedha-p9-MicroServices-spring/) : includes **Javadoc** and **JaCoCo reports** for the microservices where documentation and test coverage bring the most value.
 
 ---
 
@@ -17,14 +17,14 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 - **Microservices architecture**, each service owning a clear business responsibility.
 - **Single page application** built with Vue.js 3, communicating securely with the API gateway.
-- **Reactive API gateway** centralizes routing, authentication, and authorization.
+- **Reactive API gateway** centralizes routing, authentication, and authorization. (Reactive DB)
 - **Service discovery** via Eureka enables dynamic routing and scalability.
 - **Synchronous** REST for standard service communication; **asynchronous** messaging via RabbitMQ for critical events.
 - **Core business services**:
-  - Patients service — manages patient records with relational storage.
-  - Notes service — handles medical notes using a NoSQL store.
-  - Assessments service — evaluates diabetes risk, detects risk level changes, and emits high-risk events.
-  - Notifications service — consumes events and sends alert emails to healthcare professionals.
+  - Patients service - manages patient records with relational storage.
+  - Notes service - handles medical notes using a NoSQL store.
+  - Assessments service - evaluates diabetes risk, detects risk level changes, and emits high-risk events.
+  - Notifications service - consumes events and sends alert emails to healthcare professionals.
 - **Integrated observability**: logs, metrics, and traces collected and visualized via a custom Grafana dashboard.
 - **Multi-layered testing strategy**:
   - Unit and integration tests on core services.
@@ -136,7 +136,7 @@ It highlights critical KPIs to ensure system health and performance:
 
 #### ✅ Unit & Integration tests
 
-- Implemented for: **Patients**, **Notes**, **Assessments** and the **Gateway**
+- Implemented for **Patients**, **Notes**, **Assessments** and the **Gateway**
 - Covers core business logic, database operations, and Feign communication
 
 #### ✅ End-to-End (E2E) tests
@@ -291,22 +291,22 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 
 The system implements asynchronous communication using **RabbitMQ** for critical notifications:
 
-- **High-Risk assessment events**: when a patient is assessed as `"Early onset"`, the **Assessments** service publishes an event to the `high-risk-assessments` queue
-- **No duplicates**: the alert is triggered only when the risk changes to `"Early onset"`
-- **Email notifications**: the **Notifications** service consumes these events and sends automated email alerts to healthcare providers (emails are intercepted using **Mailtrap** during development)
+- **High-Risk assessment events** - when a patient is assessed as `"Early onset"`, the **Assessments** service publishes an event to the `high-risk-assessments` queue
+- **No duplicates** - the alert is triggered only when the risk changes to `"Early onset"`
+- **Email notifications** - the **Notifications** service consumes these events and sends automated email alerts to healthcare providers (emails are intercepted using **Mailtrap** during development)
 
 ---
 
 ### 🚀 CI/CD pipelines
 
-- `push_dev_ci.yml`: runs unit tests on modified microservices when pushing to `dev`
-- `pr_main_ci-cd.yml`: builds, tests, generates JaCoCo & JavaDocs, deploys docs to GitHub Pages (on PR to `main`)
-- `merge_main_cd.yml`: pushes Docker images to Docker Hub after PR is merged into `main`
+- `push_dev_ci.yml` - runs unit tests on modified microservices when pushing to `dev`
+- `pr_main_ci-cd.yml` - builds, tests, generates JaCoCo & JavaDocs, deploys docs to GitHub Pages (on PR to `main`)
+- `merge_main_cd.yml` - pushes Docker images to Docker Hub after PR is merged into `main`
 
 ---
 
 ### ❌ Out of scope
 
-- **Spring Cloud Config Server**: no centralized configuration management. *(used in a different project, with RabbitMQ as the refresh trigger and a GitHub repository for versioning and storing configurations)*
-- **Secrets manager**: secrets are managed via environment variables.
-- **Front-end testing** : deprioritized to focus efforts on back-end reliability and service integration.
+- **Spring Cloud Config Server** - no centralized configuration management. *(used in a different project, with RabbitMQ as the refresh trigger and a GitHub repository for versioning and storing configurations)*
+- **Secrets manager** - secrets are managed via environment variables.
+- **Front-end testing**  - deprioritized to focus efforts on back-end reliability and service integration.
