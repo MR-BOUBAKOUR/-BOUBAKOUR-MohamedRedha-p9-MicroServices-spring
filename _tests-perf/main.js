@@ -3,6 +3,7 @@ import { getAuthToken } from './helpers/auth.js';
 import * as realisticTraffic from './tests/realistic-traffic.js';
 import * as loginProcess from './tests/login-process.js';
 import * as patientRecord from './tests/patient-record.js';
+import * as bypassGateway from './tests/bypass-gateway.js';
 
 const TEST_TYPE = __ENV.TEST_TYPE || 'realistic';
 const TEST_PROFILE = __ENV.TEST_PROFILE || 'load';
@@ -32,6 +33,9 @@ export default function (data) {
             break;
         case 'patient':
             patientRecord.default(data);
+            break;
+        case 'bypassGateway':
+            bypassGateway.default(data);
             break;
         default:
             console.warn(`Unknown test type: ${data.testType}, falling back to realistic`);
