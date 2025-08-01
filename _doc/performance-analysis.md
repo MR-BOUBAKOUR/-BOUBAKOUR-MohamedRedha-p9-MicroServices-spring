@@ -39,8 +39,7 @@ The goal of this exercise was primarily to isolate and understand the root cause
 
 - **Approach**: test each microservice individually, including their own downstream calls
 - **Observation**: each component - Gateway, Assessment, and Patients microservices - independently reaches 100% CPU under load
-- **Key discovery**: 
-  - performance issues persist even when bypassing the Gateway
+- **Key discovery**: performance issues persist even when bypassing the Gateway
 
 ### 🚪 Second hypothesis: environment/hardware limitation
 
@@ -54,14 +53,13 @@ The goal of this exercise was primarily to isolate and understand the root cause
 
 ---
 
-### 🧠 Root cause analysis
+### 🔍 Root cause analysis
 
-#### 🎯 Primary cause
-**Hardware resource contention**  
+#### 🎯 Primary cause 🡒 Hardware resource contention
+
 The main performance bottleneck stems from the application, observability stack, and load testing tool running concurrently on the same machine, leading to CPU saturation. This is an environmental limitation, not an application-level issue.
 
-#### 🔁 Secondary factor
-**Lack of environment reset**  
+#### 🔁 Secondary factor 🡒 Lack of environment reset   
 Initial test results were inconsistent due to leftover state from previous runs. After properly resetting the environment between tests, results became stable and reliable.
 
 ---
