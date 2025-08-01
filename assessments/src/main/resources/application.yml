@@ -55,6 +55,6 @@ logging:
     com:
       MedilaboSolutions:
         assessment: INFO
-  # Add trace and span IDs to logs for correlation with distributed tracing (Grafana/Tempo)
+  # Add trace and span IDs to logs for correlation with distributed tracing
   pattern:
     level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"

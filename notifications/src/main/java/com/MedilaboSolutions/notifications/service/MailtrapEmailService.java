@@ -37,7 +37,7 @@ public class MailtrapEmailService {
 
         try {
             log.info("Sending email via Mailtrap...");
-            // ⚠️ Enable for demo
+            // ⚠️ Enable for demo only
             // MailtrapClientFactory.createMailtrapClient(config).send(mail);
         } catch (Exception e) {
             log.error("Failed to send email", e);

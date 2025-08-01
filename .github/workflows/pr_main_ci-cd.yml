@@ -100,19 +100,29 @@ jobs:
 
       ######################## GITHUB PAGES ########################
 
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+
       - name: Prepare content GitHub Pages
         if: steps.changes.outputs.any_changed == 'true'
         run: |
-          mkdir -p gh-pages-build
-          mkdir -p gh-pages-build/jacoco
+          mkdir -p gh-pages/jacoco
+          mkdir -p gh-pages/javadocs
           for dir in gatewayserver patients notes assessments notifications; do
-            cp -r $dir/target/site/jacoco-aggregate gh-pages-build/jacoco/$dir 2>/dev/null || true
+            if echo "${{ steps.changes.outputs.all_changed_files }}" | grep -q "$dir"; then
+              echo "🔄 Updating JaCoCo report for $dir"
+              rm -rf gh-pages/jacoco/$dir
+              cp -r $dir/target/site/jacoco-aggregate gh-pages/jacoco/$dir || true
+              echo "🔄 Updating JavaDocs for $dir"
+              rm -rf gh-pages/javadocs/$dir
+              cp -r $dir/target/reports/apidocs gh-pages/javadocs/$dir || true
+            fi
           done
-          mkdir -p gh-pages-build/javadocs
-          for dir in gatewayserver patients notes assessments notifications; do
-            cp -r $dir/target/reports/apidocs gh-pages-build/javadocs/$dir 2>/dev/null || true
-          done
-          cat > gh-pages-build/index.html << 'EOF'
+          
+          cat > gh-pages/index.html << 'EOF'
           <!DOCTYPE html>
           <html>
           <head>
@@ -155,4 +165,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: gh-pages-build
+          publish_dir: gh-pages

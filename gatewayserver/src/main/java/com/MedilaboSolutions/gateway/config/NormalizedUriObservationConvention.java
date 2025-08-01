@@ -6,7 +6,7 @@ import org.springframework.http.server.reactive.observation.ServerRequestObserva
 import org.springframework.stereotype.Component;
 
 
-// Custom observation convention to normalize URI paths in metrics.
+// Custom URI observation convention to normalize paths in metrics.
 // This helps group similar endpoints (e.g. /v1/patients/123) under a generic pattern
 // (/v1/patients/{id}) to avoid high cardinality in the observability stack
 @Component
