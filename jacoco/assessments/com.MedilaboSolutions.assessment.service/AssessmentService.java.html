@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AssessmentService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assessment</a> &gt; <a href="index.source.html" class="el_package">com.MedilaboSolutions.assessment.service</a> &gt; <span class="el_source">AssessmentService.java</span></div><h1>AssessmentService.java</h1><pre class="source lang-java linenums">package com.MedilaboSolutions.assessment.service;
+
+import com.MedilaboSolutions.assessment.config.RabbitMQConfig;
+import com.MedilaboSolutions.assessment.dto.*;
+import com.MedilaboSolutions.assessment.service.client.NoteFeignClient;
+import com.MedilaboSolutions.assessment.service.client.PatientFeignClient;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.List;
+import java.util.Objects;
+
+<span class="fc" id="L18">@Slf4j</span>
+@RequiredArgsConstructor
+@Service
+public class AssessmentService {
+
+    private final PatientFeignClient patientFeignClient;
+    private final NoteFeignClient noteFeignClient;
+
+    private final RabbitTemplate rabbitTemplate;
+
+    public AssessmentDto generateAssessment(Long patId, String correlationId) {
+
+<span class="fc" id="L30">        ResponseEntity&lt;SuccessResponse&lt;PatientDto&gt;&gt; patient = patientFeignClient.getPatientById(patId, correlationId);</span>
+<span class="fc" id="L31">        String gender = Objects.requireNonNull(patient.getBody()).getData().getGender().toLowerCase();</span>
+<span class="fc" id="L32">        int age = calculateAge(patient.getBody().getData().getBirthDate());</span>
+
+<span class="fc" id="L34">        ResponseEntity&lt;SuccessResponse&lt;List&lt;NoteDto&gt;&gt;&gt; notes = noteFeignClient.getNoteByPatientId(patId, correlationId);</span>
+<span class="fc" id="L35">        int triggerCount = countMedicalTriggers(notes);</span>
+
+<span class="fc" id="L37">        String risk = evaluateRiskLevel(gender, age, triggerCount);</span>
+
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (&quot;Early onset&quot;.equals(risk)) {</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">            if (!patient.getBody().getData().isEarlyOnsetMailSent()) {</span>
+<span class="fc" id="L41">                HighRiskAssessmentEvent event = new HighRiskAssessmentEvent(</span>
+                        patId,
+<span class="fc" id="L43">                        patient.getBody().getData().getFirstName(),</span>
+<span class="fc" id="L44">                        patient.getBody().getData().getLastName(),</span>
+                        risk
+                );
+<span class="fc" id="L47">                rabbitTemplate.convertAndSend(RabbitMQConfig.QUEUE_NAME, event);</span>
+<span class="fc" id="L48">                log.info(&quot;Published high risk assessment event to queue [{}]: {}&quot;, RabbitMQConfig.QUEUE_NAME, event);</span>
+
+<span class="fc" id="L50">                patientFeignClient.updateEarlyOnsetMailSent(patId, true, correlationId);</span>
+<span class="fc" id="L51">            }</span>
+        } else {
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            if (patient.getBody().getData().isEarlyOnsetMailSent()) {</span>
+<span class="fc" id="L54">                patientFeignClient.updateEarlyOnsetMailSent(patId, false, correlationId);</span>
+            }
+        }
+
+<span class="fc" id="L58">        return new AssessmentDto(patId, risk);</span>
+    }
+
+    private int countMedicalTriggers(ResponseEntity&lt;SuccessResponse&lt;List&lt;NoteDto&gt;&gt;&gt; notes) {
+<span class="fc" id="L62">        int count = 0;</span>
+<span class="fc" id="L63">        List&lt;NoteDto&gt; allNotes = Objects.requireNonNull(notes.getBody()).getData();</span>
+
+<span class="fc" id="L65">        List&lt;String&gt; triggers = List.of(</span>
+                &quot;Hémoglobine A1C&quot;, &quot;Microalbumine&quot;, &quot;Taille&quot;, &quot;Poids&quot;,
+                &quot;Fumeur&quot;, &quot;Fumeuse&quot;, &quot;Anormal&quot;, &quot;Cholestérol&quot;,
+                &quot;Vertiges&quot;, &quot;Rechute&quot;, &quot;Réaction&quot;, &quot;Anticorps&quot;
+        );
+
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        for (NoteDto note : allNotes) {</span>
+<span class="fc" id="L72">            String noteContent = note.getNote().toLowerCase();</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">            for (String trigger : triggers) {</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">                if (noteContent.contains(trigger.toLowerCase())) {</span>
+<span class="fc" id="L75">                    count++;</span>
+                }
+<span class="fc" id="L77">            }</span>
+<span class="fc" id="L78">        }</span>
+<span class="fc" id="L79">        return count;</span>
+    }
+
+    private String evaluateRiskLevel(String gender, int age, int triggerCount) {
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (triggerCount == 0) {</span>
+<span class="fc" id="L84">            return &quot;None&quot;;</span>
+        }
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">        if (age &gt; 30) {</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">            if (triggerCount &gt;= 8) return &quot;Early onset&quot;;</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">            if (triggerCount &gt;= 6) return &quot;In Danger&quot;;</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">            if (triggerCount &gt;= 2) return &quot;Borderline&quot;;</span>
+        }
+        else {
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            if (&quot;m&quot;.equals(gender)) {</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">                if (triggerCount &gt;= 5) return &quot;Early onset&quot;;</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                if (triggerCount &gt;= 3) return &quot;In Danger&quot;;</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">            } else if (&quot;f&quot;.equals(gender)) {</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                if (triggerCount &gt;= 7) return &quot;Early onset&quot;;</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">                if (triggerCount &gt;= 4) return &quot;In Danger&quot;;</span>
+            }
+        }
+
+<span class="nc" id="L101">        return &quot;None&quot;;</span>
+    }
+
+    private int calculateAge(LocalDate birthday) {
+<span class="fc" id="L105">        return Period.between(birthday, LocalDate.now()).getYears();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

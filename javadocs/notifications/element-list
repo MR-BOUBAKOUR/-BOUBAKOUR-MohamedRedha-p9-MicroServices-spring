@@ -1,0 +1,5 @@
+com.MedilaboSolutions.notifications
+com.MedilaboSolutions.notifications.config
+com.MedilaboSolutions.notifications.Dto
+com.MedilaboSolutions.notifications.listener
+com.MedilaboSolutions.notifications.service
