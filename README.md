@@ -156,7 +156,7 @@ Each test is launched dynamically via environment variables, enabling modular an
 **Example command:**
 
 ```bash
-TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.yml up 
+TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose/docker-compose-perf-k6.yml up
 ```
 
 <details open>
@@ -169,7 +169,7 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 >| Test profile         | [load] <br>- reaching up to 160 virtual users, then ramping down <br>- total time : 11 minutes<br>- thresholds: <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 95% of requests complete in under 2000 milliseconds <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - less than 5% of requests fail |
 >| Test type (scenario) | [realistic-traffic] <br>- login (15%)<br>- home / patients list (20%)<br>- patient record (30%)<br>- patient creation (10%)<br>- simple note creation (20%)<br>- critical note creation (5%)                                                                                              |
 >| Goal                 | Measure Gateway performance under a realistic load, simulating <u>a number and pace of users close to a normal usage</u>, with and without monitoring.                                                                                                                                    |
->| Date                 | [30-07-2025]                                                                                                                                                                                                                                                                              |
+>| Date                 | [01-08-2025]                                                                                                                                                                                                                                                                              |
 >
 > ### Key Results
 >
@@ -199,7 +199,7 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 > | Test profile         | [stress] <br>- reaching up to 400 virtual users, then ramping down <br>- total time: 11 minutes <br>- thresholds: <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 95% of requests complete in under 8000 milliseconds <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - less than 20% of requests fail |
 > | Test type (scenario) | [realistic-traffic] <br>- login (15%)<br>- home / patients list (20%)<br>- patient record (30%)<br>- patient creation (10%)<br>- simple note creation (20%)<br>- critical note creation (5%)                                                                                                 |
 > | Goal                 | Assess Gateway stability and performance limits under <u>increasing load, pushing beyond normal usage</u>, with and without the observability stack.                                                                                                                                         |
-> | Date                 | [30-07-2025]                                                                                                                                                                                                                                                                                 |
+> | Date                 | [01-08-2025]                                                                                                                                                                                                                                                                                 |
 >
 > ### Key Results
 >
@@ -230,7 +230,7 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 > | Test profile         | [spike] <br>- sudden jump to 400 virtual users, short bursts, then quick ramp down <br>- total time: ~6.5 minutes <br>- thresholds: <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 95% of requests complete in under 10000 milliseconds <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - less than 30% of requests fail |
 > | Test type (scenario) | [realistic-traffic] <br>- login (15%)<br>- home / patients list (20%)<br>- patient record (30%)<br>- patient creation (10%)<br>- simple note creation (20%)<br>- critical note creation (5%)                                                                                                                    |
 > | Goal                 | Evaluate Gateway’s capacity to handle <u>sudden traffic spikes</u> and recovery behavior, with and without the observability stack.                                                                                                                                                                             |
-> | Date                 | [30-07-2025]                                                                                                                                                                                                                                                                                                    |
+> | Date                 | [01-08-2025]                                                                                                                                                                                                                                                                                                    |
 >
 > ### Key Results
 >
@@ -260,19 +260,19 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose-perf-k6.y
 > | Test profile         | [soak] <br>- steady load of 40 virtual, ramp up and down included <br>- total time: 64 minutes <br>- thresholds: <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 95% of requests complete in under 3000 milliseconds <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - less than 5% of requests fail | 
 > | Test type (scenario) | [realistic-traffic] <br>- login (15%)<br>- home / patients list (20%)<br>- patient record (30%)<br>- patient creation (10%)<br>- simple note creation (20%)<br>- critical note creation (5%)                                                                                               |
 > | Goal                 | Verify Gateway stability and <u>resource usage under sustained load over an extended period</u>, with and without the observability stack.                                                                                                                                                 |
-> | Date                 | [30-07-2025]                                                                                                                                                                                                                                                                               |
+> | Date                 | [01-08-2025]                                                                                                                                                                                                                                                                               |
 >
 > ### Key Results
 >
 > | KPI                            | Without the observability stack | With the observability stack |  
 > |--------------------------------|---------------------------------|------------------------------|  
-> | Avg response time              | 21.69 ms                        |                              |  
-> | 50th percentile (p50 / median) | 13.96 ms                        |                              |  
-> | 95th percentile (p95)          | 73.86 ms ✅                      |                              |  
-> | Error rate                     | 0.00% ✅                         |                              |  
-> | Exception counts               | N/A                             |                              |  
-> | Request rate                   | 33.64 req/s                     |                              |  
-> | Total requests                 | 135,616                         |                              |
+> | Avg response time              | 21.69 ms                        | 21.27 ms                     |  
+> | 50th percentile (p50 / median) | 13.96 ms                        | 14.33 ms                     |  
+> | 95th percentile (p95)          | 73.86 ms ✅                      | 78.57 ms ✅                   |  
+> | Error rate                     | 0.00% ✅                         | 0.00% ✅                      |  
+> | Exception counts               | N/A                             | 0                            |  
+> | Request rate                   | 33.64 req/s                     | 36.37 req/s                  |  
+> | Total requests                 | 135.616                         | 135.010                      |
 >
 > ### Dashboard Overview
 >
