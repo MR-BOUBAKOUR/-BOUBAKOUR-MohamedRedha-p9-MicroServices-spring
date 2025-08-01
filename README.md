@@ -181,7 +181,7 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose/docker-co
 > | Error rate                     | 0.00% ✅                         | 0.00% ✅                      |  
 > | Exception counts               | N/A                             | 0                            |  
 > | Request rate                   | 87.13 req/s                     | 86.71 req/s                  |  
-> | Total requests                 | 59.731                          | 59.539                       |
+> | Total requests                 | 59731                           | 59539                        |
 > 
 > ### Dashboard Overview
 >
@@ -211,7 +211,7 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose/docker-co
 > | Error rate                     | 0.03% (38) ✅                    | 0.04% (52) ✅                 |  
 > | Exception counts               | N/A                             | 64                           |  
 > | Request rate                   | 160.25 req/s                    | 154.39 req/s                 |  
-> | Total requests                 | 110.418                         | 106.979                      |
+> | Total requests                 | 110418                          | 106979                       |
 > 
 > 
 > ### Dashboard Overview
@@ -242,7 +242,7 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose/docker-co
 > | Error rate                     | 0.00% ✅                         | 0.00% ✅                      |  
 > | Exception counts               | N/A                             | 0                            |  
 > | Request rate                   | 90.19 req/s                     | 87.15 req/s                  |  
-> | Total requests                 | 36,986                          | 35,803                       |
+> | Total requests                 | 36986                           | 35803                        |
 >
 > ### Dashboard Overview
 >
@@ -272,7 +272,7 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose/docker-co
 > | Error rate                     | 0.00% ✅                         | 0.00% ✅                      |  
 > | Exception counts               | N/A                             | 0                            |  
 > | Request rate                   | 33.64 req/s                     | 36.37 req/s                  |  
-> | Total requests                 | 135.616                         | 135.010                      |
+> | Total requests                 | 135616                          | 135010                       |
 >
 > ### Dashboard Overview
 >
@@ -280,8 +280,10 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose/docker-co
 
 </details>
 
-- A full analysis was conducted to understand the system's saturation behavior.  
-  👉 [Read the full performance analysis](_doc/performance-analysis.md)
+<br>
+
+#### ✅ Systematic analysis outlining performance constraints and testing methodology
+👉 [Read the full performance analysis](_doc/performance-analysis.md)
 
 ---
 
