@@ -1,6 +1,6 @@
 # Performance analysis
 
-## 🧪 Performance test scope and limitations
+### 🧪 Performance test scope and limitations
 
 These performance tests were conducted under the following conditions:
 
@@ -20,7 +20,7 @@ The goal of this exercise was primarily to isolate and understand the root cause
 
 ---
 
-## 📍 Initial symptom
+### 📍 Initial symptom
 
 - **Problem**: performance degradation beyond specific load threshold
 - **Observation**: Gateway + individual services performing well, but system saturated
@@ -28,23 +28,22 @@ The goal of this exercise was primarily to isolate and understand the root cause
 
 ---
 
-## 🚪 Initial hypothesis: Gateway bottleneck
+### 🚪 Initial hypothesis: Gateway bottleneck
 
-### Gateway optimization attempt
+#### Gateway optimization attempt
 
 - **Netty configuration optimization (pools, threads)**: no substantial improvement
 - **token caching + log level change everywhere (`DEBUG` → `INFO`)**: meaningful improvement but the same observed ceiling (CPU at 95-100%)
 
-### Investigating beyond the Gateway: isolated service testing
+#### Investigating beyond the Gateway: isolated service testing
 
 - **Approach**: test each microservice individually, including their own downstream calls
 - **Observation**: each component - Gateway, Assessment, and Patients microservices - independently reaches 100% CPU under load
-- **Key discovery**: 
-  - performance issues persist even when bypassing the Gateway
+- **Key discovery**: performance issues persist even when bypassing the Gateway
 
-## 🚪 Second hypothesis: environment/hardware limitation
+### 🚪 Second hypothesis: environment/hardware limitation
 
-### Investigating beyond the application: environment stabilization
+#### Investigating beyond the application: environment stabilization
 
 - **Initial observation**: significant difference in test results when comparing runs with and without the observability stack
 - **Approach**: the environment was carefully reset before each run :
@@ -54,19 +53,18 @@ The goal of this exercise was primarily to isolate and understand the root cause
 
 ---
 
-## 🧠 Root cause analysis
+### 🔍 Root cause analysis
 
-### 🎯 Primary cause
-**Hardware resource contention**  
+#### 🎯 Primary cause 🡒 Hardware resource contention
+
 The main performance bottleneck stems from the application, observability stack, and load testing tool running concurrently on the same machine, leading to CPU saturation. This is an environmental limitation, not an application-level issue.
 
-### 🔁 Secondary factor
-**Lack of environment reset**  
+#### 🔁 Secondary factor 🡒 Lack of environment reset   
 Initial test results were inconsistent due to leftover state from previous runs. After properly resetting the environment between tests, results became stable and reliable.
 
 ---
 
-## 💡 Key conclusions
+### 💡 Key conclusions
 
 - Microservices architecture is performant and stable under load
 - Observability stack overhead exists but remains minimal when:
