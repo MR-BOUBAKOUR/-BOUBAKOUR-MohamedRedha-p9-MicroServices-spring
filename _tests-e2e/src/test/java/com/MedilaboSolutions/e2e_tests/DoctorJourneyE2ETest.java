@@ -1,6 +1,7 @@
 package com.MedilaboSolutions.e2e_tests;
 
 import com.MedilaboSolutions.e2e_tests.config.TestConfig;
+import io.github.cdimascio.dotenv.Dotenv;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.TestPropertySource;
 
 import java.io.InputStream;
@@ -26,8 +29,20 @@ import static org.hamcrest.Matchers.*;
 })
 public class DoctorJourneyE2ETest {
 
-    String username = System.getenv("TEST_USER_USERNAME");
-    String password = System.getenv("TEST_USER_PASSWORD");
+    private static final Logger log = LoggerFactory.getLogger(DoctorJourneyE2ETest.class);
+
+    static {
+        Dotenv dotenv = Dotenv.configure()
+                .directory("./")
+                .ignoreIfMissing()
+                .load();
+
+        System.setProperty("TEST_USER_USERNAME", dotenv.get("TEST_USER_USERNAME", ""));
+        System.setProperty("TEST_USER_PASSWORD", dotenv.get("TEST_USER_PASSWORD", ""));
+    }
+
+    String username = System.getProperty("TEST_USER_USERNAME");
+    String password = System.getProperty("TEST_USER_PASSWORD");
 
     public RequestSpecification requestSpec;
 
@@ -58,26 +73,26 @@ public class DoctorJourneyE2ETest {
 
         String step1Risk = assessPatientRisk();
         assertThat(step1Risk).isEqualTo("None");
-        System.out.println("✅ STEP 1 - Initial risk: " + step1Risk);
+        log.info("✅ STEP 1 - Initial risk: {}", step1Risk);
 
         addNoteWithTriggersForBorderline();
 
         String step2Risk = assessPatientRisk();
         assertThat(step2Risk).isEqualTo("Borderline");
-        System.out.println("✅ STEP 2 - Risk after adding note1 : " + step2Risk);
+        log.info("✅ STEP 2 - Risk after adding note1 : {}", step2Risk);
 
         addNoteWithTriggersForInDanger();
 
         String step3Risk = assessPatientRisk();
         assertThat(step3Risk).isEqualTo("In Danger");
-        System.out.println("✅ STEP 3 - Risk after adding note2 : " + step3Risk);
+        log.info("✅ STEP 3 - Risk after adding note2 : {}", step3Risk);
 
         addNoteWithTriggersForEarlyOnset();
         updatePatient();
 
         String step4Risk = assessPatientRisk();
         assertThat(step4Risk).isEqualTo("Early onset");
-        System.out.println("✅ STEP 4 - Risk after adding note3 & updating patient: " + step4Risk);
+        log.info("✅ STEP 4 - Risk after adding note3 & updating patient: {}", step4Risk);
 
         waitForNotificationsLog();
 
@@ -121,7 +136,7 @@ public class DoctorJourneyE2ETest {
 
         requestSpec = requestSpec.header("Authorization", "Bearer " + accessToken);
 
-        System.out.println("Doctor successfully logged in");
+        log.info("Doctor successfully logged in");
     }
 
     private void createPatient() {
@@ -144,7 +159,7 @@ public class DoctorJourneyE2ETest {
                 .extract()
                 .path("data.id");
 
-        System.out.println("Patient created - Id" + createdPatientId);
+        log.info("Patient created - Id{}", createdPatientId);
     }
 
     private void addNoteWithTriggersForBorderline() {
@@ -164,7 +179,7 @@ public class DoctorJourneyE2ETest {
                 .extract()
                 .path("data.id");
 
-        System.out.println("Note1 added (2 triggers) - Id" + createdNoteId);
+        log.info("Note1 added (2 triggers) - Id{}", createdNoteId);
     }
 
     private void addNoteWithTriggersForInDanger() {
@@ -184,7 +199,7 @@ public class DoctorJourneyE2ETest {
                 .extract()
                 .path("data.id");
 
-        System.out.println("Note2 added (4 more triggers) - Id" + createdNote2Id);
+        log.info("Note2 added (4 more triggers) - Id{}", createdNote2Id);
     }
 
     private void updatePatient() {
@@ -208,7 +223,7 @@ public class DoctorJourneyE2ETest {
                 .body("data.gender", equalTo("F"))
                 .body("data.address", equalTo("456 Updated Street"));
 
-        System.out.println("Patient updated - Id" + createdPatientId);
+        log.info("Patient updated - Id{}", createdPatientId);
     }
 
     private void addNoteWithTriggersForEarlyOnset() {
@@ -228,7 +243,7 @@ public class DoctorJourneyE2ETest {
                 .extract()
                 .path("data.id");
 
-        System.out.println("Note3 added (1 more trigger) - Id" + createdNote3Id);
+        log.info("Note3 added (1 more trigger) - Id{}", createdNote3Id);
     }
 
     private String assessPatientRisk() {
@@ -293,7 +308,7 @@ public class DoctorJourneyE2ETest {
                         equalTo("Early onset")
                 ));
 
-        System.out.println("Global data consistency verified for patient Id" + createdPatientId);
+        log.info("Global data consistency verified for patient Id" + createdPatientId);
     }
 
     private void logoutDoctor() {
@@ -303,7 +318,7 @@ public class DoctorJourneyE2ETest {
                 .statusCode(200)
                 .header("Set-Cookie", containsString("refreshToken=; Max-Age=0"));
 
-        System.out.println("Doctor successfully logged out");
+        log.info("Doctor successfully logged out");
     }
 
     private void waitForNotificationsLog() {
@@ -312,7 +327,7 @@ public class DoctorJourneyE2ETest {
                 .pollInterval(2, TimeUnit.SECONDS)
                 .until(() -> {
                     // Start a new process to fetch the logs from the 'notifications' container (full logs without --since)
-                    Process process = new ProcessBuilder("docker", "logs", "docker-compose-notifications-1", "--since", "10s").start();
+                    Process process = new ProcessBuilder("docker", "logs", "notifications", "--since", "10s").start();
                     // Open the process output stream to read the logs
                     try (InputStream processOutput = process.getInputStream()) {
                         // Read all the logs from the input stream into a single String
@@ -320,7 +335,7 @@ public class DoctorJourneyE2ETest {
                         // Check if the logs contain the email sent message and the patient name to avoid false positives
                         boolean found = logs.contains("📧 Email sent to") && logs.contains("Smith-TEST");
                         if (found) {
-                            System.out.println("🔔 High-risk email successfully sent - Id" + createdPatientId);
+                            log.info("\uD83D\uDD14 High-risk email successfully sent - Id{}", createdPatientId);
                         }
                         return found;
                     }
@@ -345,7 +360,7 @@ public class DoctorJourneyE2ETest {
                     .statusCode(anyOf(is(204), is(404)));
         }
 
-        System.out.println("Cleaned up test data for patient Id" + createdPatientId);
+        log.info("Cleaned up test data for patient Id{}", createdPatientId);
 
         createdPatientId = null;
         createdNoteId = null;
