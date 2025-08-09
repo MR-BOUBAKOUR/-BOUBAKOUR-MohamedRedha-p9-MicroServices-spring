@@ -1,107 +1,113 @@
 package com.MedilaboSolutions.assessment.service;
 
-import com.MedilaboSolutions.assessment.config.RabbitMQConfig;
 import com.MedilaboSolutions.assessment.dto.*;
 import com.MedilaboSolutions.assessment.service.client.NoteFeignClient;
 import com.MedilaboSolutions.assessment.service.client.PatientFeignClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Slf4j
-@RequiredArgsConstructor
 @Service
 public class AssessmentService {
 
+    public AssessmentService(PatientFeignClient patientFeignClient, NoteFeignClient noteFeignClient, ChatClient.Builder chatClientBuilder) {
+        this.patientFeignClient = patientFeignClient;
+        this.noteFeignClient = noteFeignClient;
+        this.chatClient = chatClientBuilder.build();
+    }
+
     private final PatientFeignClient patientFeignClient;
     private final NoteFeignClient noteFeignClient;
+    private final ChatClient chatClient;
 
-    private final RabbitTemplate rabbitTemplate;
+    private static final String PROMPT = """
+            Évaluez le risque de diabète pour ce patient selon ces données :
+            
+            Âge : {age} ans
+            Sexe : {gender}
+            Notes médicales : {notes}
+            
+            Si aucune note médicale pertinente n'est disponible, répondez "None" pour le niveau de risque, indiquez dans le résumé qu'il n'y a pas assez d'informations, et ne fournissez aucune recommandation.
+            
+            Répondez strictement au format suivant, en 3 sections séparées par ### :
+            
+            NIVEAU: [Un seul de ces niveaux : None, Borderline, In Danger, Early onset]
+            ###
+            RESUME: [Résumé clair en 2-3 phrases, concis et précis]
+            ###
+            RECOMMANDATIONS: [Conseils spécifiques, actionnables, sans détails superflus]
+            """;
 
     public AssessmentDto generateAssessment(Long patId, String correlationId) {
 
-        ResponseEntity<SuccessResponse<PatientDto>> patient = patientFeignClient.getPatientById(patId, correlationId);
-        String gender = Objects.requireNonNull(patient.getBody()).getData().getGender().toLowerCase();
-        int age = calculateAge(patient.getBody().getData().getBirthDate());
+        ResponseEntity<SuccessResponse<PatientDto>> patientResponse = patientFeignClient.getPatientById(patId, correlationId);
+        if (patientResponse.getBody() == null || patientResponse.getBody().getData() == null) {
+            throw new IllegalStateException("Patient data not found for ID " + patId);
+        }
+        PatientDto patient = patientResponse.getBody().getData();
 
-        ResponseEntity<SuccessResponse<List<NoteDto>>> notes = noteFeignClient.getNoteByPatientId(patId, correlationId);
-        int triggerCount = countMedicalTriggers(notes);
+        ResponseEntity<SuccessResponse<List<NoteDto>>> notesResponse = noteFeignClient.getNoteByPatientId(patId, correlationId);
+        if (notesResponse.getBody() == null || notesResponse.getBody().getData() == null) {
+            throw new IllegalStateException("Notes not found for patient ID " + patId);
+        }
+        List<NoteDto> notes = notesResponse.getBody().getData();
 
-        String risk = evaluateRiskLevel(gender, age, triggerCount);
+        String gender = patient.getGender();
+        int age = Period.between(patient.getBirthDate(), LocalDate.now()).getYears();
+        String notesText = notes.stream()
+                .map(NoteDto::getNote)
+                .filter(Objects::nonNull)
+                .collect(Collectors.joining(" / "));
 
-        if ("Early onset".equals(risk)) {
-            if (!patient.getBody().getData().isEarlyOnsetMailSent()) {
-                HighRiskAssessmentEvent event = new HighRiskAssessmentEvent(
-                        patId,
-                        patient.getBody().getData().getFirstName(),
-                        patient.getBody().getData().getLastName(),
-                        risk
-                );
-                rabbitTemplate.convertAndSend(RabbitMQConfig.QUEUE_NAME, event);
-                log.info("Published high risk assessment event to queue [{}]: {}", RabbitMQConfig.QUEUE_NAME, event);
+        PromptTemplate promptTemplate = new PromptTemplate(PROMPT);
+        Prompt prompt = promptTemplate.create(Map.of(
+                "age", age,
+                "gender", gender,
+                "notes", notesText
+        ));
 
-                patientFeignClient.updateEarlyOnsetMailSent(patId, true, correlationId);
-            }
+        String aiResponse;
+        try {
+            log.info("Appel à Ollama avec prompt : {}", prompt.getContents());
+            aiResponse = chatClient.prompt(prompt).call().content().trim();
+            log.info("Réponse brute de l'IA: {}", aiResponse);
+        } catch (Exception e) {
+            log.error("Erreur lors de l'appel à Ollama", e);
+            throw e;
+        }
+
+        String[] parts = aiResponse.split("###");
+
+        String riskLevel = "None";
+        String summary = "";
+        String recommendations = "";
+
+        if (parts.length >= 4) {
+            riskLevel = cleanPart(parts[1]);
+            summary = cleanPart(parts[2]);
+            recommendations = cleanPart(parts[3]);
         } else {
-            if (patient.getBody().getData().isEarlyOnsetMailSent()) {
-                patientFeignClient.updateEarlyOnsetMailSent(patId, false, correlationId);
-            }
+            log.warn("Réponse IA inattendue, parsing incomplet : {}", aiResponse);
         }
 
-        return new AssessmentDto(patId, risk);
+        return new AssessmentDto(patId, riskLevel, summary, recommendations);
     }
 
-    private int countMedicalTriggers(ResponseEntity<SuccessResponse<List<NoteDto>>> notes) {
-        int count = 0;
-        List<NoteDto> allNotes = Objects.requireNonNull(notes.getBody()).getData();
-
-        List<String> triggers = List.of(
-                "Hémoglobine A1C", "Microalbumine", "Taille", "Poids",
-                "Fumeur", "Fumeuse", "Anormal", "Cholestérol",
-                "Vertiges", "Rechute", "Réaction", "Anticorps"
-        );
-
-        for (NoteDto note : allNotes) {
-            String noteContent = note.getNote().toLowerCase();
-            for (String trigger : triggers) {
-                if (noteContent.contains(trigger.toLowerCase())) {
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
-
-    private String evaluateRiskLevel(String gender, int age, int triggerCount) {
-        if (triggerCount == 0) {
-            return "None";
-        }
-        if (age > 30) {
-            if (triggerCount >= 8) return "Early onset";
-            if (triggerCount >= 6) return "In Danger";
-            if (triggerCount >= 2) return "Borderline";
-        }
-        else {
-            if ("m".equals(gender)) {
-                if (triggerCount >= 5) return "Early onset";
-                if (triggerCount >= 3) return "In Danger";
-            } else if ("f".equals(gender)) {
-                if (triggerCount >= 7) return "Early onset";
-                if (triggerCount >= 4) return "In Danger";
-            }
-        }
-
-        return "None";
-    }
-
-    private int calculateAge(LocalDate birthday) {
-        return Period.between(birthday, LocalDate.now()).getYears();
+    private String cleanPart(String text) {
+        if (text == null) return "";
+        String[] lines = text.trim().split("\n", 2);
+        return (lines.length > 1) ? lines[1].trim() : lines[0].trim();
     }
 }

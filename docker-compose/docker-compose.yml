@@ -131,11 +131,14 @@ services:
       SPRING_RABBITMQ_PORT: ${SPRING_RABBITMQ_PORT}
       SPRING_RABBITMQ_USERNAME: ${SPRING_RABBITMQ_USERNAME}
       SPRING_RABBITMQ_PASSWORD: ${SPRING_RABBITMQ_PASSWORD}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL}
     depends_on:
       eurekaserver:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
+      ollama:
+        condition: service_started
     networks:
       - medilabosolutions-net
     healthcheck:
@@ -268,8 +271,29 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    mem_limit: 256m
-    mem_reservation: 128m
+    mem_limit: 512m
+    mem_reservation: 256m
+
+  # ==================================================== Local AI =====================================================
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    networks:
+      - medilabosolutions-net
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+        reservations:
+          memory: 4G
 
   # =============================================== OBSERVABILITY STACK ===============================================
 
@@ -392,8 +416,8 @@ services:
       - ./observability/tempo/tempo.yml:/etc/tempo-config.yml
     networks:
       - medilabosolutions-net
-    mem_limit: 1g
-    mem_reservation: 512m
+    mem_limit: 512m
+    mem_reservation: 256m
 
   grafana:
     profiles: [monitoring]
@@ -526,3 +550,5 @@ volumes:
 #  gatewayserver-db-postgresql-data:
 #  notes-db-mongodb-data:
   grafana-data:
+  ollama_data:
+    driver: local

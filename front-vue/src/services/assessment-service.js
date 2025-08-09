@@ -4,7 +4,7 @@ import { setupAxiosInterceptors } from './api'
 
 const api = axios.create({
     baseURL: 'https://localhost:8071/v1',
-    timeout: 10000,
+    timeout: 60000,
     headers: {
         'Content-Type': 'application/json',
     },

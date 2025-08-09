@@ -25,22 +25,32 @@ const resultClass = computed(() => {
 </script>
 
 <template>
-    <section class="assessment-card">
         <h2>Assessment</h2>
-        <p :class="resultClass">{{ assessment.assessmentResult }}</p>
+    <section :class="resultClass" class="assessment-card">
+        <div>
+            <p>NIVEAU: {{ assessment.assessmentResult }}</p>
+            <p>RESUME: {{ assessment.summary }}</p>
+            <p>RECOMMANDATIONS: {{ assessment.recommendations }}</p>
+        </div>
     </section>
 </template>
 
 <style scoped>
 .assessment-card {
-    max-width: 300px;
-    width: 100%;
+    max-width: 320px;
+    padding: 1rem;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #222;
+    margin: 1rem auto;
 }
 
-.assessment-card p {
-    padding: 0.5rem;
-    font-weight: bold;
+.assessment-card h2 {
     text-align: center;
+    font-weight: 600;
+    margin-bottom: 1rem;
 }
 
 .risk-none {

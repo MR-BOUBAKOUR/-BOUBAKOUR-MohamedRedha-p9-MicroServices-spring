@@ -7,11 +7,9 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class AssessmentDto {
+public class OldAssessmentDto {
 
     private Long patId;
     private String assessmentResult;
-    private String summary;
-    private String recommendations;
 
 }

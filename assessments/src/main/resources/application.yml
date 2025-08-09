@@ -9,6 +9,20 @@ spring:
     port: ${SPRING_RABBITMQ_PORT}
     username: ${SPRING_RABBITMQ_USERNAME}
     password: ${SPRING_RABBITMQ_PASSWORD}
+  ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL}
+      chat:
+        model: llama3.2:latest
+        options:
+          # the precision of the response (low temp = doctor / high temp = more creative)
+          temperature: 0.1
+          # define the number of the tokens generated on the response
+          num-predict: 300
+          # define the number of the tokens for the context
+          num_ctx: 2048
+          # repetition allowed (the higher, the less reception is allowed)
+          repeat_penalty: 1.1
 
 management:
   # In production, limit exposure (include: "health,info")
