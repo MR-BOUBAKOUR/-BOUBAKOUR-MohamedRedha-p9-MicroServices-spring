@@ -1,150 +1,4 @@
-
-
-## Actualisation du référentiel de pratiques de l'examen périodique de santé
-
-## Prévention et dépistage du diabète de type 2 et des maladies liées au diabète
-
-Octobre 2014
-
-## État des connaissances sur le diabète de type 2
-
-Définition, physiopathologie, histoire de la maladie, données épidémiologiques
-
-
-
-Facteurs et marqueurs de risque de diabète
-
-Maladies secondaires au diabète
-
-
-
-Comorbidités aggravant le pronostic vital
-
-
-
-Traitements du diabète : stratégie, éducation thérapeutique, objectifs glycémiques, médicaments
-
-
-
-Prévention primaire : les actions de prévention chez les sujets à risque
-
-Populations à risque de diabète
-
-
-
-Stratégie et objectifs de la prévention du diabète
-
-
-
-## Prévention secondaire : le dépistage opportuniste du diabète de type 2
-
-Populations cibles du dépistage
-
-
-
-de confirmation diagnostique
-
-Contexte de la prévention, du dépistage du diabète et des maladies liées au diabète
-
-Stratégie et objectifs de la prise en charge des sujets dépistés
-
-
-
-## Prévention tertiaire : le dépistage des complications liées au diabète
-
-Stratégie et objectifs de la surveillance du sujet diabétique
-
-Glycémique
-
-
-
-
-
-Rénale
-
-
-
-État des pratiques de prise en charge des sujets diabétiques en France
-
-
-
-
-
-Neurologique cardiovasculaire
-
-Ophtalmologique
-
-Podologique
-
-
-
-
-
-Dentaire et autres types de surveillance
-
-## Le référentiel de pratiques de l'examen périodique de santé
-
-## Présentation synthétique
-
-Place des médecins de CES dans le dispositif en fonction de la situation clinique
-
-Algorithme 1 -Stratégie de dépistage opportuniste du diabète de type 2
-
-Algorithme 2 -Stratégie de surveillance des sujets diabétiques de type 2
-
-Informations à colliger ou à transmettre au consultant et au médecin traitant
-
-Annexes
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Conduite à tenir
-
-Conseils diététiques minimum
-
-Conseils d'hygiène de vie
-
-Incitation à l'activité physique
-
-Sujet diabétique âgé de plus de 75 ans
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Surveillance
-
-
-
-
-
-<!-- page: 1 -->
-
-## Mini-synthèse
+# Le diabète de type 2 : définition, physiopathologie, histoire de la maladie, données épidémiologiques (Mini-synthèse)
 
 ## Définition
 
@@ -168,18 +22,18 @@ Classiquement on distingue 3 phases dans l'évolution du diabète de type 2 :
 
 En 2011, la prévalence du diabète traité a été estimée à 4,6 % , soit plus de 3 millions de personnes. Selon les données de l'étude Entred 2007, 92 % des personnes traitées pour un diabète avaient un diabète de type 2.
 
-- ¼ La prévalence du diabète augmente avec l'âge et, à âge égal, elle est plus élevée chez l'homme que chez la femme en métropole.
-- ¼ Sur  les  dix  dernières  années,  le  nombre  de  personnes  traitées  pour  un  diabète  a  augmenté  en moyenne de 5 %/an.
+- La prévalence du diabète augmente avec l'âge et, à âge égal, elle est plus élevée chez l'homme que chez la femme en métropole.
+- Sur  les  dix  dernières  années,  le  nombre  de  personnes  traitées  pour  un  diabète  a  augmenté  en moyenne de 5 %/an.
 
 Par comparaison à la population non diabétique, la mortalité, toutes causes confondues et à âge égal, est 1,5 à 2 fois plus élevée chez les personnes diabétiques pour les décès liés à une cardiopathie ischémique, une pathologie cérébrovasculaire, une insuffisance rénale ou une insuffisance hépatique.
 
 <!-- page: 2 -->
 
-## Définition
+# Le diabète de type 2 : définition, physiopathologie, histoire de la maladie, données épidémiologiques
 
+## Définitions
 
-
-## Le diabète de type 2
+### Le diabète de type 2
 
 Le diabète sucré est une élévation chronique de la concentration de glucose dans le sang (hyperglycémie) et regroupe plusieurs maladies de pathogénie différente (trouble de la sécrétion et/ou de l'action de l'insuline. Il est défini, selon les critères proposés en 2006 par l'Organisation mondiale de la santé (OMS) par :
 
@@ -187,7 +41,7 @@ Le diabète sucré est une élévation chronique de la concentration de glucose 
 - la  présence  de  symptômes  de  diabète  (polyurie,  polydipsie,  amaigrissement)  associée  à  une  glycémie  (sur plasma veineux) ≥ 2 g/l (11,1 mmol/l) ;
 - une glycémie (sur plasma veineux) ≥ 2 g/l (11,1 mmol/l) 2 heures après une charge orale de 75 g de glucose.
 
-## Le prédiabète
+### Le prédiabète
 
 Le prédiabète ou intolérance au glucose, correspond à une hyperglycémie modérée, c'est-à-dire n'atteignant pas le seuil diagnostic de diabète, mais associée à une augmentation du risque de progression vers le diabète de type 2. Il est défini, selon les critères proposés en 2006 par l'Organisation mondiale de la santé (OMS) par :
 
@@ -195,8 +49,6 @@ Le prédiabète ou intolérance au glucose, correspond à une hyperglycémie mod
 - et/ou une intolérance au glucose : glycémie (sur plasma veineux) comprise entre 1,4 g/l (7 ,8 mmol/l) et 1,99 g/l (11,0 mmol/l) 2 heures après une charge orale de 75 g de glucose.
 
 ## Physiopathologie et classification
-
-
 
 Le  diabète  est  un  trouble  de  l'assimilation,  de  l'utilisation  et  du  stockage  des  sucres  apportés  par l'alimentation .  Il  se  caractérise  par  la  perte  progressive  des  capacités  sécrétoires de l'insuline, accompagnée d'une augmentation de la résistance à l'insuline.
 
@@ -220,9 +72,7 @@ Dans l'histoire de la maladie, on distingue trois phases évolutives du diabète
 
 ## Histoire de la maladie
 
-
-
-## Phase avec anomalies de la glycorégulation
+### Phase avec anomalies de la glycorégulation
 
 La phase pendant laquelle la glycémie est au-dessus des valeurs considérées comme normales (&gt; 1,10 g/l ou 6,0 mmol/l) mais au-deçà du seuil défini pour le diabète de type 2 (1,26 g/l ou 7,0 mmol/l) est décrite comme une phase de troubles de la glycorégulation ou état de prédiabète . Ces anomalies de la glycorégulation ont été identifiées comme étant un facteur de risque de diabète.
 
@@ -233,85 +83,57 @@ Deux situations métaboliques intermédiaires entre l'état où la glycémie est
 
 Qu'il soit défini comme une hyperglycémie modérée à jeun ou une intolérance au glucose, le prédiabète semble être associé à une augmentation du risque ultérieur d'accident vasculaire cérébral [ref-1] .
 
-## Phase infraclinique asymptomatique
+### Phase infraclinique asymptomatique
 
 La phase asymptomatique est caractérisée par une glycémie supérieure à la normale , associée à une absence de complications. Elle évolue sur une période relativement longue (une dizaine d'années) au cours de laquelle le diagnostic ne peut être réalisé que par le dépistage .
 
-## Phase clinique avec symptômes et complications
+### Phase clinique avec symptômes et complications
 
 La phase clinique symptomatique est caractérisée par des complications chroniques et parfois aiguës.
 
-- ¼ Les complications chroniques du diabète de type 2 sont à la fois microvasculaires (rétinopathie, néphropathie et neuropathie) et macrovasculaires (infarctus du myocarde, artérite et accident vasculaire cérébral).
-- ¼ Les complications aiguës du diabète de type 2 sont des urgences métaboliques (malaises voire coma) par hyperglycémie et acidocétose (insuline non prescrite ou insuffisamment dosée), mais aussi par hypoglycémie résultant de l'administration de quantités inadaptées d'insuline ou d'insulinosécréteurs par voie orale (sulfamides hypoglycémiants ou glinides).
+- Les complications chroniques du diabète de type 2 sont à la fois microvasculaires (rétinopathie, néphropathie et neuropathie) et macrovasculaires (infarctus du myocarde, artérite et accident vasculaire cérébral).
+- Les complications aiguës du diabète de type 2 sont des urgences métaboliques (malaises voire coma) par hyperglycémie et acidocétose (insuline non prescrite ou insuffisamment dosée), mais aussi par hypoglycémie résultant de l'administration de quantités inadaptées d'insuline ou d'insulinosécréteurs par voie orale (sulfamides hypoglycémiants ou glinides).
 
-## Les sujets diabétiques meurent principalement d'une maladie cardiovasculaire.
+#### Les sujets diabétiques meurent principalement d'une maladie cardiovasculaire.
 
 Dans la  cohorte  Entred,  une  personne  diabétique  sur  6  (17    %) [ref-2] avait  dans  ses  antécédents  une  complication macrovasculaire (infarctus du myocarde, angor, intervention de revascularisation coronaire). La mortalité cardiovasculaire concernait 32    % des personnes diabétiques incluses (données 2001-2006) [ref-3] :
 
-- 11    % liés à une cardiopathie ischémique ;
-- 8    % liés à une pathologie cérébrovasculaire.
+- 11 % liés à une cardiopathie ischémique ;
+- 8 % liés à une pathologie cérébrovasculaire.
 
 La surmortalité des personnes diabétiques par rapport aux non diabétiques était multipliée par 2,2 en ce qui concernait les cardiopathies ischémiques, et par 1,8 pour les maladies cérébrovasculaires [ref-4] .
 
-Les  deux  principales  limites  à  la  connaissance  de  la  prévalence  réelle  du  diabète  en  France  sont  liées  à  la méconnaissance de la part du diabète diagnostiqué et non traité par des médicaments et de la part du diabète non diagnostiqué.
+Les deux  principales  limites  à  la  connaissance  de  la  prévalence  réelle  du  diabète  en  France  sont  liées  à  la méconnaissance de la part du diabète diagnostiqué et non traité par des médicaments et de la part du diabète non diagnostiqué.
 
-[ref-1]: La méta-analyse de 15 cohortes prospectives (totalisant 760 000 sujets) a montré une augmentation du risque d'AVC chez les sujets ayant un prédiabète après ajustement pour les autres facteurs de risque cardiovasculaire. Pour les études définissant le diabète comme une hyperglycémie modérée, le risque relatif (RR) = 1,21, IC95 % = 1,02-1,44, p = 0,03 ; pour les études définissant le prédiabète comme une intolérance au glucose, le RR = 1,26, IC95 % = 1,10-1,43, p &lt; 0,001. Lee M, Saver JL, Hong KS, Song S, Chang KH, Ovbiagele B. Effect of pre-diabetes on future risk of stroke: meta-analysis. BMJ 2012;344:e3564.
-
-[ref-2]: Institut de veille sanitaire, Fagot-Campagna A, Fosse S, Roudier C, Romon I, Penfornis A, et al .  Caractéristiques, risque vasculaire et complications chez les personnes diabétiques en France métropolitaine : d'importantes évolutions entre Entred 2001 et Entred 2007. BEH 2009;(42-43):450-5.
-
-[ref-3]: Institut de veille sanitaire, Romon I, Jougla E, Weill A, Eschwège E, Simon D, et al . Description de la mortalité et des causes de décès dans une cohorte d'adultes diabétiques, en France métropolitaine. Étude Entred 2001. BEH 2009;(42-43):469-72.
-[ref-4]: Institut de veille sanitaire, Fagot-Campagna A, Romon I, Fosse S, Roudier C. Prévalence et incidence du diabète, et mortalité liée au diabète en France. Synthèse épidémiologique. Saint-Maurice: InVS; 2010.
 
 <!-- page: 4 -->
-|
-
-
 
 ## Données épidémiologiques
 
-
-
-## Prévalence du diabète
+### Prévalence du diabète
 
 En 2011, la prévalence du diabète traité a été estimée à 4,6 % , soit plus de 3 millions de personnes [ref-5] .
 
 Les données 2012 de l'enquête ObÉpi [ref-6] montrent que 5,5    % des Français déclaraient être traités pour un diabète de type 2 (diabète traité médicalement + diabète traité par régime seul).
 
-- ¼ La prévalence du diabète augmentait avec l'âge : &lt; 1 % avant 44 ans, comprise entre 3    % et 10    % entre 45 et 64 ans et de 10    % à 20    % après 65 ans.
-- ¼ À âge égal, elle était plus élevée chez l'homme que chez la femme, excepté dans les départements d'Outre-mer (DOM) où, à ancienneté de diabète égale, la prévalence du diabète était plus élevée chez les femmes (données 2009 [ref-7] ).
-- ¼ Elle était plus élevée chez les sujets en surpoids (prévalence multipliée par 3) et les obèses (prévalence multipliée par 7). 40    %  des hommes et 47    % des femmes diabétiques de type 2 étaient obèses.
-- ¼ La prévalence du diabète augmentait avec les difficultés financières déclarées (elle était notamment de 10    % chez les personnes déclarant ne pouvoir s'en sortir financièrement sans faire de dettes).
+- La prévalence du diabète augmentait avec l'âge : &lt; 1 % avant 44 ans, comprise entre 3    % et 10    % entre 45 et 64 ans et de 10    % à 20    % après 65 ans.
+- À âge égal, elle était plus élevée chez l'homme que chez la femme, excepté dans les départements d'Outre-mer (DOM) où, à ancienneté de diabète égale, la prévalence du diabète était plus élevée chez les femmes (données 2009 [ref-7] ).
+- Elle était plus élevée chez les sujets en surpoids (prévalence multipliée par 3) et les obèses (prévalence multipliée par 7). 40    %  des hommes et 47    % des femmes diabétiques de type 2 étaient obèses.
+- La prévalence du diabète augmentait avec les difficultés financières déclarées (elle était notamment de 10    % chez les personnes déclarant ne pouvoir s'en sortir financièrement sans faire de dettes).
 
-Selon les données du BEH publiées en 2010 [ref-8] (cf. figure 1), l'analyse des taux de prévalence par région en métropole, après standardisation sur l'âge et le sexe, montrait que :
+Selon les données du BEH publiées en 2010 [ref-8], l'analyse des taux de prévalence par région en métropole, après standardisation sur l'âge et le sexe, montrait que :
 
 - les prévalences les plus élevées étaient observées dans le Nord-Pas-de-Calais, la Picardie, l'Alsace, ChampagneArdenne et la Seine-Saint-Denis ;
 - les prévalences les plus basses étaient observées en Bretagne, dans les Pays-de-la-Loire et l'Aquitaine.
 
 La prévalence du diabète n'a cessé d'augmenter entre 2001 et 2011, le nombre de personnes traitées pour diabète s'est accru en moyenne de 5,4 %/an. Cette évolution serait liée à l'augmentation du surpoids et de l'obésité, au vieillissement de la population, à l'amélioration de l'espérance de vie des personnes traitées pour diabète et à l'intensification du dépistage [ref-9] .
 
-[ref-5]: Caisse nationale de l'assurance maladie des travailleurs salariés. Améliorer la qualité du système de santé et maîtriser les dépenses : propositions de l'Assurance Maladie pour 2014. Rapport au ministre chargé de la Sécurité sociale et au parlement sur l'évolution des charges et produits de l'assurance maladie au titre de 2014 (loi du 13 août 2004). Paris: CNAMTS; 2013. http://www.ameli.fr/fileadmin/user\_upload/documents/cnamts\_rapport\_charges\_produits\_2014.pdf
-
-[ref-6]: Institut national de la santé et de la recherche médicale, Kantar Health, Roche. Enquête épidémiologique nationale sur le surpoids et l'obésité. ObEpi 2012. Neuilly-sur-Seine: Roche; 2012. http://www.roche.fr/content/dam/corporate/roche\_fr/doc/obepi\_2012.pdf
-
-[ref-7]: Institut de veille sanitaire, Ndong JR, Romon I, Druet C, Prévot L, Hubert-Brierre R, et al . Caractéristiques, risque vasculaire, complications et qualité des soins des personnes diabétiques dans les départements d'Outre-mer et comparaison à la métropole : Entred 2007-2010, France. BEH 2010;(42-43):432-6.
-[ref-8]: Institut de veille sanitaire, Ricci P, Blotière PO, Simon D, Tuppin P, Ricordeau P, et al . Diabète traité : quelles évolutions entre 2000 et 2009 en France ? BEH 2010;(42-43):425-32.
-
-http://www.invs.sante.fr/Dossiers-thematiques/Maladies-chroniques-et-traumatismes/Diabete/Donnees-epidemiologiques/
-
-[ref-9]: Institut de veille sanitaire. Prévalence et incidence du diabète. Données épidémiologiques [Dossier] 2012. Prevalence-et-incidence-du-diabete [consulté en 08/2014].
 
 <!-- page: 5 -->
-|
-
-Figure 1. Prévalence du diabète traité par département en 2009 (taux standardisé sur l'âge et le sexe)
-
-
-
-Source : Institut de veille sanitaire, Ricci P, Blotière PO, Simon D, Tuppin P, Ricordeau P, et al . Diabète traité : quelles évolutions entre 2000 et 2009 en France ? BEH 2010;(42-43):425-32.
 
 La prévalence du diabète pourrait être sous-estimée , les personnes diabétiques non diagnostiquées et/ou non traitées n'étant pas prises en compte. Ainsi, dans l'étude nationale nutrition santé (ENNS) [ref-10] , la prévalence des cas de diabète non diagnostiqués était estimée à 1 % (IC 95 % = 0,6-1,7). La part relative de ces cas de diabète méconnus était estimée à 30 % chez les 30-54 ans et à 12 % chez les 55-74 ans [ref-11] .
 
-## Prévalence des états de prédiabète
+### Prévalence des états de prédiabète
 
 Dans la population des adultes de 18-74 ans, la prévalence de l'hyperglycémie à jeun et/ou des traitements antidiabétiques (oraux ou insuline) :
 
@@ -320,20 +142,9 @@ Dans la population des adultes de 18-74 ans, la prévalence de l'hyperglycémie 
 
 Sur les 4,7 % d'adultes ayant une hyperglycémie à jeun, 1,3 % [IC 95 % : 0,7-2,0]  n'étaient pas traités par un médicament antidiabétique.
 
-[ref-10]: Institut de veille sanitaire. Étude nationale nutrition santé ENNS, 2006. Situation nutritionnelle en France en 2006 selon les indicateurs d'objectif et les repères du Programme national nutrition santé (PNNS). Premiers résultats. Saint-Maurice: InVS; 2007. http://www.invs.sante.fr/publications/2007/nutrition\_enns/RAPP\_INST\_ENNS\_Web.pdf
-
-[ref-11]: Bonaldi C, Vernay M, Roudier C, Salanave B, Oleko A, Malon A, et al. A first national prevalence estimate of diagnosed and undiagnosed diabetes in France in 18- to 74-year-old individuals: the French Nutrition and Health Survey 2006/2007. Diabet Med 2011;28(5):583-9.
-
-[ref-12]: Institut de veille sanitaire. Étude nationale nutrition santé ENNS, 2006. Situation nutritionnelle en France en 2006 selon les indicateurs d'objectif et les repères du Programme national nutrition santé (PNNS). Premiers résultats. Saint-Maurice: InVS; 2007. http://www.invs.sante.fr/publications/2007/nutrition\_enns/RAPP\_INST\_ENNS\_Web.pdf
-
 <!-- page: 6 -->
-|
 
-
-
-
-
-## Mortalité
+### Mortalité
 
 Au cours de l'année 2009, le taux brut de mortalité des personnes traitées pour un diabète était de 29,5 pour 1 000 personnes (hommes = 31,6 ‰ ; femmes = 27,2 ‰) [ref-13] :
 
@@ -345,28 +156,13 @@ Le suivi de la mortalité d'une cohorte de personnes diabétiques traitées et d
 - 15 % des personnes diabétiques étaient décédées après 5 ans de suivi, à un âge moyen de 74 ans pour les hommes et 80 ans pour les femmes ;
 - par rapport à la population non diabétique, la mortalité, toutes causes confondues et à âge égal, était 1,4 fois plus élevée chez les personnes diabétiques, notamment en ce qui concernait les décès liés à une cardiopathie ischémique [2,2], une pathologie cérébrovasculaire [1,8], une insuffisance rénale [2,1], une insuffisance hépatique [2,2], une septicémie [1,5], un cancer du foie chez l'homme [3,0], un cancer du pancréas chez la femme [3,2], un cancer colorectal dans les deux sexes [1,7].
 
-[ref-13]: Institut de veille sanitaire, Ricci P, Blotière PO, Simon D, Tuppin P, Ricordeau P, et al . Diabète traité : quelles évolutions entre 2000 et 2009 en France ? BEH 2010;(42-43):425-32.
-
-[ref-14]: Institut de veille sanitaire, Fagot-Campagna A, Romon I, Fosse S, Roudier C. Prévalence et incidence du diabète, et mortalité liée au diabète en France. Synthèse épidémiologique. Saint-Maurice: InVS; 2010.
-
 <!-- page: 7 -->
-|
 
+# Facteurs et marqueurs de risque de diabète (Mini-synthèse)
 
+## Les facteurs de risque de diabète de type 2
 
-
-
-
-
-
-
-
-
-
-
-## Mini-synthèse
-
-Les facteurs de risque de diabète de type 2 associés à un risque de diabète augmenté avec un lien de causalité démontré sont :
+associés à un risque de diabète augmenté avec un lien de causalité démontré sont :
 
 - l'âge &gt; 45 ans ;
 - l'origine géographique (personne d'origine non caucasienne et/ou migrante ayant adopté un mode de vie occidental) ;
@@ -377,7 +173,9 @@ Les facteurs de risque de diabète de type 2 associés à un risque de diabète 
 - un antécédent familial de diabète chez un apparenté du premier degré ;
 - une anomalie de la glycorégulation ou état de prédiabète (glycémie à jeun comprise entre 1,10 g/l (6,1 mmol/l) et 1,26 g/l (7 ,0 mmol/l)).
 
-Les marqueurs de risque de diabète de type 2 sont associés à un risque de diabète augmenté, mais le lien de causalité n'a pas été clairement démontré. Ces marqueurs de risque sont les suivants :
+## Les marqueurs de risque de diabète de type 2
+
+sont associés à un risque de diabète augmenté, mais le lien de causalité n'a pas été clairement démontré. Ces marqueurs de risque sont les suivants :
 
 - une hypertension artérielle (pression artérielle systolique &gt; 140 mmHg ou pression artérielle diastolique &gt; 90 mmHg) ;
 - une dyslipidémie (HDL-cholestérolémie &lt; 0,35 g/l [0,9 mmol/l] ou triglycéridémie &gt; 2 g/l [2,3 mmol/l]) ;
@@ -389,45 +187,29 @@ Les marqueurs de risque de diabète de type 2 sont associés à un risque de dia
 
 Les études faites en population dite précaire mettent en évidence une plus forte prévalence du diabète dans ces populations, une morbi-mortalité liée au diabète plus élevée malgré un âge plus jeune, des facteurs aggravants plus fréquents (tabagisme chronique notamment).
 
-
 <!-- page: 8 -->
 
+# Facteurs et marqueurs de risque de diabète
 
 ## Facteurs de risque de diabète
 
-
-
-
-
 Aucune hiérarchisation des facteurs de risque de diabète identifiés n'a été établie. Si le lien entre ces facteurs de risque et le diabète a été établi, les risques relatifs ne sont pas clairement spécifiés. De plus, les hypothèses physiopathologiques reliant ces facteurs de risque au diabète sont  partiellement connus.
 
-## L'âge &gt; 45 ans
+### L'âge &gt; 45 ans
 
-Au-delà de 40 ans, la prévalence du diabète augmente fortement dans les deux sexes [ref-15] (cf. figure 2), mais les données ne permettent pas d'identifier clairement le point d'inflexion qui définit l'âge limite inférieur de la population cible. Dans les recommandations françaises, l'âge de 45 ans a été retenu .
+Au-delà de 40 ans, la prévalence du diabète augmente fortement dans les deux sexes [ref-15], mais les données ne permettent pas d'identifier clairement le point d'inflexion qui définit l'âge limite inférieur de la population cible. Dans les recommandations françaises, l'âge de 45 ans a été retenu .
 
 Sur  un  plan  physiopathologique,  l'augmentation  progressive  de  l'insulinorésistance  avec  l'âge  est  supposée consécutive à l'augmentation de l'adiposité abdominale et à l'accumulation des déséquilibres du mode de vie (alimentation, sédentarité).
 
-Figure 2. Prévalence du diabète en fonction de l'âge
-
-
-
-Source : Ricordeau P, Weill A, Vallier N, Bourrel R, Fender P, Allemand H. L 'épidémiologie du diabète en France métropolitaine. Diabetes Metab 2000;26(Suppl 6):11-24
-
-## L'origine géographique et les modifications de mode de vie
+### L'origine géographique et les modifications de mode de vie
 
 La prévalence du diabète de type 2 est plus faible dans les populations caucasiennes ou dans les populations non caucasiennes ayant conservé un mode de vie traditionnel par rapport aux populations d'origine non caucasienne ayant adopté un mode de vie occidental. Selon l'enquête décennale santé (EDS) 2002-2003, les femmes d'origine maghrébine vivant en France avaient un risque de diabète 2 fois supérieur à celui des femmes d'origine française [ref-16] .
 
 L'Atlas mondial du diabète publié par la Fédération internationale du diabète rapporte les estimations de la prévalence du diabète pour l'année 2013 suivantes : Moyen-Orient et Afrique du Nord (10,9    %), Amérique du Nord et Caraïbes (9,6    %), Asie du Sud-Est (8,7    %), Amérique centrale et du Sud (8,2    %), Pacifique occidental (8,1    %), Europe (6,8    %), Afrique (5,7    %).
 
-[ref-15]: Ricordeau P, Weill A, Vallier N, Bourrel R, Fender P, Allemand H. L 'épidémiologie du diabète en France métropolitaine. Diabetes Metab 2000;26(Suppl 6):11-24.
-
-[ref-16]: Institut de veille sanitaire, Fagot-Campagna A, Romon I, Fosse S, Roudier C. Prévalence et incidence du diabète, et mortalité liée au diabète en France. Synthèse épidémiologique. Saint-Maurice: InVS; 2010.
-
-http://www.invs.sante.fr/publications/2010/plaquette\_diabete/plaquette\_diabete.pdf
-
 <!-- page: 9 -->
 
-## L'excès pondéral
+### L'excès pondéral
 
 L'excès pondéral est un facteur de risque de diabète identifié par l'ensemble des modèles d'analyses multivariées. Les valeurs moyennes d'indice de masse corporelle (IMC) et de chacune des mesures des indicateurs anthropométriques (tour de taille, tour de hanches, rapport tour de taille/tour de hanches) sont plus élevées chez les diabétiques que chez les non diabétiques :
 
@@ -437,20 +219,18 @@ L'excès pondéral est un facteur de risque de diabète identifié par l'ensembl
 
 Par comparaison avec des sujets non diabétiques [ref-19] , la prévalence du diabète était 2,5 fois plus élevée chez les hommes en surpoids et 3 fois plus élevée chez les femmes en surpoids. Elle était 5,5 fois plus élevée chez les hommes obèses et 6 fois plus élevée chez les femmes obèses.
 
-## La sédentarité
+### La sédentarité
 
 La sédentarité a été définie comme un facteur de risque de diabète sur les résultats d'études épidémiologiques et d'études d'interventions en prévention primaire chez les sujets intolérants au glucose. Ces dernières montraient une réduction significative de l'incidence du diabète dans les groupes de patients pratiquant une activité physique régulière (2h30/semaine) ou traités par l'association régime + activité physique par rapport aux groupes de patients ne suivant pas un programme d'activité physique intensif.
 
-## Les antécédents de diabète gestationnel
+### Les antécédents de diabète gestationnel
 
 Le diabète gestationnel a été défini par l'OMS comme un trouble de la tolérance glucidique conduisant à une hyperglycémie de sévérité variable, débutant ou diagnostiqué pour la première fois pendant la grossesse, quels que soient les traitements nécessaires et l'évolution dans le post-partum . Il correspond à deux populations de femmes dont le pronostic maternofœtal n'est probablement pas le même :
 
 - des femmes ayant un diabète préexistant à la grossesse mais découvert pendant cette dernière (diabète de type 2), et qui persistera après l'accouchement ;
 - des femmes ayant une anomalie de la tolérance glucidique apparue en cours de grossesse (généralement en deuxième partie) et disparaissant en post-partum .
 
-
-
-## Pour info
+### Pour info
 
 Physiologiquement, un état d'insulinorésistance s'installe progressivement au fur et à mesure de l'avancée du terme de la grossesse. L 'insulinorésistance est liée à la production d'hormones placentaires, l'HPL ( Human Placental Lactogene ) et la progestérone, mais aussi à la stimulation par la grossesse d'hormones de contrerégulation, la prolactine, le cortisol et la leptine.
 
@@ -460,20 +240,12 @@ Un accroissement des risques de trouble de la tolérance glucidique, de diabète
 
 L'analyse de la littérature sur le diabète gestationnel publiée par la HAS en 2005 rapportait qu' aucune étude à long terme répondant à des critères de bonne qualité méthodologique ne permettait d'étayer cette hypothèse . L 'existence d'une obésité parentale serait en revanche un facteur de risque.
 
-[ref-17]: DESIR : Données épidémiologiques sur le syndrome d'insulino-résistance. Balkau B, Lange C, Fezeu L, Tichet J, de Lauzon-Guillain B, Czernichow S, et al . Predicting diabetes: clinical, biological, and genetic approaches: data from the Epidemiological Study on the Insulin Resistance Syndrome (DESIR). Diabetes Care 2008;31(10):2056-61.
-
-[ref-18]: Institut de veille sanitaire, Druet C, Roudier C, Romon I, Assogba F, Bourdel-Marchasson I, et al . Échantillon national témoin représentatif des personnes diabétiques, Entred 2007-2010. Caractéristiques, état de santé, prise en charge et poids économique des personnes diabétiques. Saint-Maurice: InVS; 2013. http://opac.invs.sante.fr/doc\_num.php?explnum\_id=9074
-
-[ref-19]: Institut de veille sanitaire, Fagot-Campagna A, Romon I, Fosse S, Roudier C. Prévalence et incidence du diabète, et mortalité liée au diabète en France. Synthèse épidémiologique. Saint-Maurice: InVS; 2010.
-
-
 <!-- page: 10 -->
-
 
 La prévalence du diabète gestationnel est variable (1  % à 14  %) selon les études et les populations de ces études ; dans le Réseau Sentinelle français Audipog [ref-20] (Association des utilisateurs de dossiers informatisés en pédiatrie, obstétrique et gynécologie ; http://www.audipog.net/ ), la fréquence du diabète gestationnel a été estimée entre 2  % et 4  %.
 
-- ¼ Les  risques  maternels  classiquement  associés  au  diabète  gestationnel  sont  une  hypertension  artérielle gravidique et la pré-éclampsie. Le risque de diabète à distance de la grossesse chez les femmes ayant eu un diabète gestationnel varie entre 2 % et 70 % [ref-21] . À distance de la grossesse, l'étude DPP ( Diabetes Prevention program ) [ref-22] a montré que l'incidence d'apparition d'un diabète de type 2 était augmenté chez les femmes ayant eu un diabète gestationnel par comparaison à celles n'en n'ayant pas eu.
-- ¼ Les risques fœtaux sont une macrosomie, une détresse respiratoire, une hypoglycémie, une hyperbilirubinémie, une polyglobulie ou une hypocalcémie, un hydramnios et une hypertrophie cardiaque septale.
+- Les  risques  maternels  classiquement  associés  au  diabète  gestationnel  sont  une  hypertension  artérielle gravidique et la pré-éclampsie. Le risque de diabète à distance de la grossesse chez les femmes ayant eu un diabète gestationnel varie entre 2 % et 70 % [ref-21] . À distance de la grossesse, l'étude DPP ( Diabetes Prevention program ) [ref-22] a montré que l'incidence d'apparition d'un diabète de type 2 était augmenté chez les femmes ayant eu un diabète gestationnel par comparaison à celles n'en n'ayant pas eu.
+- Les risques fœtaux sont une macrosomie, une détresse respiratoire, une hypoglycémie, une hyperbilirubinémie, une polyglobulie ou une hypocalcémie, un hydramnios et une hypertrophie cardiaque septale.
 
 Selon le rapport de synthèse de la HAS de 2005 sur « Le dépistage et le diagnostic du diabète gestationnel », les facteurs de risque de diabète gestationnel sont :
 
@@ -483,36 +255,28 @@ Selon le rapport de synthèse de la HAS de 2005 sur « Le dépistage et le diagn
 - les antécédents familiaux de diabète ;
 - un antécédent personnel de diabète gestationnel, de mort fœtale in utero ou de macrosomie (poids de naissance &gt; 4 kg).
 
-## Les antécédents de macrosomie fœtale
+### Les antécédents de macrosomie fœtale
 
 Les  femmes ayant  donné  naissance  à  un  enfant  de  poids  de  naissance  élevé  sont  classiquement  identifiées comme ayant un risque élevé de développement de diabète. En dépit de l'absence de démonstration claire liée aux insuffisances méthodologiques des études, la HAS a considéré qu'il existe un lien entre la macrosomie fœtale et le risque de diabète maternel.
 
 Dans la cohorte DESIR [ref-23] , les femmes diabétiques avaient dans leurs antécédents un nombre significativement plus élevé d'accouchements de nouveau-nés de poids de naissance de plus de 4 kg (27 % versus 15  %, p = 0,02) que les femmes non diabétiques.
 
-## Les antécédents familiaux de diabète
+### Les antécédents familiaux de diabète
 
 L'ensemble des études épidémiologiques étrangères concorde vers une augmentation du risque de survenue de diabète de type 2 chez les sujets ayant des antécédents familiaux de diabète ( risque relatif de diabète compris entre 1,7 et 4,8 selon les études et le degré de parenté ). Cependant les données de la cohorte DESIR (citée ci-dessus), n'ont mis en évidence aucune différence significative de la prévalence du diabète en fonction de l'existence ou non d'antécédents familiaux de diabète.
 
 Bien que les données de la littérature ne permettent pas d'évaluer l'influence du degré de parenté sur le risque de diabète, les recommandations françaises restreignent la population cible aux antécédents du premier degré (père, mère, frère, sœur) .
 
-## Les anomalies de la glycorégulation (ou état de prédiabète)
+### Les anomalies de la glycorégulation (ou état de prédiabète)
 
-- ¼ Le diagnostic biologique de prédiabète permet d'identifier les sujets qui risquent de développer à moyen terme un diabète.
-- ¼ La réduction du risque de prédiabète par une activité physique régulière et une réduction des apports caloriques alimentaires permet de prévenir ou de différer l'apparition du diabète de type 2.
+- Le diagnostic biologique de prédiabète permet d'identifier les sujets qui risquent de développer à moyen terme un diabète.
+- La réduction du risque de prédiabète par une activité physique régulière et une réduction des apports caloriques alimentaires permet de prévenir ou de différer l'apparition du diabète de type 2.
 
-[ref-20]: Le Réseau Sentinelle AUDIPOG est constitué, depuis 1994, d'un ensemble de maternités volontaires publiques et privées, provenant de toutes les régions de France, utilisant ou non un dossier obstétrical AUDIPOG, informatisé ou non. La base de données (site consulté en avril 2013) comprend 411 332 dossiers recueillis sur 15 ans (de 1994 à 2008) en provenance de 233 maternités. Vendittelli F, Rivière O, Crenn-Hébert C, Claris O, Tessier V, Pinquier D, et al . Réseau sentinelle Audipog 2004-2005. Partie 1 : résultats des principaux indicateurs périnatals. Gynécol Obstet Fertil 2008;36(11):1091-100.
 
-[ref-21]: Kim  C,  Newton  KM,  Knopp  RH.  Gestational  diabetes  and  the  incidence  of  type  2  diabetes:  a  systematic  review.  Diabetes  Care 2002;25(10):1862-8.
-[ref-22]: DPP : Diabetes Prevention Program . Inclusion de 2 190 femmes parmi lesquelles 350 avaient eu un diabète gestationnel. Ratner RE, Christophi CA, Metzger BE, Dabelea D, Bennett PH, Pi-Sunyer X, et al . Prevention of diabetes in women with a history of gestational diabetes: effects of metformin and lifestyle interventions. J Clin Endocrinol Metab 2008;93(12):4774-9.
-[ref-23]: Balkau B, Lange C, Fezeu L, Tichet J, de Lauzon-Guillain B, Czernichow S, et al. Predicting diabetes: clinical, biological, and genetic approaches: data from the Epidemiological Study on the Insulin Resistance Syndrome (DESIR). Diabetes Care 2008;31(10):2056-61.
 
 <!-- page: 11 -->
 
-
-
-
-
-## Pour info
+### Pour info
 
 Les  anomalies  de  la  glycorégulation  ou  prédiabète  correspondent  aux  deux  situations  métaboliques suivantes :
 
@@ -522,17 +286,13 @@ Les  anomalies  de  la  glycorégulation  ou  prédiabète  correspondent  aux  
 
 ## Marqueurs de risque de diabète
 
-## Algorithme
-
-
-
 Les marqueurs de risque correspondent à des pathologies associées au diabète pour lesquelles le lien de causalité n'a pas été clairement démontré .  Dans les recommandations françaises, il a été décidé que la recherche d'une simple association entre un facteur de risque et le diabète était suffisante, que l'association soit indépendante ou non des autres facteurs de confusion et qu'il existe une relation de causalité ou non.
 
-## L'hypertension artérielle
+### L'hypertension artérielle
 
 Les données des études (13 études de cohortes ou transversales internationales publiées entre 1990 et 2002) rapportées dans la recommandation ANAES de 2003 « Principes de dépistage du diabète de type 2 » ayant calculé le risque relatif de diabète chez des sujets hypertendus montrent qu'il variait suivant les études entre 1,14 et 2,68 pour les études de cohortes et entre 1,6 et 2,6 pour les études transversales.
 
-## Les dyslipidémies
+### Les dyslipidémies
 
 Les résultats des études (10 études transversales ou de cohorte publiées entre 1989 et 1999) rapportées dans la recommandation ANAES de 2003 « Principes de dépistage du diabète de type 2 » ayant analysé l'association entre les anomalies lipidiques et le risque de diabète ne sont pas concordants . L 'augmentation de risque relatif de diabète n'était pas statistiquement significative en ce qui concernait l'hypercholestérolémie totale, la diminution de la HDL-cholestérolémie et l'hypertriglycéridémie.
 
@@ -540,7 +300,7 @@ Dans la cohorte DESIR, les hommes traités pour une dyslipidémie étaient signi
 
 Plusieurs mécanismes physiopathologiques ont été discutés pour expliquer l'effet potentiellement délétère d'une dyslipidémie dans la survenue d'un diabète : altération de l'insulinosensibilité et de la sécrétion d'insuline.
 
-## Le tabagisme chronique
+### Le tabagisme chronique
 
 Une association significative entre le tabagisme et le risque de diabète de type 2 a été mise en évidence par une méta-analyse publiée en 2007 [ref-26] sans pouvoir établir cependant le lien de causalité :
 
@@ -549,29 +309,20 @@ Une association significative entre le tabagisme et le risque de diabète de typ
 
 Dans la cohorte DESIR, le pourcentage d'hommes fumeurs était statistiquement supérieur chez les diabétiques que chez les non diabétiques (37 % versus 24 %, p = 0,0009) [ref-27] . Cette différence n'était pas retrouvée chez la femme.
 
-[ref-24]: Wagner R. et al., Family history of diabetes is associated with higher risk for prediabetes: a multicentre analysis from the German Center for Diabetes Research, Diabetologia. 2013 Oct;56(10):2176-80.
-[ref-25]: Balkau B, Lange C, Fezeu L, Tichet J, de Lauzon-Guillain B, Czernichow S, et al . Predicting diabetes: clinical, biological, and genetic approaches: data from the Epidemiological Study on the Insulin Resistance Syndrome (DESIR). Diabetes Care 2008;31(10):2056-61.
-[ref-26]: Willi C, Bodenmann P, Ghali WA, Faris PD, Cornuz J. Active smoking and the risk of type 2 diabetes. A systematic review and metaanalysis. JAMA 2007;298(22):2654-64.
-[ref-27]: Institut de veille sanitaire, Vol S, Balkau B, Lange C, de Lauzon-Guillain B, Czernichow S, et al. Un score prédictif du diabète de type 2 en France : l'étude prospective D.E.S.I.R. BEH 2009;(9):81-4.
+
+
 
 <!-- page: 12 -->
-|
 
-
-
-
-
-## Les antécédents d'accouchement d'un enfant de faible poids de naissance ou de grossesse avec un retard de croissance intra-utérin
+### Les antécédents d'accouchement d'un enfant de faible poids de naissance ou de grossesse avec un retard de croissance intra-utérin
 
 Les antécédents de faible poids de naissance ou de retard de croissance intra-utérin semblent être des marqueurs de risque de diabète, mais les données sont encore insuffisantes pour définir le risque avec précision.
 
-## Les antécédents de syndrome des ovaires polykystiques
+### Les antécédents de syndrome des ovaires polykystiques
 
 La recommandation ANAES de 2003 « Principes de dépistage du diabète de type 2 » a identifié ce marqueur de risque de diabète de type 2 sur la base des résultats d'études de cohortes qui montraient que la prévalence du diabète de type 2 était plus élevée chez les femmes ayant un syndrome des ovaires polykystiques (risque multiplié par 2,8).
 
 ## Cas particulier des personnes en situation de précarité
-
-
 
 L'analyse des données de l'impact du niveau socio-économique et du pays d'origine sur le diabète en France (Entred 2007-2010 [ref-28] , enquête décennale santé (EDS [ref-29] )  2002-2003, enquêtes santé et protection sociale (ESPS) 2002-2004 et 2006-2008 [ref-30] ) montrent que :
 
@@ -581,37 +332,15 @@ L'analyse des données de l'impact du niveau socio-économique et du pays d'orig
 
 Les données 2011-2012 de l'étude Abena [ref-31] chez les usagers de l'aide alimentaire montraient également que la prévalence de l'obésité, de l'hypertension artérielle et du diabète étaient plus élevées qu'en population générale.
 
-[ref-28]: Institut de veille sanitaire, Fagot-Campagna A, Fosse S, Roudier C, Romon I, Penfornis A, et al . Caractéristiques, risque vasculaire et complications chez les personnes diabétiques en France métropolitaine : d'importantes évolutions entre Entred 2001 et Entred 2007. BEH 2009;(42-43):450-5.
-
-[ref-29]: L 'EDS 2002-2003 a été mise en œuvre par la Division condition de vie des ménages de l'Institut national de la statistique et de l'économie (Insee). L 'enquête décennale santé est une enquête à caractère obligatoire, transversale, réalisée par entretien, qui dispose d'un grand nombre d'indicateurs de niveau socio-économique.
-[ref-30]: L 'ESPS est une enquête transversale, généraliste, portant sur l'état de santé de la population française métropolitaine, répétée tous les deux ans.
-
-Institut  de  veille  sanitaire.  Prévalence  du  diabète  et  recours  aux  soins  en  fonction  du  niveau  socio-économique  et  du  pays  d'origine  en  France  métropolitaine.  Enquête  décennale  santé  2002-2003  et  enquêtes  santé  et  protection  sociale  2002  et  2004.  SaintMaurice : InVS ; 2011. http://www.invs.sante.fr/Publications-et-outils/Rapports-et-syntheses/Maladies-chroniques-et-traumatismes/ 2011/Prevalence-du-diabete-et-recours-aux-soins-en-fonction-du-niveau-socio-economique-et-du-pays-d-origine-en-Francemetropolitaine ;
-
-Direction de la recherche, des études, de l'évaluation et des statistiques, Allonier C, Boisguérin B, Le Fur P. Les bénéficiaires de la CMU-C déclarent plus de pathologies que le reste de la population. Résultats des enquêtes ESPS 2006-2008. Etudes et Résultats 2012;(793).
-
-[ref-31]: Observatoire de la santé d'Ile-de-France, Institut de veille sanitaire, Institut national de prévention et d'éducation pour la santé, Direction générale de la cohésion sociale, Grange D, Castetbon K, et al. Alimentation et état nutritionnel des bénéficiaires de l'aide alimentaire. Etude Abena 2011-2012 et évolutions depuis 2004-2005. Paris: ORS IdF; 2013.
 
 <!-- page: 13 -->
 
-
-
-
-
-
-
-
-
-## Maladies secondaires au diabète
-
-
-
-## Mini-synthèse
+# Maladies secondaires au diabète (Mini-synthèse)
 
 ## La gravité du diabète est liée aux complications générées par ce dernier.
 
-- ¼ Les altérations micro et macro-angiopathiques secondaires au diabète touchent les organes cibles suivants : le rein, l'œil, le pied, le système nerveux périphérique, l'appareil cardiovasculaire, les dents et leur tissu de soutien .
-- ¼ Leur survenue est fonction du degré d'hyperglycémie et de la durée d'exposition à l'hyperglycémie (durée d'évolution du diabète).
+- Les altérations micro et macro-angiopathiques secondaires au diabète touchent les organes cibles suivants : le rein, l'œil, le pied, le système nerveux périphérique, l'appareil cardiovasculaire, les dents et leur tissu de soutien .
+- Leur survenue est fonction du degré d'hyperglycémie et de la durée d'exposition à l'hyperglycémie (durée d'évolution du diabète).
 
 ## Les complications microangiopathiques associées au diabète sont à type de :
 
@@ -620,36 +349,34 @@ Direction de la recherche, des études, de l'évaluation et des statistiques, Al
 - neuropathie périphérique qui est au début infraclinique puis donne lieu à une symptomatologie distale prédominant aux membres inférieurs (troubles sensitivomoteurs) ;
 - neuropathie autonome qui  a  une  expression clinique variable et souvent latente, avec atteinte des petites fibres amyéliniques des systèmes sympathique et parasympathique. Elle peut toucher le système cardiovasculaire, le tractus digestif, le système urogénital, le système sudoral et la motricité pupillaire.
 
-Les complications macroangiopathiques associées au diabète sont cardiovasculaires (insuffisance coronarienne, artériopathie oblitérante des membres inférieurs) et cérébrovasculaires (accident vasculaire cérébral).
+## Les complications macroangiopathiques associées au diabète sont :
 
-- ¼ Le risque cardiovasculaire global des sujets diabétiques est multiplié par un facteur 2 à 3 par rapport à la population générale.
-- ¼ Les infarctus du myocarde et les accidents vasculaires cérébraux sont responsables de plus de 50 % des décès des personnes diabétiques.
+cardiovasculaires (insuffisance coronarienne, artériopathie oblitérante des membres inférieurs) et cérébrovasculaires (accident vasculaire cérébral).
+
+- Le risque cardiovasculaire global des sujets diabétiques est multiplié par un facteur 2 à 3 par rapport à la population générale.
+- Les infarctus du myocarde et les accidents vasculaires cérébraux sont responsables de plus de 50 % des décès des personnes diabétiques.
 
 ## Les autres types de complication
 
-- ¼ Le diabète est un facteur de risque indépendant de gingivite et de parodontite, responsables d'une perte précoce de dents . L 'infection parodontale influe sur l'équilibre glycémique en induisant une insulinorésistance. Les facteurs aggravants sont une mauvaise hygiène bucco-dentaire, la consommation régulière de sucres, un manque de suivi dentaire.
-- ¼ Les lésions des pieds du sujet diabétique sont à type de mal perforant plantaire avec ulcération et altération de la capacité de cicatrisation qui peuvent aller jusqu'à l'amputation . Les facteurs aggravants sont des chaussures inadaptées, une hygiène insuffisante, des soins de pédicurie mal faits, des blessures liées à la non perception de sources de chaleur ou des traumatismes.
+- Le diabète est un facteur de risque indépendant de gingivite et de parodontite, responsables d'une perte précoce de dents . L 'infection parodontale influe sur l'équilibre glycémique en induisant une insulinorésistance. Les facteurs aggravants sont une mauvaise hygiène bucco-dentaire, la consommation régulière de sucres, un manque de suivi dentaire.
+- Les lésions des pieds du sujet diabétique sont à type de mal perforant plantaire avec ulcération et altération de la capacité de cicatrisation qui peuvent aller jusqu'à l'amputation . Les facteurs aggravants sont des chaussures inadaptées, une hygiène insuffisante, des soins de pédicurie mal faits, des blessures liées à la non perception de sources de chaleur ou des traumatismes.
 
 <!-- page: 14 -->
 
-
-
 ## Les microangiopathies
 
-
-
-## La rétinopathie diabétique
+### La rétinopathie diabétique
 
 La rétinopathie  diabétique  est  une complication évolutive sur 15 à 20 ans qui  peut  rester  asymptomatique jusqu'à un stade avancé. En l'absence de traitement, elle est responsable d'une altération de l'acuité visuelle.
 
 Souvent asymptomatique, la rétinopathie se caractérise par une atteinte des vaisseaux sanguins qui alimentent la  rétine.  Les  stades  précoces  se  caractérisent  par  des  occlusions  et  des  dilatations  vasculaires  rétiniennes ( rétinopathie non proliférante ). La rétinopathie diabétique évolue vers une phase proliférative avec néo vaisseaux ( rétinopathie proliférante ) puis un œdème maculaire qui réduisent considérablement la vision.
 
-- ¼ Selon les données 2007-2010 de la cohorte Entred [ref-32] , la fréquence de la rétinopathie diabétique estimée à partir des données des médecins était de 7,9 % en métropole ; 3,9 % des sujets diabétiques déclaraient avoir perdu la vue d'un œil et 16,6 % avaient reçu un traitement ophtalmologique par laser.
-- ¼ Selon l'OMS , il a été estimé qu'un tiers de la population des diabétiques de type 2 sera atteint de rétinopathie diabétique  au  bout  de  20  ans  d'évolution  du  diabète,  que  parmi  celle-ci,  un  tiers  aura  une  rétinopathie potentiellement cécitante et un tiers des diabétiques ayant des complications cécitantes deviendra définitivement aveugle.
+- Selon les données 2007-2010 de la cohorte Entred [ref-32] , la fréquence de la rétinopathie diabétique estimée à partir des données des médecins était de 7,9 % en métropole ; 3,9 % des sujets diabétiques déclaraient avoir perdu la vue d'un œil et 16,6 % avaient reçu un traitement ophtalmologique par laser.
+- Selon l'OMS , il a été estimé qu'un tiers de la population des diabétiques de type 2 sera atteint de rétinopathie diabétique  au  bout  de  20  ans  d'évolution  du  diabète,  que  parmi  celle-ci,  un  tiers  aura  une  rétinopathie potentiellement cécitante et un tiers des diabétiques ayant des complications cécitantes deviendra définitivement aveugle.
 
 Les  sujets  diabétiques  peuvent  être  atteints  d'autres  pathologies  oculaires :  cataracte  (non  spécifique mais plus fréquente et de survenue plus précoce chez le sujet diabétique), glaucome, paralysies oculomotrices, neuropathies optiques, atteintes cornéennes.
 
-## La néphropathie diabétique
+### La néphropathie diabétique
 
 L'insuffisance rénale est une complication grave du diabète de type 2 : il s'agit le plus souvent d'une néphropathie diabétique avec atteinte glomérulaire . Le risque d'insuffisance rénale est d'autant plus élevé que le sujet diabétique est âgé ou qu'il a une hypertension artérielle (responsable d'une néphroangiosclérose).
 
@@ -657,34 +384,22 @@ La néphropathie diabétique évolue progressivement d'une phase précoce caract
 
 La néphropathie diabétique était en 2011 la seconde cause de mise en dialyse en France [ref-33] .
 
-- ¼ Les néphropathies liées au diabète de type 2 représentaient 19 % des cas de glomérulonéphrites primitives. En métropole, la néphropathie liée au diabète comme cause d'insuffisance rénale terminale était 6 fois plus élevée dans le Nord-Pas-de-Calais ou en Alsace qu'en Bretagne. Elle était particulièrement élevée dans les régions d'outre-mer, avec des taux 7 fois supérieurs au taux national à la Réunion et 3 fois supérieurs en Guadeloupe et en Guyane.
-- ¼ La population des nouveaux patients dialysés en 2011 se caractérisait par une fréquence élevée de patients âgés et de diabète associé. Les comorbidités cardiovasculaires étaient plus fréquentes parmi les sujets dialysés ayant un diabète, de même que les autres facteurs de risque cardiovasculaire (obésité et hypertension artérielle) étaient plus fréquents chez les personnes diabétiques, à l'exception du tabagisme.
+- Les néphropathies liées au diabète de type 2 représentaient 19 % des cas de glomérulonéphrites primitives. En métropole, la néphropathie liée au diabète comme cause d'insuffisance rénale terminale était 6 fois plus élevée dans le Nord-Pas-de-Calais ou en Alsace qu'en Bretagne. Elle était particulièrement élevée dans les régions d'outre-mer, avec des taux 7 fois supérieurs au taux national à la Réunion et 3 fois supérieurs en Guadeloupe et en Guyane.
+- La population des nouveaux patients dialysés en 2011 se caractérisait par une fréquence élevée de patients âgés et de diabète associé. Les comorbidités cardiovasculaires étaient plus fréquentes parmi les sujets dialysés ayant un diabète, de même que les autres facteurs de risque cardiovasculaire (obésité et hypertension artérielle) étaient plus fréquents chez les personnes diabétiques, à l'exception du tabagisme.
 
-## La neuropathie diabétique
+### La neuropathie diabétique
 
 La neuropathie périphérique peut être infraclinique ou symptomatique (troubles sensitifs ou troubles moteurs, altération  des  réflexes  ostéotendineux,  atteinte  des  nerfs  crâniens).  Ces  manifestations  sont  le  plus  souvent périphériques et prédominent aux membres inférieurs.
 
-- ¼ Les paresthésies sont à type de fourmillements (impatience des membres inférieurs, jambes sans repos), d'engourdissement, d'impression de pieds morts, de marche sur du coton.
-- ¼ Les douleurs peuvent être diffuses : sensation de brûlure, d'élancements, de picotements (aiguille, punaise) s'exacerbant la nuit et atténuées par la marche ou l'exercice musculaire.
-- ¼ Les troubles de la sensibilité sont souvent au second plan : troubles de la sensibilité profonde, troubles de la sensibilité superficielle thermo-algésique et tactile.
-
-[ref-32]: Institut de veille sanitaire, Druet C, Roudier C, Romon I, Assogba F, Bourdel-Marchasson I, et al . Échantillon national témoin représentatif des personnes diabétiques, Entred 2007-2010. Caractéristiques, état de santé, prise en charge et poids économique des personnes diabétiques. Saint-Maurice: InVS; 2013. http://opac.invs.sante.fr/doc\_num.php?explnum\_id=9074 .
-
-[ref-33]: Agence de la biomédecine. REIN Rapport annuel 2011. Réseau, épidémiologie, information, néphrologie. Registre français des traitements de suppléance de l'insuffisance rénale chronique. Saint-Denis La Plaine: Agence de la biomédecine; 2011. http://www.agence-biomedecine.fr/IMG/pdf/rapport\_reinvdef.pdf
+- Les paresthésies sont à type de fourmillements (impatience des membres inférieurs, jambes sans repos), d'engourdissement, d'impression de pieds morts, de marche sur du coton.
+- Les douleurs peuvent être diffuses : sensation de brûlure, d'élancements, de picotements (aiguille, punaise) s'exacerbant la nuit et atténuées par la marche ou l'exercice musculaire.
+- Les troubles de la sensibilité sont souvent au second plan : troubles de la sensibilité profonde, troubles de la sensibilité superficielle thermo-algésique et tactile.
 
 <!-- page: 15 -->
 
-|
-
-
-
-
-
 La  neuropathie  autonome concerne  les  petites  fibres  amyéliniques  des  systèmes  sympathique  et  parasympathique. Elle peut toucher le système cardiovasculaire, le tractus digestif, le système urogénital, le système sudoral et la motricité pupillaire . L 'expression clinique est variable (cf. encadré) et souvent latente.
 
-
-
-## Pour info
+### Pour info
 
 Neuropathie  cardiovasculaire  : hypotension  artérielle  orthostatique,  allongement  du  segment  QT, arythmie ventriculaire, tachycardie sinusale permanente, œdème des membres inférieurs.
 
@@ -700,26 +415,18 @@ Atteintes du système sudoral : anhidrose, hyperhidrose.
 
 ## Les macroangiopathies
 
-
-
 Le risque cardiovasculaire global des sujets diabétiques est élevé . Il  est multiplié par un facteur 2 à 3 par rapport à la population générale.
 
 Les accidents coronariens, les accidents vasculaires cérébraux et les artérites des membres inférieurs sont les principales complications macrovasculaires du diabète de type 2.
 
-- ¼ Les infarctus du myocarde et les accidents vasculaires cérébraux sont responsables de plus de 50 % des décès des personnes diabétiques.
-- ¼ Dans l'étude CODIAB, une artériopathie oblitérante des membres inférieurs était observée chez 19 % des personnes diabétiques [ref-34] .
-- ¼ Selon les données 2007-2010 de la cohorte Entred [ref-35] , 17 % des sujets diabétiques déclaraient un angor ou un antécédent d'infarctus du myocarde ; 14 % un antécédent chirurgical de revascularisation coronarienne.
-- ¼ Les médecins traitants rapportaient que 6 % de leurs patients diabétiques avaient une insuffisance cardiaque et 5 % avaient eu un accident vasculaire cérébral.
+- Les infarctus du myocarde et les accidents vasculaires cérébraux sont responsables de plus de 50 % des décès des personnes diabétiques.
+- Dans l'étude CODIAB, une artériopathie oblitérante des membres inférieurs était observée chez 19 % des personnes diabétiques [ref-34] .
+- Selon les données 2007-2010 de la cohorte Entred [ref-35] , 17 % des sujets diabétiques déclaraient un angor ou un antécédent d'infarctus du myocarde ; 14 % un antécédent chirurgical de revascularisation coronarienne.
+- Les médecins traitants rapportaient que 6 % de leurs patients diabétiques avaient une insuffisance cardiaque et 5 % avaient eu un accident vasculaire cérébral.
 
 Le risque de décès par maladie cardiovasculaire est 2 à 3 fois plus élevé chez les sujets diabétiques que chez les sujets non diabétiques.
 
-[ref-34]: Delcourt  C,  Vauzelle-Kervroedan  F,  Cathelineau  G,  Papoz  L.  Low  prevalence  of  long-term  complications  in  non-insulin-dependent diabetes mellitus in France: a multicenter study. J Diabetes Complications 1998;12(2):88-95.
-
-[ref-35]: Institut de veille sanitaire, Druet C, Roudier C, Romon I, Assogba F, Bourdel-Marchasson I, et al. Échantillon national témoin représentatif des personnes diabétiques, Entred 2007-2010. Caractéristiques, état de santé, prise en charge et poids économique des personnes diabétiques. Saint-Maurice: InVS; 2013. http://opac.invs.sante.fr/doc\_num.php?explnum\_id=9074
-
 <!-- page: 16 -->
-
-
 
 Le risque de mort subite est significativement plus élevé chez les sujets diabétiques que dans la population générale (p &lt; 0,001). Le risque croît progressivement (cf. tableau ci-après) avec la sévérité du diabète [ref-36] (après ajustement sur les facteurs de risque cardiovasculaire et les antécédents d'infarctus du myocarde ou d'insuffisance cardiaque).
 
@@ -735,73 +442,42 @@ Source : Jouven X, Lemaître RN, Rea TD, Sotoodehnia N, Empana JP, Siscovick DS.
 
 IC95 % : intervalle de confiance à 95 %.
 
-
-
-## Pour info
+### Pour info
 
 Chez  le sujet diabétique, les ischémies myocardiques  peuvent  être silencieuses et doivent être systématiquement recherchées par un électrocardiogramme de repos (trouble de la repolarisation faisant suspecter une ischémie sous-endocardique ou sous-épicardique, onde Q de nécrose).
 
 ## Les autres types de complications
 
-
-
-## Les complications dentaires infectieuses
+### Les complications dentaires infectieuses
 
 Trois types de lésions sont plus fréquentes chez les sujets diabétiques : la carie dentaire (destruction de l'émail de la dent par la plaque dentaire), la gingivite (inflammation de la gencive par dépôt de bactéries au niveau du collet de la dent), la parodontite (inflammation en profondeur des gencives et de l'os qui soutient la dent, entraînant la prolifération de germes le long de la racine dentaire). Les lésions gingivales et osseuses sont d'autant plus graves chez le sujet diabétique qu'elles peuvent aboutir à une perte de dents précoce (ce risque est d'autant plus élevé que le diabète est ancien).
 
 Les études cliniques suggèrent une relation bidirectionnelle entre la maladie parodontale et le diabète.
 
-- ¼ Le diabète est un facteur de risque indépendant de gingivite et de parodontite . Il fragilise les attaches dentaires  et  accroît  la  résorption  osseuse.  Les  altérations  microangiopathiques  secondaires  au  diabète aggravent l'affection parodontale.
-- ¼ L'hyperglycémie favorise la croissance des bactéries de la plaque dentaire et induit une réponse inflammatoire détruisant le tissu conjonctif et favorisant les parodontites.
-- ¼ L'infection parodontale influe sur l'équilibre glycémique en  induisant  une  insulino-résistance  par  la  production de cytokines (protéines de l'inflammation) et par l'amplification de la capacité des macrophages à répondre aux AGE ( Advanced Glycation Endproducts [ref-37] , protéines glyquées appelées aussi produits de glycation avancée). Ces AGE ont un rôle important dans le déterminisme des lésions cellulaires et tissulaires du diabète.
-
-[ref-36]: Étude de 2 040 cas de morts subites survenues hors de l'hôpital, au sein d'une cohorte de 400 000 sujets âgés de 40 à 79 ans, adhérents d'une compagnie d'assurance médicale de l'état de Washington dans les années 1980-1994, ont été examinées. 3 800 témoins ont été appariés sur l'âge, le sexe et la présence d'une pathologie cardiaque. Jouven X, Lemaître RN, Rea TD, Sotoodehnia N, Empana JP, Siscovick DS. Diabetes, glucose level, and risk of sudden cardiac death. Eur Heart J 2005;26(20):2142-7.
-
-[ref-37]: Au niveau des macrophages des cellules endothéliales, des fibres musculaires lisses et des fibroblastes, il existe un récepteur spécifique des produits terminaux de glycation (AGE) dont l'expression est inhibée par l'insuline et augmentée par le TNF ( Tumor Necrosis Factor ). La liaison des AGEs à ce récepteur est à l'origine d'une réaction inflammatoire et d'une détérioration vasculaire.
+- Le diabète est un facteur de risque indépendant de gingivite et de parodontite . Il fragilise les attaches dentaires  et  accroît  la  résorption  osseuse.  Les  altérations  microangiopathiques  secondaires  au  diabète aggravent l'affection parodontale.
+- L'hyperglycémie favorise la croissance des bactéries de la plaque dentaire et induit une réponse inflammatoire détruisant le tissu conjonctif et favorisant les parodontites.
+- L'infection parodontale influe sur l'équilibre glycémique en  induisant  une  insulino-résistance  par  la  production de cytokines (protéines de l'inflammation) et par l'amplification de la capacité des macrophages à répondre aux AGE ( Advanced Glycation Endproducts [ref-37] , protéines glyquées appelées aussi produits de glycation avancée). Ces AGE ont un rôle important dans le déterminisme des lésions cellulaires et tissulaires du diabète.
 
 <!-- page: 17 -->
 
-|
-
-
-
-
-
-## Les complications touchant les pieds
+### Les complications touchant les pieds
 
 Les lésions des pieds du sujet diabétique sont graves et peuvent aboutir à des amputations. Elles sont à type de mal perforant plantaire avec ulcérations et altération de la capacité de cicatrisation.
 
-- ¼ L'estimation du risque podologique (estimation sous forme d'une gradation de 0 à 3) faite pour 48 % des sujets diabétiques inclus dans l'étude ECODIA2 [ref-38] , montrait que  : 88 % des sujets étaient de grade 0, 3 % de grade 1, 5 % de grade 2, 4 % de grade 3.
-- ¼ Les données 2007-2010 de la cohorte ENTRED [ref-39] montraient qu'une amputation était déclarée par 1,5 % des sujets diabétiques et un mal perforant plantaire actif ou cicatrisé par 9,9 % des sujets diabétiques.
-- ¼ En 2003, 17 551 actes d'amputation des membres inférieurs ont été enregistrés dans la base PMSI (Programme de médicalisation des systèmes d'information), correspondant à 15 353 personnes dont 52 % étaient diabétiques [ref-40] .
-- ¼ Dans une étude à long terme publiée en 2006, le taux de survie à 10 ans des personnes amputées était de 8,4 % et la médiane de survie était de 2,3 ans [ref-41] .
+- L'estimation du risque podologique (estimation sous forme d'une gradation de 0 à 3) faite pour 48 % des sujets diabétiques inclus dans l'étude ECODIA2 [ref-38] , montrait que  : 88 % des sujets étaient de grade 0, 3 % de grade 1, 5 % de grade 2, 4 % de grade 3.
+- Les données 2007-2010 de la cohorte ENTRED [ref-39] montraient qu'une amputation était déclarée par 1,5 % des sujets diabétiques et un mal perforant plantaire actif ou cicatrisé par 9,9 % des sujets diabétiques.
+- En 2003, 17 551 actes d'amputation des membres inférieurs ont été enregistrés dans la base PMSI (Programme de médicalisation des systèmes d'information), correspondant à 15 353 personnes dont 52 % étaient diabétiques [ref-40] .
+- Dans une étude à long terme publiée en 2006, le taux de survie à 10 ans des personnes amputées était de 8,4 % et la médiane de survie était de 2,3 ans [ref-41] .
 
 Le risque de complications au niveau des pieds est favorisé par la conjonction de complications neurologiques, artérielles et infectieuses et sont secondaires à des microtraumatismes.
 
-- ¼ La neuropathie est à l'origine de ces lésions du pied car elle entraîne d'une part une perte de la sensibilité, favorisant les zones de frottement et d'hyperpression, d'autre part des troubles de la statique.
-- ¼ Les autres facteurs déclenchant sont  les  chaussures inadaptées, une hygiène insuffisante, des soins de pédicurie mal faits, des blessures consécutives à un déficit sensitif de perception de sources de chaleur ou de traumatismes.
-
-[ref-38]: L 'étude rétrospective transversale ECODIA2, qui incluait 4 071 sujets diabétiques, avait pour objet l'analyse des données épidémiologiques et des coûts du diabète en France en 2005.
-
-.  ECODIA2 : Étude sur l'Epidémioloie et les coûts du Diabète en France : la prise en charge du diabète de type 2 s'est améliorée entre 1999 et 2005 [abstract]. Diabetes Metab
-
-Varroud-Vial M, Simon D, Detournay B, Attali C, Charbonnel B, Fagot-Campagna A, et al 2007;33(Spe1):75.
-
-[ref-39]: ENTRED : Échantillon national témoin représentatif des personnes diabétiques. Institut de veille sanitaire, Druet C, Roudier C, Romon I,  Assogba  F,  Bourdel-Marchasson  I, et  al .  Échantillon  national  témoin  représentatif  des  personnes  diabétiques,  Entred  2007-2010. Caractéristiques, état de santé, prise en charge et poids économique des personnes diabétiques. Saint-Maurice: InVS; 2013. http://opac.invs.sante.fr/doc\_num.php?explnum\_id=9074
-
-[ref-40]: Institut de veille sanitaire, Fosse S, Jacqueminet SA, Duplan H, Hartemann-Heurtier A, Ha Van G, et al . Incidence et caractéristiques des amputations de membres inférieurs chez les personnes diabétiques en France métropolitaine, 2003. BEH 2006;(10):71-3.
-
-[ref-41]: Schofield CJ, Libby G, Brennan GM, MacAlpine RR, Morris AD, Leese GP. Mortality and hospitalization in patients after amputation: a comparison between patients with and without diabetes. Diabetes Care 2006;29(10):2252-6.
+- La neuropathie est à l'origine de ces lésions du pied car elle entraîne d'une part une perte de la sensibilité, favorisant les zones de frottement et d'hyperpression, d'autre part des troubles de la statique.
+- Les autres facteurs déclenchant sont  les  chaussures inadaptées, une hygiène insuffisante, des soins de pédicurie mal faits, des blessures consécutives à un déficit sensitif de perception de sources de chaleur ou de traumatismes.
 
 <!-- page: 18 -->
 
 
-
-## Comorbidités aggravant le pronostic vital des sujets diabétiques
-
-
-
-## Mini-synthèse
+# Comorbidités aggravant le pronostic vital des sujets diabétiques (Mini-synthèse)
 
 Des comorbidités aggravent le pronostic vital des sujets diabétiques que ce soit en augmentant le risque cardiovasculaire (syndrome métabolique, hypertension artérielle, tabagisme chronique, apnées du sommeil) ou le risque de cancer.
 
@@ -821,7 +497,7 @@ Les définitions peuvent varier, mais la plus utilisée (basée sur les critère
 
 L'hypertension artérielle aggrave le pronostic du sujet diabétique en augmentant le risque cardiovasculaire et contribue au risque de survenue et/ou de progression de la rétinopathie et de la néphropathie diabétiques. Pour mémoire, dans l'étude UKPDS [ref-45] ( UK Prospective Diabetes Study ), 39 % des sujets diabétiques nouvellement diagnostiqués étaient hypertendus.
 
-- ¼ La définition de l'hypertension artérielle est la même que chez le non diabétique : pression artérielle systolique ≥ 140 mmHg et/ou pression artérielle diastolique ≥ 90 mmHg.
+- La définition de l'hypertension artérielle est la même que chez le non diabétique : pression artérielle systolique ≥ 140 mmHg et/ou pression artérielle diastolique ≥ 90 mmHg.
 
 Chez le sujet diabétique hypertendu , la HAS préconise en 2014 dans son guide « Parcours de soins du diabète de type 2 » que la pression artérielle soit mesurée à chaque consultation et que l'automesure soit encouragée après formation. Le niveau de pression artérielle cible recommandé est &lt; 140/85 mmHg et, en cas d'insuffisance rénale, l'objectif cible de la pression artérielle est ramené à moins de 130 mmHg pour prévenir la progression des complications.
 
@@ -837,26 +513,9 @@ Le diabète de type 2 serait associé à une somnolence diurne excessive et à u
 
 Le risque de cancers est augmenté chez le sujet diabétique (cancer du pancréas, du sein, du colon) : une attention particulière doit être portée à leur dépistage et diagnostic.
 
-[ref-42]: Définition à laquelle se réfère le rapport HAS publié en 2008. National Heart Lung and Blood Institute, National Institutes of Health. Third report of the National Cholesterol Education Program (NCEP). Expert panel on detection, evaluation, and treatment of high blood cholesterol in adults (Adult Treatment Panel III) final report. Bethesda: NHLBI; 2002.
-
-[ref-43]: Dans son rapport publié en 2003 sur les « Principes de dépistage du diabète de type 2 », l'ANAES avait défini le syndrome métabolique comme l'association d'au moins 3 des critères suivants : un excès pondéral défini par un indice de masse corporelle &gt; 28 kg/m² ; une hypertension artérielle définie par une pression artérielle systolique &gt; 140 mmHg et/ou pression artérielle diastolique &gt; 90 mmHg et/ou hypertension artérielle traitée ; une HDLcholestéroémie &lt; 0,35 g/l (0,9 mmol/l) et/ou une triglycériémie &gt; 2 g/l (2,3 mmol/l) et/ou dyslipidémie traitée.
-[ref-44]: La Fédération internationale du diabète (FID) a défini par consensus un seuil de diamètre abdominal qui varie selon les origines géographiques : entre 85 et 94 cm chez l'homme et entre 80 et 90 cm chez la femme. International Diabetes Federation. Metabolic syndrome. The IDF consensus worldwide definition of the metabolic syndrome. Brussels: IDF; 2006. http://www.idf.org/webdata/docs/IDF\_Meta\_def\_final.pdf .
-[ref-45]: Hypertension in Diabetes Study (HDS): I. Prevalence of hypertension in newly presenting type 2 diabetic patients and the association with risk factors for cardiovascular and diabetic complications. J Hypertens 1993;11(3):309-17.
-[ref-46]: Haute Autorité de Santé. Pertinence de la mise en place d'un programme de dépistage des anévrismes de l'aorte abdominale en France. Saint-Denis La Plaine: HAS; 2012. http://www.has-sante.fr/portail/upload/docs/application/pdf/2013-02/aaa\_rapport\_versfinale.pdf.
-
 <!-- page: 19 -->
 
-
-
-
-
-
-
-
-
-
-
-## Mini-synthèse
+# Traitement du diabète : stratégie, objectifs glycémiques, éducation thérapeutique, médicaments (Mini-synthèse)
 
 ## La stratégie thérapeutique
 
@@ -889,45 +548,40 @@ La metformine est le traitement de première intention recommandé en monothéra
 
 Les traitements médicamenteux du diabète sont administrés par voie orale ou injectable. Leur mécanisme d'action, leurs effets indésirables et contre-indications varient en fonction de la molécule.
 
-- ¼ Médicaments par voie orale : biguanides (metformine), sulfamides hypoglycémiants, glinides inhibiteurs des alphaglucosidases, gliptines inhibiteurs de la dipeptidylpeptidase (DPP-4).
-- ¼ Médicaments par voie injectable : incrétinomimétiques analogues du glucagon-like peptide (GLP-1), les insulines.
+- Médicaments par voie orale : biguanides (metformine), sulfamides hypoglycémiants, glinides inhibiteurs des alphaglucosidases, gliptines inhibiteurs de la dipeptidylpeptidase (DPP-4).
+- Médicaments par voie injectable : incrétinomimétiques analogues du glucagon-like peptide (GLP-1), les insulines.
 
 Pour en savoir plus sur les spécialités et mécanismes d'action de ces molécules, consulter l'annexe « Spécialités médicales pour le traitement du diabète de type 2 ».
 
 <!-- page: 20 -->
 
-
-
+# Traitement du diabète : stratégie, objectifs glycémiques, éducation thérapeutique, médicaments
 
 ## La stratégie thérapeutique
 
-
-
-## Stratégie thérapeutique globale
+### Stratégie thérapeutique globale
 
 La mise en place de mesures hygiéno-diététiques efficaces est un préalable nécessaire au traitement médicamenteux du contrôle glycémique, et  leur  application  doit  être  poursuivie  tout  au  long  de  la  prise  en charge. Le diabète étant évolutif, la prise en charge thérapeutique sera réévaluée régulièrement dans toutes ses composantes : mesures hygiéno-diététiques, éducation thérapeutique et traitement médicamenteux.
 
-## Stratégie thérapeutique médicamenteuse [ref-47]
+### Stratégie thérapeutique médicamenteuse [ref-47]
 
 Un traitement médicamenteux est débuté si l'objectif glycémique n'est pas atteint malgré la mise en place des mesures hygiéno-diététiques.
 
-- ¼ Le traitement recommandé en première intention est la metformine .
-- ¼ En cas d'intolérance ou de contre-indication à la metformine, il est recommandé de prescrire un sulfamide hypoglycémiant en surveillant la prise de poids et la survenue d'hypoglycémies .
-- ¼ En cas d'intolérance ou de contre-indication à la metformine et aux sulfamides hypoglycémiants, les alternatives possibles sont : la répaglinide si la prise alimentaire est irrégulière, en raison de son administration à chaque repas (demi-vie courte) ; ou les inhibiteurs des alphaglucosidases si le risque de survenue d'hypoglycémies est élevé.
+- Le traitement recommandé en première intention est la metformine .
+- En cas d'intolérance ou de contre-indication à la metformine, il est recommandé de prescrire un sulfamide hypoglycémiant en surveillant la prise de poids et la survenue d'hypoglycémies .
+- En cas d'intolérance ou de contre-indication à la metformine et aux sulfamides hypoglycémiants, les alternatives possibles sont : la répaglinide si la prise alimentaire est irrégulière, en raison de son administration à chaque repas (demi-vie courte) ; ou les inhibiteurs des alphaglucosidases si le risque de survenue d'hypoglycémies est élevé.
 
 En cas de non-réponse, le traitement sera remplacé par un médicament d'une autre classe thérapeutique.
 
-- ¼ La définition du sujet non-répondeur est l'absence d'atteinte de l'objectif thérapeutique , c'est-à-dire un taux d'HbA1c qui n'a pas diminué d'au moins 0,5 point après un traitement médicamenteux d'au moins 6 mois à la dose maximale bien tolérée, et sous réserve d'une bonne observance.
+- La définition du sujet non-répondeur est l'absence d'atteinte de l'objectif thérapeutique , c'est-à-dire un taux d'HbA1c qui n'a pas diminué d'au moins 0,5 point après un traitement médicamenteux d'au moins 6 mois à la dose maximale bien tolérée, et sous réserve d'une bonne observance.
 
 La stratégie recommandée en première intention pour chaque étape de traitement (metformine en monothérapie, metformine + sulfamide hypoglycémiant en bithérapie, trithérapie comprenant au moins metformine + sulfamide hypoglycémiant) a été considérée par la HAS en 2013 comme étant la stratégie la plus efficace, la moins coûteuse et celle pour laquelle le recul d'utilisation était le plus important .
 
 Pour en savoir plus sur la stratégie thérapeutique médicamenteuse, consulter l'annexe « Algorithme de prise en charge thérapeutique des sujets ayant un diabète de type 2 ».
 
-## L'éducation thérapeutique du sujet diabétique
+## L’éducation thérapeutique du sujet diabétique
 
-
-
-## Une incitation à la surveillance cardiaque, dentaire et ophtalmologique régulière
+### Une incitation à la surveillance cardiaque, dentaire et ophtalmologique régulière
 
 Tout sujet diabétique de type 2 doit bénéficier des consultations spécialisées suivantes :
 
@@ -937,7 +591,7 @@ Tout sujet diabétique de type 2 doit bénéficier des consultations spécialis�
 
 Dans ce cadre, il convient de rappeler au sujet diabétique la nécessité de signaler son diabète à ces spécialistes.
 
-## Une incitation à un meilleur contrôle des autres facteurs de risque cardiovasculaire
+### Une incitation à un meilleur contrôle des autres facteurs de risque cardiovasculaire
 
 Les actions à mettre en place sont les suivantes :
 
@@ -945,58 +599,42 @@ Les actions à mettre en place sont les suivantes :
 - la correction d'une dyslipidémie par  des  mesures diététiques et/ou une bonne observance au traitement médicamenteux ;
 - la bonne observance au traitement d'une hypertension artérielle éventuelle car elle est le principal cofacteur d'aggravation des complications microvasculaires du diabète (rétinopathie et néphropathie diabétiques).
 
-[ref-47]: Selon les recommandations de la HAS de 2013, en l'absence de données bibliographiques sur la comparaison directe des différentes stratégies thérapeutiques, les recommandations ne peuvent pas être élaborées selon un critère d'efficience. Le schéma général a été élaboré en tenant compte de quatre critères discutés et validés par le groupe de travail et documentés par l'analyse de la littérature : les données de morbi-mortalité (quand elles existaient), puis l'effet sur le taux d'HbA1c, et, enfin, sans hiérarchie préétablie, les critères de tolérance (action sur le poids et risque de survenue d'hypoglycémies), de sécurité (recul sur la sécurité des nouvelles molécules) et de coût (coût journalier du traitement pharmacologique).
-
 <!-- page: 21 -->
 
-
-
-## Une incitation à la modification des habitudes de vie
+### Une incitation à la modification des habitudes de vie
 
 Lutte active contre la sédentarité et incitation à une activité physique régulière .
 
-- ¼ L'activité  physique  doit  être  adaptée  aux  capacités  individuelles  (augmentation  de  l'activité  quotidienne [ref-48] ou pratique régulière d'une activité sportive [ref-49] ).
-- ¼ Elle contribue à une amélioration du contrôle métabolique du diabète : augmentation de l'insulinosensibilité, diminution et stabilisation de la glycémie, diminution de la pression artérielle.
-- ¼ Une durée d'exercice de 30 à 60 minutes, à raison de 2 ou 3 fois par semaine, est recommandée ( a minima de la marche).
+- L'activité  physique  doit  être  adaptée  aux  capacités  individuelles  (augmentation  de  l'activité  quotidienne [ref-48] ou pratique régulière d'une activité sportive [ref-49] ).
+- Elle contribue à une amélioration du contrôle métabolique du diabète : augmentation de l'insulinosensibilité, diminution et stabilisation de la glycémie, diminution de la pression artérielle.
+- Une durée d'exercice de 30 à 60 minutes, à raison de 2 ou 3 fois par semaine, est recommandée ( a minima de la marche).
 
-## Une incitation à l'amélioration de l'équilibre nutritionnel (composition et rythme des repas)
+### Une incitation à l'amélioration de l'équilibre nutritionnel (composition et rythme des repas)
 
-- ¼ Correction des principales erreurs alimentaires qualitatives (réduction des lipides notamment les graisses alimentaires saturées, réduction des glucides simples et suppression des sodas et jus de fruits).
-- ¼ Répartition des apports caloriques et notamment glucidiques en 3 repas et/ou collations par jour.
-- ¼ La part des glucides complexes doit représenter la moitié de la ration calorique quotidienne ,  soit  un apport minimal de 180 g/j, sous forme d'aliments amylacés (pain, pâtes, riz, autres féculents) et dans une moindre mesure de fruits et de laitages.
-- ¼ Diminution de la consommation de sucres dits « raffinés » et de la consommation d'alcool . Les édulcorants acaloriques employés aux doses usuelles recommandées sont autorisés.
-- ¼ Enrichissement de l'alimentation en fibres (légumes).
+- Correction des principales erreurs alimentaires qualitatives (réduction des lipides notamment les graisses alimentaires saturées, réduction des glucides simples et suppression des sodas et jus de fruits).
+- Répartition des apports caloriques et notamment glucidiques en 3 repas et/ou collations par jour.
+- La part des glucides complexes doit représenter la moitié de la ration calorique quotidienne ,  soit  un apport minimal de 180 g/j, sous forme d'aliments amylacés (pain, pâtes, riz, autres féculents) et dans une moindre mesure de fruits et de laitages.
+- Diminution de la consommation de sucres dits « raffinés » et de la consommation d'alcool . Les édulcorants acaloriques employés aux doses usuelles recommandées sont autorisés.
+- Enrichissement de l'alimentation en fibres (légumes).
 
-## Une réduction des apports caloriques journaliers chez le sujet diabétique en surpoids ou obèse
+### Une réduction des apports caloriques journaliers chez le sujet diabétique en surpoids ou obèse
 
 L'observance à long terme des conseils diététiques étant généralement médiocre, il est recommandé, pour l'améliorer, de proposer un suivi diététique régulier et de coupler, aux conseils diététiques, des conseils d'activité physique.
 
-- ¼ La restriction calorique est indiquée dès que l'IMC &gt; 25 kg/m 2 , et ce d'autant plus que le surpoids est de type androïde [ref-50] et/ou  associé  à  des  troubles  métaboliques (dyslipidémie) ou cardiovasculaires (hypertension artérielle, artériopathie oblitérante des membres inférieurs, insuffisance coronarienne).
-- ¼ Une perte de poids, même modérée (5 % à 15 % du poids maximal initial), permet d'améliorer le contrôle glycémique chez le sujet diabétique de type 2.
-- ¼ Les objectifs pondéraux doivent être réalistes et individualisés, et s'inscrire dans la durée : perte de poids obtenue en 6 mois, maintien du poids atteint sur le long terme.
+- La restriction calorique est indiquée dès que l'IMC &gt; 25 kg/m 2 , et ce d'autant plus que le surpoids est de type androïde [ref-50] et/ou  associé  à  des  troubles  métaboliques (dyslipidémie) ou cardiovasculaires (hypertension artérielle, artériopathie oblitérante des membres inférieurs, insuffisance coronarienne).
+- Une perte de poids, même modérée (5 % à 15 % du poids maximal initial), permet d'améliorer le contrôle glycémique chez le sujet diabétique de type 2.
+- Les objectifs pondéraux doivent être réalistes et individualisés, et s'inscrire dans la durée : perte de poids obtenue en 6 mois, maintien du poids atteint sur le long terme.
 
-## Les conseils nutritionnels doivent tenir compte des habitudes alimentaires individuelles en fonction du profil de poids du sujet diabétique de type 2
+### Les conseils nutritionnels doivent tenir compte des habitudes alimentaires individuelles en fonction du profil de poids du sujet diabétique de type 2
 
-- ¼ Sujet ayant une obésité de type androïde, une hypertriglycéridémie et un HDL-cholestérol bas : régime moins riche en glucides (40 % des calories totales), comportant plus de lipides, mais régime enrichi en acides gras monoinsaturés (25 % des calories totales) avec un rapport monoinsaturés/polyinsaturés/saturés égal à 2,5/1/1.
-- ¼ Sujet ayant un poids normal ou une obésité de type gynoïde [ref-51] et un bilan lipidique normal : régime riche en glucides (c'est-à-dire correspondant à 55 % des apports caloriques journaliers), pauvre en lipides (soit 30  % des apports caloriques journaliers) et non focalisé sur les graisses monoinsaturées (soit 10 % des apports caloriques journaliers) avec un rapport acides gras monoinsaturés/polyinsaturés/saturés égal à 1/1/1.
+- Sujet ayant une obésité de type androïde, une hypertriglycéridémie et un HDL-cholestérol bas : régime moins riche en glucides (40 % des calories totales), comportant plus de lipides, mais régime enrichi en acides gras monoinsaturés (25 % des calories totales) avec un rapport monoinsaturés/polyinsaturés/saturés égal à 2,5/1/1.
+- Sujet ayant un poids normal ou une obésité de type gynoïde [ref-51] et un bilan lipidique normal : régime riche en glucides (c'est-à-dire correspondant à 55 % des apports caloriques journaliers), pauvre en lipides (soit 30  % des apports caloriques journaliers) et non focalisé sur les graisses monoinsaturées (soit 10 % des apports caloriques journaliers) avec un rapport acides gras monoinsaturés/polyinsaturés/saturés égal à 1/1/1.
 
 Les régimes à basses et très basses valeurs caloriques ne doivent pas faire partie des prescriptions courantes. Un traitement médicamenteux de l'obésité ne doit être envisagé qu'en cas d'échec des conseils diététiques.
 
-## Pour en savoir plus, consulter l'annexe « Conseils nutritionnels chez le sujet diabétique de type 2 ».
-
-[ref-48]: Marcher plutôt que se déplacer en voiture ou en transports en commun ; utiliser les escaliers plutôt que l'ascenseur ou des escaliers mécaniques ; éviter de rester assis pendant des périodes prolongées ; sortir son chien plus souvent et plus longtemps ; faire du jardinage ; etc.
-[ref-49]: Randonnée, jogging, cyclisme, natation, golf, ski de fond.
-[ref-50]: Surcharge adipeuse prédominant au niveau abdominal, avec, chez le sujet d'origine caucasienne : tour de taille ≥ 80 cm chez la femme et ≥ 94 cm chez l'homme. La fédération internationale du diabète a précisé les normes à appliquer en fonction de l'origine géographique. International Diabetes Federation. Metabolic syndrome. The IDF consensus worldwide definition of the metabolic syndrome. Brussels: IDF; 2006. http://www.idf.org/webdata/docs/IDF\_Meta\_def\_final.pdf.
-[ref-51]: Surcharge adipeuse prédominant au niveau du bas du corps.
-
 <!-- page: 22 -->
 
-
-
-
 ## Objectifs thérapeutiques glycémiques
-
-
 
 La prise en charge thérapeutique des sujets ayant un diabète de type 2 n'est pas dépendante et spécifique du niveau d'hyperglycémie, et il n'y a pas, en France, de recommandations spécifiques sur la prise en charge des anomalies de la glycorégulation (état de prédiabète).
 
@@ -1035,71 +673,56 @@ Tableau 2. Taux d'hémoglobine glyquée (HbA1c) à atteindre en fonction de la s
 
 § = stade 5 = débit de filtration glomérulaire &lt; 15 ml/min/1,73 m².
 
-[ref-52]: Plusieurs caractéristiques doivent être prises en compte au cours de la prise en charge des personnes âgées : altération de la fonction rénale, polymédication, risque élevé d'hypoglycémie et conséquences plus délétères de ces hypoglycémies, risque de dénutrition.
-
 <!-- page: 23 -->
-
-
-
 
 ## Les médicaments du diabète
 
-## Les biguanides
+### Les biguanides
 
-## Contre-indications
+#### Contre-indications
 
-- ¼ La metformine est contre-indiquée en cas d'insuffisance rénale. Le débit de filtration glomérulaire doit être évalué avant la mise en place du traitement, et contrôlé 1 fois/an chez les sujets ayant une fonction rénale normale, et 2 à 4 fois/an chez ceux dont la clairance de la créatinine est à la limite inférieure de la normale et chez les diabétiques âgés.
-- ¼ La metformine est également contre-indiquée en cas d'insuffisance cardiaque ou respiratoire, d'antécédent d'infarctus du myocarde récent, d'insuffisance hépatocellulaire, d'intoxication alcoolique aiguë ou d'alcoolisme chronique, et pendant la grossesse et l'allaitement.
-- ¼ La metformine doit être interrompue 48 heures avant une intervention chirurgicale sous anesthésie générale, rachidienne ou péridurale. Le traitement ne pourra être réintroduit que 48 heures après l'intervention ou la reprise de l'alimentation par voie orale et seulement après s'être assuré de la normalité de la fonction rénale.
-- ¼ La metformine doit être arrêtée avant ou au moment d'un examen nécessitant l'administration de produits de contraste iodés, pour n'être réintroduite que 48 heures après, et seulement après s'être assuré de la normalité de la fonction rénale.
+- La metformine est contre-indiquée en cas d'insuffisance rénale. Le débit de filtration glomérulaire doit être évalué avant la mise en place du traitement, et contrôlé 1 fois/an chez les sujets ayant une fonction rénale normale, et 2 à 4 fois/an chez ceux dont la clairance de la créatinine est à la limite inférieure de la normale et chez les diabétiques âgés.
+- La metformine est également contre-indiquée en cas d'insuffisance cardiaque ou respiratoire, d'antécédent d'infarctus du myocarde récent, d'insuffisance hépatocellulaire, d'intoxication alcoolique aiguë ou d'alcoolisme chronique, et pendant la grossesse et l'allaitement.
+- La metformine doit être interrompue 48 heures avant une intervention chirurgicale sous anesthésie générale, rachidienne ou péridurale. Le traitement ne pourra être réintroduit que 48 heures après l'intervention ou la reprise de l'alimentation par voie orale et seulement après s'être assuré de la normalité de la fonction rénale.
+- La metformine doit être arrêtée avant ou au moment d'un examen nécessitant l'administration de produits de contraste iodés, pour n'être réintroduite que 48 heures après, et seulement après s'être assuré de la normalité de la fonction rénale.
 
-## Effets indésirables
+#### Effets indésirables
 
 Un mésusage de la metformine a été identifié, que ce soit dans le non-respect des contre-indications ou dans la non-prise en compte des mises en garde du résumé des caractéristiques du produit.
 
-- ¼ L'effet indésirable le plus fréquent est la survenue de troubles gastrointestinaux, (diarrhée notamment) ayant pour conséquence un frein à l'observance. La metformine est prescrite en 2 ou 3 prises par jour, au cours ou à la fin des repas principaux afin de minimiser cet effet.
-- ¼ L'effet indésirable le plus grave est l'acidose lactique [ref-53] . Le principal mécanisme déclenchant est une hypoperfusion rénale (déshydratation secondaire à un état infectieux, à des troubles digestifs ou à un traitement antiinflammatoire non stéroïdien) chez un sujet ayant une altération de la fonction rénale et traité par diurétique et/ ou inhibiteur de l'enzyme de conversion et/ou antagoniste de l'angiotensine II.
+- L'effet indésirable le plus fréquent est la survenue de troubles gastrointestinaux, (diarrhée notamment) ayant pour conséquence un frein à l'observance. La metformine est prescrite en 2 ou 3 prises par jour, au cours ou à la fin des repas principaux afin de minimiser cet effet.
+- L'effet indésirable le plus grave est l'acidose lactique [ref-53] . Le principal mécanisme déclenchant est une hypoperfusion rénale (déshydratation secondaire à un état infectieux, à des troubles digestifs ou à un traitement antiinflammatoire non stéroïdien) chez un sujet ayant une altération de la fonction rénale et traité par diurétique et/ ou inhibiteur de l'enzyme de conversion et/ou antagoniste de l'angiotensine II.
 
-
-
-## Pour info
+#### Pour info
 
 L'acidose lactique doit être systématiquement évoquée face à des signes non spécifiques tels que des troubles digestifs (douleurs abdominales, diarrhées, vomissements, etc.), une dyspnée, des crampes musculaires, une asthénie sévère ou une anorexie. Si de tels signes apparaissent au cours d'un traitement par metformine jusque-là bien toléré, il doit être recommandé d'arrêter le traitement, au moins de façon temporaire, afin de s'assurer qu'il ne s'agit pas d'une acidose lactique. L 'éventuelle reprise du traitement doit être extrêmement prudente, et ne peut être entreprise qu'après s'être assuré de la normalité de la fonction rénale et de l'absence de persistance d'un facteur favorisant l'acidose lactique.
 
-## Les sulfamides hypoglycémiants
+### Les sulfamides hypoglycémiants
 
-## Interactions médicamenteuses
+#### Interactions médicamenteuses
 
 De nombreux médicaments interagissent avec les sulfamides hypoglycémiants, et sont capables de potentialiser ou d'antagoniser leur action. En particulier certains médicaments potentialisent leurs effets et majorent le risque de survenue d'une hypoglycémie : miconazole, phénylbutazone, bêtabloquants, fluconazole.
 
-## Contre-indications
+#### Contre-indications
 
 Les sulfamides hypoglycémiants à demi-vie longue et les formes galéniques à libération prolongée sont contreindiqués chez le sujet âgé de plus de 65 ans.
 
 Autres contre-indications : la grossesse, l'insuffisance rénale avec clairance de la créatinine &lt; 30 ml/min/1,73 m 2 , l'insuffisance hépatocellulaire.
 
-[ref-53]: L 'analyse des cas pour la période 2009-2010 montre que la mortalité liée à cet effet indésirable était de 21 % et que la prise en charge médicale nécessitait une épuration extra-rénale et une hospitalisation en réanimation.
-
 <!-- page: 24 -->
 
-
-
-
-
-## Effets indésirables
+#### Effets indésirables
 
 Une augmentation significative du poids est observée avec les sulfamides hypoglycémiants.
 
 L'hypoglycémie est l'effet secondaire le plus grave associé à l'utilisation des sulfamides hypoglycémiants.
 
-- ¼ Les sujets en insuffisance rénale sont les plus exposés ainsi que les sujets âgés.
-- ¼ Les facteurs connexes sont liés à : la longue durée d'action de certains sulfamides hypoglycémiants, la prise de boissons alcoolisées, la suppression d'un repas, un exercice physique inhabituel, la prise de médicaments potentialisateurs, une hépatopathie.
+- Les sujets en insuffisance rénale sont les plus exposés ainsi que les sujets âgés.
+- Les facteurs connexes sont liés à : la longue durée d'action de certains sulfamides hypoglycémiants, la prise de boissons alcoolisées, la suppression d'un repas, un exercice physique inhabituel, la prise de médicaments potentialisateurs, une hépatopathie.
 
 Les  hypoglycémies  sous  sulfamides  hypoglycémiants  s'observent  préférentiellement  en  fin  d'après-midi  et  au milieu de la nuit. Il est donc important de contrôler la glycémie vers 18 heures, notamment en cas de fringales de fin d'après midi.
 
-
-
-## Pour info
+#### Pour info
 
 Les sujets diabétiques traités par sulfamides hypoglycémiants doivent être informés :
 
@@ -1108,48 +731,45 @@ Les sujets diabétiques traités par sulfamides hypoglycémiants doivent être i
 
 Ils doivent également être informés sur les autres facteurs d'hypoglycémie : interactions médicamenteuses, alcool, activité physique, insuffisance rénale, etc.
 
-## Les glinides
+### Les glinides
 
-## Précautions d'emploi
+#### Précautions d'emploi
 
 Compte tenu des caractéristiques pharmacologiques des glinides, le répaglinide doit être administré en une prise avant chaque repas.
 
-## Contre-indications
+#### Contre-indications
 
 Les glinides ne sont pas recommandés après 75 ans, en raison de l'absence d'étude spécifique (recommandations HAS 2014).
 
-## Effets indésirables
+#### Effets indésirables
 
 Les effets secondaires sont à type : d'hypoglycémies mineures, d'infections des voies aériennes supérieures, de sinusite, de constipation, d'arthralgies, de céphalées et de vomissements.
 
-## Les inhibiteurs des alphaglucosidases
+### Les inhibiteurs des alphaglucosidases
 
-## Contre-indications
+#### Contre-indications
 
 Les contre-indications des inhibiteurs des alphaglucosidases sont une hypersensibilité à la molécule, certaines pathologies digestives (trouble de la digestion et de l'absorption, maladies inflammatoires chroniques de l'intestin, antécédents de syndrome subocclusif, hernie inguinale), l'insuffisance  rénale  sévère  (clairance  de  la  créatinine &lt; 25 ml/min/1,73 m 2 ), la grossesse et l'allaitement, l'enfant âgé de moins de 15 ans.
 
-## Effets indésirables
+#### Effets indésirables
 
 Les  effets  indésirables  des  inhibiteurs  des  alphaglucosidases  sont  à  type  de  troubles  digestifs  (flatulences, diarrhées) responsables d'une observance médiocre au traitement.
 
 Il n'y a pas de variation pondérale significative ni de de risque d'hypoglycémie
 
-## Précautions d'emploi
+#### Précautions d'emploi
 
 Les comprimés peuvent être croqués avec la première bouchée de nourriture ou avalés au début de chacun des 3 repas.
 
 <!-- page: 25 -->
 
+### Les gliptines inhibiteurs de la dipeptidylpeptidase (DPP-4)
 
-
-
-## Les gliptines inhibiteurs de la dipeptidylpeptidase (DPP-4)
-
-## Contre-indications
+#### Contre-indications
 
 Ces molécules sont contre-indiquées en cas d'insuffisance rénale modérée à sévère ou d'insuffisance hépatocellulaire.
 
-## Effets indésirables
+#### Effets indésirables
 
 Les effets indésirables sont à type :
 
@@ -1160,29 +780,29 @@ Les effets indésirables sont à type :
 - avec  la  vildagliptine  :  dysfonctionnement  hépatique  (contre-indication  si  les  taux  d'alanine  aminotransférase (ALAT) ou d'aspartate aminotransférase (ASAT) sont supérieurs à 3 fois la normale avant traitement), réactions cutanées exfoliatives ou bulleuses ;
 - avec la saxagliptine : diminution du nombre de lymphocytes, très rares cas de thrombopénie modérée.
 
-## Précautions d'emploi
+#### Précautions d'emploi
 
 Surveillance de la fonction hépatique tous les 3 mois la première année, puis régulièrement. Interactions médicamenteuses nombreuses, à vérifier au cas par cas.
 
-## Les incrétinomimétiques [ref-56] ou analogues du glucagon-like peptide (GLP-1)
+### Les incrétinomimétiques [ref-55] ou analogues du glucagon-like peptide (GLP-1)
 
-## Contre-indications
+#### Contre-indications
 
 Ces molécules sont contre-indiquées en cas d'insuffisance rénale modérée à sévère.
 
-## Effets indésirables 56
+#### Effets indésirables [ref-56]
 
 Les effets indésirables les plus fréquents sont les troubles gastrointestinaux (nausées, vomissements, diarrhées et ralentissement du transit, voire occlusion avec le liraglutide).
 
-- ¼ Les céphalées, les rhinopharyngites et les réactions au site d'injection sont fréquentes également (accentuées en cas de sécrétion d'anticorps anti-analogues du GLP1 par le sujet diabétique).
-- ¼ Des hypoglycémies mineures, en particulier en association avec les sulfamides hypoglycémiants (les hypoglycémies sévères sont rares).
+- Les céphalées, les rhinopharyngites et les réactions au site d'injection sont fréquentes également (accentuées en cas de sécrétion d'anticorps anti-analogues du GLP1 par le sujet diabétique).
+- Des hypoglycémies mineures, en particulier en association avec les sulfamides hypoglycémiants (les hypoglycémies sévères sont rares).
 
 Les autres effets indésirables observés sont à type de :
 
 - réactions d'hypersensibilité : choc anaphylactique, œdème de Quincke, éruptions cutanées ;
 - pancréatite aiguë et d'insuffisance rénale aiguë, de perte de poids rapide (&gt; 1,5 kg/semaine).
 
-## Précautions d'emploi
+#### Précautions d'emploi
 
 L'exénatide et le liraglutide sont indiqués dans le traitement du diabète de type 2 en association (bithérapie ou trithérapie), avec la metformine et/ou un sulfamide hypoglycémiant.
 
@@ -1190,35 +810,20 @@ L'exénatide peut être prescrit en association avec une insuline basale dans ce
 
 Des interactions médicamenteuses avec les anticoagulants ont été rapportées.
 
-[ref-54]: Une évaluation par les autorités de santé européennes est en cours en 2013 sur le risque de pancréatite aiguë et de métaplasies des canaux pancréatiques chez les sujets ayant un diabète de type 2 traités par les agonistes du récepteur du glucagon-like peptide 1 (GLP-1) et les inhibiteurs de la dipeptylpeptidase-4 (DPP-4).
-
-Agence nationale de sécurité du médicament et des produits de santé. Diabète de type 2 : nouvelles données sur le risque pancréatique chez les patients diabétiques traités par les incrétinomimétiques. Point d'information. Saint-Denis: ANSM; 2013.
-
-http://ansm.sante.fr/S-informer/Points-d-information-Points-d-information/Diabete-de-type-2-nouvelles-donnees-sur-le-risquepancreatique-chez-les-patients-diabetiques-traites-par-les-incretinomimetiques-Point-d-information .
-
-[ref-55]: Les incrétines sont des hormones sécrétées par les cellules endocrines de l'épithélium intestinal lors de l'absorption des nutriments (c'est le repas qui déclenche leur libération). Elles stimulent la sécrétion d'insuline, inhibent la sécrétion de glucagon, ralentissent la vidange gastrique et induisent la sensation de satiété.
-
-[ref-56]: La surveillance de ces molécules se poursuit dans le cadre d'un plan de gestion des risques européen et d'études post-inscription.
-
 <!-- page: 26 -->
 
-
-
-
-
-
-## Pour info
+#### Pour info
 
 - ´ ´ L'Agence française de sécurité sanitaire des produits de santé (Afssaps) a décidé en 2011 [ref-57] de suspendre l'utilisation en France des médicaments contenant de la pioglitazone (Actos ® et Competact ® ), sur avis de la Commission d'autorisation de mise sur le marché (AMM) et de la Commission nationale de pharmacovigilance [ref-58] . Les résultats de l'étude réalisée par la Caisse nationale de l'assurance maladie des travailleurs salariés (CNAMTS), à la demande de l'Afssaps, ont confirmé l'augmentation du risque de cancer de la vessie (estimée à 20 %) chez les patients traités par pioglitazone.
 - ´ ´ Les spécialités contenant de la rosiglitazone (Avandia ® , Avandamet ® ) ont été retirées du marché à compter du 3 décembre 2010 [ref-59] . Ce retrait a fait suite aux recommandations de l' European Medicines Agency (EMA) qui a conclu que le rapport bénéfice/risque de la rosiglitazone était défavorable en raison de l'augmentation du risque cardiovasculaire.
 
-## Les insulines
+### Les insulines
 
 Deux types d'insuline sont disponibles : les insulines humaines et les analogues de l'insuline.
 
 L'insuline peut être d'action rapide, intermédiaire ou lente.
 
-## Effets indésirables
+#### Effets indésirables
 
 L'effet indésirable le plus courant est une réaction au niveau du site d'injection de l'insuline.
 
@@ -1226,41 +831,25 @@ Les autres types d'effets indésirables sont l'hypoglycémie, la prise de poids 
 
 Les hypoglycémies sont liées à une inadéquation entre la dose d'insuline injectée, les apports glucidiques alimentaires et les dépenses énergétiques. Elles sont un effet secondaire sévère. Aucune différence significative n'a été observée entre les différentes formes d'insuline en ce qui concerne le risque d'hypoglycémie, mais le moment de survenue de l'hypoglycémie dépend du profil d'action des insulines utilisées. La prévention et la correction des hypoglycémies doivent faire l'objet d'une éducation du patient et de son entourage.
 
-## Précautions d'emploi
+#### Précautions d'emploi
 
 La prévention et la correction des hypoglycémies sous insuline nécessitent une éducation du patient et de son entourage lors de la mise en route de l'insulinothérapie. Elle comprend notamment l'autosurveillance glycémique et l'adaptation des doses.
 
 Les insulines intermédiaires seules ou mélangées à un analogue rapide sont sous forme de suspension dans un stylo injecteur qui doivent être remués avant injection, afin d'homogénéiser la suspension. Si cela n'est pas fait, il y a un risque de variabilité pharmacocinétique accrue.
 
-[ref-57]: Agence française de sécurité sanitaire des produits de santé. Suspension de l'utilisation des médicaments contenant de la pioglitazone (Actos®, Competact®). Lettre aux professionnels de santé. Saint-Denis: Afssaps; 2011. http://ansm.sante.fr/S-informer/Informations-de-securite-Lettres-aux-professionnels-de-sante/Suspension-de-l-utilisation-desmedicaments-contenant-de-la-pioglitazone-Actos-R-Competact-R-Lettre-aux-professionnels-de-sante.
-
-[ref-58]: Agence française de sécurité sanitaire des produits de santé. Commission nationale de pharmacovigilance. Compte rendu de la réunion
-
-du mardi 29 mars 2011. ACTOS® (pioglitazone) et cancer de la vessie. Saint-Denis: Afssaps; 2011. http://ansm.sante.fr/var/ansm\_site/storage/original/application/cd6483cba30f36cb142a2140c9e51e09.pdf.
-
-[ref-59]: European Medicines Agency. AVANDIA 2 mg comprimés pelliculés. Résumé des caractéristiques du produit. London: EMA; 2009. http://www.ema.europa.eu/docs/fr\_FR/document\_library/EPAR\_-\_Product\_Information/human/000268/WC500029108.pdf
-
-Arrêté du 8 novembre 2011 portant radiation de spécialités pharmaceutiques de la liste des médicaments agréés à l'usage des collectivités publiques prévue à l'article L. 5123-2 du code de la santé publique. Journal Officiel 2011;15 novembre ; Arrêté du 8 novembre 2011 portant radiation de spécialités pharmaceutiques de la liste mentionnée au premier alinéa de l'article L. 162-17 du code de la sécurité sociale. Journal Officiel 2011;15 novembre.
-
-
 <!-- page: 27 -->
-|
 
-
-
-
-
-## Mini-synthèse
+# Contexte de la prévention, du dépistage du diabète et des maladies liées au diabète (Mini-synthèse)
 
 Le diabète de type 2 se caractérise par une phase asymptomatique au cours de laquelle peuvent se développer des complications. Cette phase silencieuse d'hyperglycémie évolue sur une période relativement longue au cours de laquelle le diagnostic ne peut être réalisé que par le dépistage .
 
-- ¼ La prévention des complications liées au diabète nécessite une approche plurifactorielle du fait de l'atteinte de plusieurs organes cibles comme le rein, l'œil, le pied, le système nerveux périphérique et l'appareil cardiovasculaire.
-- ¼ La mise en place de mesures hygiéno-diététiques efficaces  est  un  préalable  au  traitement  médicamenteux  du contrôle glycémique et leur application doit être poursuivie tout au long de la prise en charge thérapeutique. À cette fin, l'éducation thérapeutique est indispensable à la prise en charge des sujets diabétiques de type 2.
+- La prévention des complications liées au diabète nécessite une approche plurifactorielle du fait de l'atteinte de plusieurs organes cibles comme le rein, l'œil, le pied, le système nerveux périphérique et l'appareil cardiovasculaire.
+- La mise en place de mesures hygiéno-diététiques efficaces  est  un  préalable  au  traitement  médicamenteux  du contrôle glycémique et leur application doit être poursuivie tout au long de la prise en charge thérapeutique. À cette fin, l'éducation thérapeutique est indispensable à la prise en charge des sujets diabétiques de type 2.
 
 Le diabète a fait l'objet de plusieurs programmes de développement selon les axes suivants : prévention, dépistage, qualité et organisation des soins, suivi épidémiologique (avec notamment la cohorte ENTRED) et éducation thérapeutique .
 
-- ¼ Chez les sujets diabétiques , l'objectif de ces plans de santé publique est de réduire la fréquence et la gravité des complications  du  diabète  (notamment  les  complications  cardiovasculaires),  d'améliorer  la  surveillance  médicale  de l'ensemble des diabétiques traités par antidiabétiques oraux et/ou insuline (conformément aux recommandations de bonnes pratiques), de réduire la fréquence des facteurs de gravité dans la population diabétique tels que l'hypertension artérielle, les dyslipidémies, le tabagisme, l'alcoolisme.
-- ¼ Chez les sujets à risque , l'objectif de ces plans de santé publique est de prévenir le diabète par le développement d'une politique nutritionnelle et le renforcement du dépistage du diabète.
+- Chez les sujets diabétiques , l'objectif de ces plans de santé publique est de réduire la fréquence et la gravité des complications  du  diabète  (notamment  les  complications  cardiovasculaires),  d'améliorer  la  surveillance  médicale  de l'ensemble des diabétiques traités par antidiabétiques oraux et/ou insuline (conformément aux recommandations de bonnes pratiques), de réduire la fréquence des facteurs de gravité dans la population diabétique tels que l'hypertension artérielle, les dyslipidémies, le tabagisme, l'alcoolisme.
+- Chez les sujets à risque , l'objectif de ces plans de santé publique est de prévenir le diabète par le développement d'une politique nutritionnelle et le renforcement du dépistage du diabète.
 
 La  loi  d'orientation  relative  à  la  politique  de  santé  publique  de  2004 [ref-60] avait  fixé  également comme objectif  que  la surveillance des diabétiques soit conforme aux recommandations pour 80 % des personnes diabétiques (en termes de respect de la périodicité des examens, des consultations préconisées, des traitements). Les données 2007-2010 de la cohorte ENTRED ont permis d'évaluer la qualité de cette prise en charge et de la comparer aux données 2001-2003.
 
@@ -1268,17 +857,9 @@ Le dépistage, le traitement et le suivi des patients diabétiques de type 2 ont
 
 Pour en savoir plus, consulter l'annexe « Liste des publications de la HAS sur le diabète »
 
-[ref-60]: Loi n° 2004-806 du 9 août 2004 relative à la politique de santé publique. Journal Officiel 2004;11 août.
-
 <!-- page: 28 -->
 
-
-
-## Prévention primaire Populations à risque de diabète
-
-
-
-## Mini-synthèse
+# Prévention primaire Populations à risque de diabète (Mini-synthèse)
 
 Les sujets considérés à risque de diabète répondent à un ou plusieurs des critères suivants (en plus de l'âge) :
 
@@ -1295,7 +876,7 @@ Les sujets considérés à risque de diabète répondent à un ou plusieurs des 
 
 Pour repérer les sujets à risque de diabète, la HAS propose d'utiliser un questionnaire validé tel que le FINDRISK ( FINnish Diabetes Risk Score , cf. tableau 3).
 
-## Tableau 3. Formulaire d'évaluation du risque de diabète de type 2 [ref-63]
+Tableau 3. Formulaire d'évaluation du risque de diabète de type 2 [ref-63]
 
 | Critère                       | Critère                                     |   Valeur du critère | Critère                                    | Critère            |   Valeur du critère |
 |-------------------------------|---------------------------------------------|---------------------|--------------------------------------------|--------------------|---------------------|
@@ -1316,106 +897,68 @@ Pour repérer les sujets à risque de diabète, la HAS propose d'utiliser un que
 
 ## Calcul du score de risque de diabète dans les 10 ans
 
-- ´ ´ somme = 7 ; risque faible (= 1 %)  1 personne sur 100 développera un diabète.
-- ´ ´ somme = 7-11 ; risque légèrement élevé (= 4 %)  1 personne sur 25 développera un diabète.
-- ´ ´ somme = 12-14 ; risque modéré (= 17 %)  1 personne sur 6 développera un diabète.
-- ´ ´ somme = 15-20 ; risque élevé (= 33 %)  1 personne sur 3 développera un diabète.
-- ´ ´ somme &gt; 20 ; risque très élevé (= 50 %)  1 personne sur 2 développera un diabète.
+- somme = 7 ; risque faible (= 1 %)  1 personne sur 100 développera un diabète.
+- somme = 7-11 ; risque légèrement élevé (= 4 %)  1 personne sur 25 développera un diabète.
+- somme = 12-14 ; risque modéré (= 17 %)  1 personne sur 6 développera un diabète.
+- somme = 15-20 ; risque élevé (= 33 %)  1 personne sur 3 développera un diabète.
+- somme &gt; 20 ; risque très élevé (= 50 %)  1 personne sur 2 développera un diabète.
 
 * mesuré sous les côtes, au niveau du nombril ;  ATCD = Antécédent ; HTA = Hypertension artérielle.
 
-## Pour en savoir plus sur le score de précarité, consulter l'annexe « Score EPICES de précarité ».
-
-[ref-61]: Lorsque la glycémie est comprise entre 1,10 g/L et 1,25 g/L, le diagnostic d'hyperglycémie modérée à jeun (prédiabète) est posé. Il faut prévoir le renouvellement du test de dépistage du diabète à 1 an.
-[ref-62]: Le  score  EPICES,  tel  qu'il  est  utilisé  dans  les  centres  d'examens  de  santé,  utilise  11  questions  explorant  les  différents  champs  socioéconomiques, le  score  variant  de  0  (absence  de  précarité)  à  100  (précarité  maximum).  Institut  de  veille  sanitaire,  Sass  C,  Moulin  JJ,  Guéguen  R,  Abric  L, Dauphinot V, et al. Le score Epices : un score individuel de précarité. Construction du score et mesure des relations avec des données de santé, dans une population de 197 389 personnes. BEH 2006;(14):93-6.
-[ref-63]: Lindström J, Tuomilehto J. The diabetes risk score. A practical tool to predict type 2 diabetes risk. Diabetes Care 2003;26(3):725-31.
-
 <!-- page: 29 -->
 
-
-
-
-
-
-
-
-## Mini-synthèse
+# Prévention primaire – Stratégie et objectifs de la prévention du diabète (Mini-synthèse)
 
 ## Actions ayant montré leur efficacité dans la prévention du diabète de type 2
 
 La prévention du diabète repose sur l' éducation nutritionnelle et une amélioration de l'hygiène de vie (activité physique, alimentation équilibrée réduite en graisses, réduction pondérale) et l'obtention d'un changement durable de ces comportements.
 
-- ¼ Les résultats des essais de prévention du diabète sont concordants et apportent des arguments forts en faveur de la possibilité de prévenir ou de retarder la survenue d'un diabète de type 2 chez des sujets à haut risque.
-- ¼ Les études ayant associé une réduction de poids et une augmentation de l'activité physique concordent vers une diminution de la prévalence du diabète de type 2.
-- ¼ La  réduction  de  la  consommation  de  graisses  animales,  en  particulier  d'acides  gras  saturés,  et l'augmentation des apports en fibres alimentaires permettent un meilleur contrôle du poids.
-
-
+- Les résultats des essais de prévention du diabète sont concordants et apportent des arguments forts en faveur de la possibilité de prévenir ou de retarder la survenue d'un diabète de type 2 chez des sujets à haut risque.
+- Les études ayant associé une réduction de poids et une augmentation de l'activité physique concordent vers une diminution de la prévalence du diabète de type 2.
+- La  réduction  de  la  consommation  de  graisses  animales,  en  particulier  d'acides  gras  saturés,  et l'augmentation des apports en fibres alimentaires permettent un meilleur contrôle du poids.
 
 <!-- page: 30 -->
 
-
-## Actions ayant montré leur efficacité
-
-
-
-## Activité physique
+### Activité physique
 
 Les mécanismes mis en jeu dans l'action préventive du diabète par l'activité physique sont l'amélioration du transport et de l'utilisation du glucose musculaire et la modification de la sensibilité à l'insuline.
 
-- ¼ L'association entre activité physique, restriction calorique et prévention du diabète de type 2 a été établie par des études épidémiologiques et des essais randomisés comparant le risque de survenue d'un diabète dans des populations actives et/ou ayant un régime alimentaire restrictif versus des populations sédentaires et/ou ne modifiant pas leurs habitudes alimentaires.
-- ¼ Une méta-analyse de 10 études publiée en 2007 [ref-64] a montré une réduction du risque de diabète de type 2 avec une activité physique d'intensité régulière (soit 2,5 h/ semaine de marche) : par comparaison à l'absence d'activité physique, le risque relatif (RR) de diabète était diminué de 30 % (RR = 0,70 ; IC 95 % = 0,58-0,84).
+- L'association entre activité physique, restriction calorique et prévention du diabète de type 2 a été établie par des études épidémiologiques et des essais randomisés comparant le risque de survenue d'un diabète dans des populations actives et/ou ayant un régime alimentaire restrictif versus des populations sédentaires et/ou ne modifiant pas leurs habitudes alimentaires.
+- Une méta-analyse de 10 études publiée en 2007 [ref-64] a montré une réduction du risque de diabète de type 2 avec une activité physique d'intensité régulière (soit 2,5 h/ semaine de marche) : par comparaison à l'absence d'activité physique, le risque relatif (RR) de diabète était diminué de 30 % (RR = 0,70 ; IC 95 % = 0,58-0,84).
 
 Pour en savoir plus, consulter l'annexe « Études sur l'impact de l'activité physique sur la prévention du diabète de type 2 ».
 
-
-
-## Pour info
+### Pour info
 
 La promotion d'une activité régulière d'intensité modérée fait partie des axes du programme national nutrition santé (PNNS) mis en place par le ministère de la Santé en 2001, repris dans la loi relative à la politique de santé publique du 9 août 2004 [ref-65] .
 
 L'objectif qui a été fixé est d'augmenter de 25 % la proportion d'adultes pratiquant l'équivalent de 30 minutes de marche rapide par jour.
 
-## Réduction pondérale et équilibre alimentaire
+### Réduction pondérale et équilibre alimentaire
 
 Selon  les  données  de  l'enquête  ObÉpi  2012 [ref-66] , 43  %  des  personnes  diabétiques  de  type  2  sont  obèses (40 % des hommes, 47 % des femmes). Par comparaison avec la population non diabétique ayant un poids normal, 3 fois plus de personnes déclarent un diabète traité ou sous régime seul en cas de surpoids, 7 fois plus en cas d'obésité.
 
-- ¼ Une méta-analyse de 71 études (totalisant 0,5 million de sujets) publiée en 2014 [ref-67] a montré que la perte de poids permettait une diminution du risque de diabète de type 2 (Odds ratio = 0,62, IC 95 % = 0,58-0,67), quelle que soit la méthode utilisée (activité physique, diète, chirurgie bariatrique, traitement médicamenteux).
-- ¼ Les résultats des études Diabetes Prevention Program (DPP) [ref-68] et Finnish Diabetes Prevention Study (DPS) [ref-69] ont montré l'efficacité des mesures hygiéno-diététiques sur la prévention du diabète. La combinaison d'un régime hypocalorique (visant une perte pondérale de 5 %), d'une restriction des graisses alimentaires et de 30 minutes/ jour d'activité physique modérée permettait une réduction du risque de diabète.
-
-[ref-64]: Jeon CY, Lokken RP, Hu FB, van Dam RM. Physical activity of moderate intensity and risk of type 2 diabetes: a systematic review. Diabetes Care 2007;30(3):744-52.
-
-[ref-65]: Ministère de l'emploi et de la solidarité. Programme National Nutrition-Santé (PNNS) 2001 - 2005. Paris: ministère de l'Emploi et de la Solidarité; 2001. http://www.sante.gouv.fr/IMG/pdf/1n1.pdf ; Loi n° 2004-806 du 9 août 2004 relative à la politique de santé publique. Journal Officiel 2004;11 août.
-
-[ref-66]: Institut national de la santé et de la recherche médicale, Kantar Health, Roche. Enquête épidémiologique nationale sur le surpoids et l'obésité. ObEpi 2012. Neuilly-sur-Seine: Roche; 2012. http://www.roche.fr/content/dam/corporate/roche\_fr/doc/obepi\_2012.pdf
-
-[ref-67]: Merlotti C, Morabito A, Pontiroli AE. Prevention of type 2 diabetes; a systematic review and meta-analysis of different intervention strategies. Diabetes Obes Metab 2014;16(8):719-27.
-
-[ref-68]: DPP : Diabetes Prevention Program. Tuomilehto J, Lindström J, Eriksson JG, Valle TT, Hämäläinen H, Ilanne-Parikka P, et al. Prevention of type 2 diabetes mellitus by changes in lifestyle among subjects with impaired glucose tolerance. N Engl J Med 2001;344(18):1343-50.
-
-[ref-69]: DPS : Finnish Diabetes Prevention Study. Lindström J, Louheranta A, Mannelin M, Rastas M, Salminen V, Eriksson J, et al. The Finnish Diabetes Prevention Study (DPS). Lifestyle intervention and 3-year results on diet and physical activity. Diabetes Care 2003;26(12):3230-6.
+- Une méta-analyse de 71 études (totalisant 0,5 million de sujets) publiée en 2014 [ref-67] a montré que la perte de poids permettait une diminution du risque de diabète de type 2 (Odds ratio = 0,62, IC 95 % = 0,58-0,67), quelle que soit la méthode utilisée (activité physique, diète, chirurgie bariatrique, traitement médicamenteux).
+- Les résultats des études Diabetes Prevention Program (DPP) [ref-68] et Finnish Diabetes Prevention Study (DPS) [ref-69] ont montré l'efficacité des mesures hygiéno-diététiques sur la prévention du diabète. La combinaison d'un régime hypocalorique (visant une perte pondérale de 5 %), d'une restriction des graisses alimentaires et de 30 minutes/ jour d'activité physique modérée permettait une réduction du risque de diabète.
 
 <!-- page: 31 -->
 
-
-
-
-
-## Pour mémoire
+### Pour mémoire
 
 Selon les données de l'enquête ObÉpi 2012 (données déclaratives) [ref-70] , 32 % des adultes français de 18 ans et  plus  sont  en  surpoids  (25  ≤  indice  de  masse  corporelle  (IMC)  &lt;  30  kg/m 2 )  et  15 %  sont  obèses (IMC ≥ 30 kg/m 2 ).
 
-- ´ ´ La prévalence de l'obésité est plus élevée chez les femmes (16 %) que chez les hommes (14 %). Elle diminue avec l'âge : elle est de 22 % chez les sujets âgés de 65-69 ans et de 16  % chez ceux âgés de 80 ans et plus. Cette diminution s'observe aussi bien chez les hommes que chez les femmes. La prévalence de l'obésité est inversement proportionnelle au niveau de revenus.
-- ´ ´ Les régions suivantes ont des taux de prévalence élevés : le Nord-Pas-de-Calais (prévalence de 21 %), la Champagne-Ardenne (20 %), la Picardie et la Haute-Normandie (20 %), l'Alsace (19 %) et le Limousin (18 %).
-- ´ ´ Les régions ayant une prévalence basse sont la région Midi-Pyrénées (12 %), la région PACA (12 %) et les Pays de la Loire (12 %).
+- La prévalence de l'obésité est plus élevée chez les femmes (16 %) que chez les hommes (14 %). Elle diminue avec l'âge : elle est de 22 % chez les sujets âgés de 65-69 ans et de 16  % chez ceux âgés de 80 ans et plus. Cette diminution s'observe aussi bien chez les hommes que chez les femmes. La prévalence de l'obésité est inversement proportionnelle au niveau de revenus.
+- Les régions suivantes ont des taux de prévalence élevés : le Nord-Pas-de-Calais (prévalence de 21 %), la Champagne-Ardenne (20 %), la Picardie et la Haute-Normandie (20 %), l'Alsace (19 %) et le Limousin (18 %).
+- Les régions ayant une prévalence basse sont la région Midi-Pyrénées (12 %), la région PACA (12 %) et les Pays de la Loire (12 %).
 
 Chez les sujets en surpoids ou obèse, il est nécessaire de répéter les conseils diététiques et de vérifier régulièrement l'obtention d'une modification durable des habitudes alimentaires.
 
 Une analyse des habitudes alimentaires par l'interrogatoire peut être utile pour évaluer si les apports alimentaires sont équilibrés ou déséquilibrés.
 
-- ¼ Le bilan nutritionnel peut être fait a minima par interrogation sur le contenu des repas des dernières 24 heures et, au mieux, en utilisant un journal alimentaire sur une semaine.
-- ¼ En cas d'échec au bout de 6 mois à 1 an, le recours à un professionnel spécialisé (diététicien, endocrino-diabétologue) peut-être proposé.
+- Le bilan nutritionnel peut être fait a minima par interrogation sur le contenu des repas des dernières 24 heures et, au mieux, en utilisant un journal alimentaire sur une semaine.
+- En cas d'échec au bout de 6 mois à 1 an, le recours à un professionnel spécialisé (diététicien, endocrino-diabétologue) peut-être proposé.
 
-## Les conseils nutritionnels minimums peuvent être les suivants :
+### Les conseils nutritionnels minimums peuvent être les suivants :
 
 - faire 3 repas par jour (ne pas sauter de repas), prendre le temps de manger assis à table, éviter le grignotage, diversifier les repas ;
 - diminuer la ration énergétique en choisissant une alimentation de densité énergétique moindre (fruits, légumes) et/ou un contrôle de la taille des portions (notamment en ce qui concerne les féculents) ;
@@ -1423,25 +966,15 @@ Une analyse des habitudes alimentaires par l'interrogatoire peut être utile pou
 - limiter la consommation d'aliments à forte densité énergétique riches en lipides (fritures, frites, chips, beignets) ou en sucres (pâtisseries, glaces, viennoiseries, confiseries, jus de fruits, sodas, spécialités laitières, boissons énergisantes, boissons alcoolisées, confitures, miel) ;
 - augmenter les aliments alcalinisants (fruits et légumes) et diminuer les aliments acidifiants (protéines animales) [ref-71] .
 
-## Concernant le volume des portions, l'assiette équilibrée est un outil simple à proposer :
+### Concernant le volume des portions, l'assiette équilibrée est un outil simple à proposer :
 
 - la moitié de l'assiette devrait être occupée par des légumes ;
 - un quart de l'assiette devrait être occupé par les féculents ;
 - un quart de l'assiette devrait être occupé par de la viande ou du poisson.
 
-[ref-70]: Institut national de la santé et de la recherche médicale, Kantar Health, Roche. Enquête épidémiologique nationale sur le surpoids et l'obésité. ObEpi 2012. Neuilly-sur-Seine: Roche; 2012. http://www.roche.fr/content/dam/corporate/roche\_fr/doc/obepi\_2012.pdf
-
-[ref-71]: Les régimes acidifiants (riches en protéines animales et pauvres en végétaux) augmenteraient le risque d'insulino-résistance. Une étude Inserm a étudié pendant 14 ans l'alimentation de 60 000 femmes affiliées à la MGEN (Mutuelle générale de l'Education nationale) et appartenant à la cohorte E3N-EPIC ( European Prospective Investigation into Cancer and Nutrition ). Les femmes ayant une alimentation à pouvoir acide élevé avaient un risque de diabète de type 2 augmenté de 56 % par rapport aux femmes avec un régime alcalinisant. Fagherazzi G, Vilier A, Bonnet F, Lajous M, Balkau B, Boutron-Rualt MC, et al . Dietary acid load and risk of type 2 diabetes: the E3N-EPIC cohort study. Diabetologia 2014;57(2):313-20.
-
-
 <!-- page: 32 -->
-|
 
-
-
-
-
-## Mini-synthèse
+# Prévention secondaire – Populations cibles du dépistage
 
 Les populations cibles ont été définies par les recommandations ANAES de 2003 et HAS de 2014.
 
@@ -1483,22 +1016,14 @@ et aux caractéristiques suivantes :
 - précarité définie par un score EPICES &gt; 30 [ref-72] ;
 - avec ou sans autre marqueur de risque associé .
 
-[ref-72]: Le score de précarité EPICES, tel qu'il est utilisé dans les centres d'examens de santé, est fondé sur 11 questions explorant les différents champs socioéconomiques, le score variant de 0 (absence de précarité) à 100 (précarité maximum). Institut de veille sanitaire, Sass C, Moulin JJ, Guéguen R, Abric L, Dauphinot V, et al. Le score Epices : un score individuel de précarité. Construction du score et mesure des relations avec des données de santé, dans une population de 197 389 personnes. BEH 2006;(14):93-6.
-
-
 <!-- page: 33 -->
-|
 
-
-
-## Mini-synthèse
+# Prévention secondaire – Examens biologiques de dépistage et de confirmation diagnostique
 
 ## Examen biologique de dépistage
 
-- ¼ Le test de dépistage recommandé est la mesure de la glycémie veineuse à jeun .
-- ¼ Selon les recommandations ANAES, il n'est pas recommandé de doser l'hémoglobine glyquée pour dépister un diabète .
-
-
+- Le test de dépistage recommandé est la mesure de la glycémie veineuse à jeun .
+- Selon les recommandations ANAES, il n'est pas recommandé de doser l'hémoglobine glyquée pour dépister un diabète .
 
 ## Pour info
 
@@ -1508,9 +1033,9 @@ et aux caractéristiques suivantes :
 
 ## Confirmation diagnostique
 
-- ¼ Le diagnostic est confirmé lorsqu'une seule glycémie est ≥ 2 g/l (1 1, 1 mmol/l), qu'il y ait ou non des symptômes de diabète associés.
-- ¼ Lorsque la glycémie est ≥ 1,26 g/l (7 mmol/l) et &lt; 2 g/l (1 1, 1 mmol/l), la confirmation diagnostique du diabète de type 2 sera faite par un second test de glycémie veineuse à jeun . Le diagnostic est confirmé en cas de glycémie à nouveau ≥ 1,26 g/l (7 mmol/l).
-- ¼ Lorsque la glycémie est comprise entre 1,10 g/l et 1,25 g/l (6,0 et 6,8 mmol/l), le diagnostic d'hyperglycémie modérée à jeun (prédiabète) est posé.
+- Le diagnostic est confirmé lorsqu'une seule glycémie est ≥ 2 g/l (1 1, 1 mmol/l), qu'il y ait ou non des symptômes de diabète associés.
+- Lorsque la glycémie est ≥ 1,26 g/l (7 mmol/l) et &lt; 2 g/l (1 1, 1 mmol/l), la confirmation diagnostique du diabète de type 2 sera faite par un second test de glycémie veineuse à jeun . Le diagnostic est confirmé en cas de glycémie à nouveau ≥ 1,26 g/l (7 mmol/l).
+- Lorsque la glycémie est comprise entre 1,10 g/l et 1,25 g/l (6,0 et 6,8 mmol/l), le diagnostic d'hyperglycémie modérée à jeun (prédiabète) est posé.
 
 ## Rythme de dépistage
 
@@ -1519,19 +1044,13 @@ Selon le parcours de soins HAS de 2014, le rythme de répétition du dépistage 
 - après 1-3 ans si la glycémie veineuse à jeun est &lt; 1,10 g/l (6,0 mmol/l) ;
 - 1 an plus tard si la glycémie veineuse à jeun est comprise entre 1,10 et 1,25 g/l (6,0 et 6,8 mmol/l).
 
-
-
 ## Pour mémoire
 
 Tous les diabètes diagnostiqués chez l'adulte ne sont pas des diabètes de type 2 : diabète de type 1 d'évolution lente (LADA ou Latent Autoimmune Diabetes in Adults ), diabète de type Mody (forme monogénique de diabète survenant à un âge jeune), diabète secondaire à un cancer du pancréas, à une pancréatopathie, à une hémochromatose, à un diabète gestationnel.
 
 <!-- page: 34 -->
 
-
-
-
-
-## Mini-synthèse
+# Prévention secondaire – Stratégie et objectifs de la prise en charge des sujets dépistés
 
 ## Si la glycémie veineuse à jeun est &lt; 1,10 g/l (6,0 mmol/l) :
 
@@ -1539,43 +1058,31 @@ Tous les diabètes diagnostiqués chez l'adulte ne sont pas des diabètes de typ
 - l'objectif de la prise en charge est le contrôle des facteurs de risque modifiables (équilibre alimentaire, activité physique, réduction pondérale) ;
 - le dépistage individuel du diabète sera renouvelé après 1-3 ans.
 
-Si la glycémie veineuse à jeun est comprise entre 1,10 et 1,25 g/l (6,0 et 6,8 mmol/l) :
+## Si la glycémie veineuse à jeun est comprise entre 1,10 et 1,25 g/l (6,0 et 6,8 mmol/l) :
 
 - le diagnostic de prédiabète est posé ;
 - l'objectif de la prise en charge est le contrôle des facteurs de risque modifiables (équilibre alimentaire, activité physique, réduction pondérale) ;
 - le dépistage individuel du diabète sera renouvelé après 1 an.
 
-Si la glycémie veineuse à jeun est &gt; 2 g/l (11,1 mmol/l) au premier dosage ou à nouveau ≥ 1,26 g/l au 2 e  dosage (7 mmol/l) :
+## Si la glycémie veineuse à jeun est &gt; 2 g/l (11,1 mmol/l) au premier dosage ou à nouveau ≥ 1,26 g/l au 2 e  dosage (7 mmol/l) :
 
 - le diagnostic de diabète est posé ;
 - l'objectif de la prise en charge est multiple : contrôle des facteurs de risque aggravants modifiables (notamment contrôle des facteurs de risque cardiovasculaire), prises en charge diététique et médicamenteuse, prévention des complications du diabète.
 
 La prise en charge des sujets chez qui un diabète de type 2 a été dépisté est faite par le médecin traitant et si nécessaire par un endocrinologue spécialisé en diabétologie.
 
-L'objectif de la prise en charge d'un sujet diabétique nouvellement diagnostiqué est double :
+## L'objectif de la prise en charge d'un sujet diabétique nouvellement diagnostiqué est double :
 
 - rechercher les complications liées au diabète étant  donné  que  le  début  de  la  maladie  est  souvent  méconnu  et que les complications peuvent être présentes dès le diagnostic. Ces complications sont de deux types : microangiopathiques (rétinopathie, néphropathie, neuropathie) et macroangiopathiques (maladie coronarienne, vasculocérébrale et artériopathie périphérique) ;
 - rechercher les comorbidités pouvant aggraver le pronostic , étant donné que ces pathologies concomitantes peuvent accélérer l'installation des complications.
 
 <!-- page: 35 -->
 
-
-
-
-
-
-
-
-
-
-
-## Mini-synthèse
+# Prévention tertiaire – Stratégie et objectifs de la surveillance du sujet diabétique
 
 La prise en charge de la surveillance du sujet diabétique de type 2 est faite par le médecin traitant et si nécessaire par un endocrinologue spécialisé en diabétologie.
 
 ## La prévention des complications liées au diabète est assurée par :
-
-
 
 - le contrôle glycémique ;
 - la surveillance de l'atteinte des organes cibles (cœur, vaisseaux, rein, œil, pied, système nerveux, dents) ;
@@ -1591,8 +1098,8 @@ Les complications sont de deux types : microangiopathiques (rétinopathie, néph
 
 La fréquence des consultations repose sur un accord professionnel.
 
-- ¼ Le rythme minimal est d'une consultation de suivi tous les 3-4 mois , ce qui correspond au rythme de prescription du dosage de l'hémoglobine glyquée (HbA1c) et aux recommandations de surveillance régulière du poids, de la pression artérielle, de l'état dentaire et des pieds.
-- ¼ Cette fréquence pourra être augmentée en fonction des objectifs glycémiques, des modifications de régime ou de thérapeutique nécessaires et de la survenue de complications.
+- Le rythme minimal est d'une consultation de suivi tous les 3-4 mois , ce qui correspond au rythme de prescription du dosage de l'hémoglobine glyquée (HbA1c) et aux recommandations de surveillance régulière du poids, de la pression artérielle, de l'état dentaire et des pieds.
+- Cette fréquence pourra être augmentée en fonction des objectifs glycémiques, des modifications de régime ou de thérapeutique nécessaires et de la survenue de complications.
 
 ## Objectifs des consultations de suivi
 
@@ -1607,11 +1114,7 @@ Les objectifs des consultations de suivi sont de vérifier :
 
 <!-- page: 36 -->
 
-
-
-## Actions ayant montré leur efficacité dans la prévention des maladies liées au diabète
-
-
+# Actions ayant montré leur efficacité dans la prévention des maladies liées au diabète
 
 Le développement des maladies liées au diabète dépend du degré d'hyperglycémie et de la durée d'exposition à cette hyperglycémie. L'objectif du contrôle glycémique est de prévenir la survenue et/ou de ralentir la progression des maladies liées au diabète.
 
@@ -1623,17 +1126,17 @@ Par ailleurs il a été démontré un effet bénéfique des soins de pédicurie-
 
 L'impact d'un contrôle glycémique strict sur la prévention primaire des événements cardiovasculaires n'a pu être aussi clairement démontré que pour les complications microvasculaires.
 
-- ¼ Une diminution de 1 % du taux d'hémoglobine glyquée était associée à une diminution de 43 % des amputations ou des décès dus à une pathologie artérielle périphérique (étude UKPDS [ref-74] ) ;
-- ¼ Une augmentation de 1 % du taux d'hémoglobine glyquée s'accompagnait d'une augmentation du risque d'artériopathie périphérique de 28 % (étude UKPDS).
+- Une diminution de 1 % du taux d'hémoglobine glyquée était associée à une diminution de 43 % des amputations ou des décès dus à une pathologie artérielle périphérique (étude UKPDS [ref-74] ) ;
+- Une augmentation de 1 % du taux d'hémoglobine glyquée s'accompagnait d'une augmentation du risque d'artériopathie périphérique de 28 % (étude UKPDS).
 
 Le bénéfice à long terme (3,5-10 ans) d'un contrôle glycémique intensif précoce a été démontré sur la survenue de la rétinopathie (UKPDS, ACCORD) et de la néphropathie (ADVANCE), avec un effet additif  du contrôle de la tension artérielle (UKPDS, ADVANCE).
 
 ## Limites de l'intensification du contrôle glycémique
 
-- ¼ Le contrôle glycémique intensif seul, par rapport à un contrôle classique [ref-75] , ne diminue pas la mortalité globale ou la mortalité cardiovasculaire. Le contrôle glycémique intensif pourrait toutefois réduire le risque de complications microvasculaires, mais augmenterait le risque d'hypoglycémie.
-- ¼ Le bénéfice d'un contrôle glycémique intensif précoce est faible et/ou non significatif sur les complications macrovasculaires et sur la progression de la rétinopathie et de la néphropathie lorsque le diabète évolue depuis plusieurs années .
-- ¼ L'intensification du traitement serait délétère, notamment à cause des risques hypoglycémiques (augmentation de la mortalité dans ACCORD et augmentation des morts subites dans VADT).
-- ¼ L'effet est discuté sur la neuropathie et l'artériopathie périphérique : pas de différence significative sur l'abolition des réflexes ostéotendineux rotuliens et achilléens, ni sur l'abolition d'un pouls périphérique ou sur la mesure de l'index de pression systolique, ni sur l'existence d'une cardiopathie ischémique silencieuse (UKPDS).
+- Le contrôle glycémique intensif seul, par rapport à un contrôle classique [ref-75] , ne diminue pas la mortalité globale ou la mortalité cardiovasculaire. Le contrôle glycémique intensif pourrait toutefois réduire le risque de complications microvasculaires, mais augmenterait le risque d'hypoglycémie.
+- Le bénéfice d'un contrôle glycémique intensif précoce est faible et/ou non significatif sur les complications macrovasculaires et sur la progression de la rétinopathie et de la néphropathie lorsque le diabète évolue depuis plusieurs années .
+- L'intensification du traitement serait délétère, notamment à cause des risques hypoglycémiques (augmentation de la mortalité dans ACCORD et augmentation des morts subites dans VADT).
+- L'effet est discuté sur la neuropathie et l'artériopathie périphérique : pas de différence significative sur l'abolition des réflexes ostéotendineux rotuliens et achilléens, ni sur l'abolition d'un pouls périphérique ou sur la mesure de l'index de pression systolique, ni sur l'existence d'une cardiopathie ischémique silencieuse (UKPDS).
 
 ## Amélioration de la qualité de vie des sujets diabétiques de type 2
 
@@ -1641,30 +1144,11 @@ L'amélioration de la qualité de vie des personnes diabétiques résulte d'une 
 
 Une étude interventionnelle randomisée de coaching par téléphone [ref-76] a montré qu'après 6 mois de conseils téléphoniques, le groupe ayant bénéficié de l'intervention avait un score de qualité de vie meilleur que le groupe témoin et que le taux d'hospitalisations ou de consultations médicales non programmées était réduit.
 
-## Pour  en  savoir  plus,  consulter  l'annexe  «  Études  UKPDS,  ACCORD,  ADVANCE  et  VADT,  cohortes ENTRED et DESIR ».
-
-[ref-73]: UKPDS : United Kingdom Prospective Diabetes Study ;  VADT : Veterans Affairs Diabetes Trial ;  ACCORD : Action to Control Cardiovascular Risk in Diabetes ; ADVANCE : Action in Diabetes and Vascular Disease .
-
-[ref-74]: Stratton IM, Adler AI, Neil HA, Matthews DR, Manley SE, Cull CA, et al . Association of glycaemia with macrovascular and microvascular complications of type 2 diabetes (UKPDS 35): prospective observational study. BMJ 2000;321(7258):405-12
-
-[ref-75]: Hemmingsen B, Lund SS, Gluud C, Vaag A, Almdal T, Hemmingsen C, et  al. Targeting intensive glycaemic control versus targeting conventional glycaemic control for type 2 diabetes mellitus. Cochrane Database of Systematic Reviews 2011;Issue 6:CD008143.
-
-[ref-76]: Courtney M, Edwards H, Chang A, Parker A, Finlayson K, Hamilton K. Fewer emergency readmissions and better quality of life for older adults at risk of hospital readmission: a randomized controlled trial to determine the effectiveness of a 24-week exercise and telephone follow-up program. J Am Geriatr Soc 2009;57(3):395-402.
+Pour  en  savoir  plus,  consulter  l'annexe  «  Études  UKPDS,  ACCORD,  ADVANCE  et  VADT,  cohortes ENTRED et DESIR ».
 
 <!-- page: 37 -->
-|
 
-
-
-
-
-
-
-
-
-
-
-## Mini-synthèse
+# Prévention tertiaire – Surveillance glycémique (Mini-synthèse)
 
 ## Le dosage de l'hémoglobine glyquée
 
@@ -1674,10 +1158,10 @@ L'hémoglobine glyquée (HbA1c) est le témoin de l'hyperglycémie chronique et 
 
 L'objectif glycémique est individualisé en fonction du profil des patients et peut évoluer au cours du temps.
 
-- ¼ Pour la plupart des sujets diabétiques de type 2, une cible d'HbA1c ≤ 7 % est recommandée.
-- ¼ Pour les sujets dont le diabète est nouvellement diagnostiqué, sans antécédent cardiovasculaire et dont l'espérance de vie est &gt; 15 ans, un objectif ≤ 6,5 % est recommandé.
-- ¼ Pour les sujets diabétiques de type 2 ayant une espérance de vie &lt; 5 ans ou ayant des complications macrovasculaires évoluées, ou un diabète ancien mal équilibré, un objectif ≤ 8 % est recommandé.
-- ¼ Pour les personnes âgées de 75 ans ou plus, dont l'état de santé est fragilisé, l'objectif recommandé est compris entre 8 % et 9 %.
+- Pour la plupart des sujets diabétiques de type 2, une cible d'HbA1c ≤ 7 % est recommandée.
+- Pour les sujets dont le diabète est nouvellement diagnostiqué, sans antécédent cardiovasculaire et dont l'espérance de vie est &gt; 15 ans, un objectif ≤ 6,5 % est recommandé.
+- Pour les sujets diabétiques de type 2 ayant une espérance de vie &lt; 5 ans ou ayant des complications macrovasculaires évoluées, ou un diabète ancien mal équilibré, un objectif ≤ 8 % est recommandé.
+- Pour les personnes âgées de 75 ans ou plus, dont l'état de santé est fragilisé, l'objectif recommandé est compris entre 8 % et 9 %.
 
 ## Place de l'autosurveillance glycémique chez le sujet diabétique de type 2
 
@@ -1690,15 +1174,9 @@ L'autosurveillance glycémique n'est pas recommandée de manière systématique 
 
 <!-- page: 38 -->
 
-
-
-
-
-
+# Prévention tertiaire – Surveillance glycémique
 
 ## Le dosage de l'hémoglobine glyquée
-
-
 
 Le dosage de l'hémoglobine glyquée (HbA1c) est l'examen de référence dans le suivi du diabète . Il permet d'estimer de façon rétrospective l'équilibre glycémique des sujets diabétiques sur une durée d'environ 3 mois.
 
@@ -1718,8 +1196,8 @@ Les techniques disponibles pour doser l'HbA1c étaient les suivantes :
 
 Les laboratoires utilisaient en très grande majorité des techniques standardisées (26 des 31 techniques utilisées étaient standardisées). La qualité globalement correcte des résultats (notamment la reproductibilité [ref-78] ) était le reflet d'une large utilisation de techniques de dosage chromatographiques (CLHP en particulier) ou immunologiques, qui sont pour la majorité d'entre elles standardisées.
 
-- ¼ Les techniques CLHP avaient une bonne reproductibilité : le coefficient de variation (CV) médian était de 1,8 % avec des valeurs allant de 1,0 % à 3,1 %. Pour 3/4 des techniques, le CV était ≤ 2,4 %.
-- ¼ Les techniques immunologiques avaient une reproductibilité acceptable : le CV médian était de 3,3 % avec des valeurs allant de 2,2 % à 4,3 %. Pour 3/4 des techniques, le CV était ≤ 3,8 %.
+- Les techniques CLHP avaient une bonne reproductibilité : le coefficient de variation (CV) médian était de 1,8 % avec des valeurs allant de 1,0 % à 3,1 %. Pour 3/4 des techniques, le CV était ≤ 2,4 %.
+- Les techniques immunologiques avaient une reproductibilité acceptable : le CV médian était de 3,3 % avec des valeurs allant de 2,2 % à 4,3 %. Pour 3/4 des techniques, le CV était ≤ 3,8 %.
 
 Un cahier  des  charges  des  notices  des  réactifs  de  dosage  de  l'HbA1c  a  été  publié  par  l'Afssaps  en  2006 [ref-79] . Il regroupe les recommandations internationales et nationales en matière de suivi glycémique du diabète qui préconisent :
 
@@ -1728,36 +1206,9 @@ Un cahier  des  charges  des  notices  des  réactifs  de  dosage  de  l'HbA1c  
 - l'utilisation de valeurs de référence en accord avec le système de standardisation ;
 - l'identification du réactif utilisé avec l'indication du paramètre dosé (HbA1c ou HbA1c évaluée par algorithme à partir du dosage de l'hémoglobine glyquée).
 
-[ref-77]: Agence française de sécurité sanitaire des produits de santé. Annales du contrôle national de qualité des analyses de biologie médicale. Biochimie 2010. 10BIO1 et 10BIO2. Saint-Denis: Afssaps; 2012.
-
-http://ansm.sante.fr/var/ansm\_site/storage/original/application/864745724deb88c48699b2b293ae8fce.pdf
-
-[ref-78]: La valeur recommandée par le NGSP/DCCT-SFBC ( National Glycohemoglobin Standardization Program : http://www.ngsp.org/ ) pour la reproductibilité est ≤ 4 %
-
-[ref-79]: Agence  française  de  sécurité  sanitaire  des  produits  de  santé.  Cahier  des  charges  des  notices  des  réactifs  de  dosage  de  l'HbA1c. Saint-Denis: Afssaps; 2006. http://www.ansm.sante.fr/content/download/1601/15558/version/2/file/hba1c.pdf
-
-[ref-80]: Directive européenne 98/79/CE du Parlement européen et du Conseil du 27 octobre 1998 relative aux dispositifs médicaux de diagnostic in vitro. Journal Officiel des Communautés Européennes 1998, 7 décembre:L 331-1-L 331/37.
-
 <!-- page: 39 -->
 
-
-
-
-
-
-## Algorithme décisionnel en fonction du profil du sujet diabétique
-
-
-
-
-<!-- page: 40 -->
-
-
-
-
 ## L'autosurveillance glycémique
-
-
 
 Dans le cas où elle est indiquée, le rythme préconisé pour l'autosurveillance glycémique est le suivant :
 
@@ -1766,21 +1217,14 @@ Dans le cas où elle est indiquée, le rythme préconisé pour l'autosurveillanc
 - 2 fois/semaine à 2 fois/jour en cas de traitement n'atteignant pas l'objectif glycémique, comme outil d'éducation thérapeutique du patient pour démontrer l'effet de l'activité physique, de l'alimentation et du traitement médicamenteux  ;
 - 2 fois/semaine à 2 fois/jour en cas de traitement par insulinosécréteurs (sulfamides ou glinides, seuls ou associés à d'autres médicaments antidiabétiques).
 
-
-
 ## Pour info
 
 - ´ ´ Le prescripteur d'un système d'autosurveillance glycémique doit préciser l'unité de mesure (mg/dl ou mol/l) souhaitée pour l'affichage par le lecteur de glycémie et le nombre d'autosurveillances à réaliser par jour ou par semaine.
 - ´ ´ Par arrêté ministériel du 25 février 2011 [ref-81] , la prise en charge des bandelettes d'autosurveillance glycémique par l'Assurance maladie est limitée à 200 par an, à l'exception des sujets pour lesquels une insulinothérapie est en cours ou prévue à court ou moyen terme.
 
-[ref-81]: Arrêté du 25 février 2011 relatif à la modification des conditions de prise en charge des appareils pour lecture automatique de la glycémie, dits lecteurs de glycémie, inscrits au chapitre 1 er  du titre Ier de la liste des produits et prestations remboursables prévue à l'article L. 165-1 du code de la sécurité sociale. Journal Officiel 2011;27 février.
-
-
 <!-- page: 41 -->
 
-
-
-## Mini-synthèse
+# Prévention tertiaire – Surveillance neurologique
 
 ## Dépistage de la neuropathie autonome
 
@@ -1802,25 +1246,9 @@ Le questionnaire DN4 peut être utilisé pour diagnostiquer des douleurs neuropa
 
 Pour en savoir plus, consulter l'annexe « Test au monofilament et questionnaire DN4 ».
 
-[ref-82]: Les signes de neuropathie autonome peuvent être à type de neuropathie cardiovasculaire (hypotension artérielle orthostatique, allongement du segment QT, arythmie ventriculaire, œdème des membres inférieurs) ; de neuropathie du tractus digestif (dysphagie, brûlure rétrosternale, reflux gastro-œsophagien,  nausées,  vomissements,  douleurs  abdominales,  ballonnements,  distensions  abdominales,  sensation  de  satiété  précoce, lenteur  de  digestion,  gastroparésie,  hypoglycémie  postprandiale  immédiate,  hyperglycémie  à  distance  des  repas,  diarrhée,  constipation)  ;  de neuropathie vésicale (vessie hypoactive, vessie hyperactive) ; de neuropathie génitale (chez la femme : baisse des sécrétions vaginales, anorgasmie ; chez l'homme : éjaculation rétrograde, dysfonction érectile) ; de troubles visuels (anomalie de la motricité pupillaire, défaut d'adaptation à l'obscurité) ; d'atteintes du système sudoral (anhydrose, hyperhydrose).
-
-
-
 <!-- page: 42 -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-## Mini-synthèse
+# Prévention tertiaire – Surveillance rénale
 
 L'atteinte rénale liée au diabète est caractérisée par une diminution progressive de la fonction rénale (diminution du débit de filtration glomérulaire). Elle est définie par la présence, pendant plus de 3 mois, de marqueurs d'atteinte rénale (protéinurie, albuminurie) ou d'une baisse du débit de filtration glomérulaire &lt; 60 ml/min/1,73 m².
 
@@ -1835,15 +1263,13 @@ Le dépistage de marqueurs d'atteinte rénale (protéinurie, hématurie, leucocy
 
 ## Résultats
 
-- ¼ Le débit de filtration glomérulaire anormal est &lt; 60 ml/min/1,73 m².
-- ¼ L'albuminurie  est  considérée  comme  positive  si  elle  est  &gt;  3  mg/mmol  chez  le  sujet  diabétique  et &gt; 30 mg/mmol chez le sujet non diabétique.
+- Le débit de filtration glomérulaire anormal est &lt; 60 ml/min/1,73 m².
+- L'albuminurie  est  considérée  comme  positive  si  elle  est  &gt;  3  mg/mmol  chez  le  sujet  diabétique  et &gt; 30 mg/mmol chez le sujet non diabétique.
 
 ## Le diagnostic est confirmé par :
 
 - la persistance d'une diminution du débit de filtration glomérulaire sur deux ou trois examens consécutifs répétés dans les trois mois et avec la même technique de dosage de la créatininémie ;
 - ou par la persistance d'une albuminurie sur deux ou trois examens consécutifs répétés dans les 3 mois.
-
-
 
 ## Pour mémoire
 
@@ -1863,17 +1289,13 @@ Par souci de simplification de la pratique clinique, la HAS a proposé de reteni
 
 <!-- page: 43 -->
 
-
-
 ## Classification de l'insuffisance rénale chronique
 
 La maladie rénale chronique est classée en 5 stades de sévérité.
 
-- ¼ Les stades 1 et 2 sont définis par un débit de filtration glomérulaire &gt; 60 ml/min/1,73 m² mais avec présence de marqueurs d'atteinte rénale.
-- ¼ Les stades 3 et 4 de l'insuffisance rénale chronique sont définis par un débit de filtration glomérulaire compris entre 15 et 59 ml/min/1,73 m².
-- ¼ Le stade 5 (défaillance rénale) de l'insuffisance rénale chronique terminale, défini par un débit de filtration glomérulaire &lt; 15 ml/min/1,73 m², nécessite un traitement de suppléance, greffe rénale ou dialyse.
-
-
+- Les stades 1 et 2 sont définis par un débit de filtration glomérulaire &gt; 60 ml/min/1,73 m² mais avec présence de marqueurs d'atteinte rénale.
+- Les stades 3 et 4 de l'insuffisance rénale chronique sont définis par un débit de filtration glomérulaire compris entre 15 et 59 ml/min/1,73 m².
+- Le stade 5 (défaillance rénale) de l'insuffisance rénale chronique terminale, défini par un débit de filtration glomérulaire &lt; 15 ml/min/1,73 m², nécessite un traitement de suppléance, greffe rénale ou dialyse.
 
 ## Pour mémoire
 
@@ -1892,13 +1314,9 @@ DFG : débit de filtration glomérulaire ; KDIGO : Kidney Disease Improving Glob
 
 * : La maladie rénale chronique est définie par la présence de marqueurs d'atteinte rénale persistant plus de 3 mois et présents lors de 2 à 3 examens consécutifs : albuminurie, hématurie, leucocyturie, anomalies morphologiques ou histologiques ou marqueurs de dysfonction tubulaire.
 
-
 <!-- page: 44 -->
 
-
-## Évaluation de la fonction rénale
-
-
+# Évaluation de la fonction rénale
 
 Le diagnostic de maladie rénale chronique est fait par l'estimation du débit de filtration glomérulaire (DFG) en association à la recherche de protéinurie ou d'albuminurie, même en présence d'un DFG &gt; 60 ml/min/1,73 m 2 .
 
@@ -1910,8 +1328,8 @@ La HAS a recommandé en 2011 d'évaluer la fonction rénale à partir de la cré
 
 Dans la fiche Bon usage des technologies de santé (BUTS) publiée en 2012, la HAS a recommandé également d'utiliser l'équation CKD-EPI pour estimer le débit de filtration glomérulaire [ref-84] , et a estimé que, dans l'attente de l'appropriation de cette nouvelle équation par les professionnels de santé, la formule MDRD pouvait être utilisée.
 
-- ¼ La HAS considère que les équations d'estimation du DFG (dont l'équation CKD-EPI) ne sont pas validées chez les sujets de type non caucasien (le facteur de correction en ce qui concerne l'origine géographique fourni pour l'équation n'est validé que pour la population afro-américaine), les sujets âgés de plus de 75 ans, les sujets de poids extrême ou dont la masse musculaire est élevée ou faible, les sujets dénutris ou ayant une alimentation pauvre en protéines animales.
-- ¼ Les données de la littérature concordent vers une meilleure performance de la formule MDRD par rapport à la formule de Cockcroft, notamment pour la prédiction du débit de filtration glomérulaire chez les sujets âgés, les sujets en surpoids ou obèses.
+- La HAS considère que les équations d'estimation du DFG (dont l'équation CKD-EPI) ne sont pas validées chez les sujets de type non caucasien (le facteur de correction en ce qui concerne l'origine géographique fourni pour l'équation n'est validé que pour la population afro-américaine), les sujets âgés de plus de 75 ans, les sujets de poids extrême ou dont la masse musculaire est élevée ou faible, les sujets dénutris ou ayant une alimentation pauvre en protéines animales.
+- Les données de la littérature concordent vers une meilleure performance de la formule MDRD par rapport à la formule de Cockcroft, notamment pour la prédiction du débit de filtration glomérulaire chez les sujets âgés, les sujets en surpoids ou obèses.
 
 ## Dosage de la créatininémie
 
@@ -1919,32 +1337,14 @@ La HAS a recommandé en 2011 d'utiliser la méthode enzymatique standardisée ID
 
 Différentes méthodes de dosage de la créatinine coexistent : méthode de Jaffé classique ou « non compensée », méthode de Jaffé dite « compensée », méthode enzymatique.
 
-- ¼ Les méthodes de Jaffé ont l'inconvénient d'être sujettes à de nombreuses interférences (chromogènes non spécifiques tels que protéines, glucose, etc.) [ref-85] . Les méthodes dites « compensées » intègrent une correction par une compensation des chromogènes non spécifiques (correction de -18 μmo/l à -26 μmol/l).
-- ¼ Les méthodes enzymatiques permettent de s'affranchir de certaines de ces interférences.
-- ¼ La standardisation du dosage de la créatinine nécessite pour les fabricants de remplacer la méthode de calibration traditionnelle par une calibration traçable à l'IDMS ( Isotope dilution mass spectrometry ), considérée comme la méthode de référence.
-- ¼ En 2010, le contrôle national de qualité [ref-86] a mis en évidence :
+- Les méthodes de Jaffé ont l'inconvénient d'être sujettes à de nombreuses interférences (chromogènes non spécifiques tels que protéines, glucose, etc.) [ref-85] . Les méthodes dites « compensées » intègrent une correction par une compensation des chromogènes non spécifiques (correction de -18 μmo/l à -26 μmol/l).
+- Les méthodes enzymatiques permettent de s'affranchir de certaines de ces interférences.
+- La standardisation du dosage de la créatinine nécessite pour les fabricants de remplacer la méthode de calibration traditionnelle par une calibration traçable à l'IDMS ( Isotope dilution mass spectrometry ), considérée comme la méthode de référence.
+- En 2010, le contrôle national de qualité [ref-86] a mis en évidence :
 - que  les  techniques  colorimétriques,  basées  sur  la  réaction  de  Jaffé,  étaient  largement  majoritaires  par rapport aux techniques enzymatiques. Pour ces dernières, seule la technique Vitros semblait être implantée en France ;
 - une dispersion importante des résultats, en particulier dans les valeurs basses de la créatinine (&lt; 70 μmol/l), en raison de la coexistence de techniques standardisées et non standardisées, notamment dans le groupe des techniques de type Jaffé.
 
-[ref-83]: CKD-EPI : Chronic Kidney Disease - Epidemiology Collaboration ; MDRD : Modification of Diet in Renal Disease.
-
-[ref-84]: Pour estimer le DFG à partir de la créatininémie par l'équation CKD-EPI, il est possible d'utiliser la calculette de la Société française de néphrologie, accessible en ligne ( http://www.soc-nephrologie.org/eservice/calcul/eDFG.htm ). Le résultat, étant déjà indexé à la surface corporelle, ne doit pas être réadapté à la surface corporelle du sujet.
-
-[ref-85]: Selon leur concentration, ces composés peuvent provoquer une surestimation de 18 à 20 μmol/l de la concentration de créatinine, dosée par les méthodes de Jaffé classiques. À l'inverse, l'augmentation de la bilirubine masque le développement de la coloration et donne des résultats faussement bas.
-
-[ref-86]: Agence française de sécurité sanitaire des produits de santé. Rapport du contrôle de marché des dispositifs médicaux de diagnostic in vitro de dosage de la créatinine. État des lieux, notices et traçabilité. Saint-Denis: Afssaps; 2010.
-
-http://ansm.sante.fr/var/ansm\_site/storage/original/application/e8d6968887948105b6a7eafbb55bd12f.pdf
-
-;
-
-Agence française de sécurité sanitaire des produits de santé. Annales du contrôle national de qualité des analyses de biologie médicale. Biochimie 2010. 10BIO1 et 10BIO2. Saint-Denis: Afssaps; 2012.
-
-http://ansm.sante.fr/var/ansm\_site/storage/original/application/864745724deb88c48699b2b293ae8fce.pdf
-
 <!-- page: 45 -->
-
-
 
 ## Recherche d'une albuminurie/protéinurie
 
@@ -1952,8 +1352,8 @@ L'atteinte rénale peut être estimée, en cas de débit de filtration glomérul
 
 La microalbuminurie, ou paucialbuminurie, correspond à une protéinurie peu importante et non détectée par les méthodes traditionnelles de mesure ou de dépistage (bandelette) de la protéinurie.
 
-- ¼ La protéinurie peut être recherchée avec une bandelette urinaire. En cas de positivité, elle doit être confirmée et quantifiée.
-- ¼ La confirmation peut être réalisée à partir d'un échantillon d'urine (pouvant être prélevé à tout moment de la journée) et, dans ce cas, le résultat est exprimé sous forme de rapport albuminurie/créatinine urinaire ou protéinurie/créatinine urinaire dans les unités du système international (mg/mmol). Le recueil des urines de 24 heures n'est pas nécessaire [ref-87] .
+- La protéinurie peut être recherchée avec une bandelette urinaire. En cas de positivité, elle doit être confirmée et quantifiée.
+- La confirmation peut être réalisée à partir d'un échantillon d'urine (pouvant être prélevé à tout moment de la journée) et, dans ce cas, le résultat est exprimé sous forme de rapport albuminurie/créatinine urinaire ou protéinurie/créatinine urinaire dans les unités du système international (mg/mmol). Le recueil des urines de 24 heures n'est pas nécessaire [ref-87] .
 
 ## Recherche par bandelette urinaire
 
@@ -1970,25 +1370,14 @@ Les éléments suivants peuvent provoquer une réaction faussement positive : un
 
 Conformément à la Nomenclature des actes de biologie médicale (NABM), le dosage de la protéinurie et le rapport protéinurie/créatininurie sont calculés.
 
-- ¼ Si  ce  rapport  est  &gt;  20,0  mg/mmol de créatinine chez l'homme, ou &gt; 28,0 mg/mmol de créatinine chez la femme, le dosage de la microalbuminurie n'est pas réalisé et le résultat est rendu sous forme d'un rapport protéinurie/créatininurie.
-- ¼ Si ce rapport est &lt; 20,0 mg/mmol de créatinine chez l'homme, ou &lt; 28,0 mg/mmol de créatinine chez la femme, le  dosage  de  la  microalbuminurie  est  réalisé  et  le  résultat  est  rendu  sous  forme  d'un  rapport  albuminurie/ créatininurie (A/C).
+- Si  ce  rapport  est  &gt;  20,0  mg/mmol de créatinine chez l'homme, ou &gt; 28,0 mg/mmol de créatinine chez la femme, le dosage de la microalbuminurie n'est pas réalisé et le résultat est rendu sous forme d'un rapport protéinurie/créatininurie.
+- Si ce rapport est &lt; 20,0 mg/mmol de créatinine chez l'homme, ou &lt; 28,0 mg/mmol de créatinine chez la femme, le  dosage  de  la  microalbuminurie  est  réalisé  et  le  résultat  est  rendu  sous  forme  d'un  rapport  albuminurie/ créatininurie (A/C).
 
 En cas de positivité, la répétition de l'examen est nécessaire pour confirmer l'anomalie observée, de préférence à partir d'un échantillon des urines du matin.
 
-[ref-87]: Le dosage de la protéinurie dans une collecte de 24 h est considérée comme le « gold standard », mais la collecte est difficile et exposée aux erreurs.
-
 <!-- page: 46 -->
-|
 
-
-
-
-
-
-
-
-
-## Mini-synthèse
+# Prévention tertiaire – Surveillance cardiovasculaire
 
 Le risque cardiovasculaire global des sujets diabétiques est élevé . Les principales complications macrovasculaires du  diabète  de  type  2  sont  les  suivantes  : accidents coronariens, accidents vasculaires cérébraux, artérites des membres inférieurs .
 
@@ -2017,21 +1406,12 @@ L'hypertension artérielle observée en cas de diabète de type 2 est dans la pl
 
 Un bilan lipidique doit être effectué une fois par an chez le sujet diabétique de type 2 par la mesure du cholestérol total, du HDL-cholestérol et des triglycérides, la mesure ou le calcul (si triglycérides &lt; 4,5 g/l) du LDL -cholestérol.
 
-- ¼ La décision d'un traitement médicamenteux de prévention cardiovasculaire primaire en cas d'hyperlipidémie ne sera prise qu'après une phase prolongée (3 à 6 mois) d'intensification hygiénodiététique et d'équilibration du diabète, qui permet parfois de normaliser les paramètres lipidiques.
-- ¼ Une prise en charge médicamenteuse de la dyslipidémie sera instaurée chez le sujet diabétique de type 2 ayant une atteinte rénale ou ayant au moins deux des facteurs de risque suivants : âge &gt; 50 ans chez l'homme, ou &gt; 60 ans chez  la  femme,  antécédents  familiaux  de  maladie  coronarienne  précoce,  tabagisme,  hypertension  artérielle,  HDL cholestérolémie &lt; 0,40 g/l (1,0 mmol/l), microalbuminurie &gt; 30 mg / 24 h.
-
-[ref-88]: La pratique d'examens complémentaires (exploration vasculaire par échographie-Doppler, mesure de l'épaisseur pariétale des carotides, recherche d'une médiacalcose des artères des membres inférieurs) n'est pas recommandée en soins primaires en l'absence de signes cliniques d'appel, faute de pouvoir définir un arbre décisionnel validé.
-
-[ref-89]: La définition de l'hypertension artérielle est la même que chez le sujet non diabétique : pression artérielle systolique (PAS) ≥ 140 mmHg et/ou pression artérielle diastolique (PAD) ≥ 90mmHg. Agence nationale d'accréditation et d'évaluation en santé. Prise en charge des patients adultes atteints d'hypertension artérielle essentielle. Paris: ANAES; 2000.
+- La décision d'un traitement médicamenteux de prévention cardiovasculaire primaire en cas d'hyperlipidémie ne sera prise qu'après une phase prolongée (3 à 6 mois) d'intensification hygiénodiététique et d'équilibration du diabète, qui permet parfois de normaliser les paramètres lipidiques.
+- Une prise en charge médicamenteuse de la dyslipidémie sera instaurée chez le sujet diabétique de type 2 ayant une atteinte rénale ou ayant au moins deux des facteurs de risque suivants : âge &gt; 50 ans chez l'homme, ou &gt; 60 ans chez  la  femme,  antécédents  familiaux  de  maladie  coronarienne  précoce,  tabagisme,  hypertension  artérielle,  HDL cholestérolémie &lt; 0,40 g/l (1,0 mmol/l), microalbuminurie &gt; 30 mg / 24 h.
 
 <!-- page: 47 -->
-|
 
-
-
-
-
-## Mini-synthèse
+# Prévention tertiaire – Surveillance ophtalmologique
 
 ## Dépistage de la rétinopathie diabétique
 
@@ -2053,30 +1433,18 @@ L'optimisation du contrôle glycémique (HbA1C&lt; 7 %) et du contrôle de la pr
 
 Les sujets diabétiques peuvent être atteints d'autres pathologies oculaires, en particulier la cataracte (non spécifique, mais plus fréquente et de survenue plus précoce chez le sujet diabétique) et le glaucome , ainsi que des paralysies oculomotrices, des neuropathies optiques, des atteintes cornéennes, liées au diabète mais plus rarement observées.
 
-- ¼ Chez les sujets ayant été opérés d'une cataracte, une intensification du suivi du fond d'œil pendant l'année qui suit l'intervention est recommandée.
-- ¼ Les autres anomalies oculaires doivent être dépistées régulièrement, par un examen ophtalmologique complet, réalisé de façon périodique, à un rythme identique à celui de la population non diabétique.
+- Chez les sujets ayant été opérés d'une cataracte, une intensification du suivi du fond d'œil pendant l'année qui suit l'intervention est recommandée.
+- Les autres anomalies oculaires doivent être dépistées régulièrement, par un examen ophtalmologique complet, réalisé de façon périodique, à un rythme identique à celui de la population non diabétique.
 
 <!-- page: 48 -->
 
-
-
-
-
-
-
-## Prévention tertiaire Surveillance podologique
-
-
-
-
-
-## Mini-synthèse
+# Prévention tertiaire Surveillance podologique
 
 Les lésions des pieds du sujet diabétique sont graves et peuvent aboutir à des amputations . Elles sont à type de mal perforant plantaire avec ulcérations et altération de la capacité de cicatrisation.
 
 La prévention des lésions du pied nécessite d'éviter les traumatismes, les lésions de compression, les plaies pouvant être occasionnées par une mauvaise hygiène du pied ou un choix de chaussures inadaptées.
 
-## Elle fait appel à :
+Elle fait appel à :
 
 - des soins de pédicurie-podologie réguliers ;
 - l'éducation du patient (et éventuellement de l'entourage) à l'hygiène des pieds ;
@@ -2092,21 +1460,9 @@ L'inspection des pieds doit être faite à chaque consultation par la recherche 
 - d'une neuropathie périphérique par le test au monofilament de 10 g ;
 - d'une artériopathie par la palpation des pouls périphériques et la mesure de l'index de pression systolique (IPS) [ref-90] .
 
-## Le risque podologique est gradé de 0 à 3.
-
-Pour en savoir plus, consulter l'annexe « Gradation du risque podologique ».
-
-[ref-90]: L 'index  de  pression  systolique  (IPS)  correspond  au  rapport  de  la  pression  artérielle  systolique  à  la  cheville  sur  la  pression  artérielle  systolique humérale, mesurées à l'aide d'une sonde Doppler de poche (Doppler portable). Un IPS inférieur à 0,9 permet de faire le diagnostic d'artériopathie oblitérante des membres inférieurs.
-
 <!-- page: 49 -->
 
-
-
-## Mini-synthèse
-
-
-
-
+# Prévention tertiaire – Surveillance dentaire et autres types de surveillance
 
 ## Dépistage des pathologies dentaires
 
@@ -2124,113 +1480,73 @@ La vaccination contre la grippe saisonnière annuelle est recommandée.
 
 <!-- page: 50 -->
 
-
-
-
-
-
-
-
-
-## Mini-synthèse
+# Prévention tertiaire – État des pratiques de prise en charge des sujets diabétiques en France (Mini-synthèse)
 
 ## Typologie des populations diabétiques de type 2 en France
 
-- ¼ Les sujets diabétiques de type 2 traités représentent 4,6 % de la population française. Ils sont âgés de 65 ans en moyenne (26 % ont plus de 75 ans).
-- ¼ 80 % sont en surpoids ou obèses, 78 % sont traités pour une pathologie cardiovasculaire.
-- ¼ Dans 80 % des cas, c'est le médecin généraliste qui a détecté le diabète, le plus souvent au cours d'un bilan de santé de routine .
-- ¼ Le nombre de sujets diabétiques ou ayant un prédiabète est plus élevé dans les populations en situation de précarité par comparaison à la population générale et leur diabète est plus grave.
-- ¼ Les sujets diabétiques ont une qualité de vie altérée , notamment du fait des complications liées à cette maladie.
+- Les sujets diabétiques de type 2 traités représentent 4,6 % de la population française. Ils sont âgés de 65 ans en moyenne (26 % ont plus de 75 ans).
+- 80 % sont en surpoids ou obèses, 78 % sont traités pour une pathologie cardiovasculaire.
+- Dans 80 % des cas, c'est le médecin généraliste qui a détecté le diabète, le plus souvent au cours d'un bilan de santé de routine .
+- Le nombre de sujets diabétiques ou ayant un prédiabète est plus élevé dans les populations en situation de précarité par comparaison à la population générale et leur diabète est plus grave.
+- Les sujets diabétiques ont une qualité de vie altérée , notamment du fait des complications liées à cette maladie.
 
 ## Traitement et suivi des sujets diabétiques de type 2 en France
 
-- ¼ 42 % des diabétiques de type 2 étaient traités par une monothérapie per os en 2006-2007 (68 % par un biguanide) ; 83 % avaient également un traitement antihypertenseur, 59 % un traitement hypolipidémiant.
-- ¼ Le suivi des sujets diabétiques est insuffisant : seuls 2 % des sujets ont bénéficié de l'ensemble des examens et/ou consultations recommandés pour le suivi du diabète de type 2 .
+- 42 % des diabétiques de type 2 étaient traités par une monothérapie per os en 2006-2007 (68 % par un biguanide) ; 83 % avaient également un traitement antihypertenseur, 59 % un traitement hypolipidémiant.
+- Le suivi des sujets diabétiques est insuffisant : seuls 2 % des sujets ont bénéficié de l'ensemble des examens et/ou consultations recommandés pour le suivi du diabète de type 2 .
 
 ## Respect des recommandations françaises de suivi des sujets diabétiques de type 2
 
-- ¼ Les recommandations françaises de suivi des sujets diabétiques de type 2 sont partiellement respectées : la plus importante disparité concerne le suivi de l'équilibre glycémique par des glycémies sans dosage d'HbA1c, contrairement aux recommandations françaises qui préconisent le dosage de la glycémie pour le diagnostic et non pour le suivi thérapeutique.
-- ¼ Seuls 5 % des médecins généralistes déclarent assurer pour leurs patients diabétiques des consultations  dédiées  à  l'éducation  thérapeutique. Parmi  les  freins  au  développement  d'une démarche éducative, les médecins généralistes citent en premier le manque de temps.
+- Les recommandations françaises de suivi des sujets diabétiques de type 2 sont partiellement respectées : la plus importante disparité concerne le suivi de l'équilibre glycémique par des glycémies sans dosage d'HbA1c, contrairement aux recommandations françaises qui préconisent le dosage de la glycémie pour le diagnostic et non pour le suivi thérapeutique.
+- Seuls 5 % des médecins généralistes déclarent assurer pour leurs patients diabétiques des consultations  dédiées  à  l'éducation  thérapeutique. Parmi  les  freins  au  développement  d'une démarche éducative, les médecins généralistes citent en premier le manque de temps.
 
 <!-- page: 51 -->
 
-
-
-
+# Prévention tertiaire – État des pratiques de prise en charge des sujets diabétiques en France
 
 ## Typologie des sujets diabétiques de type 2 en France
 
+### Descriptif des sujets diabétiques
 
+- Plus de 3 millions de personnes étaient traitées pour diabète en France en 2011, soit 4,6 % de la population ; l'ancienneté moyenne du diabète était de 11 ans (données Entred 2007-2010).
+- L'âge moyen des sujets diabétiques traités était de 64,8 ans (écart-type : 13,8 ans) ; 26 % avaient 75 ans ou plus, et les hommes représentaient 54 % des diabétiques traités (données Entred 2007-2010).
+- 80 % des sujets diabétiques étaient en surpoids ou obèses : 39 % avaient un indice de masse corporelle (IMC) compris entre 25 et 29 kg/m2 et 41 % ≥ 30 kg/m 2   (données Entred 2007-2010).
+- 78 % des sujets diabétiques prenaient un traitement à visée cardiovasculaire (données Entred 2007-2010).
+- Une amputation était rapportée par 1,5 % des sujets diabétiques, un mal perforant plantaire actif ou cicatrisé par 10 % (données Entred 2007-2010).
+- Un tabagisme chronique était rapporté par 36 % des sujets diabétiques de type 2 âgés de moins de 45 ans, 29 % des 45 à 54 ans, 17 % des 55-64 ans et 9 % des plus de 65 ans (données 2007 [ref-91] ).
+- La mortalité , toutes causes confondues et à âge égal, était plus élevée chez les personnes diabétiques que dans la population générale ; 15 % des personnes diabétiques étaient décédées après cinq ans de suivi, à un âge moyen de 77 ans (données Entred 2001) [ref-92] .
 
-## Descriptif des sujets diabétiques
+### Circonstances diagnostiques du diabète
 
-- ¼ Plus de 3 millions de personnes étaient traitées pour diabète en France en 2011, soit 4,6 % de la population ; l'ancienneté moyenne du diabète était de 11 ans (données Entred 2007-2010).
-- ¼ L'âge moyen des sujets diabétiques traités était de 64,8 ans (écart-type : 13,8 ans) ; 26 % avaient 75 ans ou plus, et les hommes représentaient 54 % des diabétiques traités (données Entred 2007-2010).
-- ¼ 80 % des sujets diabétiques étaient en surpoids ou obèses : 39 % avaient un indice de masse corporelle (IMC) compris entre 25 et 29 kg/m2 et 41 % ≥ 30 kg/m 2   (données Entred 2007-2010).
-- ¼ 78 % des sujets diabétiques prenaient un traitement à visée cardiovasculaire (données Entred 2007-2010).
-- ¼ Une amputation était rapportée par 1,5 % des sujets diabétiques, un mal perforant plantaire actif ou cicatrisé par 10 % (données Entred 2007-2010).
-- ¼ Un tabagisme chronique était rapporté par 36 % des sujets diabétiques de type 2 âgés de moins de 45 ans, 29 % des 45 à 54 ans, 17 % des 55-64 ans et 9 % des plus de 65 ans (données 2007 [ref-91] ).
-- ¼ La mortalité , toutes causes confondues et à âge égal, était plus élevée chez les personnes diabétiques que dans la population générale ; 15 % des personnes diabétiques étaient décédées après cinq ans de suivi, à un âge moyen de 77 ans (données Entred 2001) [ref-92] .
+- Le médecin généraliste joue un rôle prépondérant puisque, dans 80 % des cas, c'est lui qui a détecté le diabète. Le bilan de santé de routine est la première source de dépistage du diabète de type 2 .
+- Le diabète était découvert à l'occasion d'un dépistage (67 % des cas), de symptômes évocateurs (18 % des cas), ou de complications (15 % des cas).
 
-## Circonstances diagnostiques du diabète
+### Caractéristiques socioéconomiques des sujets diabétiques
 
-- ¼ Le médecin généraliste joue un rôle prépondérant puisque, dans 80 % des cas, c'est lui qui a détecté le diabète. Le bilan de santé de routine est la première source de dépistage du diabète de type 2 .
-- ¼ Le diabète était découvert à l'occasion d'un dépistage (67 % des cas), de symptômes évocateurs (18 % des cas), ou de complications (15 % des cas).
-
-## Caractéristiques socioéconomiques des sujets diabétiques
-
-- ¼ Selon les données Entred 2007 [ref-94] , les revenus des personnes diabétiques étaient inférieurs à ceux de la population générale quel que soit l'âge avant 75 ans ; 6 % des patients étaient assurés par la couverture maladie universelle (CMU).
-- ¼ L'analyse  des  caractéristiques  de  la  population  dite  en  situation  de  précarité  montre  qu'elle  est  plus  jeune, masculine, plutôt célibataire,  fumant  plus,  d'un  niveau  éducatif  souvent  élevé, avec un taux de surpoids, de diabète et de prédiabète supérieur à celui des personnes non précaires 94 .  Ses  conditions  de  vie socioéconomiques sont inférieures à la population générale avec des difficultés importantes pour se loger et s'alimenter de manière équilibrée : alimentation carencée en protéines animales, laitages, fruits et légumes verts, surconsommation de féculents et de sodas sucrés . Chez ces personnes, les affections dentaires sont fréquentes et mal prises en charge.
+- Selon les données Entred 2007 [ref-94] , les revenus des personnes diabétiques étaient inférieurs à ceux de la population générale quel que soit l'âge avant 75 ans ; 6 % des patients étaient assurés par la couverture maladie universelle (CMU).
+- L'analyse  des  caractéristiques  de  la  population  dite  en  situation  de  précarité  montre  qu'elle  est  plus  jeune, masculine, plutôt célibataire,  fumant  plus,  d'un  niveau  éducatif  souvent  élevé, avec un taux de surpoids, de diabète et de prédiabète supérieur à celui des personnes non précaires 94 .  Ses  conditions  de  vie socioéconomiques sont inférieures à la population générale avec des difficultés importantes pour se loger et s'alimenter de manière équilibrée : alimentation carencée en protéines animales, laitages, fruits et légumes verts, surconsommation de féculents et de sodas sucrés . Chez ces personnes, les affections dentaires sont fréquentes et mal prises en charge.
 
 Chez les personnes en situation de précarité , la gravité du diabète est liée à des ruptures de traitement (situation socioéconomique, compliance fluctuante), à un suivi aléatoire et/ou non adapté, à un diagnostic tardif. Dans ce type de population, la fréquence des complications est élevée : en 2006, 35 % des personnes diabétiques avaient un risque podologique élevé, 32 % une rétinopathie, 25 % une complication macrovasculaire, 6 % une artérite des membres inférieurs et 17 % avaient subi une amputation [ref-95] .
 
-[ref-91]: Institut de veille sanitaire, Fagot-Campagna A, Fosse S, Roudier C, Romon I, Penfornis A, et al . Caractéristiques, risque vasculaire et complications chez les personnes diabétiques en France métropolitaine : d'importantes évolutions entre Entred 2001 et Entred 2007. BEH 2009;(42-43):450-5.
-
-[ref-92]: Institut de veille sanitaire, Romon I, Jougla E, Weill A, Eschwège E, Simon D, et al. Description de la mortalité et des causes de décès dans une cohorte d'adultes diabétiques, en France métropolitaine. Étude Entred 2001. BEH 2009;(42-43):469-72.
-
-[ref-93]: Institut de veille sanitaire, Fagot-Campagna A, Fosse S, Roudier C, Romon I, Penfornis A, et al. Caractéristiques, risque vasculaire et complications chez les personnes diabétiques en France métropolitaine : d'importantes évolutions entre Entred 2001 et Entred 2007. BEH 2009;(42-43):450-5.
-
-[ref-94]: Jaffiol C, Fontbonne A, Vannereau D, Olive JP, Passeron S. Diabète et précarité. Résultats d'une étude en Languedoc 2012. http://www.precaritediabete.academie-medecine.fr/diabete\_et\_precarite\_en\_languedoc.pdf [consulté en 07/2014].
-
-[ref-95]: Institut de veille sanitaire, Arnaud A, Fagot-Campagna A, Reach G, Basin C, Laporte A. Prévalence et caractéristiques du diabète chez les personnes sans domicile fixe fréquentant des centres d'hébergement d'urgence à Paris, 2006. BEH 2008;(43):418-20.
-
 <!-- page: 52 -->
 
-
-
-## Qualité de vie des sujets diabétiques
+### Qualité de vie des sujets diabétiques
 
 À âge égal, les scores physiques et mentaux des personnes diabétiques de type 2 sont globalement inférieurs aux scores de la population générale (enquête Insee 2002-2003 [ref-96] ). Lors de l'annonce du diagnostic, les personnes diabétiques ont des sentiments d'inquiétude (30 %), de peur (13 %), de colère (4 %) et d'injustice (12 %) [ref-98] .
 
-- ¼ Les données de l'étude Entred 2007 montrent que le recours à une consultation psychiatrique était rapporté par 5 % des personnes diabétiques (7 % des femmes et 4 % des hommes), était significativement plus fréquent chez les personnes les plus jeunes (p &lt; 0,001) et chez les personnes ayant un score de qualité de vie physique (score PCS physical component summary scores ) ou mentale (score MCS mental component summary scores ) bas (p &lt; 0,001 pour les deux scores 98 ).
-- ¼ En analyse multivariée, les facteurs associés indépendamment à un faible score de qualité de vie mentale étaient : un revenu jugé insuffisant, l'existence d'une complication macrovasculaire, la survenue d'une hypoglycémie sévère, la dépendance pour les activités de la vie quotidienne, le soutien social perçu comme insuffisant et une hémoglobine glyquée élevée (entre 8 % et 10 %).
-- ¼ Les facteurs indépendamment associés à un faible score de qualité de vie physique étaient : un revenu jugé insuffisant, une obésité, l'existence d'une complication macrovasculaire, la dépendance pour les activités de la vie quotidienne, une hospitalisation pendant l'année précédant l'étude et le soutien social perçu comme insuffisant.
+- Les données de l'étude Entred 2007 montrent que le recours à une consultation psychiatrique était rapporté par 5 % des personnes diabétiques (7 % des femmes et 4 % des hommes), était significativement plus fréquent chez les personnes les plus jeunes (p &lt; 0,001) et chez les personnes ayant un score de qualité de vie physique (score PCS physical component summary scores ) ou mentale (score MCS mental component summary scores ) bas (p &lt; 0,001 pour les deux scores 98 ).
+- En analyse multivariée, les facteurs associés indépendamment à un faible score de qualité de vie mentale étaient : un revenu jugé insuffisant, l'existence d'une complication macrovasculaire, la survenue d'une hypoglycémie sévère, la dépendance pour les activités de la vie quotidienne, le soutien social perçu comme insuffisant et une hémoglobine glyquée élevée (entre 8 % et 10 %).
+- Les facteurs indépendamment associés à un faible score de qualité de vie physique étaient : un revenu jugé insuffisant, une obésité, l'existence d'une complication macrovasculaire, la dépendance pour les activités de la vie quotidienne, une hospitalisation pendant l'année précédant l'étude et le soutien social perçu comme insuffisant.
 
-## Perception de la maladie par les sujets diabétiques
+### Perception de la maladie par les sujets diabétiques
 
-- ¼ Les données de l'enquête Diabasis publiée en 2009 [ref-99] montrent que, chez les personnes diabétiques nouvellement diagnostiquées, l'annonce du diagnostic est signalée comme un moment important au cours duquel 85 % des personnes souhaiteraient obtenir davantage d'informations , notamment sur les médicaments, les conséquences possibles du diabète sur la santé et sur l'origine de la maladie.
-- ¼ Selon les données de l'étude Entred 2007 [ref-100] , chez les personnes diabétiques traitées : 80 % se disaient bien ou très bien informées sur leur maladie (la principale source d'information étant leur médecin traitant), 42 % souhaitaient avoir des informations complémentaires sur l'alimentation, 33 % des informations sur les complications liées au diabète et 33 % auraient aimé pouvoir bénéficier d'un complément éducatif individuel.
-- ¼ 20 % des personnes diabétiques interrogées ont précisé ne pas suivre de régime tant qu'elles n'ont pas de complications de santé, la moitié ont modifié leurs habitudes alimentaires, 71 % ont déclaré ne pas avoir d'activité physique régulière [ref-101] .
-
-[ref-96]: Institut de veille sanitaire, Bourdel-Marchasson I, Tulon A, Erpelding ML, Lecomte P, Vexiau P, et al. La qualité de vie des diabétiques de type 2 vivant en France métropolitaine : de multiples facteurs associés. Entred 2007. BEH 2011;(2):15-9.
-
-[ref-97]: Hochberg G, Dejager S, Eschwege E, Guillausseau PJ, Halimi S, Virally ML, et al. DIABASIS : perception et vécu du diabète de type 2 par les patients eux-mêmes en France [abstract]. Diabetes Metab 2009;35(Suppl 1):59.
-
-[ref-98]: Les scores sont calculés à partir de huit dimensions : fonctionnement et limitation physiques, douleur physique, limitation émotionnelle, santé mentale, vitalité, fonctionnement social et perception. Les deux scores vont de 0 à 100, la valeur 100 signifiant la meilleure qualité de vie.
-
-[ref-99]: L'enquête Diabasis 2008, réalisée en partenariat avec l'Association de langue française pour l'étude du diabète et des maladies métaboliques (Alfediam) et le Diabète éducation de langue française (DELF), avait pour objet de décrire le diabète de type 2 du point de vue des patients. 14 200 autoquestionnaires explorant la connaissance de la maladie dans la population générale âgée de 45 ans et plus ont été analysés, 1 092 réponses provenaient de sujets diabétiques de type 2. Mosnier-Pudar H, Hochberg G, Eschwege E, Virally ML, Halimi S, Guillausseau PJ, et al. How do patients with type 2 diabetes perceive their disease? Insights from the French DIABASIS survey. Diabetes Metab 2009;35(3):220-7.
-
-[ref-100]: Institut de veille sanitaire, Fournier C, Gautier A, Attali C, Bocquet-Chabert A, Mosnier-Pudar H, et al. Besoins d'information et d'éducation des personnes diabétiques, pratiques éducatives des médecins, étude Entred, France, 2007. BEH 2009;(42-43):460-4.
-
-[ref-101]: Hochberg G, Dejager S, Eschwege E, Guillausseau PJ, Halimi S, Virally ML, et al . DIABASIS : perception et vécu du diabète de type 2 par les patients eux-mêmes en France [abstract]. Diabetes Metab 2009;35(Suppl 1):59.
+- Les données de l'enquête Diabasis publiée en 2009 [ref-99] montrent que, chez les personnes diabétiques nouvellement diagnostiquées, l'annonce du diagnostic est signalée comme un moment important au cours duquel 85 % des personnes souhaiteraient obtenir davantage d'informations , notamment sur les médicaments, les conséquences possibles du diabète sur la santé et sur l'origine de la maladie.
+- Selon les données de l'étude Entred 2007 [ref-100] , chez les personnes diabétiques traitées : 80 % se disaient bien ou très bien informées sur leur maladie (la principale source d'information étant leur médecin traitant), 42 % souhaitaient avoir des informations complémentaires sur l'alimentation, 33 % des informations sur les complications liées au diabète et 33 % auraient aimé pouvoir bénéficier d'un complément éducatif individuel.
+- 20 % des personnes diabétiques interrogées ont précisé ne pas suivre de régime tant qu'elles n'ont pas de complications de santé, la moitié ont modifié leurs habitudes alimentaires, 71 % ont déclaré ne pas avoir d'activité physique régulière [ref-101] .
 
 <!-- page: 53 -->
 
-
-
 ## Traitement et suivi des sujets diabétiques de type 2 en France
-
-
 
 Les données d'évaluation des pratiques sont relativement anciennes, mais certaines ont été actualisées, suite à la mise en place des CAPI (contrats d'amélioration des pratiques individuelles) en 2009.
 
@@ -2246,11 +1562,11 @@ Dans ce cadre, les indicateurs de suivi et les objectifs à atteindre suivants o
 
 Des améliorations dans le suivi des sujets diabétiques ont été observées au cours des années, mais elles restent insuffisantes après 15 années d'élaboration de recommandations et de plans de santé publique, notamment en ce qui concerne le risque néphrologique, ophtalmologique, podologique et le contrôle glycémique (cf. : paragraphes ci-après). L 'objectif de 80 % de sujets diabétiques ayant un suivi conforme aux recommandations françaises n'est pas atteint [ref-103] .
 
-## Prise en charge des personnes diabétiques
+### Prise en charge des personnes diabétiques
 
 En 2007 [ref-104] ,  75  %  des  sujets  diabétiques de type 2 étaient pris en charge en ALD (affection de longue durée) diabète. Le taux de sujets nouvellement mis en ALD pour un diabète (taux standardisé sur l'âge) était, en 2006, plus élevé chez les hommes que chez les femmes (154 versus 121 / 100 000 personnes) [ref-105] .
 
-## Traitement des sujets diabétiques
+### Traitement des sujets diabétiques
 
 Les données de remboursements (pour la période de août 2006 à juillet 2007) des sujets diabétiques de type 2 âgés de 65 ans de l'étude Entred [ref-106] montrent que :
 
@@ -2259,21 +1575,7 @@ Les données de remboursements (pour la période de août 2006 à juillet 2007) 
 - 10 % par une trithérapie antidiabétique orale ;
 -  7 % étaient sous insuline, 12 % sous une association insuline + antidiabétique oral.
 
-[ref-102]: Caisse  nationale  de  l'assurance  maladie  des  travailleurs  salariés.  Convention  médicale  :  rémunération  sur  objectifs.  Pathologies chroniques : diabète 2012. http://www.ameli.fr/fileadmin/user\_upload/documents/272012fiche\_long\_diabet\_BAT.pdf
-
-[ref-103]: Haut conseil de la santé publique. Objectifs de santé publique. Évaluation des objectifs de la loi du 9 août 2004. Propositions. Paris: HCSP; 2010. http://www.sante-sports.gouv.fr/IMG/pdf/Rapport\_Haut\_conseil\_de\_la\_sante\_publique\_-\_Objectifs\_de\_sante\_publique.pdf ; Inspection générale des affaires sociales, Morel A, Lecoq G, Jourdain-Menninger D. Évaluation de la prise en charge du diabète. Rapport. Tome I. Paris: IGAS; 2012. http://www.ladocumentationfrancaise.fr/var/storage/rapports-publics/124000256/0000.pdf
-
-[ref-104]: Institut de veille sanitaire, Druet C, Roudier C, Romon I, Assogba F, Bourdel-Marchasson I, et al. Échantillon national témoin représentatif des personnes diabétiques, Entred 2007-2010. Caractéristiques, état de santé, prise en charge et poids économique des personnes diabétiques. Saint-Maurice: InVS; 2013. http://opac.invs.sante.fr/doc\_num.php?explnum\_id=9074
-
-[ref-105]: Institut de veille sanitaire, Fagot-Campagna A, Romon I, Fosse S, Roudier C. Prévalence et incidence du diabète, et mortalité liée au diabète en France. Synthèse épidémiologique. Saint-Maurice: InVS; 2010. http://www.invs.sante.fr/publications/2010/plaquette\_diabete/plaquette\_diabete.pdf
-
-[ref-106]: Échantillon aléatoire de 9 781 adultes (18 ans et plus) ayant bénéficié d'au moins trois remboursements d'antidiabétiques oraux et/ou d'insuline entre août 2006 et juillet 2007.
-
-Institut de veille sanitaire, Robert J, Roudier C, Poutignat N, Fagot-Campagna A, Weill A, et al. Prise en charge des personnes diabétiques de type 2 en France en 2007 et tendances par rapport à 2001. BEH 2009;(42-43):455-60.
-
 <!-- page: 54 -->
-
-
 
 Conformément aux recommandations HAS publiées en 2013, le traitement antidiabétique doit être adapté en fonction de la situation clinique et de l'équilibre glycémique (mesuré par l'hémoglobine glyquée [HbA1c]). Une étude observationnelle (publiée en 2010 [ref-113]) sur 17 493 sujets traités par hypoglycémiants oraux seuls, avec au moins deux dosages d'HbA1c disponibles, a montré après 12 mois de suivi, que seuls 10,5 % des sujets avaient bénéficié d'une intensification du traitement lorsque le deuxième dosage d'HbA1c montrait un déséquilibre du diabète.
 
@@ -2284,49 +1586,45 @@ En ce qui concerne les autres traitements :
 - 40 % un antiagrégant plaquettaire ;
 - 59 % un traitement hypolipémiant (statines 47 %, fibrates 10 %, autres 2 %).
 
-## Consultations médicales spécialisées au cours du suivi des sujets diabétiques
+### Consultations médicales spécialisées au cours du suivi des sujets diabétiques
 
 Les données de pratiques françaises, mises en parallèle avec les recommandations françaises de suivi d'un sujet diabétique de type 2, sont issues de l'étude Entred 2007-2010, des bases de remboursement de l'Assurance maladie d'août 2006 à juillet 2008 et du Programme de médicalisation des systèmes d'information (PMSI) de remboursement [ref-107] .
 
-## Consultation cardiologique et ECG de repos
+#### Consultation cardiologique et ECG de repos
 
 - 1 Pour mémoire, les recommandations françaises préconisent une consultation cardiologique avec ECG de repos 1 fois/an.
 - ´ ´ Si l'on se réfère aux données de remboursement 2006-2007 et aux données Entred 2007-2010, 39 % des sujets diabétiques ont bénéficié d'un électrocardiogramme ou d'une consultation de cardiologie.
 
-## Consultation d'ophtalmologie
+#### Consultation d'ophtalmologie
 
 - 1 Pour mémoire, les recommandations françaises préconisent une consultation ophtalmologique tous les 2 ans si le diabète et la tension artérielle sont contrôlés .
 - ´ ´ Si l'on se réfère aux données de remboursement 2006-2007 et aux données Entred 2007-2010, 50 % des sujets diabétiques ont bénéficié d'une consultation d'ophtalmologie.
 
-## Soins dentaires
+#### Soins dentaires
 
 - 1 Pour mémoire, les recommandations françaises préconisent un examen dentaire/an .
 - ´ ´ Si l'on se réfère aux données de remboursement 2006-2007 et aux données Entred 2007-2010, 38 % des sujets diabétiques ont bénéficié d'un examen dentaire.
 - ´ ´ Les personnes diabétiques ne recourent pas plus que les non-diabétiques au dentiste, voire moins, alors qu'elles sont prises en charge à 100 % par le dispositif des affections de longue durée au titre du diabète.
 
-## Examens biologiques de suivi des sujets diabétiques
+### Examens biologiques de suivi des sujets diabétiques
 
-## Dosage de l'hémoglobine glyquée (HbA1c)
+#### Dosage de l'hémoglobine glyquée (HbA1c)
 
 - 1 Pour mémoire, les recommandations françaises préconisent un dosage d'HbA1c 4 fois/an .
 - ´ ´ Si l'on se réfère aux données de remboursement 2006-2007 :
 - 44 % des personnes diabétiques de type 2 ont bénéficié de 3 dosages d'HbA1c ;
 - 90 % des sujets ont eu au moins un dosage dans l'année.
 
-## Bilan lipidique
+#### Bilan lipidique
 
 - 1 Pour mémoire, les recommandations françaises préconisent un bilan lipidique/an .
 - ´ ´ Si l'on se réfère aux données de remboursements 2006-2007 :
 - 76 % des personnes diabétiques de type 2 ont bénéficié d'au moins un dosage de lipides sanguins dans l'année ;
 - 72 % ont eu un dosage de LDL cholestérol.
 
-[ref-107]: Institut de veille sanitaire, Robert J, Roudier C, Poutignat N, Fagot-Campagna A, Weill A, et al . Prise en charge des personnes diabétiques de type 2 en France en 2007 et tendances par rapport à 2001. BEH 2009;(42-43):455-60 ; Institut de veille sanitaire, Druet C, Roudier C, Romon I, Assogba F, Bourdel-Marchasson I, et  al. Échantillon national témoin représentatif des personnes diabétiques, Entred 2007-2010. Caractéristiques, état de santé, prise en charge et poids économique des personnes diabétiques. Saint-Maurice: InVS; 2013. http://opac.invs.sante.fr/doc\_num.php?explnum\_id=9074 .
-
 <!-- page: 55 -->
 
-
-
-## Surveillance de la fonction rénale
+#### Surveillance de la fonction rénale
 
 - 1 Pour  mémoire,  les  recommandations  françaises  préconisent un  dosage/an  de  la  créatininémie  et  une recherche/an d'albuminurie .
 - ´ ´ Si l'on se réfère aux données de remboursement 2006-2007 :
@@ -2337,9 +1635,7 @@ Ces pourcentages sont probablement sous-estimés car ils ne prennent pas en comp
 
 ## Respect des recommandations françaises sur le suivi du sujet diabètique de type 2
 
-
-
-## État des pratiques et respect des recommandations
+### État des pratiques et respect des recommandations
 
 L'étude Entred 2007-2010 (« Échantillon national témoin représentatif des personnes diabétiques ») avait pour objectif  d'approfondir  les  connaissances  sur  l'état  de  santé  des  personnes  diabétiques  en  France,  leur  prise  en charge médicale, leur qualité de vie, les besoins en démarche éducative et le coût du diabète. Les données de l'étude Entred n'ont pas été actualisées depuis leur publication pour la période 2007-2010.
 
@@ -2351,21 +1647,10 @@ Le ministère des Affaires sociales et de la Santé a publié en 2013 des donné
 
 Pour en savoir plus, consulter l'annexe « Données Entred 2007-2010 sur les pratiques de prise en charge des sujets diabétiques » .
 
-
 <!-- page: 56 -->
 
-
-## Place des médecins du Centre d'examens de santé dans le dispositif de prévention et de dépistage du diabète et des maladies liées au diabète
-
-## Mini-synthèse
-
-
-
-
-
-
-
-
+# Place des médecins du Centre d'examens de santé dans le dispositif de prévention et de dépistage du diabète et des maladies liées au diabète (Mini-synthèse
+)
 
 ## Place du médecin de CES dans la prévention du diabète
 
@@ -2384,29 +1669,24 @@ Chez un homme ou une femme âgé(e) de 45 ans ou plus, le médecin de Centre d'e
 
 ## Place du médecin de CES dans le dépistage et la prévention des complications du diabète
 
-- ¼ Chez  un  sujet  diabétique,  le  médecin  de  CES  devra  rechercher  les  complications  liées  au diabète par les actes suivants : palpation des pouls périphériques (abolition), examen des réflexes ostéo-tendineux au niveau des membres inférieurs (abolition), auscultation cardiovasculaire, prise de la tension artérielle (hypotension orthostatique), électrocardiogramme de repos (ischémie myocardique silencieuse), test au monofilament Nylon (troubles distaux de la sensibilité), examen cutané des pieds, recherche d'une protéinurie, dosage de la créatininémie, estimation du débit de filtration glomérulaire. L'examen dentaire recherchera une parodontopathie.
-- ¼ Pour prévenir les complications liées au diabète, le médecin de CES incitera les consultants diabétiques à : prendre régulièrement leur traitement, éviter les déséquilibres alimentaires, augmenter l'activité physique, perdre du poids, avoir une hygiène rigoureuse des pieds, participer à des ateliers d'éducation thérapeutique.
+- Chez  un  sujet  diabétique,  le  médecin  de  CES  devra  rechercher  les  complications  liées  au diabète par les actes suivants : palpation des pouls périphériques (abolition), examen des réflexes ostéo-tendineux au niveau des membres inférieurs (abolition), auscultation cardiovasculaire, prise de la tension artérielle (hypotension orthostatique), électrocardiogramme de repos (ischémie myocardique silencieuse), test au monofilament Nylon (troubles distaux de la sensibilité), examen cutané des pieds, recherche d'une protéinurie, dosage de la créatininémie, estimation du débit de filtration glomérulaire. L'examen dentaire recherchera une parodontopathie.
+- Pour prévenir les complications liées au diabète, le médecin de CES incitera les consultants diabétiques à : prendre régulièrement leur traitement, éviter les déséquilibres alimentaires, augmenter l'activité physique, perdre du poids, avoir une hygiène rigoureuse des pieds, participer à des ateliers d'éducation thérapeutique.
 
 ## Place du médecin de CES dans le dépistage et la prévention des comorbidités aggravantes
 
-- ¼ Chez un sujet diabétique, le médecin de CES devra rechercher les comorbidités par les actes suivants : prise de la tension artérielle (hypertension artérielle), recherche d'un syndrome métabolique, dosage des lipides sanguins.
-- ¼ Le  médecin  de  CES  informera  les  consultants  diabétiques sur  les  risques  d'aggravation  des complications liées au diabète en cas de pathologie concomitante augmentant notamment leur risque cardiovasculaire global (tabagisme chronique, dyslipidémie).
-- ¼ Il les incitera si besoin à : prendre régulièrement leur traitement antihypertenseur ou hypolipémiant et à arrêter de fumer.
+- Chez un sujet diabétique, le médecin de CES devra rechercher les comorbidités par les actes suivants : prise de la tension artérielle (hypertension artérielle), recherche d'un syndrome métabolique, dosage des lipides sanguins.
+- Le  médecin  de  CES  informera  les  consultants  diabétiques sur  les  risques  d'aggravation  des complications liées au diabète en cas de pathologie concomitante augmentant notamment leur risque cardiovasculaire global (tabagisme chronique, dyslipidémie).
+- Il les incitera si besoin à : prendre régulièrement leur traitement antihypertenseur ou hypolipémiant et à arrêter de fumer.
 
 <!-- page: 57 -->
-|
 
-
-
-
-
-
+# Place des médecins du Centre d'examens de santé dans le dispositif de prévention et de dépistage du diabète et des maladies liées au diabète
 
 ## Place du médecin de CES dans la prévention du diabète
 
-## Actes réalisés
+### Actes réalisés
 
-## Interrogatoire
+#### Interrogatoire
 
 Chez un homme ou une femme âgé(e) de 45 ans ou plus, l'interrogatoire fait par le médecin de Centre d'examens de santé recherche les facteurs de risque de diabète suivants :
 
@@ -2421,7 +1701,7 @@ Chez un homme ou une femme âgé(e) de 45 ans ou plus, l'interrogatoire fait par
 - dyslipidémie traitée ou non traitée , définie par une HDL -cholestérolémie &lt; 0,35 g/l (0,9 mmol/l) ou une triglycéridémie &gt; 2 g/l (2,3 mmol/l) ;
 - précarité , définie par un score EPICES &gt; 30 [ref-109] .
 
-## Examens clinique et paraclinique
+#### Examens clinique et paraclinique
 
 Si l'interrogatoire a révélé des facteurs et/ou des marqueurs de risque de diabète, l'examen clinique fait par le médecin de Centre d'examens de santé dans le cadre de l'examen périodique de santé comportera les éléments spécifiques suivants :
 
@@ -2431,36 +1711,23 @@ Si l'interrogatoire a révélé des facteurs et/ou des marqueurs de risque de di
 - un dosage de la glycémie à jeun (après 8 heures de jeûne) à la recherche d'un prédiabète ;
 - un dosage sérique du cholestérol total et du LDL -cholestérol.
 
-## Déclenchement d'une « synthèse anormale »
+#### Déclenchement d'une « synthèse anormale »
 
 Le médecin de Centre d'examens de santé déclenchera une « synthèse anormale » qui sera envoyée (ou remise) au(à la) consultant(e) et envoyée à son médecin traitant (après accord de ce dernier(cette dernière)) si la glycémie à jeun mesurée au cours de l'examen périodique de santé est comprise entre 1,10 g/l (6,1 mmol/l) et 1,26 g/l 7,0 mmol/l) .
 
-- ¼ Lorsque le diagnostic d'hyperglycémie modérée à jeun (prédiabète) est posé, le renouvellement du test de dépistage du diabète doit être refait au bout d'un an.
-- ¼ Lorsque la glycémie est inférieure à 1,10 g/l, le renouvellement du test est planifié dans les 1 et 3 ans.
-
-[ref-108]: Lorsque la glycémie est comprise entre 1,10 g/L et 1,25 g/L, le diagnostic d'hyperglycémie modérée à jeun (prédiabète) est posé. Il faut prévoir le renouvellement du test de dépistage du diabète à 1 an.
-
-[ref-109]: La précarité, définie selon le score EPICES, est fortement liée à tous les indicateurs de position sociale, de mode de vie, d'accès aux soins et de santé.
-
-Institut de veille sanitaire, Sass C, Moulin JJ, Guéguen R, Abric L, Dauphinot V, et al . Le score Epices : un score individuel de précarité.  Construction du score et mesure des relations avec des données de santé, dans une population de 197 389 personnes. BEH 2006;(14):93-6.
+- Lorsque le diagnostic d'hyperglycémie modérée à jeun (prédiabète) est posé, le renouvellement du test de dépistage du diabète doit être refait au bout d'un an.
+- Lorsque la glycémie est inférieure à 1,10 g/l, le renouvellement du test est planifié dans les 1 et 3 ans.
 
 <!-- page: 58 -->
-|
 
-
-
-
-
-
-
-## Informations apportées
+#### Informations apportées
 
 Le médecin de Centre d'examens de santé informe le(la) consultant(e) sur :
 
 - les risques liés à l'état de prédiabète ;
 - les mesures ayant démontré leur efficacité sur la prévention du diabète.
 
-## À cette fin, il l'incitera :
+À cette fin, il l'incitera :
 
 - à augmenter son activité physique (entre 30 et 60 minutes 3-5 fois par semaine) ;
 - à perdre du poids (perte pondérale d'environ 5 % à 7 % du poids corporel initial [ref-110] ) ;
@@ -2470,11 +1737,9 @@ Le médecin de Centre d'examens de santé informe le(la) consultant(e) sur :
 
 ## Place du médecin de CES dans le dépistage du diabète
 
+### Actes réalisés
 
-
-## Actes réalisés
-
-## Interrogatoire
+#### Interrogatoire
 
 Chez un homme ou une femme âgé(e) de 45 ans ou plus, l'interrogatoire fait par le médecin de Centre d'examens de santé recherchera les facteurs de risque de diabète suivants :
 
@@ -2489,30 +1754,15 @@ Chez un homme ou une femme âgé(e) de 45 ans ou plus, l'interrogatoire fait par
 - dyslipidémie traitée ou non traitée , définie par une HDL -cholestérolémie &lt; 0,35 g/l (0,9 mmol/l) ou une triglycéridémie &gt; 2 g/l (2,3 mmol/l) ;
 - précarité , définie par un score EPICES &gt; 30 [ref-112] .
 
-
-
-## Pour mémoire
+#### Pour mémoire
 
 Le score Epices a été construit à l'aide d'un questionnaire socioéconomique sur un échantillon de 7 208 personnes âgées de 16 à 59 ans (inclusion dans 18 centres d'examens de santé volontaires) [ref-114] .
 
 Le questionnaire comporte 42 questions portant sur les différentes dimensions de la précarité : nationalité, niveau  d'études,  situation  professionnelle,  composition  du  ménage,  logement,  protection  sociale,  santé perçue, revenus, loisirs, difficultés financières, insertion sociale, recours aux soins, événements graves vécus avant 18 ans.
 
-[ref-110]: Pour un sujet de 80 kg, cela revient à perdre 4 à 7 kg.
-
-[ref-111]: Lorsque la glycémie est comprise entre 1,10 g/L et 1,25 g/L, le diagnostic d'hyperglycémie modérée à jeun (prédiabète) est posé. Il faut prévoir le renouvellement du test de dépistage du diabète à 1 an.
-
-[ref-112]: Le score EPICES, tel qu'il est utilisé dans les centres d'examens de santé, utilise 11 questions explorant les différents champs socio économiques, le score variant de 0 (absence de précarité) à 100 (précarité maximum). Institut de veille sanitaire, Sass C, Moulin JJ, Guéguen R, Abric L, Dauphinot V, et al. Le score Epices : un score individuel de précarité. Construction du score et mesure des relations avec des données de santé, dans une population de 197 389 personnes. BEH 2006;(14):93-6.
-
-[ref-113]: Institut de veille sanitaire, Sass C, Moulin JJ, Guéguen R, Abric L, Dauphinot V, et al. Le score Epices : un score individuel de précarité.  Construction du score et mesure des relations avec des données de santé, dans une population de 197 389 personnes. BEH 2006;(14):93-6.
-
 <!-- page: 59 -->
-|
 
-
-
-
-
-## Examen clinique
+#### Examen clinique
 
 Si l'interrogatoire a révélé des facteurs et/ou des marqueurs de risque de diabète, l'examen clinique fait par le médecin de Centre d'examens de santé dans le cadre de l'examen périodique de santé comportera les éléments spécifiques suivants :
 
@@ -2522,7 +1772,7 @@ Si l'interrogatoire a révélé des facteurs et/ou des marqueurs de risque de di
 - un dosage de la glycémie à jeun (après 8 heures de jeûne) ;
 - un dosage sérique du cholestérol total et du LDL -cholestérol.
 
-## Déclenchement d'une « synthèse anormale »
+#### Déclenchement d'une « synthèse anormale »
 
 Le médecin de Centre d'examens de santé déclenchera une « synthèse anormale » qui sera envoyée (ou remise) au(à la) consultant(e) et envoyée à son médecin traitant (après accord de ce dernier(cette dernière)) si :
 
@@ -2530,7 +1780,7 @@ Le médecin de Centre d'examens de santé déclenchera une « synthèse anormale
 - lorsque le diagnostic d'hyperglycémie modérée à jeun (prédiabète) est posé, le renouvellement du test de dépistage du diabète doit être refait au bout d'un an ;
 - lorsque la glycémie est inférieure à 1,10 g/l, le renouvellement du test est planifié dans les 1 à 3 ans.
 
-## Informations apportées
+#### Informations apportées
 
 Le médecin de Centre d'examens de santé informera les consultant(e)s diabétiques sur :
 
@@ -2545,9 +1795,9 @@ Le médecin de Centre d'examens de santé informera les consultant(e)s diabétiq
 
 ## Place du médecin de CES dans le dépistage et la prévention des complications du diabète
 
-## Actes réalisés
+### Actes réalisés
 
-## Interrogatoire
+#### Interrogatoire
 
 Chez un sujet diabétique l'interrogatoire recherchera les principaux symptômes évocateurs :
 
@@ -2555,7 +1805,7 @@ Chez un sujet diabétique l'interrogatoire recherchera les principaux symptômes
 - d'une neuropathie périphérique : troubles sensitifs prédominant aux membres inférieurs (fourmillements, impatience des membres inférieurs, engourdissements, paresthésies, sensation de brûlure, élancements, picotements s'exacerbant la nuit et atténués par l'exercice musculaire) ;
 - de complications cardiovasculaires : angor, dyspnée, claudication intermittente, antécédent d'accident cérébral ischémique transitoire.
 
-## Examen clinique
+#### Examen clinique
 
 Chez le sujet diabétique connu, l'examen clinique du médecin de Centre d'examens de santé comportera les éléments suivants :
 
@@ -2570,10 +1820,7 @@ Chez le sujet diabétique connu, l'examen clinique du médecin de Centre d'exame
 
 <!-- page: 60 -->
 
-
-
-
-## Déclenchement d'une « synthèse anormale »
+#### Déclenchement d'une « synthèse anormale »
 
 Le médecin de Centre d'examens de santé déclenchera une « synthèse anormale » qui sera envoyée (ou remise) au(à la) consultant(e) et envoyée à son médecin traitant (après accord de ce dernier(cette dernière)) en cas de :
 
@@ -2583,7 +1830,7 @@ Le médecin de Centre d'examens de santé déclenchera une « synthèse anormale
 - symptomatologie faisant suspecter une atteinte rénale ;
 - baisse brutale de l'acuité visuelle faisant suspecter un œdème maculaire, une hémorragie vitréenne, ou un décollement de la rétine.
 
-## Informations apportées
+#### Informations apportées
 
 Le médecin de Centre d'examens de santé informera les consultant(e)s diabétiques sur :
 
@@ -2591,7 +1838,7 @@ Le médecin de Centre d'examens de santé informera les consultant(e)s diabétiq
 - le taux d'hémoglobine glyquée (HbA1c) à atteindre et sur le fait qu'une diminution de l'HbA1c vers sa cible thérapeutique s'accompagne de bénéfices pour sa santé ;
 - les mesures ayant démontré leur efficacité sur la prévention de ces complications (réduction du risque cardiovasculaire et prise en charge des complications du diabète).
 
-## À cette fin, il les incitera :
+À cette fin, il les incitera :
 
 - à une bonne adhésion à leur traitement médicamenteux ;
 - à savoir équilibrer en qualité et en quantité la consommation des sucres et des graisses de leur alimentation et à éviter les déséquilibres alimentaires ;
@@ -2606,16 +1853,16 @@ Le médecin de Centre d'examens de santé informera les consultant(e)s diabétiq
 
 ## Place du médecin de CES dans le dépistage et la prévention des comorbidités aggravantes
 
-## Actes réalisés
+### Actes réalisés
 
-## Interrogatoire
+#### Interrogatoire
 
 Chez un sujet diabétique l'interrogatoire recherchera :
 
 - les  principaux symptômes évocateurs de complications cardiovasculaires :  angor,  dyspnée, claudication intermittente, antécédent d'accident cérébral ischémique transitoire ;
 - un tabagisme chronique .
 
-## Examen clinique et paraclinique
+#### Examen clinique et paraclinique
 
 Chez le sujet diabétique connu, l'examen clinique du médecin de Centre d'examens de santé comportera les éléments suivants :
 
@@ -2625,136 +1872,32 @@ Chez le sujet diabétique connu, l'examen clinique du médecin de Centre d'exame
 
 <!-- page: 61 -->
 
-
-
-
-
-## Déclenchement d'une « synthèse anormale »
+#### Déclenchement d'une « synthèse anormale »
 
 Le médecin de Centre d'examens de santé déclenchera une « synthèse anormale » qui sera envoyée (ou remise) au(à la) consultant(e) et envoyée à son médecin traitant (après accord de ce dernier(cette dernière)) si :
 
 - la tension artérielle mesurée au cours de l'examen périodique de santé est supérieure à la normale (pression artérielle systolique (PAS) ≥ 140 mmHg et/ou pression artérielle diastolique (PAD) ≥ 90mmHg ) ;
 - la tension artérielle mesurée au cours de l'examen périodique de santé est supérieure au niveau de pression artérielle cible ( 130/80 mmHg en l'absence de protéinurie, 125/75 mmHg en cas de protéinurie) chez une personne est traité(e) pour une hypertension artérielle.
 
-## Informations apportées
+#### Informations apportées
 
 Le médecin de Centre d'examens de santé informera les consultant(e)s diabétiques sur :
 
 - le risque d'aggravation des complications liées au diabète en cas de pathologie concomitante augmentant le risque cardiovasculaire global (tabagisme chronique, dyslipidémie) ;
 - les mesures ayant démontré leur efficacité sur la prévention de ces complications.
 
-## À cette fin, il les incitera :
+À cette fin, il les incitera :
 
 - à une bonne adhésion au traitement médicamenteux, que ce soit pour le diabète ou pour les pathologies concomitantes, comme une hypertension artérielle ou une dyslipidémie (à titre d'exemple : un bon contrôle glycémique et tensionnel a une action préventive sur le risque de survenue d'une néphropathie diabétique) ;
 - à arrêter de fumer.
 
 <!-- page: 62 -->
 
-
-## Algorythme 1
-
-## Population cible du dépistage opportuniste du diabète de type 2
-
-## Homme ou femme âgé(e) de 45 ans et plus
-
-## Femme âgée de 45 ans et plus
-
-Origine non caucasienne ou migrante et ayant adopté un mode de vie occidental
-
-Sédentarité et/ou surpoids (IMC &gt; 28 kg   m²)
-
-ATCD familial de diabète (apparenté du 1 er  degré)
-
-HTA
-
-État de prédiabète (anomalie de la glycorégulation)*
-
-
-
-Tabagisme chronique
-
-ATCD d'accouchement d'un enfant de faible poids de naissance ou ATCD de grossesse avec retard de croissance intra-utérin
-
-ATCD de diabète gestationnel
-
-ATCD d'accouchement d'un enfant de poids de naissance &gt; 4 kg
-
-ATCD de syndrome des ovaires polykystiques
-
-## Examen biologique de dépistage
-
-Glycémie veineuse après un jeûne de 8 heures (seuil d'anormalité &gt; 1,26 g/l [ 7,0 mmol/l ] )
-
-## Examen biologique de confirmation
-
-Second test de glycémie veineuse à jeun lorsque le test de dépistage a été fait par un prélèvement veineux à jeun
-
-## Rythme de répétition du dépistage
-
--  tous les 3 ans en cas de résultat négatif
--  entre 1 et 3 ans en cas de résultat négatif, pour les sujets ayant plusieurs facteurs et/ou marqueurs de risque de diabète
--  tous les ans pour les sujets ayant un prédiabète (glycémie à jeun comprise entre &gt; 1,10 et &lt; 1,26 g/l (&gt; 6,0 et &lt; 7,0 mmol/l))
-
-
 <!-- page: 63 -->
 
-
-Référentiel
-
-
-
-
-
-## Algorythme 2
-
-
-
-|                                                   | Cardiovasculaire Référentiel                                                           | Neurologique Référentiel N                                                                  | Neurologique Référentiel N                                                          | Ophtalmologique Référentiel                                     | Rénale Référentiel                                                 | Dentaire Référentiel                        | Podologique Référentiel                                            | Podologique Référentiel           | Podologique Référentiel           | Podologique Référentiel           |
-|---------------------------------------------------|----------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------------------|---------------------------------------------|--------------------------------------------------------------------|-----------------------------------|-----------------------------------|-----------------------------------|
-|                                                   |                                                                                        | Neuropathie                                                                                 | Neuropathie autonome                                                                |                                                                 |                                                                    |                                             |                                                                    | Risque podologique                | Risque podologique                | Risque podologique                |
-| Objectif préventif de la surveillance Référentiel |                                                                                        |                                                                                             |                                                                                     |                                                                 |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-| Signes fonctionnels                               |                                                                                        | périphérique                                                                                |                                                                                     | Rétinopathie diabétique                                         | Néphropathie diabétique                                            | Parodonthopatie, chute des dents            | Mal perforant plantaire, ulcérations, amputation                   |                                   |                                   |                                   |
-| Signes cliniques                                  |  AOMI  AVC  Insuffisance cardiaque                                                  | membres inférieurs :  Abolition des réflexes ostéo- tendineux  Troubles sensitifs         |  Hypotension orthostatique  AOMI  Allongement du segment QT à l'ECG              | Microanévrysmes  Hémorragies rétiniennes  Exsudats liquidiens |                                                                    |                                             |  Cals, callosités, cors  Plaie cutanée  Érythème  Mycose    |                                   |                                   |                                   |
-|                                                   |                                                                                        |                                                                                             |                                                                                     |                                                                 |  Microalbuminurie  Protéinurie persistante  Insuffisance rénale |  Inflammation gingivale                    |                                                                   |                                   |                                   |                                   |
-| Examens                                           |                                                                                        |                                                                                             |                                                                                     |                                                                 |                                                                    |                                             |                                                                   |                                   |                                   |                                   |
-|                                                   |  ECG de repos  Palpation des pouls périphériques                                     |                                                                                             |                                                                                     |                                                                 |                                                                    |                                             |  Examen                                                           |                                   |                                   |                                   |
-|                                                   |                                                                                        |                                                                                             |  Tension artérielle                                                                |  Fond d'œil                                                    |  Ratio                                                            |                                             | visuel à                                                           |                                   |                                   |                                   |
-|                                                   |  Auscultation et pulmonaire                                                           | ostéo- tendineux  Test au Nylon                                                            |  Palpation des pouls  ECG de repos                                                |                                                                 |  Créatininémie  Débit de filtration glomérulaire                 |                                             | la recherche d'une lésion cutanée                                  |  Gradation du risque podologique |  Gradation du risque podologique |  Gradation du risque podologique |
-|                                                   | cardiovasculaire                                                                       | monofilament                                                                                |                                                                                     |                                                                 |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-|                                                   |  À chaque                                                                             |                                                                                             |                                                                                     |  Tous les 2 ans (1 fois/an si diabète ou                       |                                                                    |                                             |  À chaque examen                                                  |                                   |                                   |                                   |
-|                                                   |                                                                                        |                                                                                             |                                                                                     | non équilibrés)                                                 |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-| Rythme                                            | examen (ECG : 1fois/ans)                                                               |                                                                                             |                                                                                     |                                                                 |  1 fois/an                                                        |                                             |                                                                    |  1 fois/an                       |  1 fois/an                       |  1 fois/an                       |
-|                                                   |                                                                                        |  Tous les 3-4                                                                              |                                                                                     |                                                                 |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-|                                                   |                                                                                        |                                                                                             |                                                                                     |                                                                 |                                                                    |  1 fois/an                                 |                                                                    |                                   |                                   |                                   |
-|                                                   |                                                                                        |                                                                                             |                                                                                     | HTA                                                             |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-| de répétition                                     |                                                                                        |                                                                                             |                                                                                     |                                                                 |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-|                                                   |                                                                                        |                                                                                             | mois                                                                                |                                                                 |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-| AIT : Accident                                    |                                                                                        |                                                                                             |                                                                                     |                                                                 |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-|                                                   |                                                                                        |                                                                                             |                                                                                     | membres inférieurs ; AVC                                        |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-| IDM : infarctus du                                |                                                                                        |                                                                                             |                                                                                     |                                                                 |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-| ischémique                                        |                                                                                        |                                                                                             |                                                                                     |                                                                 |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-|                                                   |                                                                                        |                                                                                             |                                                                                     |                                                                 |                                                                    |                                             | Électrocardiogramme                                                | Électrocardiogramme               | Électrocardiogramme               | Électrocardiogramme               |
-| transitoire ; myocarde ; HTA : hypertension       |                                                                                        |                                                                                             |                                                                                     |                                                                 |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-| AOMI                                              | Artériopathie                                                                          |                                                                                             |                                                                                     |                                                                 |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-| :                                                 | :                                                                                      | :                                                                                           | :                                                                                   | :                                                               | :                                                                  | :                                           | :                                                                  | :                                 | :                                 | :                                 |
-|                                                   |                                                                                        |                                                                                             |                                                                                     |                                                                 |                                                                    | cérébral ; ECG                              | cérébral ; ECG                                                     | cérébral ; ECG                    | cérébral ; ECG                    | cérébral ; ECG                    |
-|                                                   |                                                                                        | Localisé  Réflexes                                                                         | Malaises ortho- statiques Troubles digestifs Anomalies de la vésicale  Impuissance |                                                                 |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-|                                                   | Ischémie myocardique silencieuse,  Angor  Claudication intermittente  AIT  Dyspnée | aux Localisé aux membres inférieurs :  Paresthésies  Douleurs  Troubles de la sensibilté |   vidange                                                                         |  de rétine   l'acuité                                        |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-|                                                   |                                                                                        |                                                                                             |                                                                                    | Décollement Altération de visuelle                              |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-|                                                   | global                                                                                 |                                                                                             |                                                                                     |                                                                 |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-|                                                   |                                                                                        |                                                                                             |                                                                                     |                                                                 |                                                                    |  Douleurs dentaires  Hémorragie gingivale |                                                                    |                                   |                                   |                                   |
-|                                                   |                                                                                        |                                                                                             |                                                                                     |                                                                 | albuminurie/ créatinurie                                           |                                             |  Douleurs plantaires                                              |                                   |                                   |                                   |
-|                                                  | Risque cardiovasculaire                                                                | Risque cardiovasculaire                                                                     | Risque cardiovasculaire                                                             | Risque cardiovasculaire                                         | Risque cardiovasculaire                                            | Risque cardiovasculaire                     | Risque cardiovasculaire                                            | Risque cardiovasculaire           | Risque cardiovasculaire           | Risque cardiovasculaire           |
-| IDM                                               |                                                                                        |                                                                                             |                                                                                     |                                                                 |                                                                    |                                             |                                                                    |                                   |                                   |                                   |
-
 <!-- page: 64 -->
-|
 
-
-
-
-
-## Mini-synthèse
+# Conseils diététiques minimums
 
 Les conseils diététiques, avec pour objectif l'amélioration de l'équilibre alimentaire, voire la restriction calorique modérée chez les sujets  en  surpoids,  sont  la  base  de  la  prise  en  charge  du  sujet  diabétique  de  type  2.  Ils  peuvent  nécessiter l'intervention d'une diététicienne dans le cadre d'une éducation thérapeutique .
 
@@ -2762,31 +1905,29 @@ Dans le cadre de l'examen périodique de santé, le médecin de Centre d'examens
 
 ## Le type de repas, leur volume et rythme
 
-- ¼ Structurer les prises alimentaires en repas et en collations en fonction des nécessités du mode de vie du sujet (en général, 3 repas principaux et une collation éventuelle).
-- ¼ Ne pas sauter de repas pour éviter les grignotages, entre les repas, favorisés par la faim.
-- ¼ Contrôler la taille des portions (utiliser des assiettes de petit diamètre, ne pas se resservir).
-- ¼ Diversifier les choix alimentaires en mangeant de tout (ne pas éliminer les aliments préférés, mais en manger modérément).
+- Structurer les prises alimentaires en repas et en collations en fonction des nécessités du mode de vie du sujet (en général, 3 repas principaux et une collation éventuelle).
+- Ne pas sauter de repas pour éviter les grignotages, entre les repas, favorisés par la faim.
+- Contrôler la taille des portions (utiliser des assiettes de petit diamètre, ne pas se resservir).
+- Diversifier les choix alimentaires en mangeant de tout (ne pas éliminer les aliments préférés, mais en manger modérément).
 
 ## Apports en lipides contrôlés
 
-- ¼ Diminuer la consommation de matières grasses, de viandes dites grasses, de charcuterie, de fromages gras, de fruits oléagineux, ainsi que de tous les produits de paneterie et de biscuiterie sucrées et salées.
-- ¼ En ce qui concerne les aliments riches en lipides,  privilégier  ceux  favorisant  les  apports  en  acides  gras  essentiels polyinsaturés (Omega 3). Ainsi, l'huile de colza riche en acides gras polyinsaturés à longue chaîne (n-3) est préconisée comme huile d'ajout de première intention.
+- Diminuer la consommation de matières grasses, de viandes dites grasses, de charcuterie, de fromages gras, de fruits oléagineux, ainsi que de tous les produits de paneterie et de biscuiterie sucrées et salées.
+- En ce qui concerne les aliments riches en lipides,  privilégier  ceux  favorisant  les  apports  en  acides  gras  essentiels polyinsaturés (Omega 3). Ainsi, l'huile de colza riche en acides gras polyinsaturés à longue chaîne (n-3) est préconisée comme huile d'ajout de première intention.
 
 ## Apports en glucides contrôlés
 
-- ¼ Les aliments glucidiques ont une place indispensable pour leur effet sur le rassasiement et la prise alimentaire.
-- ¼ La répartition glucidique optimale semble être de 10 % à 20 % des apports totaux au petit déjeuner, et de 40 % à 45 % des apports totaux au déjeuner et au dîner.
-- ¼ Les collations sont issues du fractionnement des repas.
-- ¼ L'index glycémique des aliments étant variable d'un sujet à l'autre, la HAS ne recommande pas de proposer une classification des aliments glucidiques pouvant aboutir à de nouveaux interdits.
-- ¼ Conseiller le pain et les féculents.
-- ¼ Conseiller les légumes verts et la consommation de 2 à 3 fruits par jour.
-- ¼ Conseiller de lire les étiquettes, de différencier les boissons sucrées des boissons totalement édulcorées, ainsi que de discerner la composition en glucides des jus de fruits.
+- Les aliments glucidiques ont une place indispensable pour leur effet sur le rassasiement et la prise alimentaire.
+- La répartition glucidique optimale semble être de 10 % à 20 % des apports totaux au petit déjeuner, et de 40 % à 45 % des apports totaux au déjeuner et au dîner.
+- Les collations sont issues du fractionnement des repas.
+- L'index glycémique des aliments étant variable d'un sujet à l'autre, la HAS ne recommande pas de proposer une classification des aliments glucidiques pouvant aboutir à de nouveaux interdits.
+- Conseiller le pain et les féculents.
+- Conseiller les légumes verts et la consommation de 2 à 3 fruits par jour.
+- Conseiller de lire les étiquettes, de différencier les boissons sucrées des boissons totalement édulcorées, ainsi que de discerner la composition en glucides des jus de fruits.
 
 ## Apports contrôlés en sel
 
-- ¼ Recommander un apport en sel de 8 g/jour, réduit à 6 g/jour en cas d'hypertension artérielle.
-
-
+- Recommander un apport en sel de 8 g/jour, réduit à 6 g/jour en cas d'hypertension artérielle.
 
 ## Pour info
 
@@ -2801,15 +1942,8 @@ Il y a 1 g de sel dans :
 -  50 g de surimi.
 
 <!-- page: 65 -->
-|
 
-
-
-
-
-
-
-## Mini-synthèse
+# Incitation à l’activité physique
 
 L'activité physique ne se réduit pas au sport, elle comprend aussi l'activité physique dans la vie de tous les jours, à la maison, au travail, dans les transports et au cours des loisirs non compétitifs. Les bénéfices de l'activité physique ne sont pas acquis définitivement mais se maintiennent tant que se poursuit l'activité physique.
 
@@ -2840,8 +1974,6 @@ Tableau 4. Questionnaire de Ricci et Gagnon pour évaluer le niveau habituel d'a
 - ´ ´ Total &gt; 32 points = très actif
 
 <!-- page: 66 -->
-
-
 
 ## Bénéfices attendus de l'activité physique régulière
 
@@ -2890,44 +2022,28 @@ Dans le  cadre  de  l'examen  périodique  de  santé,  le  médecin  de  Centre
 
 <!-- page: 67 -->
 
-
-
-## Conseils minimums d'hygiène de vie
-
-## Mini-synthèse
+# Conseils minimums d'hygiène de vie
 
 ## Les conseils minimums de prévention du risque podologique
 
-- ¼ Éviter de couper les ongles de pied à angle vif  les limer en arrondi.
-- ¼ Ne  pas  utiliser  un  instrument  tranchant  pour  éliminer  cors  et  durillons  utiliser  des  coricides,  poncer  les  zones d'hyperkératose.
-- ¼ Ne pas prendre de bains de pieds prolongés  bien sécher ses pieds après la douche (notamment entre les orteils).
-- ¼ Limiter les talons à 5 cm et éviter les chaussures pointues  être attentif au choix des chaussures qui ne doivent pas occasionner des compressions ou un frottement.
-- ¼ Éviter les blessures involontaires des pieds  contrôler l'absence de corps étranger avant de se chausser, ne pas marcher pieds nus.
-- ¼ Inspecter chaque jour ses pieds, au besoin à l'aide d'un miroir  signaler immédiatement toute lésion suspecte.
+- Éviter de couper les ongles de pied à angle vif  les limer en arrondi.
+- Ne  pas  utiliser  un  instrument  tranchant  pour  éliminer  cors  et  durillons  utiliser  des  coricides,  poncer  les  zones d'hyperkératose.
+- Ne pas prendre de bains de pieds prolongés  bien sécher ses pieds après la douche (notamment entre les orteils).
+- Limiter les talons à 5 cm et éviter les chaussures pointues  être attentif au choix des chaussures qui ne doivent pas occasionner des compressions ou un frottement.
+- Éviter les blessures involontaires des pieds  contrôler l'absence de corps étranger avant de se chausser, ne pas marcher pieds nus.
+- Inspecter chaque jour ses pieds, au besoin à l'aide d'un miroir  signaler immédiatement toute lésion suspecte.
 
 ## Les conseils minimum d'hygiène buccodentaire
 
-- ¼ Brosser ses dents au moins deux fois par jour en utilisant un dentifrice fluoré antibactérien.
-- ¼ Passer du fil dentaire entre les dents au moins une fois par jour.
-- ¼ Utiliser si besoin un bain de bouche antibactérien (sans alcool) une fois par jour pour éliminer les bactéries et contrôler la plaque dentaire.
-- ¼ Faire un détartrage régulier (tous les 6 mois).
-- ¼ Consulter en cas de symptôme d'inflammation des gencives, comme par exemple des saignements ou un gonflement des gencives.
+- Brosser ses dents au moins deux fois par jour en utilisant un dentifrice fluoré antibactérien.
+- Passer du fil dentaire entre les dents au moins une fois par jour.
+- Utiliser si besoin un bain de bouche antibactérien (sans alcool) une fois par jour pour éliminer les bactéries et contrôler la plaque dentaire.
+- Faire un détartrage régulier (tous les 6 mois).
+- Consulter en cas de symptôme d'inflammation des gencives, comme par exemple des saignements ou un gonflement des gencives.
 
 <!-- page: 68 -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-## Mini-synthèse
+# Sujet diabétique âgé de plus de 75 ans (Mini-synthèse)
 
 ## Particularités du diabète des sujets âgés
 
@@ -2947,13 +2063,9 @@ Le médecin de Centre d'examens de santé prend part à la surveillance de la to
 
 <!-- page: 69 -->
 
-
-
-
+# Sujet diabétique âgé de plus de 75 ans
 
 ## Particularités du diabète des sujets âgés de plus de 75 ans
-
-
 
 Selon l'Institut national de veille sanitaire (InVS) et les données de l'étude Entred, un quart des sujets diabétiques a 75 ans ou plus (21 % pour la tranche d'âge 75-84 ans et 4 % pour la tranche d'âge 85 ans et plus).
 
@@ -2969,8 +2081,6 @@ Le vieillissement s'accompagne aussi de modifications des réponses à l'hypogly
 - diminution de la capacité à se « resucrer » (perte d'autonomie, troubles cognitifs).
 
 ## Objectifs glycémiques et spécificités thérapeutiques chez le sujet âgé diabétique
-
-
 
 L'âge, les conditions du vieillissement, l'importance des complications, l'état physique et psychologique des sujets âgés diabétiques sont évalués pour définir la stratégie thérapeutique. On distingue classiquement 3 catégories de sujets âgés :
 
@@ -2990,11 +2100,7 @@ Selon les recommandations HAS de 2013, si l'écart à l'objectif est faible (moi
 
 Parmi les facteurs de fragilité, en plus des comorbidités (accident vasculaire cérébral, pathologies chroniques invalidantes, cancers, polypathologie et polymédication), les caractéristiques définissant le « syndrome gériatrique » incluent : une altération des fonctions cognitives, une dénutrition, des chutes, une incontinence, des escarres, un déficit  sensoriel, une dépression, une maladie d'Alzheimer et autres démences, une dépendance fonctionnelle (besoin d'aide pour la préparation des repas, les courses, le ménage, la prise de médicaments, une atteinte de la mobilité), la nécessité d'une contention, un alitement, des difficultés familiales et/ou socioéconomiques.
 
-
 <!-- page: 70 -->
-|
-
-
 
 L'adéquation entre les objectifs et la iatrogénie thérapeutique est délicate . La surveillance de l'efficacité et de la tolérance des traitements chez le sujet âgé doit être renforcée et la pertinence des thérapeutiques régulièrement réévaluée.
 
@@ -3012,33 +2118,29 @@ Selon les recommandations HAS, les traitements médicamenteux autorisés, avec l
 
 ## L'impact des complications du diabète chez le sujet âgé
 
-
-
 La multiplicité des pathologies concomitantes chez les séniors a un impact sur les complications du diabète , particulièrement celles qui concernent : l'œil et la vision, les reins, le cœur et les artères, les pieds, ou encore les dents. Des troubles neuropsychiques sont également observés chez le diabétique âgé.
 
-- ¼ Les modifications physiologiques liées au vieillissement et la polymédication augmentent le risque d'hypoglycémie chez le sujet âgé. Chez le sujet âgé, les symptômes sont souvent discrets ou atypiques (vertiges, désorientation, chutes, troubles du comportement), passant parfois inaperçus du fait de l'existence de troubles cognitifs, et survenant volontiers la nuit.
-- ¼ Les troubles trophiques des pieds résultent d'un ensemble de facteurs : la neuropathie diabétique sensitive et/ou motrice, la neuropathie autonome, l'artériopathie des membres inférieurs, la présence de déformations (hallux valgus, orteils en griffe), le port de chaussures inadaptées, des soins de pédicurie inadaptés, un traumatisme favorisé par une mauvaise acuité visuelle ou une mobilité réduite, la marche pieds nus au domicile, la paronychie.
-- ¼ Les anomalies de la vision , secondaires à la rétinopathie diabétique et aux pathologies concomitantes comme la cataracte ou le glaucome, sont une source majeure de handicap et d'isolement.
+- Les modifications physiologiques liées au vieillissement et la polymédication augmentent le risque d'hypoglycémie chez le sujet âgé. Chez le sujet âgé, les symptômes sont souvent discrets ou atypiques (vertiges, désorientation, chutes, troubles du comportement), passant parfois inaperçus du fait de l'existence de troubles cognitifs, et survenant volontiers la nuit.
+- Les troubles trophiques des pieds résultent d'un ensemble de facteurs : la neuropathie diabétique sensitive et/ou motrice, la neuropathie autonome, l'artériopathie des membres inférieurs, la présence de déformations (hallux valgus, orteils en griffe), le port de chaussures inadaptées, des soins de pédicurie inadaptés, un traumatisme favorisé par une mauvaise acuité visuelle ou une mobilité réduite, la marche pieds nus au domicile, la paronychie.
+- Les anomalies de la vision , secondaires à la rétinopathie diabétique et aux pathologies concomitantes comme la cataracte ou le glaucome, sont une source majeure de handicap et d'isolement.
 
 <!-- page: 71 -->
 
-
-
-- ¼ Les gingivites et parodontites liées au diabète peuvent être à l'origine d'édentation et concourir au déséquilibre nutritionnel. L'infection parodontale influe sur l'équilibre glycémique en induisant une insulinorésistance.
-- ¼ L'insuffisance  rénale secondaire  à  la  néphropathie  diabétique  mais  également  liée  à  l'âge  conditionne  la stratégie thérapeutique.
-- ¼ Le risque d' insuffisance cardiaque est augmenté chez le sujet âgé diabétique, secondaire aux cardiopathies ischémiques et aux effets de l'hypertension artérielle, fréquente dans ces tranches d'âge.
-- ¼ La fréquence des troubles dépressifs et cognitifs et de la démence est plus élevée que chez les sujets âgés non diabétiques. Le dépistage de ces troubles passe par un interrogatoire du sujet et/ou de son entourage (Se  plaint-il  de  troubles  de  la  mémoire  ?  A-t-il  limité  ses  activités  ?  A-t-il  une  perte  d'autonomie  ?  Fait-il fréquemment des chutes ?).
-- ¼ Les  facteurs  favorisant  les  chutes  sont  nombreux  chez  le  sujet  âgé  diabétique :  mauvais  contrôle glycémique et hypoglycémies, neuropathie périphérique, hypotension orthostatique (effets secondaires des traitements antihypertenseurs), mobilité réduite, obésité, déformation des pieds, déficit visuel, polymédication.
+- Les gingivites et parodontites liées au diabète peuvent être à l'origine d'édentation et concourir au déséquilibre nutritionnel. L'infection parodontale influe sur l'équilibre glycémique en induisant une insulinorésistance.
+- L'insuffisance  rénale secondaire  à  la  néphropathie  diabétique  mais  également  liée  à  l'âge  conditionne  la stratégie thérapeutique.
+- Le risque d' insuffisance cardiaque est augmenté chez le sujet âgé diabétique, secondaire aux cardiopathies ischémiques et aux effets de l'hypertension artérielle, fréquente dans ces tranches d'âge.
+- La fréquence des troubles dépressifs et cognitifs et de la démence est plus élevée que chez les sujets âgés non diabétiques. Le dépistage de ces troubles passe par un interrogatoire du sujet et/ou de son entourage (Se  plaint-il  de  troubles  de  la  mémoire  ?  A-t-il  limité  ses  activités  ?  A-t-il  une  perte  d'autonomie  ?  Fait-il fréquemment des chutes ?).
+- Les  facteurs  favorisant  les  chutes  sont  nombreux  chez  le  sujet  âgé  diabétique :  mauvais  contrôle glycémique et hypoglycémies, neuropathie périphérique, hypotension orthostatique (effets secondaires des traitements antihypertenseurs), mobilité réduite, obésité, déformation des pieds, déficit visuel, polymédication.
 
 ## L'examen périodique de santé du sujet âgé diabétique
-
-
 
 L'organisation des soins constitue une part essentielle de la prise en charge des sujets âgés diabétiques , notamment si ces personnes vivent seules. Chez ces personnes, le rôle du médecin généraliste et des médecins spécialistes est fondamental dans la prise en charge.
 
 - 1 Le médecin de Centre d'examens de santé (CES) devra s'assurer, par interrogation du consultant, de la mise en place effective d'une prise en charge pluriprofessionnelle et d'un suivi régulier par le médecin traitant.
 
-Afin de préserver l'autonomie des sujets âgés diabétiques et de prévenir les complications ou leur aggravation, le médecin de CES devra inciter les sujets âgés diabétiques :
+### Afin de préserver l'autonomie des sujets âgés diabétiques et de prévenir les complications ou leur aggravation, 
+
+le médecin de CES devra inciter les sujets âgés diabétiques :
 
 - à une surveillance ophtalmologique régulière (tous les 2 ans à tous les ans) ayant pour objet de maintenir une fonction visuelle correcte (d'autant plus que d'autres pathologies ophtalmologiques comme, par exemple, la cataracte viennent altérer la capacité de vision) ;
 - à la mise en œuvre d'un suivi podologique régulier (médecin traitant, pédicure, podologue) et de la bonne compréhension des conseils d'éducation à la prévention des lésions des pieds ;
@@ -3050,31 +2152,29 @@ Afin de préserver l'autonomie des sujets âgés diabétiques et de prévenir le
 
 « bien portant » est fixé à 130/80 mmHg. Chez le sujet âgé dit
 
-L'objectif tensionnel chez le sujet âgé diabétique « fragile », on admet des chiffres plus élevés, en pratique 150/90 mmHg.
+### L'objectif tensionnel chez le sujet âgé diabétique « fragile », 
+
+on admet des chiffres plus élevés, en pratique 150/90 mmHg.
 
 - 1 Le médecin de CES déclenchera une « synthèse anormale » qui sera envoyée (ou remise) au(à la) consultant(e) et envoyée à son médecin traitant (après accord de ce dernier(cette dernière)) si la tension artérielle est supérieure aux objectifs tensionnels.
 
-
 <!-- page: 72 -->
-|
 
+### Chez le sujet âgé diabétique traité par sulfamide hypoglycémiant, 
 
-
-Chez le sujet âgé diabétique traité par sulfamide hypoglycémiant, le médecin de CES participera à la prévention des hypoglycémies qui passe par :
+le médecin de CES participera à la prévention des hypoglycémies qui passe par :
 
 - une surveillance régulière du débit de filtration glomérulaire (2-4 fois/an) fait à partir du dosage de la créatininémie par l'équation CKD-EPI ( Chronic Kidney Disease-Epidemiology Collaboration ) ;
 - une éducation des sujets diabétiques et de leur entourage sur la régularité de la prise alimentaire, la connaissance des signes d'hypoglycémie, ainsi que sur les horaires auxquels ces hypoglycémies sont le plus susceptibles de se produire sous sulfamides hypoglycémiants (11 h et 18 h).
 - 1 Le médecin de CES déclenchera une « synthèse anormale » qui sera envoyée (ou remise) au(à la) consultant(e) et envoyée à son médecin traitant (après accord de ce dernier(cette dernière)) si la fonction rénale est altérée (débit de filtration glomérulaire &lt; 60ml/min/1,73 m²).
 
-## En ce qui concerne le risque podologique du sujet âgé diabétique :
+### En ce qui concerne le risque podologique du sujet âgé diabétique :
 
 - 1 le  médecin de CES examinera les pieds lors de la consultation et déclenchera une « synthèse anormale » qui  sera  envoyée  (ou  remise)  au(à  la)  consultant(e)  et  envoyée  à  son  médecin  traitant  (après  accord  de  ce dernier(cette dernière)) si une plaie non cicatrisée a été détectée.
 
 <!-- page: 73 -->
 
-
-
-## Mini-synthèse
+# Informations à colliger et/ou à transmettre au consultant et au médecin traitant après l’EPS
 
 ## Informations à colliger dans le cadre de l'Examen périodique de santé (EPS)
 
@@ -3082,21 +2182,21 @@ Les informations à colliger dans le dossier du Centre d'examen de santé pour u
 
 ## Données d'interrogatoire
 
-- ¼ Les antécédents personnels : d'hyperglycémie, de diabète gestationnel, de macrosomie fœtale.
-- ¼ Les antécédents personnels cardiovasculaires.
-- ¼ Les antécédents familiaux de diabète.
-- ¼ Le niveau d'activité physique.
-- ¼ L'équilibre ou les déséquilibres alimentaires.
-- ¼ Le tabagisme chronique.
+- Les antécédents personnels : d'hyperglycémie, de diabète gestationnel, de macrosomie fœtale.
+- Les antécédents personnels cardiovasculaires.
+- Les antécédents familiaux de diabète.
+- Le niveau d'activité physique.
+- L'équilibre ou les déséquilibres alimentaires.
+- Le tabagisme chronique.
 
 ## Données cliniques
 
-- ¼ La taille, le poids, l'indice de masse corporelle.
-- ¼ La pression artérielle, l'électrocardiogramme, l'examen artériel périphérique.
-- ¼ L'examen cutané des pieds.
-- ¼ L'examen dentaire.
-- ¼ Les réflexes ostéotendineux (sujets diabétiques connus).
-- ¼ L'examen au monofilament.
+- La taille, le poids, l'indice de masse corporelle.
+- La pression artérielle, l'électrocardiogramme, l'examen artériel périphérique.
+- L'examen cutané des pieds.
+- L'examen dentaire.
+- Les réflexes ostéotendineux (sujets diabétiques connus).
+- L'examen au monofilament.
 
 ## Données biologiques
 
@@ -3115,28 +2215,26 @@ Selon le cas de figure, le conseil minimum à apporter à un(e) consultant(e) da
 
 ## Homme ou femme ayant un prédiabète
 
-- ¼ Avoir une activité physique régulière (30 à 60 minutes 3 fois par semaine).
-- ¼ Avoir une alimentation équilibrée.
-- ¼ Perdre du poids.
-- ¼ Arrêter de fumer.
+- Avoir une activité physique régulière (30 à 60 minutes 3 fois par semaine).
+- Avoir une alimentation équilibrée.
+- Perdre du poids.
+- Arrêter de fumer.
 
 <!-- page: 74 -->
 
-
-
 ## Homme ou femme diabétique
 
-- ¼ Avoir une activité physique régulière (30 à 60 minutes 3 fois par semaine).
-- ¼ Avoir une alimentation équilibrée.
-- ¼ Avoir une bonne hygiène buccodentaire.
-- ¼ Perdre du poids.
-- ¼ Arrêter de fumer.
-- ¼ Avoir  une  bonne  compliance  thérapeutique  (traitement  médicamenteux  du  diabète,  mais  également  traitement  des comorbidités éventuelles comme une hypertension artérielle, une dyslipidémie).
+- Avoir une activité physique régulière (30 à 60 minutes 3 fois par semaine).
+- Avoir une alimentation équilibrée.
+- Avoir une bonne hygiène buccodentaire.
+- Perdre du poids.
+- Arrêter de fumer.
+- Avoir  une  bonne  compliance  thérapeutique  (traitement  médicamenteux  du  diabète,  mais  également  traitement  des comorbidités éventuelles comme une hypertension artérielle, une dyslipidémie).
 
 En complément :
 
-- ¼ Informer sur l'existence du programme Sophia 114 d'aide et d'accompagnement dans la prise en charge du diabète.
-- ¼ Informer sur l'existence de programmes d'éducation thérapeutique.
+- Informer sur l'existence du programme Sophia 114 d'aide et d'accompagnement dans la prise en charge du diabète.
+- Informer sur l'existence de programmes d'éducation thérapeutique.
 
 ## Informations à transmettre au médecin traitant
 
@@ -3144,25 +2242,21 @@ Le médecin de Centre d'examens de santé déclenchera une « synthèse anormale
 
 ## Chez un sujet non diabétique
 
-- ¼ Si la glycémie à jeun mesurée au cours de l'examen périodique de santé est &gt; 1,26 g/l (7,0 mmol/l) .
-- ¼ Si la glycémie à jeun mesurée au cours de l'examen périodique de santé est comprise entre 1,10 g/l (6,1 mmol/l) et 1,26 g/l (7,0 mmol/l) .
-- ¼ Si la tension artérielle mesurée au cours de l'examen périodique de santé est supérieure à la normale (pression artérielle systolique (PAS) ≥ 140 mmHg et/ou pression artérielle diastolique (PAD) ≥ 90mmHg ).
+- Si la glycémie à jeun mesurée au cours de l'examen périodique de santé est &gt; 1,26 g/l (7,0 mmol/l) .
+- Si la glycémie à jeun mesurée au cours de l'examen périodique de santé est comprise entre 1,10 g/l (6,1 mmol/l) et 1,26 g/l (7,0 mmol/l) .
+- Si la tension artérielle mesurée au cours de l'examen périodique de santé est supérieure à la normale (pression artérielle systolique (PAS) ≥ 140 mmHg et/ou pression artérielle diastolique (PAD) ≥ 90mmHg ).
 
 ## Chez un sujet diabétique connu
 
-- ¼ Si la recherche au cours de l'examen périodique de santé d'une protéinurie est positive .
-- ¼ S'il existe une symptomatologie thoracique typique ou atypique faisant suspecter une pathologie coronaire.
-- ¼ Si l' ECG de repos révèle des troubles de la repolarisation évocateurs d'une ischémie myocardique ou d'un infarctus du myocarde indolore passé inaperçu.
-- ¼ Si  la tension  artérielle mesurée  au  cours  de  l'examen  périodique  de  santé  est  supérieure  à  la  normale  (pression artérielle systolique (PAS) ≥ 140 mmHg et/ou pression artérielle diastolique (PAD) ≥ 90mmHg ).
-- ¼ Si, chez un sujet diabétique traité pour une hypertension, la tension artérielle mesurée au cours de l'examen périodique de santé est supérieure au niveau de pression artérielle cible ( 130/80 mmHg en l'absence de protéinurie, 125/75 mmHg si protéinurie).
-
-[ref-114]: Sophia est un service gratuit qui s'adresse aux personnes de plus de 18 ans ayant un diabète pris en charge au titre d'une Affection de longue durée (ALD). Ce dispositif mis en place par l'Assurance maladie a pour objet d'aider les personnes ayant un diabète à mettre en pratique les recommandations de leur médecin traitant et des professionnels de santé qui les entourent, en proposant un soutien, des informations et des conseils personnalisés, adaptés à l'état de santé de chacun.
+- Si la recherche au cours de l'examen périodique de santé d'une protéinurie est positive .
+- S'il existe une symptomatologie thoracique typique ou atypique faisant suspecter une pathologie coronaire.
+- Si l' ECG de repos révèle des troubles de la repolarisation évocateurs d'une ischémie myocardique ou d'un infarctus du myocarde indolore passé inaperçu.
+- Si  la tension  artérielle mesurée  au  cours  de  l'examen  périodique  de  santé  est  supérieure  à  la  normale  (pression artérielle systolique (PAS) ≥ 140 mmHg et/ou pression artérielle diastolique (PAD) ≥ 90mmHg ).
+- Si, chez un sujet diabétique traité pour une hypertension, la tension artérielle mesurée au cours de l'examen périodique de santé est supérieure au niveau de pression artérielle cible ( 130/80 mmHg en l'absence de protéinurie, 125/75 mmHg si protéinurie).
 
 <!-- page: 75 -->
 
-
-
-
+# Annexes
 
 ## Gradation du risque podologique
 
@@ -3178,8 +2272,6 @@ Le médecin de Centre d'examens de santé déclenchera une « synthèse anormale
 * : Définie par l'anomalie du test au monofilament ; † : Définie par l'absence d'au moins un des deux pouls du pied ou par un index de pression systolique (IPS) &lt; 0,9 ; ‡ : Hallux valgus, orteil en marteau ou en griffe, proéminence de la tête des métatarsiens, déformations post-chirurgicales ou liées à une neuro-arthropathie ; AOMI : Artériopathie oblitérante des membres inférieurs ; MPR : médecine physique et de réadaptation.
 
 <!-- page: 76 -->
-
-
 
 ## Spécialités médicales pour le traitement du diabète de type 2
 
@@ -3205,9 +2297,9 @@ Le médecin de Centre d'examens de santé déclenchera une « synthèse anormale
 | Gliptines (inhibiteurs de la dipeptidylpeptidase ou DDP-4) | Blocage de la dégradation de l'hormone GLP-1 ( gluca- gon-like peptide -1) et peptide insulinotropique glucose- dépendante (GIP) † .                                                                                                                                                                                                                                                                                                                                                                                                                                   | Vildagliptine                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | GALVUS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Médicaments qui réduisent l'absorption des sucres          | Médicaments qui réduisent l'absorption des sucres                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Médicaments qui réduisent l'absorption des sucres                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Médicaments qui réduisent l'absorption des sucres                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Inhibiteurs des alpha-glucosidases                         | ´ ´ Inhibition réversible des alpha-glucosidases intestinales.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Acarbose                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | ACARBOSE GLUCOR                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Inhibiteurs des alpha-glucosidases                         | ´ ´ Ralentissement de la digestion des hydrates de carbone complexes en monosaccharides absorbables au niveau de l'intestin grêle.                                                                                                                                                                                                                                                                                                                                                                                                                                     | Miglitol                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | DIASTABOL                                                                                                                                                                                                                                                                                  <!-- page: 79 -->                                                                                                                                                                                                                                                           |
+| Inhibiteurs des alpha-glucosidases                         | ´ ´ Ralentissement de la digestion des hydrates de carbone complexes en monosaccharides absorbables au niveau de l'intestin grêle.                                                                                                                                                                                                                                                                                                                                                                                                                                     | Miglitol                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | DIASTABOL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
-
+<!-- page: 77 -->  
 
 
 
@@ -3236,19 +2328,9 @@ NPH : Neutral protamine Hagedorn
 
 <!-- page: 78 -->
 
-## Algorithme de prise en charge thérapeutique des sujets ayant un diabète de type 2
-
-
-
-
-
-Source : Haute Autorité de Santé. Stratégie médicamenteuse du contrôle glycémique du diabète de type 2 . Saint-Denis La Plaine: HAS; 2013.
-
 <!-- page: 79 -->
 
 ## Conseils nutritionnels chez le sujet diabétique de type 2
-
-
 
 | Nutriment                           | Recommandation                                                                                                                                                                                                                                                                                                                            | Commentaire                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 |-------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -3261,21 +2343,17 @@ Source : Haute Autorité de Santé. Stratégie médicamenteuse du contrôle glyc
 | Graisses alimentaires               | Diminuer préférentiellement les graisses d'origine animale (viandes grasses, œufs, charcuterie, fromages, beurre, crème fraîche). Diminuer les aliments riches en graisses tels que les fritures, les cacahuètes ou autres fruits oléagineux, les chocolats, les glaces, les pâtisseries et autres viennoiseries, les biscuits apéritifs. | Éviter d'associer plusieurs aliments gras dans un même repas. Augmenter la fréquence de consommation des poissons. Préférer les viandes maigres (filet de porc, volailles sans la peau), les laitages écrémés ou demi-écrémés. Choisir, pour cuisiner, des matières grasses d'origine végétale riches en acides gras monoinsaturés (olive, arachide, colza) ou polyinsaturés (tournesol, pépins de raisin, maïs, etc.) au détriment des acides gras saturés. Favoriser les modes de cuisson sans graisse. Il n'est pas démontré qu'un apport supplé- mentaire en acides gras polyinsaturés (huiles de poisson) ait un intérêt chez le sujet diabé- tique de type 2. |
 | Macronutriments                     | Il n'existe pas d'argument pour modifier les apports protéiques chez le sujet diabétique de type 2 non compliqué.                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | Fibres alimentaires                 | L'alimentation doit être riche en fibres alimentaires de type soluble (pectines, guar, gomme), contenues dans les fruits, les légumes verts et les légumineuses.                                                                                                                                                                          | Un ajout de fibres alimentaires sous forme de poudre, comprimés, gélules, aliments spéciaux n'est pas recommandé.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+
 <!-- page: 80 -->
-|
 
-
-
-
-
-## Études UKPDS, ACCORD, ADVANCE, et VADT, cohortes ENTRED et DESIR
+# Études UKPDS, ACCORD, ADVANCE, et VADT, cohortes ENTRED et DESIR
 
 Les résultats de morbi-mortalité des essais cliniques d'intensification du contrôle glycémique ACCORD, ADVANCE et VADT, publiés en 2008 et 2009, ainsi que ceux du suivi à 10 ans de l'étude UKPDS, sont concordants sur la réduction de risque de survenue ou de progression des complications micro- et macrovasculaires liées au diabète.
 
-- ¼ Ces études ont cherché à évaluer l'impact d'un traitement intensif du diabète et d'un contrôle glycémique stricte, en fonction de l'ancienneté du diabète et selon le type de complications considérées, micro- ou macrovasculaires.
-- ¼ Les sujets inclus dans les études ACCORD, ADVANCE et VADT étaient en moyenne plus âgés que ceux de l'étude UKPDS (54 ans dans l'étude UKPDS, 62 ans dans l'étude ACCORD, 66 ans dans l'étude ADVANCE, 60 ans dans l'étude VADT) et avaient un diabète diagnostiqué depuis plus longtemps (nouvellement diagnostiqué dans l'étude UKPDS, 8 ans en moyenne dans l'étude ADVANCE, 10 ans en moyenne dans l'étude ACCORD, 11 ans en moyenne dans l'étude VADT).
+- Ces études ont cherché à évaluer l'impact d'un traitement intensif du diabète et d'un contrôle glycémique stricte, en fonction de l'ancienneté du diabète et selon le type de complications considérées, micro- ou macrovasculaires.
+- Les sujets inclus dans les études ACCORD, ADVANCE et VADT étaient en moyenne plus âgés que ceux de l'étude UKPDS (54 ans dans l'étude UKPDS, 62 ans dans l'étude ACCORD, 66 ans dans l'étude ADVANCE, 60 ans dans l'étude VADT) et avaient un diabète diagnostiqué depuis plus longtemps (nouvellement diagnostiqué dans l'étude UKPDS, 8 ans en moyenne dans l'étude ADVANCE, 10 ans en moyenne dans l'étude ACCORD, 11 ans en moyenne dans l'étude VADT).
 
-## Étude UKPDS (United Kingdom Prospective Diabetes Study) [ref-115]
+# Étude UKPDS (United Kingdom Prospective Diabetes Study) [ref-115]
 
 ## Objectifs de l'étude
 
@@ -3306,21 +2384,13 @@ Dans le groupe metformine, la réduction de risque relatif persistait à 10 ans 
 - les infarctus du myocarde (réduction de 33 %, p = 0,005) ;
 - les décès toutes causes confondues (réduction de 27 %, p = 0,005).
 
-## Étude ACCORD (Action to Control Cardiovascular Risk in Diabetes) [ref-116]
+# Étude ACCORD (Action to Control Cardiovascular Risk in Diabetes) [ref-116]
 
 ## Objectifs de l'étude
 
 Les études épidémiologiques ont montré une relation entre les niveaux d'HbA1C et les événements cardiovasculaires chez les sujets diabétiques de type 2. L 'étude ACCORD avait pour objet d'évaluer si un traitement ayant pour finalité la normalisation du taux d'HbA1C permettrait de réduire la survenue d'événements cardiovasculaires chez des sujets diabétiques de type 2 (35 % des sujets avaient un antécédent de pathologie cardiovasculaire ou des facteurs de risque cardiovasculaire autres que le diabète).
 
-[ref-115]: Holman  RR,  Paul  SK,  Bethel  MA,  Matthews  DR,  Neil  HA.  10-year  follow-up  of  intensive  glucose  control  in  type  2  diabetes.  N  Engl  J  Med 2008;359(15):1577-89.
-
-[ref-116]: Action to Control Cardiovascular Risk in Diabetes Study Group, Gerstein HC, Miller ME, Byington RP, Goff DC, Bigger JT, et al. Effects of intensive glucose lowering in type 2 diabetes. N Engl J Med 2008;358(24):2545-59.
-
 <!-- page: 81 -->
-
-
-
-
 
 ## Descriptif de l'étude
 
@@ -3340,7 +2410,7 @@ Par ailleurs,  la  fréquence  des  hypoglycémies sévères nécessitant une in
 
 En comparaison au groupe traitement standard, l'utilisation d'une thérapie intensive avec pour objectif d'atteindre un niveau normal d'HbA1C après 3,5 ans de suivi a augmenté la mortalité et n'a pas diminué de manière significative la survenue d'événements cardiovasculaires.
 
-## Étude ADVANCE (Action in Diabetes and Vascular Disease: Preterax and Diamicron Modified Release Controlled Evaluation) [ref-117]
+# Étude ADVANCE (Action in Diabetes and Vascular Disease: Preterax and Diamicron Modified Release Controlled Evaluation) [ref-117]
 
 ## Objectifs de l'étude
 
@@ -3360,11 +2430,7 @@ Au terme des 5 ans de suivi, le taux moyen d'HbA1C était significativement (p &
 
 Au total,  2  125  sujets  ont  eu  un  événement  macro  ou  microvasculaire  majeur  :  18  %  dans  le  groupe  intensif  et  20  % dans le groupe standard (p = 0,01). Le traitement intensif réduisait de manière significative l'incidence des événements microvasculaires majeurs (p =  0,01), mais pas celle des événements cardiovasculaires. Le contrôle intensif du diabète était associé avec une réduction significative des complications rénales à type de néphropathie (p = 0,006), de microalbuminurie (p = 0,02) et de macroalbuminurie (p &lt; 0,001). Le taux d'hypoglycémies sévères était plus élevé dans le groupe traitement intensif que dans le groupe contrôle (0,7 % versus 0,4 % ; p &lt; 0,001). Aucune différence sur le taux de décès toutes causes confondues ou le taux de décès d'origine cardiovasculaire n'était observée.
 
-[ref-117]: ADVANCE Collaborative Group, Patel A, MacMahon S, Chalmers J, Neal B, Billot L, et al. Intensive blood glucose control and vascular outcomes in patients with type 2 diabetes. N Engl J Med 2008;358(24):2560-72.
-
-
 <!-- page: 82 -->
-
 
 L'étude n'a pas mis en évidence le fait que l'effet du contrôle intensif du diabète ait été dépendant du niveau basal d'HbA1C, de la pression artérielle, de l'âge, du sexe et de la présence ou de l'absence d'un antécédent cardiovasculaire.
 
@@ -3372,7 +2438,7 @@ L'étude n'a pas mis en évidence le fait que l'effet du contrôle intensif du d
 
 Une stratégie de contrôle glycémique intensif, comprenant le glicazide et d'autres molécules selon besoin, qui abaisse le taux d'HbA1C à 6,5 %, a abouti à une réduction d'événements majeurs macrovasculaires et microvasculaires, principalement grâce à une réduction relative du risque de néphropathie.
 
-## Étude VADT (Veterans Affairs Diabetes Trial) [ref-118]
+# Étude VADT (Veterans Affairs Diabetes Trial) [ref-118]
 
 ## Objectifs de l'étude
 
@@ -3392,7 +2458,7 @@ Le suivi moyen a été de 5,6 ans. Les taux moyens d'HbA1C étaient de 8,4 % dan
 
 Le contrôle glycémique intensif chez les sujets diabétiques de type 2 mal contrôlés n'a pas eu d'effet significatif sur le taux d'événements cardiovasculaires majeurs, décès ou complications microvasculaires, et a réduit de manière significative le taux de l'albuminurie.
 
-## Cohorte ENTRED (échantillon national témoin représentatif des personnes diabétiques) [ref-119]
+# Cohorte ENTRED (échantillon national témoin représentatif des personnes diabétiques) [ref-119]
 
 ## Objectifs de l'étude
 
@@ -3403,13 +2469,7 @@ L'étude Entred 2007-2010 avait pour objectifs de :
 - faire une évaluation économique du parcours de soins des sujets diabétiques ;
 - décrire l'éducation en santé attendue et reçue par les sujets diabétiques, ainsi que les pratiques d'éducation en santé des médecins concernant le diabète.
 
-[ref-118]: Duckworth W, Abraira C, Moritz T, Reda D, Emanuele N, Reaven PD, et al. Glucose control and vascular complications in veterans with type 2 diabetes. N Engl J Med 2009;360(2):129-39.
-
-[ref-119]: Institut de veille sanitaire, Fagot-Campagna A, Fosse S, Roudier C, Romon I, Penfornis A, et al . Caractéristiques, risque vasculaire et complications chez les personnes diabétiques en France métropolitaine : d'importantes évolutions entre Entred 2001 et Entred 2007. BEH 2009;(42-43):450-5.
-
 <!-- page: 83 -->
-
-
 
 ## Descriptif de l'étude
 
@@ -3436,7 +2496,7 @@ Le risque cardiovasculaire est augmenté chez les sujets diabétiques par rappor
 - 26 % ont un risque élevé ( i.e. sujets ayant au moins 2 facteurs de risque additionnels au diabète, diabète évoluant depuis moins de 10 ans) ;
 - 59 % avaient un risque très élevé ( i.e. sujets ayant un risque &gt; 20 % de faire un événement coronarien dans les 10 ans).
 
-## Cohorte DESIR (données épidémiologiques sur le syndrome d'insulino-résistance ) [ref-123]
+# Cohorte DESIR (données épidémiologiques sur le syndrome d'insulino-résistance ) [ref-123]
 
 ## Descriptif de l'étude
 
@@ -3448,20 +2508,7 @@ Les données cliniques recueillies étaient les suivantes : l'âge, les antécé
 
 Les données biologiques recueillies étaient les suivantes : la glycémie à jeun, les gamma-GT, la triglycéridémie, la HDL cholestérolémie.
 
-[ref-120]: Le diabète de type 1 était défini par un diagnostic avant 45 ans et un traitement par insuline dans les deux années suivant le diagnostic. La cohorte totale incluait 10 705 adultes et enfants diabétiques, vivant en métropole ou domiciliés à l'île de la Réunion, en Martinique, en Guadeloupe ou en Guyane.
-
-[ref-121]: Risque estimé par l'équation de Framingham recalibrée.
-
-[ref-122]: Institut de veille sanitaire, Fagot-Campagna A, Fosse S, Roudier C, Romon I, Penfornis A, et al . Caractéristiques, risque vasculaire et complications chez les personnes diabétiques en France métropolitaine : d'importantes évolutions entre Entred 2001 et Entred 2007. BEH 2009;(42-43):450-5.
-
-[ref-123]: Institut de veille sanitaire, Vol S, Balkau B, Lange C, de Lauzon-Guillain B, Czernichow S, et al . Un score prédictif du diabète de type 2 en France : l'étude prospective D.E.S.I.R. BEH 2009;(9):81-4.
-
 <!-- page: 84 -->
-|
-
-
-
-
 
 ## Résultats
 
@@ -3502,13 +2549,8 @@ Le score de risque élaboré a été validé à partir de deux cohortes françai
 Les performances de ce score pour prédire le diabète après 9 ans de suivi étaient faibles : pour un score clinique élevé (&gt; 7 chez l'homme et &gt; 4 chez la femme), la valeur prédictive positive (VPP) était respectivement de 29 % et 24 %.
 
 <!-- page: 85 -->
-|
 
-
-
-
-
-## Études sur l'impact de l'activité physique sur la prévention du diabète de type 2
+# Études sur l'impact de l'activité physique sur la prévention du diabète de type 2
 
 ## Essai DPP (Diabetes Prevention Program) [ref-124]
 
@@ -3526,11 +2568,11 @@ Après  10  ans  de  suivi,  les  résultats  de  l'étude  ont  montré  une  r
 
 Initiée en 1986 en Chine, l'étude China Da Qing Diabetes Prevention Study a inclus, entre juillet et décembre, 577 sujets âgés de 45 ± 9 ans, intolérants au glucose (défini par une glycémie, 2 heures après ingestion de 75 g de glucose, comprise entre 1,4 et 2 g/l [&gt; 7 ,8 et &lt; 11,1 mmol/l]). Les sujets ont été divisés en quatre groupes randomisés : 1 groupe contrôle, 1 groupe régime alimentaire, 1 groupe exercice physique, et 1 groupe régime alimentaire + exercice physique. Les sujets ont été suivis pendant 6 ans tous les 2 ans (8 % de perdus de vue).
 
-- ¼ Les sujets ayant un IMC ≥ 25 kg/m 2  ont été encouragés à réduire leurs apports en calories afin de diminuer graduellement leur poids à raison de 0,5 à 1 kg/mois jusqu'à atteindre un IMC &lt; 23 kg/m 2 .
-- ¼ Des objectifs individuels étaient fixés pour la consommation calorique totale et pour la consommation journalière de céréales, légumes, viande, lait et huiles.
-- ¼ Les  sujets  du  groupe  exercice  physique  âgés  de  moins  de  50  ans,  indemnes  de  maladie  cardiovasculaire  ou  de problèmes articulaires, étaient encouragés à augmenter leur activité d'au moins une unité/jour [ref-126] .
-- ¼ Des séances de conseils individuelles et collectives ont été menées toutes les semaines pendant 1 mois, tous les mois pendant 3 mois, puis tous les 3 mois.
-- ¼ Les sujets du groupe contrôle recevaient une information générale sur l'intolérance au glucose et le diabète, et les médecins de leurs centres de consultations leur remettaient des brochures sur l'équilibre alimentaire et l'activité physique.
+- Les sujets ayant un IMC ≥ 25 kg/m 2  ont été encouragés à réduire leurs apports en calories afin de diminuer graduellement leur poids à raison de 0,5 à 1 kg/mois jusqu'à atteindre un IMC &lt; 23 kg/m 2 .
+- Des objectifs individuels étaient fixés pour la consommation calorique totale et pour la consommation journalière de céréales, légumes, viande, lait et huiles.
+- Les  sujets  du  groupe  exercice  physique  âgés  de  moins  de  50  ans,  indemnes  de  maladie  cardiovasculaire  ou  de problèmes articulaires, étaient encouragés à augmenter leur activité d'au moins une unité/jour [ref-126] .
+- Des séances de conseils individuelles et collectives ont été menées toutes les semaines pendant 1 mois, tous les mois pendant 3 mois, puis tous les 3 mois.
+- Les sujets du groupe contrôle recevaient une information générale sur l'intolérance au glucose et le diabète, et les médecins de leurs centres de consultations leur remettaient des brochures sur l'équilibre alimentaire et l'activité physique.
 
 ## Résultats
 
@@ -3543,22 +2585,9 @@ Le risque relatif de devenir diabétique, après ajustement sur l'IMC et la glyc
 - 45,6 % dans le groupe exercice physique + régime alimentaire ;
 - 65,9 % dans le groupe contrôle.
 
-[ref-124]: Diabetes Prevention Program Research Group, Knowler WC, Fowler SE, Hamman RF, Christophi CA, Hoffman HJ, et al .  10-year follow-up of diabetes incidence and weight loss in the Diabetes Prevention Program Outcomes Study. Lancet 2009;374(9702):1677-86.
-
-[ref-125]: Pan XR, Li GW, Hu YH, Wang JX, Yang WY, An ZX, et al . Effects of diet and exercise in preventing NIDDM in people with impaired glucose tolerance. The Da Qing IGT and Diabetes Study. Diabetes Care 1997;20(4):537-44.
-
-[ref-126]: ]: Une unité d'activité physique équivaut à : soit 30 min d'activité faible (marche lente, faire ses courses ou le ménage) ; soit 20 min d'activité modérée (marche rapide, descendre les escaliers, trajet à bicyclette, danse de salon lente) ; soit 10 min d'activité soutenue (course lente, monter les escaliers, danse de salon rapide, faire du volley ou du tennis de table) ; soit 5 min d'activité intense (sauter à la corde, jouer au basket, nager).
-
 <!-- page: 86 -->
-|
 
-
-
-
-
-
-
-## Étude DPS (Diabetes Prevention Study) [ref-127]
+# Étude DPS (Diabetes Prevention Study) [ref-127]
 
 ## Descriptif de l'étude
 
@@ -3578,7 +2607,7 @@ Après un suivi moyen de 4 à 5 ans, l'incidence de la maladie a chuté de 50 % 
 
 Après un suivi moyen de 7 ans (à l'issue de la période d'intervention les sujets ont été suivis 3 années supplémentaires), la réduction relative de risque de diabète était de 36 %.
 
-## Nurses' Study [ref-128]
+# Nurses' Study [ref-128]
 
 ## Descriptif de l'étude
 
@@ -3588,11 +2617,11 @@ La Nurses' Study est une étude de cohorte ayant inclus, dans les années quatre
 
 Après 8 ans de suivi, le risque relatif de diabète de type 2 était diminué chez les femmes ayant un exercice physique régulier hebdomadaire (p &lt; 0,0001), par rapport à celles qui n'avaient pas d'activité physique régulière.
 
-- ¼ Après ajustement sur l'indice de masse corporelle, la réduction de risque restait significative (p = 0,005).
-- ¼ Aucun gradient explicite de l'effet, en fonction de la fréquence des séances d'activité physique, n'était identifiable.
-- ¼ Cette réduction de risque était indépendante des antécédents familiaux de diabète, et s'observait quel que soit le poids initial de la femme.
+- Après ajustement sur l'indice de masse corporelle, la réduction de risque restait significative (p = 0,005).
+- Aucun gradient explicite de l'effet, en fonction de la fréquence des séances d'activité physique, n'était identifiable.
+- Cette réduction de risque était indépendante des antécédents familiaux de diabète, et s'observait quel que soit le poids initial de la femme.
 
-## Étude de Helmrich et al. [ref-129]
+# Étude de Helmrich et al. [ref-129]
 
 ## Descriptif de l'étude
 
@@ -3602,20 +2631,9 @@ Après 8 ans de suivi, le risque relatif de diabète de type 2 était diminué c
 
 Cette étude a montré que l'exercice physique avait un effet protecteur chez les sujets à haut risque de diabète (index pondéral élevé, antécédents d'hypertension artérielle, antécédents de diabète familial). Le risque de diabète de type 2 (ajusté selon l'âge) diminuait de 6 % par tranche de 500 kilocalories d'activité physique par semaine.
 
-[ref-127]: Lindström J, Ilanne-Parikka P, Peltonen M, Aunola S, Eriksson JG, Hemiö K, et al . Sustained reduction in the incidence of type 2 diabetes by lifestyle intervention: follow-up of the Finnish Diabetes Prevention Study. Lancet 2006;368(9548):1673-9.
-
-[ref-128]: Manson JE, Rimm EB, Stampfer MJ, Colditz GA, Willett WC, Krolewski AS, et al . Physical activity and incidence of non-insulin-dependent diabetes mellitus in women. Lancet 1991;338(8770):774-8.
-
-[ref-129]: Helmrich SP, Ragland DR, Leung RW, Paffenbarger RS. Physical activity and reduced occurrence of non-insulin-dependent diabetes mellitus. N Engl J Med 1991;325(3):147-52.
-
 <!-- page: 87 -->
-|
 
-
-
-
-
-## Étude de Framingham [ref-130]
+# Étude de Framingham [ref-130]
 
 ## Descriptif de l'étude
 
@@ -3631,15 +2649,8 @@ L'étude de Framingham a montré que, dans une population non sélectionnée de 
 - 4,2 ans pour des sujets très actifs.
 
 <!-- page: 88 -->
-|
 
-
-
-
-
-## Score EPICES de précarité
-
-
+# Score EPICES de précarité
 
 Le score Epices a été construit à l'aide d'un questionnaire socioéconomique administré dans un échantillon de 7 208 personnes âgées de 16 à 59 ans, examinées dans 18 centres d'examens de santé volontaires [ref-131] .
 
@@ -3651,299 +2662,4 @@ Cet axe a été interprété comme le reflet du gradient social lié à la préc
 
 La régression multiple a permis ensuite de sélectionner un sous-ensemble de 11 questions (binaires) expliquant 91 % de la variance du facteur « précarité ». Les coefficients de régression ont permis de déterminer les « poids » de chaque question, donnant la règle de calcul du score au niveau individuel, variant de 0 (absence de précarité) à 100 (précarité maximum).
 
-## Modalités de calcul du score de précarité EPICES
-
-| Questions                                                                                                                                                 | Réponse aux questions                                                                               | Réponse aux questions                                                                               |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| Questions                                                                                                                                                 | Oui                                                                                                 | Non                                                                                                 |
-| 1. Rencontrez-vous parfois un travailleur social ?                                                                                                        | 10,06                                                                                               | 0                                                                                                   |
-| 2. Bénéficiez-vous d'une assurance maladie complémentaire ?                                                                                               | -11,83                                                                                              | 0                                                                                                   |
-| 3. Vivez-vous en couple ?                                                                                                                                 | -8,28                                                                                               | 0                                                                                                   |
-| 4. Êtes-vous propriétaire de votre logement ?                                                                                                             | -8,28                                                                                               | 0                                                                                                   |
-| 5. Y-a-t-il des périodes dans le mois où vous rencontrez de réelles difficultés financières à faire face à vos besoins (alimentation, loyer, EDF, etc.) ? | 14,80                                                                                               | 0                                                                                                   |
-| 6. Vous est-il arrivé de faire du sport au cours des 12 derniers mois ?                                                                                   | -6,51                                                                                               | 0                                                                                                   |
-| 7. Êtes-vous allé(e) au spectacle au cours des 12 derniers mois ?                                                                                         | -7,10                                                                                               | 0                                                                                                   |
-| 8. Êtes-vous parti(e) en vacances au cours des 12 derniers mois ?                                                                                         | -7,10                                                                                               | 0                                                                                                   |
-| 9. Au cours des 6 derniers mois, avez-vous eu des contacts avec des membres de votre famille autres que vos parents ou vos enfants ?                      | -9,47                                                                                               | 0                                                                                                   |
-| 10. En cas de difficultés, y a-t-il dans votre entourage des personnes sur qui vous puissiez compter pour vous héberger quelques jours en cas de besoin ? | -9,47                                                                                               | 0                                                                                                   |
-| 11. En cas de difficultés, y a-t-il dans votre entourage des personnes sur qui vous puissiez compter pour vous apporter une aide matérielle ?             | -7,10                                                                                               | 0                                                                                                   |
-| Constante                                                                                                                                                 | 75,14                                                                                               | -                                                                                                   |
-| Calcul du score : chaque coefficient est ajouté à la constante si la réponse à la question est oui.                                                       | Calcul du score : chaque coefficient est ajouté à la constante si la réponse à la question est oui. | Calcul du score : chaque coefficient est ajouté à la constante si la réponse à la question est oui. |
-
-[ref-131]: Institut de veille sanitaire, Sass C, Moulin JJ, Guéguen R, Abric L, Dauphinot V, et al. Le score Epices : un score individuel de précarité. Construction du score et mesure des relations avec des données de santé, dans une population de 197 389 personnes. BEH 2006;(14):93-6.
-
-
 <!-- page: 89 -->
-
-
-## Test au monofilament et questionnaire DN4
-
-## Le déroulement du test au monofilament [ref-132]
-
-## Conditions de réalisation
-
-- ¼ Le sujet doit être confortablement installé et détendu.
-- ¼ Le sujet ne doit pas voir si l'examinateur applique ou non le filament, ni où il l'applique.
-- ¼ Appliquer le filament perpendiculairement à la surface de la peau avec une force suffisante pour faire bomber le filament.
-- ¼ Le contact cutané et le retrait doivent durer environ 2 secondes.
-- ¼ Il ne faut pas faire glisser le monofilament sur la peau ou faire des contacts répétés au niveau de la zone explorée.
-- ¼ Les trois sites à tester sur chaque pied sont la face plantaire de la tête du premier métatarsien, de la tête du cinquième métatarsien et la pulpe de l'hallux ;
-- ¼ Il ne faut pas appliquer le filament sur une callosité, une cicatrice ou du tissu nécrotique. En cas d'ulcère, appliquer le filament à la périphérie de ce dernier.
-
-## Étape préliminaire
-
-- ¼ Appliquer d'abord le monofilament sur les mains du sujet (ou sur le coude ou le front), afin qu'il sache ce qu'il doit ressentir.
-
-## Déroulement du test
-
-- ¼ Appuyer le filament sur la peau et demander au patient s'il ressent la pression appliquée (oui/non) et où il la ressent (pied droit /gauche).
-- ¼ Répéter l'application deux fois au même site en intercalant un « test factice » au cours duquel le filament n'est pas appliqué (au total : 3 questions par site).
-- ¼ La sensation de protection est conservée à chaque site si le sujet répond correctement à deux des trois applications. Elle est absente si deux des trois réponses sont fausses : le sujet est alors considéré à risque d'ulcération.
-- ¼ Encourager le sujet pendant le test.
-
-[ref-132]: Haute Autorité de Santé. Le pied de la personne âgée : approche médicale et prise en charge de pédicurie-podologie. Saint-Denis La Plaine: HAS; 2005.
-
-
-<!-- page: 90 -->
-|
-
-
-
-
-
-
-
-## Le questionnaire DN4 [ref-133]
-
-La réponse positive à chaque item est cotée 1 et la réponse négative est cotée 0. Le score maximum est de 10 et le diagnostic de la douleur neuropathique est posé à partir d'un score de 4/10.
-
-Question 1 : La douleur présente-t-elle une ou plusieurs des caractéristiques suivantes :
-
-- brûlure ;
-- sensation de froid douloureux ;
-- décharges électriques.
-
-Question 2 : La douleur est-elle associée dans la même région à un ou plusieurs des symptômes suivants :
-
-- fourmillements ;
-- picotements ;
-- engourdissement ;
-- démangeaisons.
-
-Question 3 :  La  douleur  est-elle  localisée  dans  un  territoire  où  l'examen  clinique  met  en  évidence  les  caractéristiques suivantes :
-
-- hypoesthésie au toucher ;
-- hypoesthésie à la piqûre.
-
-Question 4 : La douleur est-elle provoquée ou augmentée par :
-
-- le frottement.
-
-[ref-133]: Bouhassira D, Attal N, Alchaar H, Boureau F, Brochet B, Bruxelle J, et al. Comparison of pain syndromes associated with nervous or somatic lesions and development of a new neuropathic pain diagnostic questionnaire (DN4). Pain 2005;114(1-2):29-36.
-
-
-<!-- page: 91 -->
-
-
-## Données Entred 2007-2010 sur les pratiques de prise en charge des sujets diabétiques
-
-
-
-## Analyse du point de vue du patient
-
-Les données ENTRED 2007-2010 montrent que les sujets diabétiques sont en majorité suivis par leur médecin généraliste. Les médecins généralistes consultent leurs patients diabétiques en moyenne 9 fois dans l'année (27 % des patients ayant consulté au moins une fois par mois).
-
-En ce qui concerne les examens de suivi :
-
-- 44 % des personnes diabétiques de type 2 ont bénéficié des trois dosages de l'HbA1c recommandés dans l'année pour surveiller l'équilibre glycémique ;
-- 39 % ont bénéficié d'un électrocardiogramme et/ou d'une consultation de cardiologie ;
-- 12 % ont bénéficié d'une consultation d'un endocrinologue libéral ou hospitalier ;
-- 20 % ont bénéficié d'une consultation diététique ;
-- 23 % ont bénéficié d'une consultation par un podologue/pédicure (les médecins transmettent au pédicure-podologue les éléments nécessaires pour la gradation du risque podologique pour 66 % de leurs patients).
-- Si l'on se réfère aux recommandations françaises, l'analyse du suivi des sujets diabétiques pour la période 2006-2007 [ref-134] montre que (figure 3, tableau 5) :
-- seuls 2 % des sujets diabétiques de type 2 ont bénéficié de tous les éléments de ce suivi ;
-- 12 % ont bénéficié à la fois des trois dosages annuels d'HbA1c, de la consultation ophtalmologique et d'un électrocardiogramme ou d'une consultation cardiologique dans l'année.
-
-Figure  3. Proportions  de  sujets  diabétiques  de  type  2  bénéficiant  des  actes recommandés (actes réalisés en secteur libéral seulement) dans les DOM et en métropole, Entred 2007, France : données de consommation médicale.
-
-
-
-Source :  Institut  de  veille  sanitaire,  Ndong  JR,  Romon  I,  Druet  C,  Prévot  L,  Hubert-Brierre  R, et  al . Caractéristiques, risque vasculaire, complications et qualité des soins des personnes diabétiques dans les départements d'Outre-mer et comparaison à la métropole : Entred 2007-2010, France. BEH 2010; (42-43):432-6.
-
-[ref-134]: Institut de veille sanitaire, Robert J, Roudier C, Poutignat N, Fagot-Campagna A, Weill A, et al. Prise en charge des personnes diabétiques de type 2 en France en 2007 et tendances par rapport à 2001. BEH 2009;(42-43):455-60.
-
-<!-- page: 92 -->
-
-
-
-Tableau 5. Analyse du respect des recommandations de suivi chez les patients diabétiques de type 2 (données du régime général, France métropolitaine, Entred août 2006-juillet 2007*)
-
-| Examens de suivi devant être faits            | Rappel des recommandations françaises                               | Données de la cohorte (3 647 sujets diabétiques)   | Données de la cohorte (3 647 sujets diabétiques)   | Données de la cohorte (3 647 sujets diabétiques)   |
-|-----------------------------------------------|---------------------------------------------------------------------|----------------------------------------------------|----------------------------------------------------|----------------------------------------------------|
-| chez un sujet diabétique de type              | Rappel des recommandations françaises                               | Examens effectués simultanément                    | Nombre cumulé de sujets                            | %cumulé de sujets                                  |
-| Recherche d'albuminurie ou de protéinurie (a) | 1 fois/an                                                           | (a)                                                | 987                                                | 28                                                 |
-| Consultation dentaire (b)                     | 1 fois/an                                                           | (a) + (b)                                          | 409                                                | 11                                                 |
-| Électrocardiogramme de repos (c)              | 1 fois/an                                                           | (a+b+c)                                            | 189                                                | 5                                                  |
-| Dosage de l'hémoglobine glyquée 3 fois/an (d) | 3 à 4 fois/an                                                       | (a+b+c+d)                                          | 112                                                | 3                                                  |
-| Examen ophtalmologique (e)                    | 1 fois tous les 2 ans sous certaines conditions † (sinon 1 fois/an) | (a+b+c+d+e)                                        | 77                                                 | 2                                                  |
-| Dosage des lipides sanguins (f)               | 1 fois/an                                                           | (a+b+c+d+e+f)                                      | 74                                                 | 2                                                  |
-| Dosage de la créatininémie (g)                | 1 fois/an                                                           | (a+b+c+d+e+f+g)                                    | 72                                                 | 2                                                  |
-
-* : Institut de veille sanitaire, Robert J, Roudier C, Poutignat N, Fagot-Campagna A, Weill A, et al. Prise en charge des personnes diabétiques de type 2 en France en 2007 et tendances par rapport à 2001. BEH 2009;(42-43):455-60.
-- † : sujet non traité par insuline, sans rétinopathie, avec un diabète et une tension artérielle équilibrés.
-
-## Analyse du point de vue du médecin traitant
-
-Selon les données d'une étude faite par l'Assurance maladie en 2000 [ref-135] , quatre groupes de médecins traitants ont été identifiés (tableau 6).
-
-- ¼ Les médecins du groupe 1 ( 7 % des médecins de l'étude) ne suivaient leurs patients diabétiques que par une glycémie à jeun, contrairement aux recommandations françaises qui préconisent le dosage de la glycémie pour le diagnostic et non pour le suivi thérapeutique.
-- ¼ Les médecins du groupe 2 ( 32 % ) effectuaient fréquemment des dosages d'hémoglobine glyquée (HbA1c), mais peu de dépistage des complications.
-- ¼ Les médecins du groupe 3 ( 36 % ) effectuaient peu de dosages d'HbA1c et peu de dépistage des complications.
-- ¼ Les  médecins  du  groupe  4  ( 25  % )  effectuaient  des  dosages  d'HbA1c  assez  fréquents  et  un  meilleur  dépistage  des complications.
-
-La plus importante disparité concernait le suivi de l'équilibre glycémique par des glycémies sans dosage d'HbA1c , contrairement aux recommandations françaises qui préconisent le dosage de la glycémie pour le diagnostic et non pour le suivi thérapeutique.
-
-Il n'y avait pas de parallélisme entre la qualité de la surveillance de l'équilibre biologique du diabète et celle du dépistage et du suivi des complications.
-
-[ref-135]: Dans cette étude exhaustive, sans tirage d'échantillon, le recueil, à partir des bases de données de l'Assurance maladie, des prescriptions de 1 787 médecins généralistes de la région Centre concernait leurs 37 087 sujets diabétiques (la sélection des patients reposant sur le remboursement d'un médicament antidiabétique oral pendant l'année 2000). Germanaud J, Deprez PH, Delvoye S, Gabach P, Schmitt B, Lasfargues G, et al . Une typologie des pratiques médicales comme outil de l'amélioration de la qualité des soins. Expérience dans la prise en charge des malades diabétiques par les médecins généralistes. Rev Med Ass Mal 2003;34(2).
-
-<!-- page: 93 -->
-
-
-
-Tableau 6. Caractéristiques des prescriptions de suivi par les médecins de leurs patients diabétiques de type 2
-
-| Médecins de l'étude   | Médecins de l'étude   |                                                                                                                                                                                                                                               |
-|-----------------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Groupe                | %                     | Prescription de suivi de leur patientèle diabétique                                                                                                                                                                                           |
-| 1                     | 15                    | ´ ´ 57 %des patients diabétiques avaient eu au cours de l'année une ou plusieurs glycémies. ´ ´ Et aucun dosage d'HbA1c. ´ ´ Et aucune recherche de microalbuminurie. ´ ´ Et aucune consultation ophtalmologique ou cardiologique ni ECG.     |
-| 2                     | 32                    | ´ ´ 55 %des patients diabétiques avaient eu au moins 3 dosages d'HbA1c au cours de l'année. ´ ´ 12 %avaient eu une recherche de microalbuminurie. ´ ´ 41 %une consultation ophtalmologique. ´ ´ 25 %un ECG ou une consultation cardiologique. |
-| 3                     | 34                    | ´ ´ 19 %des patients diabétiques avaient eu au moins 3 dosages d'HbA1c au cours de l'année. ´ ´ 19 %une recherche de microalbuminurie. ´ ´ 39 %une consultation ophtalmologique. ´ ´ 22 %un ECG ou une consultation cardiologique.            |
-| 4                     | 19                    | ´ ´ 45 %des patients diabétiques avaient eu au moins 3 dosages d'HbA1c au cours de l'année. ´ ´ 45 %une recherche de microalbuminurie. ´ ´ 50 %une consultation ophtalmologique. ´ ´ 36 %un ECG ou une consultation cardiologique.            |
-
-HbA1c : hémoglobine glyquée ; ECG : électrocardiogramme.
-
-## Analyse des difficultés d'application des recommandations par les médecins traitants
-
-Le diabète de type 2 est, pour le médecin traitant, une maladie chronique dont l'évolution dépend autant de la qualité du suivi médical que du comportement du malade.
-
-- ¼ Pour les médecins généralistes (données de l'étude Entred 2007 [ref-136] ) : la principale difficulté rencontrée dans la prise en charge du diabète était l 'absence d'adhésion de leurs patients aux recommandations concernant l'alimentation (un problème pour 65 % des médecins) et l'activité physique (64 %), puis la disponibilité d'un diététicien (43 %). Le besoin d'un soutien psychologique des patients était considéré comme une difficulté supplémentaire par 17 % des médecins.
-- ¼ 23 % des médecins spécialistes et 5 % des médecins généraliste s déclaraient assurer pour la majorité de leurs patients diabétiques des consultations dédiées à l'éducation thérapeutique .
-- ¼ Parmi les f reins au développement d'une démarche éducative , les médecins généralistes citaient le manque de temps (76 %), le manque de professionnels et de structures relais (39 % et 40 %), l'absence d'intérêt de leur patient pour cette démarche (33 %), le manque de formation (26 %) et le manque de matériel adapté (21 %).
-
-
-
-## Pour info
-
-Il a été estimé que l'insuffisance du recours au dépistage de la rétinopathie diabétique était multifactorielle :
-
--  manque d'information des sujets diabétiques sur le risque de complications oculaires et sur l'intérêt d'un suivi régulier ;
--  difficultés d'accès aux ophtalmologistes compte tenu de leur répartition géographique hétérogène (temps nécessaire à l'obtention d'un rendez-vous, distance entre le cabinet et le domicile), des coûts générés par la consultation ;
--  précarité :
--  gêne occasionnée par les gouttes oculaires, peur de découvrir un problème visuel, sentiment d'inutilité ;
--  sensibilisation insuffisante des médecins traitants.
-
-[ref-136]: Institut de veille sanitaire, Fournier C, Gautier A, Attali C, Bocquet-Chabert A, Mosnier-Pudar H, et al . Besoins d'information et d'éducation des personnes diabétiques, pratiques éducatives des médecins, étude Entred, France, 2007. BEH 2009;(42-43):460-4.
-
-
-<!-- page: 94 -->
-
-
-## Liste des publications de la HAS sur le Diabète
-
-## Recommandations
-
-- ´ ´ « suivi du patient diabétique de type 2 à l'exclusion du suivi des complications (1999) » ;
-- ´ ´ « stratégie de prise en charge du patient diabétique de type 2 à l'exclusion de la prise en charge des complications (2000) » ;
-- ´ ´ « principes de dépistage du diabète de type 2 (2003) » ;
-- ´ ´ « rapport de synthèse sur le dépistage et le diagnostic du diabète gestationnel (2005) » ;
-- ´ ´ « diabète de type 2. Guide médecin. Guide ALD (2007) » ;
-- ´ ´ « dépistage de la rétinopathie diabétique par lecture différée de photographies du fond d'oeil (2010) » ;
-- ´ ´ « stratégie médicamenteuse du contrôle glycémique du diabète de type 2 (2013) » ;
-- ´ ´ « diabète de type 2 de l'adulte. Guide parcours de soins (2014) ».
-
-## Évaluations des technologies de santé publiées
-
-- ´ ´ « Holter glycémique : mesure ambulatoire de la glycémie en continu (CGMS) (2006) » ;
-- ´ ´ « mesure de l'insulinorésistance et de la tolérance au glucose (2006) » ;
-- ´ ´ « interprétation des photographies du fond d'oeil, suite à une rétinographie avec ou sans mydriase (2007) » ;
-- ´ ´ « séances de prévention des lésions des pieds chez le patient diabétique, par le pédicure-podologue (2007) » ;
-- ´ ´ « évaluation des dispositifs médicaux pour autosurveillance et autotraitement du diabète (2007) ».
-
-<!-- page: 95 -->
-
-
-
-
-
-
-
-Conformément à la méthode définie pour l'actualisation des référentiels de pratiques des Centres d'examens de santé, il a été décidé de regrouper les références utilisées pour élaborer le référentiel dans le tableau « Littérature source » en fin de document, sans les citer au fil du texte.
-
-- ¼ Les données chiffrées sont issues notamment des documents de l'InVS, de l'INSERM.
-- ¼ Pour les données non issues d'un des rapports listés dans le tableau « Littérature source », une note de bas de page précise la référence ad hoc.
-
-L'actualisation  du  référentiel  de  pratiques  ne  fait  pas  appel  à  une  lecture  critique  de  la  littérature  selon  la  méthode traditionnellement en usage à la HAS. Conformément au guide méthodologique prédéfini, la recherche a été centrée sur les recommandations issues de la HAS, de l'Ansm (anciennement Afssaps) publiées au cours des 10 dernières années (20022013), complétée des rapports suivants : guide ALD de la HAS, rapports d'étude d'évaluation des technologies de santé de la HAS, rapports d'évaluation des programmes et politiques de santé publique de la HAS, conférences de consensus, auditions publiques, rapports issus de l'InVS.
-
-## Littérature utilisée pour l'actualisation du référentiel de pratique des CES sur le dépistage et la prévention du diabète et des maladies liées au diabète
-
-| Origine                                        |   Année de publication | Type                               | Titre                                                                                                                                                                                                                                                                                                     |
-|------------------------------------------------|------------------------|------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| HAS                                            |                   2014 | Parcours de soins ALD              | Diabète de type 2 de l'adulte                                                                                                                                                                                                                                                                             |
-| HAS                                            |                   2013 | Recommandation de bonne pratique   | Stratégie médicamenteuse du contrôle glycémique du diabète de type 2                                                                                                                                                                                                                                      |
-| InVS                                           |                   2013 | Rapport                            | Échantillon national témoin représentatif des personnes diabétiques, Entred 2007-2010. Caractéristiques, état de santé, prise en charge et poids économique des personnes diabétiques                                                                                                                     |
-| Ministère des Affaires sociales et de la Santé |                   2013 | Rapport                            | Projet de loi de financement de la Sécurité sociale. PLFSS 2014. Annexe 1. Programmes de qualité et d'efficience. Maladie. Partie II : objectifs / résultats. Objectif 2 : développer la prévention. Indicateur n°2-5 : taux de diabétiques bénéficiant des recommandations de bonnes pratiques cliniques |
-| FID                                            |                   2013 | Rapport                            | Atlas du diabète de la FID. 6e édition                                                                                                                                                                                                                                                                    |
-| HAS                                            |                   2012 | Fiche BUTS                         | Diagnostic de l'insuffisance rénale chronique. Estimer le débit de filtration glomérulaire par l'équation CKD-EPI. Doser la créatininémie par méthode enzymatique                                                                                                                                         |
-| IGAS                                           |                   2012 | Rapport                            | Évaluation de la prise en charge du diabète. Tome I                                                                                                                                                                                                                                                       |
-| HAS                                            |                   2011 | Rapport d'évaluation technologique | Évaluation du débit de filtration glomérulaire, et du dosage de la créatininémie dans le diagnostic de la maladie rénale chronique chez l'adulte                                                                                                                                                          |
-| HAS                                            |                   2011 | Rapport d'évaluation technologique | Évaluation du rapport albuminurie/créatinurie dans le diagnostic de la maladie rénale chronique chez l'adulte                                                                                                                                                                                             |
-| HAS                                            |                   2011 | Fiche BUTS                         | L'autosurveillance glycémique dans le diabète de type 2 : une utilisation très ciblée                                                                                                                                                                                                                     |
-| HAS                                            |                   2011 | Recommandation de bonne pratique   | Surpoids et obésité de l'adulte : prise en charge médicale de premier recours                                                                                                                                                                                                                             |
-| HAS                                            |                   2010 | Recommandation en santé publique   | Dépistage de la rétinopathie diabétique par lecture différée de photographies du fond d'œil                                                                                                                                                                                                               |
-| InVS                                           |                   2010 | Synthèse                           | Prévalence et incidence du diabète, et mortalité liée au diabète en France. Synthèse épidémiologique                                                                                                                                                                                                      |
-| HCSP                                           |                   2010 | Rapport                            | Objectifs de santé publique. Évaluation des objectifs de la loi du 9 août 2004. Propositions                                                                                                                                                                                                              |
-
-
-<!-- page: 96 -->
-|
-
-
-
-
-
-| Origine                                  |   Année de publication | Type                                           | Titre                                                                                                                                                                                                   |
-|------------------------------------------|------------------------|------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| MSSS                                     |                   2009 | Plaquette d'information ?                      | Coup d'œil sur l'alimentation de la personne diabétique                                                                                                                                                 |
-| HAS                                      |                   2008 | Rapport d'évaluation technologique             | Place des dosages des apolipoprotéines A1 et B dans le bilan lipidique                                                                                                                                  |
-| Inserm                                   |                   2008 | Rapport d'expertise collective                 | Activité physique. Contextes et effets sur la santé                                                                                                                                                     |
-| HAS                                      |                   2007 | Rapport d'évaluation des technologies de santé | Interprétation des photographies du fond d'œil, suite à une rétinographie avec ou sans mydriase                                                                                                         |
-| HAS                                      |                   2007 | Guide ALD médecin                              | Diabète de type 2                                                                                                                                                                                       |
-| HAS                                      |                   2007 | Rapport d'évaluation des actes professionnels  | Séances de prévention des lésions des pieds chez le patient diabétique, par le pédicure-podologue                                                                                                       |
-| HAS                                      |                   2007 | Révision des descriptions génériques           | Évaluation des dispositifs médicaux pour autosurveillance et autotraitement du diabète                                                                                                                  |
-| Académie nationale de chirurgie dentaire |                   2007 | Rapport                                        | Diabète de type 2 et parodontopathies                                                                                                                                                                   |
-| InVS                                     |                   2007 | Rapport                                        | Étude nationale nutrition santé ENNS, 2006. Situation nutritionnelle en France en 2006 selon les indicateurs d'objectif et les repères du Programme national nutrition santé (PNNS). Premiers résultats |
-| HAS                                      |                   2006 | Rapport d'évaluation des technologies de santé | Mesure de l'insulinorésistance et de l'intolérance au glucose                                                                                                                                           |
-| DGS                                      |                   2006 | Rapport                                        | Prévention bucco-dentaire chez les personnes âgées                                                                                                                                                      |
-| HAS                                      |                   2006 | Rapport d'évaluation des technologies de santé | Holter glycémique : mesure ambulatoire de la glycémie en continu (CGMS)                                                                                                                                 |
-| Alfediam                                 |                   2006 | Recommandation                                 | Dépistage de l'ischémie myocardique silencieuse chez le diabétique de type 2                                                                                                                            |
-| WHO/IDF                                  |                   2006 | Rapport                                        | Definition and diagnosis of diabetes mellitus and intermediate hyperglycemia : report of a WHO/IDF consultation                                                                                         |
-| HAS                                      |                   2005 | Recommandation                                 | Le pied de la personne âgée : approche médicale et prise en charge de pédicurie-podologie                                                                                                               |
-| HAS                                      |                   2005 | Rapport de synthèse                            | Le dépistage et le diagnostic du diabète gestationnel                                                                                                                                                   |
-| ANAES                                    |                   2003 | Recommandation                                 | Principes de dépistage du diabète de type 2                                                                                                                                                             |
-| ANAES                                    |                   2000 | Recommandation                                 | Stratégie de prise en charge du patient diabétique de type 2 à l'exclusion de la prise en charge des complications                                                                                      |
-| ANAES                                    |                   1999 | Recommandation                                 | Suivi du patient diabétique de type 2 à l'exclusion du suivi des complications                                                                                                                          |
-| WHO                                      |                   1999 | Rapport                                        | Definition, diagnosis and classification of diabetes mellitus and its complications                                                                                                                     |
-
-ALD : Affection longue durée ; Alfediam : Association de langue française pour l'étude du diabète et des maladies métaboliques ; ANAES : Agence nationale d'accréditation et d'évaluation en santé ; DGS : Direction générale de la santé ; Fiche BUTS : Fiche Bon usage des technologies de santé ; FID : Fédération internationale du diabète ; HAS : Haute Autorité de Santé ; HCSP : Haut conseil de la santé publique ; IDF : International Diabetes Federation ; IGAS : Inspection générale des affaires sociales ; Inserm : Institut national de la santé et de la recherche médicale ; InVS : Institut de veille sanitaire ; MSSS : Ministère de la Santé et des Services sociaux du Québec ; WHO : World Health Organization.
-
-|
-
-<!-- page: 97 -->
-
-
-
-Ce référentiel est téléchargeable sur www.has-sante.fr
-
-<!-- page: 98 -->
-
