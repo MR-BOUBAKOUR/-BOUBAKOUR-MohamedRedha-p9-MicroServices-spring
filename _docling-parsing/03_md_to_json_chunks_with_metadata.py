@@ -57,7 +57,7 @@ if current_chunk["text"].strip() or current_chunk["metadata"]["titles"]:
 # ---- Split chunks if they exceed max characters ----
 final_chunks = []
 for chunk in chunks:
-# ---- Trim very large tables at the first pipe ----
+    # ---- Trim very large tables at the first pipe ----
     if len(chunk["text"]) > 2 * max_chunk_chars and '|' in chunk["text"]:
         first_pipe_index = chunk["text"].find('|')
         chunk["text"] = chunk["text"][:first_pipe_index].rstrip()
