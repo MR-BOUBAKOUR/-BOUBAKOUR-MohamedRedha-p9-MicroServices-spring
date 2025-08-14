@@ -9,6 +9,8 @@ const props = defineProps({
 })
 
 const resultClass = computed(() => {
+    if (!props.assessment?.assessmentResult) return ''
+    
     switch (props.assessment.assessmentResult) {
         case 'VERY_LOW':
             return 'risk-very-low'
@@ -27,9 +29,12 @@ const resultClass = computed(() => {
 </script>
 
 <template>
-        <h2>Assessment</h2>
+    <h2>Assessment</h2>
     <section :class="resultClass" class="assessment-card">
-        <div>
+        <div v-if="!assessment">
+            <p>Analyse en cours...</p>
+        </div>
+        <div v-else>
             <p>NIVEAU: {{ assessment.assessmentResult }}</p>
             <p>RESUME: {{ assessment.summary }}</p>
             <p>RECOMMANDATIONS: {{ assessment.recommendations }}</p>
@@ -39,7 +44,7 @@ const resultClass = computed(() => {
 
 <style scoped>
 .assessment-card {
-    max-width: 320px;
+    max-width: 600px;
     padding: 1rem;
     border: 1px solid #bbb;
     border-radius: 8px;

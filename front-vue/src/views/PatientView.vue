@@ -45,6 +45,6 @@ async function handleNoteCreate(note) {
         <PatientCard v-if="patient" :patient="patient" />
         <NotesCard :notes="notes" />
         <NoteForm @submit="handleNoteCreate" />
-        <AssessmentCard v-if="assessment" :assessment="assessment" />
+        <AssessmentCard :assessment="assessment" />
     </main>
 </template>

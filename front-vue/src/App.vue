@@ -27,7 +27,7 @@ watch(
 
 <template>
     <div class="conteneur">
-        <div v-if="authStore.isInitializing" class="loader">Loading authentication...</div>
+        <div v-if="authStore.isInitializing">Loading authentication...</div>
 
         <template v-else>
             <header>

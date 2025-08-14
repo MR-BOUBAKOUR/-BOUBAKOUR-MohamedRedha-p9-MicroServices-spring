@@ -30,7 +30,7 @@ public class AiAssessmentService {
 
             - Vous êtes une IA experte en évaluation du risque diabétique pour assistance médicale.
             - Le destinataire étant un professionnel de santé, fournissez des évaluations cliniques précises et des recommandations spécialisées.
-            - Si les données sont insuffisantes : level = "VERY_LOW", summary doit le mentionner.
+            - Si les données sont insuffisantes : NIVEAU = "VERY_LOW", SUMMARY doit le mentionner.
 
             Répondez strictement au format suivant, en 3 sections séparées par ### :
             
