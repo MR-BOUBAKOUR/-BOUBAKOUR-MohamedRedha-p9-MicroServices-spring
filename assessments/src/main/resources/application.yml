@@ -23,7 +23,7 @@ spring:
           num-predict: 300
           # define the number of the tokens for the context
           num_ctx: 2048
-          # repetition allowed (the higher, the less reception is allowed)
+          # repetition allowed (the higher, the less repetition is allowed)
           repeat_penalty: 1.1
     vectorstore:
       qdrant:

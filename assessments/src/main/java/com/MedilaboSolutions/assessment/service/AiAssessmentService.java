@@ -21,25 +21,24 @@ public class AiAssessmentService {
             log.warn("Pas de notes médicales : retour direct VERY_LOW");
             return AiAssessmentResponse.builder()
                     .level("VERY_LOW")
-                    .summary("Données insuffisantes pour évaluer le risque de diabète.")
-                    .recommendations("Données insuffisantes.")
+                    .summary("Absence de notes.")
+                    .recommendations("Données insuffisantes pour formuler des recommandations.")
                     .build();
         }
 
         String systemPrompt = """
-
-            - Vous êtes une IA experte en évaluation du risque diabétique pour assistance médicale.
-            - Le destinataire étant un professionnel de santé, fournissez des évaluations cliniques précises et des recommandations spécialisées.
-            - Si les données sont insuffisantes : NIVEAU = "VERY_LOW", SUMMARY doit le mentionner.
+            Vous êtes une IA experte en évaluation du risque diabétique pour assistance médicale.
+            Le destinataire étant un professionnel de santé, fournissez des évaluations cliniques précises et des recommandations spécialisées.
+            Si les données fournies sont insuffisantes pour conclure objectivement : NIVEAU = "VERY_LOW", SUMMARY = "Données insuffisantes."
+            Ne pas inventer ou extrapoler d’éléments non présents dans les données.
 
             Répondez strictement au format suivant, en 3 sections séparées par ### :
             
             NIVEAU: [Un seul de ces niveaux : VERY_LOW, LOW, MODERATE, HIGH, VERY_HIGH]
             ###
-            SUMMARY: [Résumé clair en 2-3 phrases, concis et précis]
+            SUMMARY: [Résumé clair en 3-4 phrases, précis et concis]
             ###
-            RECOMMANDATIONS: [Conseils spécifiques, actionnables, sans détails superflus]
-
+            RECOMMANDATIONS: [3 recommandations courtes : spécifiques, actionnables, sans détails superflus]
             """;
 
         String userPrompt = """
