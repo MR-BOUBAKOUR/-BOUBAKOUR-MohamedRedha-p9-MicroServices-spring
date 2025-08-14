@@ -17,19 +17,29 @@ public class AiAssessmentService {
 
     public AiAssessmentResponse evaluateDiabetesRisk(int age, String gender, String notesText) {
 
+        if (notesText == null || notesText.isBlank()) {
+            log.warn("Pas de notes médicales : retour direct VERY_LOW");
+            return AiAssessmentResponse.builder()
+                    .level("VERY_LOW")
+                    .summary("Données insuffisantes pour évaluer le risque de diabète.")
+                    .recommendations("Données insuffisantes.")
+                    .build();
+        }
+
         String systemPrompt = """
-            Vous êtes une IA experte en médecine qui évalue le risque de diabète.
+
+            - Vous êtes une IA experte en évaluation du risque diabétique pour assistance médicale.
+            - Le destinataire étant un professionnel de santé, fournissez des évaluations cliniques précises et des recommandations spécialisées.
+            - Si les données sont insuffisantes : level = "VERY_LOW", summary doit le mentionner.
+
+            Répondez strictement au format suivant, en 3 sections séparées par ### :
             
-            Répondez toujours strictement en JSON avec le format :
-            {
-              "level": "None | Borderline | In Danger | Early onset",
-              "summary": "Résumé clair en 2-3 phrases",
-              "recommendations": "Conseils spécifiques, actionnables, sans détails superflus"
-            }
-            
-            Si les informations sont insuffisantes, définissez "level": "None" et mentionnez-le dans "summary".
-            
-            Ne rajoutez jamais de texte hors JSON.
+            NIVEAU: [Un seul de ces niveaux : VERY_LOW, LOW, MODERATE, HIGH, VERY_HIGH]
+            ###
+            SUMMARY: [Résumé clair en 2-3 phrases, concis et précis]
+            ###
+            RECOMMANDATIONS: [Conseils spécifiques, actionnables, sans détails superflus]
+
             """;
 
         String userPrompt = """
@@ -41,21 +51,46 @@ public class AiAssessmentService {
 
         try {
             log.info("Appel à Ollama en cours...");
-            AiAssessmentResponse response = chatClient.prompt()
+            String  markdownResponse = chatClient.prompt()
                     .system(systemPrompt)
                     .user(userPrompt)
                     .call()
-                    .entity(AiAssessmentResponse.class);
-            log.info("Réponse IA reçue");
+                    .content()
+                    .trim();
+            log.info("Réponse IA reçue et valide");
+            return parseMarkdownResponse(markdownResponse);
 
-            return response;
         } catch (Exception e) {
-            log.error("Erreur lors de l'appel à Ollama", e);
+            log.error("Erreur lors de l'appel ou du parsing IA", e);
             return AiAssessmentResponse.builder()
-                    .level("Error")
+                    .level("ERROR")
                     .summary("Impossible d'évaluer le risque : erreur IA")
                     .recommendations("Veuillez réessayer plus tard")
                     .build();
         }
+    }
+
+    private AiAssessmentResponse parseMarkdownResponse(String markdown) {
+        String level = "ERROR";
+        String summary = "Données manquantes";
+        String recommendations = "Données manquantes";
+
+        String[] sections = markdown.split("###");
+        for (String section : sections) {
+            section = section.trim();
+            if (section.startsWith("NIVEAU:")) {
+                level = section.substring("NIVEAU:".length()).trim();
+            } else if (section.startsWith("SUMMARY:")) {
+                summary = section.substring("SUMMARY:".length()).trim();
+            } else if (section.startsWith("RECOMMANDATIONS:")) {
+                recommendations = section.substring("RECOMMANDATIONS:".length()).trim();
+            }
+        }
+
+        return AiAssessmentResponse.builder()
+                .level(level)
+                .summary(summary)
+                .recommendations(recommendations)
+                .build();
     }
 }

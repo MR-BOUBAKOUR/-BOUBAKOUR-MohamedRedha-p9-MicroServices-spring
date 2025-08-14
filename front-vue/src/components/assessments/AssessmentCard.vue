@@ -10,14 +10,16 @@ const props = defineProps({
 
 const resultClass = computed(() => {
     switch (props.assessment.assessmentResult) {
-        case 'None':
-            return 'risk-none'
-        case 'Borderline':
-            return 'risk-borderline'
-        case 'In Danger':
-            return 'risk-danger'
-        case 'Early onset':
-            return 'risk-early-onset'
+        case 'VERY_LOW':
+            return 'risk-very-low'
+        case 'LOW':
+            return 'risk-low'
+        case 'MODERATE':
+            return 'risk-moderate'
+        case 'HIGH':
+            return 'risk-high'
+        case 'VERY_HIGH':
+            return 'risk-very-high'
         default:
             return ''
     }
@@ -53,27 +55,33 @@ const resultClass = computed(() => {
     margin-bottom: 1rem;
 }
 
-.risk-none {
+.risk-very-low {
     background-color: #d0e7ff;
     border-color: #8ab4f8;
     color: #1a3e72;
 }
 
-.risk-borderline {
+.risk-low {
     background-color: #fff9c4;
     border-color: #f0e68c;
     color: #6b5700;
 }
 
-.risk-danger {
+.risk-moderate {
     background-color: #ffe0b2;
     border-color: #ffb74d;
     color: #7a4b00;
 }
 
-.risk-early-onset {
+.risk-high {
     background-color: #ffcdd2;
     border-color: #f28b82;
     color: #7f1f1f;
+}
+
+.risk-very-high {
+    background-color: #d32f2f;
+    border-color: #b71c1c;
+    color: #ffffff;
 }
 </style>

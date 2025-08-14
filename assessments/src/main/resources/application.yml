@@ -12,6 +12,8 @@ spring:
   ai:
     ollama:
       base-url: ${OLLAMA_BASE_URL}
+      embedding:
+        model: text-embedding-3-small
       chat:
         model: llama3.2:latest
         options:
@@ -23,6 +25,11 @@ spring:
           num_ctx: 2048
           # repetition allowed (the higher, the less reception is allowed)
           repeat_penalty: 1.1
+    vectorstore:
+      qdrant:
+        host: localhost
+        collection-name: guidelines
+        port: 6333
 
 management:
   # In production, limit exposure (include: "health,info")

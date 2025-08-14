@@ -254,6 +254,14 @@ services:
     mem_limit: 1g
     mem_reservation: 512m
 
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: guidelines-db-qdrant
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
   # ==================================================== EVENT BUS ====================================================
 
   rabbitmq:
@@ -549,6 +557,7 @@ volumes:
 #  patients-db-mysql-data:
 #  gatewayserver-db-postgresql-data:
 #  notes-db-mongodb-data:
+  qdrant_data:
   grafana-data:
   ollama_data:
     driver: local
