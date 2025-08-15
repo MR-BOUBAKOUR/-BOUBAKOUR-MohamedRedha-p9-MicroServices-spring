@@ -66,7 +66,7 @@ class AssessmentIT extends AbstractRabbitMQContainerTest {
         AssessmentDto result = assessmentService.generateAssessment(1L, "test-correlation-id");
 
         // Then
-        assertThat(result.getAssessmentResult()).isEqualTo("Early onset");
+        assertThat(result.getLevel()).isEqualTo("Early onset");
 
         // Verify message was published to RabbitMQ
         await().atMost(3, TimeUnit.SECONDS).untilAsserted(() -> {
@@ -100,7 +100,7 @@ class AssessmentIT extends AbstractRabbitMQContainerTest {
         AssessmentDto result = assessmentService.generateAssessment(1L, "test-correlation-id");
 
         // Then
-        assertThat(result.getAssessmentResult()).isEqualTo("Borderline");
+        assertThat(result.getLevel()).isEqualTo("Borderline");
 
         // Verify no message in queue
         Message message = rabbitTemplate.receive(RabbitMQConfig.QUEUE_NAME, 1000);
@@ -126,7 +126,7 @@ class AssessmentIT extends AbstractRabbitMQContainerTest {
         AssessmentDto result = assessmentService.generateAssessment(1L, "test-correlation-id");
 
         // Then
-        assertThat(result.getAssessmentResult()).isEqualTo("Early onset");
+        assertThat(result.getLevel()).isEqualTo("Early onset");
 
         // Verify no message in queue (no duplicate)
         Message message = rabbitTemplate.receive(RabbitMQConfig.QUEUE_NAME, 1000);
@@ -152,7 +152,7 @@ class AssessmentIT extends AbstractRabbitMQContainerTest {
         AssessmentDto result = assessmentService.generateAssessment(1L, "test-correlation-id");
 
         // Then
-        assertThat(result.getAssessmentResult()).isEqualTo("Borderline");
+        assertThat(result.getLevel()).isEqualTo("Borderline");
 
         // Verify patient mail flag was reset
         verify(patientFeignClient).updateEarlyOnsetMailSent(1L, false, "test-correlation-id");

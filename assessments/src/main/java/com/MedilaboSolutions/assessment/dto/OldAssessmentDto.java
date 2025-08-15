@@ -10,6 +10,6 @@ import lombok.*;
 public class OldAssessmentDto {
 
     private Long patId;
-    private String assessmentResult;
+    private String level;
 
 }

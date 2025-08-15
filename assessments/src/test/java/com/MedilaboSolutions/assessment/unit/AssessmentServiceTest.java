@@ -58,7 +58,7 @@ class AssessmentServiceTest {
 
         AssessmentDto result = assessmentService.generateAssessment(1L, "corrId");
 
-        assertThat(result.getAssessmentResult()).isEqualTo("None");
+        assertThat(result.getLevel()).isEqualTo("None");
         verify(rabbitTemplate, never()).convertAndSend(eq("high-risk-assessments"), any(HighRiskAssessmentEvent.class));
     }
 
@@ -84,7 +84,7 @@ class AssessmentServiceTest {
 
         AssessmentDto result = assessmentService.generateAssessment(1L, "corrId");
 
-        assertThat(result.getAssessmentResult()).isEqualTo("Borderline");
+        assertThat(result.getLevel()).isEqualTo("Borderline");
         verify(rabbitTemplate, never()).convertAndSend(eq("high-risk-assessments"), any(HighRiskAssessmentEvent.class));
     }
 
@@ -110,7 +110,7 @@ class AssessmentServiceTest {
 
         AssessmentDto result = assessmentService.generateAssessment(1L, "corrId");
 
-        assertThat(result.getAssessmentResult()).isEqualTo("In Danger");
+        assertThat(result.getLevel()).isEqualTo("In Danger");
         verify(rabbitTemplate, never()).convertAndSend(eq("high-risk-assessments"), any(HighRiskAssessmentEvent.class));
     }
 
@@ -136,7 +136,7 @@ class AssessmentServiceTest {
 
         AssessmentDto result = assessmentService.generateAssessment(1L, "corrId");
 
-        assertThat(result.getAssessmentResult()).isEqualTo("Early onset");
+        assertThat(result.getLevel()).isEqualTo("Early onset");
         verify(rabbitTemplate).convertAndSend(eq("high-risk-assessments"), any(HighRiskAssessmentEvent.class));
     }
 }

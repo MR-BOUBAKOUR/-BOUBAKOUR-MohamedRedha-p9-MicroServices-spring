@@ -10,8 +10,9 @@ import lombok.*;
 public class AssessmentDto {
 
     private Long patId;
-    private String assessmentResult;
-    private String summary;
+    private String level;
+    private String context;
+    private String analysis;
     private String recommendations;
 
 }

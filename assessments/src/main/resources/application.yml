@@ -31,9 +31,9 @@ spring:
           # the precision of the response (low temp = doctor / high temp = more creative)
           temperature: 0.1
           # define the number of the tokens generated on the response
-          num-predict: 300
+          num-predict: 600
           # define the number of the tokens for the context
-          num_ctx: 2048
+          num_ctx: 4096
           # repetition allowed (the higher, the less repetition is allowed)
           repeat_penalty: 1.1
     vectorstore:

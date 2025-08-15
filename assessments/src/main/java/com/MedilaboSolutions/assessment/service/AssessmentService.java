@@ -59,7 +59,8 @@ public class AssessmentService {
         return new AssessmentDto(
                 patId,
                 aiResponse.level(),
-                aiResponse.summary(),
+                aiResponse.context(),
+                aiResponse.analysis(),
                 aiResponse.recommendations()
         );
     }

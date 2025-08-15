@@ -21,24 +21,32 @@ public class AiAssessmentService {
             log.warn("Pas de notes médicales : retour direct VERY_LOW");
             return AiAssessmentResponse.builder()
                     .level("VERY_LOW")
-                    .summary("Absence de notes.")
-                    .recommendations("Données insuffisantes pour formuler des recommandations.")
+                    .context("Absence de notes.")
+                    .analysis("Impossible de conclure objectivement.")
+                    .recommendations("Revoir le patient avec des données complémentaires.")
                     .build();
         }
 
         String systemPrompt = """
             Vous êtes une IA experte en évaluation du risque diabétique pour assistance médicale.
             Le destinataire étant un professionnel de santé, fournissez des évaluations cliniques précises et des recommandations spécialisées.
-            Si les données fournies sont insuffisantes pour conclure objectivement : NIVEAU = "VERY_LOW", SUMMARY = "Données insuffisantes."
+            Si les données fournies sont insuffisantes pour conclure objectivement :
+                - NIVEAU = "VERY_LOW"
+                - CONTEXTE = "Données insuffisantes."
+                - ANALYSE = "Impossible de conclure objectivement."
+                - RECOMMANDATIONS = "Revoir le patient avec des données complémentaires."
+
             Ne pas inventer ou extrapoler d’éléments non présents dans les données.
 
-            Répondez strictement au format suivant, en 3 sections séparées par ### :
+            Répondez strictement au format suivant, en 4 sections séparées par ### :
             
-            NIVEAU: [Un seul de ces niveaux : VERY_LOW, LOW, MODERATE, HIGH, VERY_HIGH]
+            NIVEAU: [VERY_LOW | LOW | MODERATE | HIGH | VERY_HIGH]
             ###
-            SUMMARY: [Résumé clair en 3-4 phrases, précis et concis]
+            CONTEXTE: [Résumé des données cliniques disponibles, antécédents pertinents, dernières mesures connues]
             ###
-            RECOMMANDATIONS: [3 recommandations courtes : spécifiques, actionnables, sans détails superflus]
+            ANALYSE: [Raisonnement médical justifiant le niveau retenu, basé sur les éléments du CONTEXTE]
+            ###
+            RECOMMANDATIONS: [3 recommandations courtes, spécifiques, actionnables, orientées suivi ou traitement]
             """;
 
         String userPrompt = """
@@ -63,7 +71,8 @@ public class AiAssessmentService {
             log.error("Erreur lors de l'appel ou du parsing IA", e);
             return AiAssessmentResponse.builder()
                     .level("ERROR")
-                    .summary("Impossible d'évaluer le risque : erreur IA")
+                    .context("Impossible d'évaluer le risque")
+                    .analysis("Erreur IA")
                     .recommendations("Veuillez réessayer plus tard")
                     .build();
         }
@@ -71,7 +80,8 @@ public class AiAssessmentService {
 
     private AiAssessmentResponse parseMarkdownResponse(String markdown) {
         String level = "ERROR";
-        String summary = "Données manquantes";
+        String context = "Données manquantes";
+        String analysis = "Données manquantes";
         String recommendations = "Données manquantes";
 
         String[] sections = markdown.split("###");
@@ -79,8 +89,10 @@ public class AiAssessmentService {
             section = section.trim();
             if (section.startsWith("NIVEAU:")) {
                 level = section.substring("NIVEAU:".length()).trim();
-            } else if (section.startsWith("SUMMARY:")) {
-                summary = section.substring("SUMMARY:".length()).trim();
+            } else if (section.startsWith("CONTEXTE:")) {
+                context = section.substring("CONTEXTE:".length()).trim();
+            } else if (section.startsWith("ANALYSE:")) {
+                analysis = section.substring("ANALYSE:".length()).trim();
             } else if (section.startsWith("RECOMMANDATIONS:")) {
                 recommendations = section.substring("RECOMMANDATIONS:".length()).trim();
             }
@@ -88,7 +100,8 @@ public class AiAssessmentService {
 
         return AiAssessmentResponse.builder()
                 .level(level)
-                .summary(summary)
+                .context(context)
+                .analysis(analysis)
                 .recommendations(recommendations)
                 .build();
     }

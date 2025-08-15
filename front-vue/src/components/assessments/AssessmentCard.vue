@@ -9,9 +9,9 @@ const props = defineProps({
 })
 
 const resultClass = computed(() => {
-    if (!props.assessment?.assessmentResult) return ''
+    if (!props.assessment?.level) return ''
     
-    switch (props.assessment.assessmentResult) {
+    switch (props.assessment.level) {
         case 'VERY_LOW':
             return 'risk-very-low'
         case 'LOW':
@@ -35,8 +35,9 @@ const resultClass = computed(() => {
             <p>Analyse en cours...</p>
         </div>
         <div v-else>
-            <p>NIVEAU: {{ assessment.assessmentResult }}</p>
-            <p>RESUME: {{ assessment.summary }}</p>
+            <p>NIVEAU: {{ assessment.level }}</p>
+            <p>CONTEXTE: {{ assessment.context }}</p>
+            <p>ANALYSE: {{ assessment.analysis }}</p>
             <p>RECOMMANDATIONS: {{ assessment.recommendations }}</p>
         </div>
     </section>
