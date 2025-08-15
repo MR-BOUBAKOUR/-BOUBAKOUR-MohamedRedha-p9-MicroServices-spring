@@ -25,7 +25,7 @@ services:
       timeout: 5s
       retries: 5
     mem_limit: 1g
-    mem_reservation: 1g
+    mem_reservation: 512m
 
   gatewayserver:
     container_name: gatewayserver
@@ -66,7 +66,7 @@ services:
       timeout: 5s
       retries: 5
     mem_limit: 1g
-    mem_reservation: 1g
+    mem_reservation: 512m
 
   patients:
     container_name: patients
@@ -93,7 +93,7 @@ services:
       timeout: 5s
       retries: 5
     mem_limit: 1g
-    mem_reservation: 1g
+    mem_reservation: 512m
 
   notes:
     container_name: notes
@@ -117,7 +117,7 @@ services:
       timeout: 5s
       retries: 5
     mem_limit: 1g
-    mem_reservation: 1g
+    mem_reservation: 512m
 
   assessments:
     container_name: assessments
@@ -132,6 +132,9 @@ services:
       SPRING_RABBITMQ_USERNAME: ${SPRING_RABBITMQ_USERNAME}
       SPRING_RABBITMQ_PASSWORD: ${SPRING_RABBITMQ_PASSWORD}
       OLLAMA_BASE_URL: ${OLLAMA_BASE_URL}
+      POSTGRES_ASSESSMENTS_URL: ${POSTGRES_ASSESSMENTS_URL}
+      POSTGRES_ASSESSMENTS_USER: ${POSTGRES_ASSESSMENTS_USER}
+      POSTGRES_ASSESSMENTS_PASSWORD: ${POSTGRES_ASSESSMENTS_PASSWORD}
     depends_on:
       eurekaserver:
         condition: service_healthy
@@ -147,7 +150,7 @@ services:
       timeout: 5s
       retries: 5
     mem_limit: 1g
-    mem_reservation: 1g
+    mem_reservation: 512m
 
   notifications:
     container_name: notifications
@@ -178,7 +181,7 @@ services:
       timeout: 5s
       retries: 5
     mem_limit: 1g
-    mem_reservation: 1g
+    mem_reservation: 512m
 
 #  front-vue:
 #    build:
@@ -254,13 +257,27 @@ services:
     mem_limit: 1g
     mem_reservation: 512m
 
-  qdrant:
-    image: qdrant/qdrant:latest
-    container_name: guidelines-db-qdrant
+  assessments-db-postgresql:
+    container_name: assessments-db-postgresql
+    image: pgvector/pgvector:pg16
     ports:
-      - "6333:6333"
-    volumes:
-      - qdrant_data:/qdrant/storage
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_ASSESSMENTS_DATABASE}
+      POSTGRES_USER: ${POSTGRES_ASSESSMENTS_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_ASSESSMENTS_PASSWORD}
+#    volumes:
+#       - assessments-db-postgresql-data:/var/lib/postgresql/data
+#      - ../_data/postgresql-init:/docker-entrypoint-initdb.d
+    networks:
+      - medilabosolutions-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_ASSESSMENTS_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 1g
+    mem_reservation: 512m
 
   # ==================================================== EVENT BUS ====================================================
 
@@ -554,10 +571,10 @@ networks:
     driver: bridge
 
 volumes:
-#  patients-db-mysql-data:
-#  gatewayserver-db-postgresql-data:
-#  notes-db-mongodb-data:
-  qdrant_data:
+  #  gatewayserver-db-postgresql-data:
+  #  patients-db-mysql-data:
+  #  notes-db-mongodb-data:
+  #  assessments-db-postgresql-data:
   grafana-data:
   ollama_data:
     driver: local

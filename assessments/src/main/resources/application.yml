@@ -4,6 +4,17 @@ server:
 spring:
   application:
     name: assessments
+  datasource:
+    url: ${POSTGRES_ASSESSMENTS_URL}
+    username: ${POSTGRES_ASSESSMENTS_USER}
+    password: ${POSTGRES_ASSESSMENTS_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   rabbitmq:
     host: ${SPRING_RABBITMQ_HOST}
     port: ${SPRING_RABBITMQ_PORT}
@@ -13,7 +24,7 @@ spring:
     ollama:
       base-url: ${OLLAMA_BASE_URL}
       embedding:
-        model: text-embedding-3-small
+        model: mxbai-embed-large
       chat:
         model: llama3.2:latest
         options:
@@ -26,10 +37,9 @@ spring:
           # repetition allowed (the higher, the less repetition is allowed)
           repeat_penalty: 1.1
     vectorstore:
-      qdrant:
-        host: localhost
-        collection-name: guidelines
-        port: 6333
+      pgvector:
+        initialize-schema: true
+        dimensions: 1024
 
 management:
   # In production, limit exposure (include: "health,info")
