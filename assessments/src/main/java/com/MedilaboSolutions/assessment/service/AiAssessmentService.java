@@ -1,19 +1,17 @@
 package com.MedilaboSolutions.assessment.service;
 
 import com.MedilaboSolutions.assessment.dto.AiAssessmentResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class AiAssessmentService {
 
     private final ChatClient chatClient;
-
-    public AiAssessmentService(ChatClient.Builder builder) {
-        this.chatClient = builder.build();
-    }
 
     public AiAssessmentResponse evaluateDiabetesRisk(int age, String gender, String notesText) {
 
@@ -29,24 +27,19 @@ public class AiAssessmentService {
 
         String systemPrompt = """
             Vous êtes une IA experte en évaluation du risque diabétique pour assistance médicale.
-            Le destinataire étant un professionnel de santé, fournissez des évaluations cliniques précises et des recommandations spécialisées.
-            Si les données fournies sont insuffisantes pour conclure objectivement :
-                - NIVEAU = "VERY_LOW"
-                - CONTEXTE = "Données insuffisantes."
-                - ANALYSE = "Impossible de conclure objectivement."
-                - RECOMMANDATIONS = "Revoir le patient avec des données complémentaires."
-
-            Ne pas inventer ou extrapoler d’éléments non présents dans les données.
+            Le destinataire étant un professionnel de santé, adopter un langage expert.
+            Vos réponses doivent se baser uniquement sur les données fournies. Ne pas inventer ou extrapoler d’informations absentes.
+            Si les données fournies sont insuffisantes pour conclure objectivement : NIVEAU = "VERY_LOW" et CONTEXTE = "Données insuffisantes."
 
             Répondez strictement au format suivant, en 4 sections séparées par ### :
             
             NIVEAU: [VERY_LOW | LOW | MODERATE | HIGH | VERY_HIGH]
             ###
-            CONTEXTE: [Résumé des données cliniques disponibles, antécédents pertinents, dernières mesures connues]
+            CONTEXTE: [Liste des faits observables et antécédents pertinents]
             ###
-            ANALYSE: [Raisonnement médical justifiant le niveau retenu, basé sur les éléments du CONTEXTE]
+            ANALYSE: [Raisonnement médical justifiant le NIVEAU, 3-4 phrases, concis, sans répétitions]
             ###
-            RECOMMANDATIONS: [3 recommandations courtes, spécifiques, actionnables, orientées suivi ou traitement]
+            RECOMMANDATIONS: [3 actions concrètes, spécifiques, orientées suivi ou traitement.]
             """;
 
         String userPrompt = """

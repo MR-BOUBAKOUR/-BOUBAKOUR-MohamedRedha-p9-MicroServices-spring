@@ -1322,7 +1322,7 @@ Le dosage de l'HbA1c peut être faussé en cas de grossesse, d'hémoglobinopathi
 
 Selon les données du contrôle national de qualité publiées par l'Afssaps, le dosage de l'HbA1c était maîtrisé par la majorité des laboratoires inclus (1 714 laboratoires) en 2012 [ref-77] .
 
-Les techniques disponibles pour doser l'HbA1c étaient les suivantes :
+### Les techniques disponibles pour doser l'HbA1c étaient les suivantes :
 
 - immuno-enzymologie (mesure fluorométrique) ;
 - immunologie (mesure turbimétrique) ;
@@ -1335,7 +1335,9 @@ Les laboratoires utilisaient en très grande majorité des techniques standardis
 - Les techniques CLHP avaient une bonne reproductibilité : le coefficient de variation (CV) médian était de 1,8 % avec des valeurs allant de 1,0 % à 3,1 %. Pour 3/4 des techniques, le CV était ≤ 2,4 %.
 - Les techniques immunologiques avaient une reproductibilité acceptable : le CV médian était de 3,3 % avec des valeurs allant de 2,2 % à 4,3 %. Pour 3/4 des techniques, le CV était ≤ 3,8 %.
 
-Un cahier  des  charges  des  notices  des  réactifs  de  dosage  de  l'HbA1c  a  été  publié  par  l'Afssaps  en  2006 [ref-79] . Il regroupe les recommandations internationales et nationales en matière de suivi glycémique du diabète qui préconisent :
+### Un cahier  des  charges  des  notices  des  réactifs  de  dosage  de  l'HbA1c  a  été  publié  par  l'Afssaps  en  2006 [ref-79] .
+
+Il regroupe les recommandations internationales et nationales en matière de suivi glycémique du diabète qui préconisent :
 
 - l'utilisation  de  réactifs  dosant  l'HbA1c  pour  le  suivi  glycémique  du  diabète  et  non  l'hémoglobine  glyquée  ou l'HbA1 ;
 - la standardisation des réactifs conformément à la directive 98/79/CE [ref-80] ;

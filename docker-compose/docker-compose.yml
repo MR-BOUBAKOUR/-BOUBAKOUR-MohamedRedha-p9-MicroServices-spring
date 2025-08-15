@@ -140,6 +140,8 @@ services:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
+      assessments-db-postgresql:
+        condition: service_healthy
       ollama:
         condition: service_started
     networks:
@@ -302,7 +304,7 @@ services:
   # ==================================================== Local AI =====================================================
 
   ollama:
-    image: ollama/ollama:latest
+    image: ollama/ollama:0.6.1
     container_name: ollama
     restart: unless-stopped
     ports:
