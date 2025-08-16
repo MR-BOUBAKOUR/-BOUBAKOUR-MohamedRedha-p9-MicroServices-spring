@@ -304,7 +304,7 @@ services:
   # ==================================================== Local AI =====================================================
 
   ollama:
-    image: ollama/ollama:0.6.1
+    image: ollama/ollama:latest
     container_name: ollama
     restart: unless-stopped
     ports:
@@ -313,6 +313,8 @@ services:
       - ollama_data:/root/.ollama
     environment:
       - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_GPU_LAYERS=-1
+      - OLLAMA_GPU_MEMORY_FRACTION=0.9
     networks:
       - medilabosolutions-net
     deploy:
@@ -320,7 +322,10 @@ services:
         limits:
           memory: 8G
         reservations:
-          memory: 4G
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 
   # =============================================== OBSERVABILITY STACK ===============================================
 
@@ -432,7 +437,6 @@ services:
     mem_reservation: 128m
 
   tempo:
-    profiles: [monitoring]
     container_name: tempo
     image: grafana/tempo:latest
     command: -config.file /etc/tempo-config.yml
