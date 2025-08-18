@@ -1,6 +1,7 @@
 package com.MedilaboSolutions.assessment.config;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,8 +35,10 @@ public class AiConfig {
     }
 
     @Bean
-    ChatClient  chatClient(ChatClient.Builder builder) {
-        return builder.build();
+    ChatClient  chatClient(ChatClient.Builder builder, VectorStore vectorStore) {
+        return builder
+                .defaultAdvisors(new QuestionAnswerAdvisor(vectorStore))
+                .build();
     }
 
 }
