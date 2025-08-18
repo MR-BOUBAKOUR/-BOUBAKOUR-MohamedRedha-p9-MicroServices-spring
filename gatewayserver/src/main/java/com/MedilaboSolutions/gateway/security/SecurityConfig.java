@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
                     config.setAllowCredentials(true);
-                    config.setAllowedOrigins(List.of("https://localhost:5173"));
+                    config.setAllowedOrigins(List.of("http://localhost:5173"));     // ⚠️ in prod — https
                     config.setAllowedHeaders(List.of("*"));
                     config.setAllowedMethods(List.of("GET", "POST", "PUT", "OPTIONS"));
                     return config;
@@ -81,7 +81,7 @@ public class SecurityConfig {
                                     (authentication != null) ? authentication.getName() : "anonymous");
                             ResponseCookie clearCookie = ResponseCookie.from("refreshToken", "")
                                     .httpOnly(true)
-                                    .secure(true)
+                                    .secure(false) // ⚠️ In prod, need to be true (HTTPS)
                                     .sameSite("Strict")
                                     .maxAge(Duration.ZERO)
                                     .path("/")
