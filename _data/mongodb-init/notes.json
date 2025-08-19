@@ -43,5 +43,10 @@
         "patId": 4,
         "patFirstName": "TestEarlyOnset",
         "note": "Taille, Poids, Cholestérol, Vertige et Réaction"
+    },
+    {
+      "patId": 5,
+      "patFirstName": "TestHighRisk",
+      "note": "IMC 31 kg/m², antécédents familiaux de diabète, hypertension artérielle et dyslipidémie. Il est sédentaire, consomme beaucoup de sucre et signale une fatigue chronique. Glycémie à jeun 1,25 g/L, HbA1c 7,2 %. Il se plaint également de polyurie et soif excessive."
     }
 ]

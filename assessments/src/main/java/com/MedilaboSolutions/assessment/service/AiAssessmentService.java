@@ -33,7 +33,7 @@ public class AiAssessmentService {
 
             Répondez strictement au format suivant, en 4 sections séparées par ### :
             
-            NIVEAU: [VERY_LOW | LOW | MODERATE | HIGH | VERY_HIGH]
+            NIVEAU: [VERY_LOW | LOW | MODERATE | HIGH]
             ###
             CONTEXTE: [Liste des faits observables et antécédents pertinents]
             ###

@@ -20,8 +20,6 @@ const resultClass = computed(() => {
             return 'risk-moderate'
         case 'HIGH':
             return 'risk-high'
-        case 'VERY_HIGH':
-            return 'risk-very-high'
         default:
             return ''
     }
@@ -83,11 +81,5 @@ const resultClass = computed(() => {
     background-color: #ffcdd2;
     border-color: #f28b82;
     color: #7f1f1f;
-}
-
-.risk-very-high {
-    background-color: #d32f2f;
-    border-color: #b71c1c;
-    color: #ffffff;
 }
 </style>

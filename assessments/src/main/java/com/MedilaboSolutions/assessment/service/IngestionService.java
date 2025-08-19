@@ -23,20 +23,28 @@ public class IngestionService {
     private final VectorStore vectorStore;
     private final ObjectMapper objectMapper;
 
-    @Value("classpath:/guidelines_docs/guidelines_result_chunks.json")
+    @Value("classpath:/docs/guidelines_result_chunks.json")
     private Resource guidelines;
+
+    @Value("classpath:/docs/simulated_chunks.json")
+    private Resource simulatedChunks;
 
     @EventListener(ApplicationReadyEvent.class)
     public void ingest() {
         log.info("Démarrage ingestion...");
 
+        ingestFile(guidelines, "guidelines_result_chunks.json");
+        ingestFile(simulatedChunks, "simulated_chunks.json");
+    }
+
+    private void ingestFile(Resource resource, String fileName) {
         try {
             List<ChunkDto> chunks = objectMapper.readValue(
-                    guidelines.getInputStream(),
+                    resource.getInputStream(),
                     objectMapper.getTypeFactory().constructCollectionType(List.class, ChunkDto.class));
-            log.info("JSON chargé, {} chunks trouvés", chunks.size());
+            log.info("{} chargé, {} chunks trouvés", fileName, chunks.size());
 
-            List<Document> guidelineDocuments = chunks.stream()
+            List<Document> documents = chunks.stream()
                     .map(chunk -> new Document(
                             chunk.getText(),
                             Map.of(
@@ -45,12 +53,12 @@ public class IngestionService {
                                     "refs", chunk.getMetadata().getRefs()
                             )))
                     .toList();
-            log.info("Documents créés, {}", guidelineDocuments.size());
+            log.info("Documents créés depuis {}", fileName);
 
-            vectorStore.accept(guidelineDocuments);
-            log.info("guidelineDocuments chunks ingérés avec succès.");
+            vectorStore.accept(documents);
+            log.info("Chunks de {} ingérés avec succès.", fileName);
         } catch (Exception e) {
-            log.error("Erreur lors de l'ingestion", e);
+            log.error("Erreur lors de l'ingestion de {}", fileName, e);
         }
     }
 }
