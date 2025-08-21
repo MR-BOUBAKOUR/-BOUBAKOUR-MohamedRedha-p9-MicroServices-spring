@@ -97,7 +97,7 @@ public class AiAssessmentService {
             L'analyse doit citer explicitement les points pertinents des directives médicales et les mobiliser pour justifier le NIVEAU de risque.
             Évitez les généralités.
             
-            Si directives absentes: votre expertise médicale
+            Si directives médicales non-pertinentes ou absentes: votre expertise médicale
             Si les données sont insuffisantes: NIVEAU = "VERY_LOW" et CONTEXTE = "Données insuffisantes."
 
             Répondez strictement au format suivant, en 5 sections séparées par ### :
