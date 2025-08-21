@@ -34,9 +34,14 @@ const resultClass = computed(() => {
         </div>
         <div v-else>
             <p>NIVEAU: {{ assessment.level }}</p>
-            <p>CONTEXTE: {{ assessment.context }}</p>
-            <p>ANALYSE: {{ assessment.analysis }}</p>
-            <p>RECOMMANDATIONS: {{ assessment.recommendations }}</p>
+            <p>CONTEXTE:</p>
+            <p>{{ assessment.context }}</p>
+            <p>ANALYSE:</p>
+            <p>{{ assessment.analysis }}</p>
+            <p>RECOMMANDATIONS:</p>
+            <p>{{ assessment.recommendations }}</p>
+            <p>SOURCES:</p>
+            <p>{{ assessment.sources }}</p>
         </div>
     </section>
 </template>

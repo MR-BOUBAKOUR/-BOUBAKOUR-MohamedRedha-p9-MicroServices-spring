@@ -14,5 +14,6 @@ public class AssessmentDto {
     private String context;
     private String analysis;
     private String recommendations;
+    private String sources;
 
 }

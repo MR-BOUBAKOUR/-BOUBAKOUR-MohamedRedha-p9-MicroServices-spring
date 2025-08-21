@@ -4,7 +4,7 @@ import { setupAxiosInterceptors } from './api'
 
 const api = axios.create({
     baseURL: `${import.meta.env.VITE_GATEWAY_URL}/v1`,
-    timeout: 60000,
+    timeout: 120000,
     headers: {
         'Content-Type': 'application/json',
     },

@@ -4,7 +4,12 @@ import com.MedilaboSolutions.assessment.dto.AiAssessmentResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.rag.Query;
+import org.springframework.ai.rag.retrieval.search.VectorStoreDocumentRetriever;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -12,10 +17,12 @@ import org.springframework.stereotype.Service;
 public class AiAssessmentService {
 
     private final ChatClient chatClient;
+    private final VectorStoreDocumentRetriever documentRetriever;
+    private final SummarizerService summarizerService;
 
-    public AiAssessmentResponse evaluateDiabetesRisk(int age, String gender, String notesText) {
+    public AiAssessmentResponse evaluateDiabetesRisk(int age, String gender, String medicalNotes) {
 
-        if (notesText == null || notesText.isBlank()) {
+        if (medicalNotes == null || medicalNotes.isBlank()) {
             log.warn("Pas de notes médicales : retour direct VERY_LOW");
             return AiAssessmentResponse.builder()
                     .level("VERY_LOW")
@@ -25,13 +32,75 @@ public class AiAssessmentService {
                     .build();
         }
 
+        try {
+
+            // Step 1: retrieve and summarize the relevant guideline chunks
+            String relevantGuidelines = retrieveAndSummarizeChunks(medicalNotes);
+            log.info("Résumé final des chunks pertinents : {}", relevantGuidelines);
+
+            // Step 2: perform the diabetes risk assessment using patient data and summarized guidelines
+            return performDiabetesAssessment(age, gender, medicalNotes, relevantGuidelines);
+
+        } catch (Exception e) {
+            log.error("Erreur lors de l'évaluation du risque diabétique", e);
+            return AiAssessmentResponse.builder()
+                    .level("ERROR")
+                    .context("Impossible d'évaluer le risque")
+                    .analysis("Erreur technique lors de l'analyse")
+                    .recommendations("Veuillez réessayer plus tard")
+                    .build();
+        }
+    }
+
+    private String retrieveAndSummarizeChunks(String medicalNotes) {
+        log.info("Recherche de chunks pertinents pour les notes médicales");
+
+        // Build the query object from the medical notes for vector-based retrieval
+        Query query = new Query(medicalNotes);
+        List<Document> retrievedChunks = documentRetriever.retrieve(query);
+
+        if (retrievedChunks.isEmpty()) {
+            log.warn("Aucun chunk pertinent trouvé dans la base de connaissances");
+            return "Aucune directive médicale spécifique trouvée.";
+        }
+
+        log.info("Trouvé {} chunks pertinents, résumé en cours...", retrievedChunks.size());
+
+        for (int i = 0; i < retrievedChunks.size(); i++) {
+            Document doc = retrievedChunks.get(i);
+            log.info("=========================== Chunk #{} ===========================", i + 1);
+            log.info("Chunk #{} : {}", i + 1, doc.getText());
+            log.info("Metadata #{} : {}", i + 1, doc.getMetadata());
+            log.info("=================================================================");
+        }
+
+        // Summarize retrieved chunks while keeping their references and page numbers
+        Document summarizedChunks = summarizerService.summarizeChunks(retrievedChunks);
+
+        return summarizedChunks.getText();
+    }
+
+    private AiAssessmentResponse performDiabetesAssessment(int age, String gender, String medicalNotes, String guidelines) {
+        log.info("Évaluation du risque diabétique avec directives médicales");
+
         String systemPrompt = """
             Vous êtes une IA experte en évaluation du risque diabétique pour assistance médicale.
             Le destinataire étant un professionnel de santé, adopter un langage expert.
-            Vos réponses doivent se baser uniquement sur les données fournies. Ne pas inventer ou extrapoler d’informations absentes.
-            Si les données fournies sont insuffisantes pour conclure objectivement : NIVEAU = "VERY_LOW" et CONTEXTE = "Données insuffisantes."
+            
+            Vous avez accès aux directives médicales suivantes :
+            %s
+            
+            Basez votre évaluation sur :
+            1. Les données du patient fournies
+            2. Les directives médicales ci-dessus
+            
+            L'analyse doit citer explicitement les points pertinents des directives médicales et les mobiliser pour justifier le NIVEAU de risque.
+            Évitez les généralités.
+            
+            Si directives absentes: votre expertise médicale
+            Si les données sont insuffisantes: NIVEAU = "VERY_LOW" et CONTEXTE = "Données insuffisantes."
 
-            Répondez strictement au format suivant, en 4 sections séparées par ### :
+            Répondez strictement au format suivant, en 5 sections séparées par ### :
             
             NIVEAU: [VERY_LOW | LOW | MODERATE | HIGH]
             ###
@@ -40,44 +109,36 @@ public class AiAssessmentService {
             ANALYSE: [Raisonnement médical justifiant le NIVEAU, 3-4 phrases, concis, sans répétitions]
             ###
             RECOMMANDATIONS: [3 actions concrètes, spécifiques, orientées suivi ou traitement.]
-            """;
+            ###
+            SOURCES: [Liste des paires refs/pages utilisées dans les sections ANALYSE et RECOMMANDATIONS - format stricte: [[ref-A], page B]]
+            """.formatted(guidelines);
 
         String userPrompt = """
             Évaluez le risque de diabète pour ce patient :
             Âge : %d
             Sexe : %s
             Notes médicales : %s
-            """.formatted(age, gender, notesText);
+            """.formatted(age, gender, medicalNotes);
 
-        try {
-            log.info("Appel à Ollama en cours...");
-            String  markdownResponse = chatClient.prompt()
-                    .system(systemPrompt)
-                    .user(userPrompt)
-                    .call()
-                    .content()
-                    .trim();
-            log.info("Réponse IA reçue et valide");
-            return parseMarkdownResponse(markdownResponse);
+        String response = chatClient.prompt()
+                .system(systemPrompt)
+                .user(userPrompt)
+                .call()
+                .content()
+                .trim();
 
-        } catch (Exception e) {
-            log.error("Erreur lors de l'appel ou du parsing IA", e);
-            return AiAssessmentResponse.builder()
-                    .level("ERROR")
-                    .context("Impossible d'évaluer le risque")
-                    .analysis("Erreur IA")
-                    .recommendations("Veuillez réessayer plus tard")
-                    .build();
-        }
+        log.info("Évaluation du risque diabétique terminée");
+        return parseResponse(response);
     }
 
-    private AiAssessmentResponse parseMarkdownResponse(String markdown) {
+    private AiAssessmentResponse parseResponse(String response) {
         String level = "ERROR";
         String context = "Données manquantes";
         String analysis = "Données manquantes";
         String recommendations = "Données manquantes";
+        String sources = "Données manquantes";
 
-        String[] sections = markdown.split("###");
+        String[] sections = response.split("###");
         for (String section : sections) {
             section = section.trim();
             if (section.startsWith("NIVEAU:")) {
@@ -88,6 +149,8 @@ public class AiAssessmentService {
                 analysis = section.substring("ANALYSE:".length()).trim();
             } else if (section.startsWith("RECOMMANDATIONS:")) {
                 recommendations = section.substring("RECOMMANDATIONS:".length()).trim();
+            } else if (section.startsWith("SOURCES:")) {
+                sources = section.substring("SOURCES:".length()).trim();
             }
         }
 
@@ -96,6 +159,7 @@ public class AiAssessmentService {
                 .context(context)
                 .analysis(analysis)
                 .recommendations(recommendations)
+                .sources(sources)
                 .build();
     }
 }

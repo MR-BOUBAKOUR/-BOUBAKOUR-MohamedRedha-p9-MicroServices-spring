@@ -7,5 +7,6 @@ public record AiAssessmentResponse(
         String level,
         String context,
         String analysis,
-        String recommendations
+        String recommendations,
+        String sources
 ) {}

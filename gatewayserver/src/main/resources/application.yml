@@ -24,8 +24,8 @@ spring:
           # Activate the lowerCase for the URIs ( -> upperCase: false)
           lowerCaseServiceId: true
       httpclient:
-        connect-timeout: 90000
-        response-timeout: 90s
+        connect-timeout: 240000
+        response-timeout: 240s
 
   security:
     oauth2:

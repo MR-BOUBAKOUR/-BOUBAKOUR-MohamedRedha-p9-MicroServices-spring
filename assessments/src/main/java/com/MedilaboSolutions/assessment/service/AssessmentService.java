@@ -61,7 +61,8 @@ public class AssessmentService {
                 aiResponse.level(),
                 aiResponse.context(),
                 aiResponse.analysis(),
-                aiResponse.recommendations()
+                aiResponse.recommendations(),
+                aiResponse.sources()
         );
     }
 }
