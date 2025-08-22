@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Slf4j
 @Service
@@ -25,8 +26,8 @@ public class SummarizerService {
         log.info("Résumé de {} chunks en cours...", retrievedChunks.size());
 
         // Step 1: build the text including refs & pages for each chunk
-        String combinedText = retrievedChunks.stream()
-                .map(this::formatChunk)
+        String combinedText = IntStream.range(0, retrievedChunks.size())
+                .mapToObj(i -> "CHUNK " + (i+1) + ":\n" + formatChunk(retrievedChunks.get(i)))
                 .collect(Collectors.joining("\n\n"));
 
         // Step 2: generate the summary using the AI model
@@ -50,20 +51,19 @@ public class SummarizerService {
         try {
             return chatClient.prompt()
                     .system("""
-                        Vous êtes un assistant médical expert spécialisé dans la synthèse des directives médicales. Votre objectif est de résumer les chunks que vous recevez.
-        
+                        Vous êtes un assistant médical expert spécialisé dans la synthèse des directives médicales.
+                        Votre objectif est de résumer les chunks que vous recevez, en incluant obligatoirement la paire ref associée à chaque chunk SI ELLE EXISTE.
+
                         INSTRUCTIONS :
-                        - 1 chunk = 1 résumé en une phrase avec la paire refs/pages associées
-                        - résume = critères, diagnostiques, seuils, et recommandations importantes
-                        - Pas de répetitions
+                        - 1 chunk = 1 résumé en une phrase + refs/pages .
+                        - résumé = critères, diagnostiques, seuils, et recommandations importantes
 
-                        Répondez strictement au format suivant, en 2 sections séparées par ### :
+                        RÈGLES :
+                        - Si le chunk contient des references : terminez le résumé en les évoquant
+                        - Si le chunk ne contient AUCUNE référence : ne mettez rien après le résumé
 
-                        RESUME:
-                        - [Phrase résumé du chunk 1] [[ref-A], page B]
-                        - [Phrase résumé du chunk 2] [[ref-C], page D]
-                        ###
-                        SOURCES: [Liste des paires refs/pages présentes dans la section RESUME - format strict: [[ref-A], page B]]
+                        Répondez strictement au format suivant :
+                        RESUME: [Liste des résumés ainsi que leur [[ref-A], page B] associés]
                     """)
                     .user(combinedText)
                     .call()

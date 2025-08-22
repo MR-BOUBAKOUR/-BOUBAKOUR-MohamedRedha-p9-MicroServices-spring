@@ -87,7 +87,7 @@ public class AiAssessmentService {
             Vous êtes une IA experte en évaluation du risque diabétique pour assistance médicale.
             Le destinataire étant un professionnel de santé, adopter un langage expert.
             
-            Vous avez accès aux directives médicales suivantes :
+            Vous avez accès aux directives médicales suivantes, ainsi qu’à leurs sources :
             %s
             
             Basez votre évaluation sur :
@@ -104,13 +104,18 @@ public class AiAssessmentService {
             
             NIVEAU: [VERY_LOW | LOW | MODERATE | HIGH]
             ###
-            CONTEXTE: [Liste des faits observables et antécédents pertinents]
+            CONTEXTE: [Liste des faits observables et antécédents pertinents uniquement. Aucun diagnostic toléré dans cette section]
             ###
             ANALYSE: [Raisonnement médical justifiant le NIVEAU, 3-4 phrases, concis, sans répétitions]
             ###
             RECOMMANDATIONS: [3 actions concrètes, spécifiques, orientées suivi ou traitement.]
             ###
-            SOURCES: [Liste des paires refs/pages utilisées dans les sections ANALYSE et RECOMMANDATIONS - format stricte: [[ref-A], page B]]
+            SOURCES: [Liste des paires refs/pages utilisées dans les sections ANALYSE et RECOMMANDATIONS
+                Si aucune ref/page = format stricte: vide
+                sinon = format stricte:
+                - [[ref-A], page B]
+                - [[ref-C], page D]
+            ]
             """.formatted(guidelines);
 
         String userPrompt = """
