@@ -8,7 +8,6 @@ import com.MedilaboSolutions.assessment.service.client.NoteFeignClient;
 import com.MedilaboSolutions.assessment.service.client.PatientFeignClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -54,7 +52,7 @@ public class AssessmentService {
         this.assessmentRepository = assessmentRepository;
         this.assessmentMapper = assessmentMapper;
 
-        // Charger le fichier JSON dans une variable indépendante
+        // Load the JSON file into an independent variable
         try (InputStream is = refsFile.getInputStream()) {
             this.cachedRefsFromFile = objectMapper.readValue(is, Map.class);
         } catch (Exception e) {
@@ -98,6 +96,7 @@ public class AssessmentService {
         AiAssessmentResponse aiResponse = aiAssessmentService.evaluateDiabetesRisk(age, gender, notesText);
         assert aiResponse != null;
 
+        // Enrich the raw AI sources by replacing refs with detailed content
         String sourcesEnriched = enrichSources(aiResponse.sources());
 
         // Saving the assessment produced with the status "PENDING" so that the doctor can evaluate it
@@ -117,81 +116,45 @@ public class AssessmentService {
         return assessmentMapper.toAssessmentDto(generatedAssessment);
     }
 
-//    private String enrichSources(String aiSourcesText) {
-//        try {
-//            // Pattern pour gérer : "- [[ref-XXX], page YYY]" ET "- [[], page YYY]" (sans ref)
-//            Pattern pattern = Pattern.compile("-?\\s*\\[\\[(ref-\\d+)?\\],\\s*page\\s+(\\d+)\\]");
-//
-//            Matcher matcher = pattern.matcher(aiSourcesText);
-//
-//            StringBuilder enriched = new StringBuilder();
-//            boolean found = false;
-//
-//            while (matcher.find()) {
-//                found = true;
-//
-//                String ref = matcher.group(1);   // ex: "ref-328" ou null si pas de ref
-//                String page = matcher.group(2);  // ex: "328"
-//
-//                String key = ref != null ? ref : "";
-//                String content = "";
-//
-//                if (ref != null) {
-//                    String jsonKey = "[" + ref + "]";
-//                    content = cachedRefsFromFile.getOrDefault(jsonKey, "Rapport de prévention et dépistage du diabète de type 2, HAS.");
-//
-//                } else {
-//                    log.info("Pas de ref, contenu vide");
-//                }
-//
-//                String enrichedLine = String.format("- [[%s], page %s] : Rapport de prévention et dépistage du diabète de type 2, HAS. Détail référence :  %s%n", key, page, content);
-//                enriched.append(enrichedLine);
-//            }
-//
-//            return found ? enriched.toString().trim() : aiSourcesText;
-//        } catch (Exception e) {
-//            log.error("Erreur lors de l'enrichissement des sources", e);
-//            return aiSourcesText;
-//        }
-//    }
-
     private String enrichSources(String aiSourcesText) {
         try {
-            // Pattern pour gérer : "- [[ref-XXX], page YYY]" ET "- [[], page YYY]" (sans ref)
-            // Capture uniquement ref- suivi de chiffres
+            // Pattern to handle: "- [[ref-XXX], page YYY]" AND "- [[], page YYY]" (without ref)
+            // Capture only "ref-" followed by digits
             Pattern pattern = Pattern.compile("-?\\s*\\[\\[(ref-\\d+)?\\],\\s*page\\s+(\\d+)\\]");
-
             Matcher matcher = pattern.matcher(aiSourcesText);
 
-            StringBuilder enriched = new StringBuilder();
-            boolean found = false;
+            StringBuilder enrichedSourceText = new StringBuilder();
+            boolean patternMatched = false;
 
             while (matcher.find()) {
-                found = true;
+                patternMatched = true;
 
-                String ref = matcher.group(1);   // ex: "ref-328" ou null si pas de ref
-                String page = matcher.group(2);  // ex: "328"
+                String ref = matcher.group(1);   // e.g., "ref-328" or null if no ref
+                String page = matcher.group(2);  // e.g., "328"
 
                 String key;
                 String content;
 
                 if (ref != null) {
-                    // Si ref présent → on garde uniquement la ref
+                    // If ref exists → keep only the ref
                     key = ref;
                     String jsonKey = "[" + ref + "]";
-                    content = cachedRefsFromFile.getOrDefault(jsonKey,
-                            "Rapport de prévention et dépistage du diabète de type 2, HAS.");
+
+                    content = cachedRefsFromFile.getOrDefault(
+                        jsonKey,
+                        "Référence fictive (origine: depuis un document supplémentaire rajouté afin d'illustrer la capacité de l’application à exploiter plusieurs fichiers dans notre RAG)."
+                    );
                 } else {
-                    // Sinon → on garde uniquement la page
+                    // Otherwise → keep only the page
                     key = "page " + page;
                     content = "Rapport de prévention et dépistage du diabète de type 2, HAS.";
                 }
 
                 String enrichedLine = String.format("- [%s] : %s%n", key, content);
-                enriched.append(enrichedLine);
+                enrichedSourceText.append(enrichedLine);
             }
 
-            return found ? enriched.toString().trim() : aiSourcesText;
+            return patternMatched ? enrichedSourceText.toString().trim() : aiSourcesText;
         } catch (Exception e) {
             log.error("Erreur lors de l'enrichissement des sources", e);
             return aiSourcesText;
