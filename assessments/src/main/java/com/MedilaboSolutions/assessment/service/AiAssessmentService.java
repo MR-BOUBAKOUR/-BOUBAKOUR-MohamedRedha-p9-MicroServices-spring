@@ -108,7 +108,7 @@ public class AiAssessmentService {
             ###
             ANALYSE: [Raisonnement médical justifiant le NIVEAU, 3-4 phrases, concis, sans répétitions]
             ###
-            RECOMMANDATIONS: [3 actions concrètes, spécifiques, orientées suivi ou traitement.]
+            RECOMMANDATIONS: [Liste de 3 actions concrètes, spécifiques, orientées suivi ou traitement.]
             ###
             SOURCES: [Liste des paires refs/pages utilisées dans les sections ANALYSE et RECOMMANDATIONS
                 Si aucune ref/page = format stricte: vide

@@ -150,7 +150,7 @@ public class AssessmentService {
                     content = "Rapport de prévention et dépistage du diabète de type 2, HAS.";
                 }
 
-                String enrichedLine = String.format("- [%s] : %s%n", key, content);
+                String enrichedLine = String.format("- [%s] : %s", key, content);
                 enrichedSourceText.append(enrichedLine);
             }
 
