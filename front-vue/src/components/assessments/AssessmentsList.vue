@@ -2,26 +2,37 @@
 import AssessmentCard from './AssessmentCard.vue'
 
 defineProps({
-    assessments: {
-        type: Array,
-        required: true,
-    },
+    assessments: { type: Array, required: true },
+    loading: { type: Boolean, default: false },
 })
 </script>
 
 <template>
     <section class="assessments-section">
         <h2>Assessments</h2>
-        <TransitionGroup tag="ul" name="list" class="assessments-list" v-if="assessments?.length">
+
+        <TransitionGroup
+            tag="ul"
+            name="list"
+            class="assessments-list"
+        >
+            <!-- Generated assessment -->
+            <li v-if="loading" key="pending" class="assessment-card">
+                <p>Évaluation en cours…</p>
+            </li>
+
+            <!-- Existing assessments -->
             <li
                 v-for="(assessment, index) in assessments"
                 :key="assessment.id ?? index"
-                class="assessment-card"
             >
                 <AssessmentCard :assessment="assessment" />
             </li>
         </TransitionGroup>
-        <p v-else>Ce patient n'a pas encore d'évaluations.</p>
+
+        <p v-if="!loading && !assessments?.length">
+            Ce patient n'a pas encore d'évaluations.
+        </p>
     </section>
 </template>
 
@@ -46,7 +57,9 @@ defineProps({
 }
 
 .assessment-card {
-    border: 1px solid #ccc;
-    padding: 0.5rem;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 2rem;
 }
 </style>

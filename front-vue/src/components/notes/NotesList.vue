@@ -42,7 +42,7 @@ defineProps({
 .note-card {
     border: 1px solid #ccc;
     padding: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     background-color: #f5f5f5;
 }
 </style>

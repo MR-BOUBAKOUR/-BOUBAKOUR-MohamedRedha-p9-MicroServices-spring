@@ -36,7 +36,7 @@ public class AssessmentService {
     }
 
     public List<AssessmentDto> findAssessmentsByPatientId(Long patId, String correlationId) {
-        List<Assessment> assessments = assessmentRepository.findByPatId(patId);
+        List<Assessment> assessments = assessmentRepository.findByPatIdOrderByCreatedAtDesc(patId);
 
         return assessments.stream()
                 .map(assessmentMapper::toAssessmentDto)

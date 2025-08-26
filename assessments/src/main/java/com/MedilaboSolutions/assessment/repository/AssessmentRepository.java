@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface AssessmentRepository extends JpaRepository<Assessment, Long> {
-    List<Assessment> findByPatId(Long patId);
+    List<Assessment> findByPatIdOrderByCreatedAtDesc(Long patId);
 }

@@ -34,6 +34,8 @@ const resultClass = computed(() => {
         <p><strong>RECOMMANDATIONS:</strong> {{ assessment.recommendations }}</p>
         <p><strong>SOURCES:</strong> {{ assessment.sources }}</p>
         <p><strong>STATUS:</strong> {{ assessment.status }}</p>
+        <p><strong>CRÉÉ LE:</strong> {{ new Date(assessment.createdAt).toLocaleString() }}</p>
+        <p><strong>MISE À JOUR:</strong> {{ assessment.updatedAt ? new Date(assessment.updatedAt).toLocaleString() : ' ---' }}</p>
     </section>
 </template>
 
@@ -42,6 +44,7 @@ const resultClass = computed(() => {
     border: 1px solid #bbb;
     border-radius: 8px;
     margin-bottom: 1rem;
+    padding: 2rem;
 }
 
 .risk-very-low {
