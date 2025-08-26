@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/assessments")
@@ -18,7 +20,20 @@ public class AssessmentController {
     private final AssessmentService assessmentService;
 
     @GetMapping("/{patId}")
-    public ResponseEntity<SuccessResponse<AssessmentDto>> getAssessmentByPatientId(
+    public ResponseEntity<SuccessResponse<List<AssessmentDto>>> getAssessmentsByPatientId(
+            @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
+            @PathVariable Long patId
+    ) {
+        log.info("Fetching assessments list for patientId={}", patId);
+        List<AssessmentDto> assessments = assessmentService.findAssessmentsByPatientId(patId, correlationId);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new SuccessResponse<>(200, "Assessments fetched successfully", assessments));
+    }
+
+    @GetMapping("/{patId}/generate")
+    public ResponseEntity<SuccessResponse<AssessmentDto>> generateAssessment(
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
             @PathVariable Long patId
     ) {
@@ -27,7 +42,6 @@ public class AssessmentController {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(new SuccessResponse<>(200, "Assessment fetched successfully", assessment));
+                .body(new SuccessResponse<>(200, "Assessment generated successfully", assessment));
     }
-
 }

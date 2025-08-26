@@ -8,10 +8,10 @@ defineProps({
 </script>
 
 <template>
-    <section class="notes-card">
+    <section class="notes-section">
         <h2>Notes</h2>
         <TransitionGroup tag="ul" name="list" class="notes-list" v-if="notes.length > 0">
-            <li v-for="note in notes" :key="note.id" class="note-item">
+            <li v-for="note in notes" :key="note.id" class="note-card">
                 {{ note.note }}
             </li>
         </TransitionGroup>
@@ -29,7 +29,7 @@ defineProps({
     transform: translateX(-30px);
 }
 
-.notes-card {
+.notes-section {
     margin-top: 2rem;
 }
 
@@ -39,7 +39,7 @@ defineProps({
     margin: 0;
 }
 
-.note-item {
+.note-card {
     border: 1px solid #ccc;
     padding: 0.5rem;
     margin-bottom: 0.5rem;

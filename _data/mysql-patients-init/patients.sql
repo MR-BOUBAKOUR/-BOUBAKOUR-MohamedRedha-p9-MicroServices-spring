@@ -1,8 +1,8 @@
 CREATE DATABASE IF NOT EXISTS medilabosolutions;
 USE medilabosolutions;
 
-DROP TABLE IF EXISTS patient;
-CREATE TABLE patient  (
+DROP TABLE IF EXISTS patients;
+CREATE TABLE patients  (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE patient  (
     early_onset_mail_sent BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-INSERT INTO patient (first_name, last_name, birth_date, gender, address, phone, early_onset_mail_sent) VALUES
+INSERT INTO patients (first_name, last_name, birth_date, gender, address, phone, early_onset_mail_sent) VALUES
     ('TestNone', 'Test', '1966-12-31', 'F', '1 Brookside St', '100-222-3333', FALSE),
     ('TestBorderline', 'Test', '1945-06-24', 'M', '2 High St', '200-333-4444', FALSE),
     ('TestInDanger', 'Test', '2004-06-18', 'M', '3 Club Road', '300-444-5555', FALSE),
@@ -25,6 +25,7 @@ INSERT INTO patient (first_name, last_name, birth_date, gender, address, phone, 
     ('Pierre', 'Durand', '1990-01-10', 'M', '56 Boulevard Saint-Michel', '503-345-6789', FALSE),
     ('Sophie', 'Bernard', '1985-12-05', 'F', '78 Rue Victor Hugo', '504-456-7890', FALSE),
     ('Laurent', 'Petit', '1988-07-18', 'M', '90 Place de la République', '505-567-8901', FALSE),
+
     ('Claire', 'Robert', '1992-04-30', 'F', '23 Rue Montmartre', '506-678-9012', FALSE),
     ('Nicolas', 'Richard', '1983-11-12', 'M', '45 Avenue Voltaire', '507-789-0123', FALSE),
     ('Isabelle', 'Moreau', '1977-09-03', 'F', '67 Rue de Rivoli', '508-890-1234', FALSE),

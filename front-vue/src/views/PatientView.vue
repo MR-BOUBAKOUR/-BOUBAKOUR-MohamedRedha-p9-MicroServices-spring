@@ -2,24 +2,24 @@
 import { useRoute } from 'vue-router'
 import { ref, onMounted } from 'vue'
 import PatientCard from '@/components/patients/PatientCard.vue'
-import NotesCard from '@/components/notes/NotesCard.vue'
+import NotesList from '@/components/notes/NotesList.vue'
 import NoteForm from '@/components/notes/NoteForm.vue'
-import AssessmentCard from '@/components/assessments/AssessmentCard.vue'
+import AssessmentsList from '@/components/assessments/AssessmentsList.vue'
 import { fetchPatientById } from '@/services/patient-service'
 import { fetchNotesByPatientId, createNote } from '@/services/note-service'
-import { fetchAssessmentByPatientId } from '@/services/assessment-service'
+import { fetchAssessmentsByPatientId } from '@/services/assessment-service'
 
 const route = useRoute()
 const patientId = Number(route.params.id)
 
 const patient = ref()
 const notes = ref([])
-const assessment = ref()
+const assessments = ref([])
 
 onMounted(async () => {
     patient.value = await fetchPatientById(patientId)
     notes.value = await fetchNotesByPatientId(patientId)
-    assessment.value = await fetchAssessmentByPatientId(patientId)
+    assessments.value = await fetchAssessmentsByPatientId(patientId)
 })
 
 async function handleNoteCreate(note) {
@@ -33,7 +33,7 @@ async function handleNoteCreate(note) {
         const createdNote = await createNote(newNote)
         notes.value.push(createdNote)
 
-        assessment.value = await fetchAssessmentByPatientId(patientId)
+        assessments.value = await fetchAssessmentsByPatientId(patientId)
     } catch (e) {
         console.warn('Erreur lors de la création de la note.')
     }
@@ -43,8 +43,8 @@ async function handleNoteCreate(note) {
 <template>
     <main>
         <PatientCard v-if="patient" :patient="patient" />
-        <NotesCard :notes="notes" />
+        <NotesList :notes="notes" />
         <NoteForm @submit="handleNoteCreate" />
-        <AssessmentCard :assessment="assessment" />
+        <AssessmentsList :assessments="assessments" />
     </main>
 </template>

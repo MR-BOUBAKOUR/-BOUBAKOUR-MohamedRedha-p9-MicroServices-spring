@@ -1,6 +1,9 @@
 package com.MedilaboSolutions.assessment.service;
 
 import com.MedilaboSolutions.assessment.dto.*;
+import com.MedilaboSolutions.assessment.mapper.AssessmentMapper;
+import com.MedilaboSolutions.assessment.model.Assessment;
+import com.MedilaboSolutions.assessment.repository.AssessmentRepository;
 import com.MedilaboSolutions.assessment.service.client.NoteFeignClient;
 import com.MedilaboSolutions.assessment.service.client.PatientFeignClient;
 import lombok.extern.slf4j.Slf4j;
@@ -21,29 +24,42 @@ public class AssessmentService {
     private final PatientFeignClient patientFeignClient;
     private final NoteFeignClient noteFeignClient;
     private final AiAssessmentService aiAssessmentService;
+    private final AssessmentRepository assessmentRepository;
+    private final AssessmentMapper assessmentMapper;
 
-    public AssessmentService(PatientFeignClient patientFeignClient, NoteFeignClient noteFeignClient, AiAssessmentService aiAssessmentService, ChatClient.Builder builder) {
+    public AssessmentService(PatientFeignClient patientFeignClient, NoteFeignClient noteFeignClient, AiAssessmentService aiAssessmentService, ChatClient.Builder builder, AssessmentRepository assessmentRepository, AssessmentMapper assessmentMapper) {
         this.patientFeignClient = patientFeignClient;
         this.noteFeignClient = noteFeignClient;
         this.aiAssessmentService = aiAssessmentService;
+        this.assessmentRepository = assessmentRepository;
+        this.assessmentMapper = assessmentMapper;
+    }
+
+    public List<AssessmentDto> findAssessmentsByPatientId(Long patId, String correlationId) {
+        List<Assessment> assessments = assessmentRepository.findByPatId(patId);
+
+        return assessments.stream()
+                .map(assessmentMapper::toAssessmentDto)
+                .toList();
     }
 
     public AssessmentDto generateAssessment(Long patId, String correlationId) {
 
-        // Finding the data
+        // Finding the patient data
         ResponseEntity<SuccessResponse<PatientDto>> patientResponse = patientFeignClient.getPatientById(patId, correlationId);
         if (patientResponse.getBody() == null || patientResponse.getBody().getData() == null) {
             throw new IllegalStateException("Patient data not found for ID " + patId);
         }
         PatientDto patient = patientResponse.getBody().getData();
 
+        // Finding the notes of the patient
         ResponseEntity<SuccessResponse<List<NoteDto>>> notesResponse = noteFeignClient.getNoteByPatientId(patId, correlationId);
         if (notesResponse.getBody() == null || notesResponse.getBody().getData() == null) {
             throw new IllegalStateException("Notes not found for patient ID " + patId);
         }
         List<NoteDto> notes = notesResponse.getBody().getData();
 
-        // Preparing the data
+        // Preparing the data for the AI
         int age = Period.between(patient.getBirthDate(), LocalDate.now()).getYears();
         String gender = patient.getGender();
         String notesText = notes.stream()
@@ -53,16 +69,22 @@ public class AssessmentService {
 
         // Using the AI for the assessment
         AiAssessmentResponse aiResponse = aiAssessmentService.evaluateDiabetesRisk(age, gender, notesText);
+        assert aiResponse != null;
+
+        // Saving the assessment produced with the status "PENDING" so that the doctor can evaluate it
+        Assessment generatedAssessment = Assessment.builder()
+                .patId(patId)
+                .level(aiResponse.level())
+                .context(aiResponse.context())
+                .analysis(aiResponse.analysis())
+                .recommendations(aiResponse.recommendations())
+                .sources(aiResponse.sources())
+                .status("PENDING")
+                .build();
+
+        assessmentRepository.save(generatedAssessment);
 
         // Returning the final result
-        assert aiResponse != null;
-        return new AssessmentDto(
-                patId,
-                aiResponse.level(),
-                aiResponse.context(),
-                aiResponse.analysis(),
-                aiResponse.recommendations(),
-                aiResponse.sources()
-        );
+        return assessmentMapper.toAssessmentDto(generatedAssessment);
     }
 }

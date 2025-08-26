@@ -10,7 +10,7 @@ const props = defineProps({
 
 const resultClass = computed(() => {
     if (!props.assessment?.level) return ''
-    
+
     switch (props.assessment.level) {
         case 'VERY_LOW':
             return 'risk-very-low'
@@ -27,40 +27,20 @@ const resultClass = computed(() => {
 </script>
 
 <template>
-    <h2>Assessment</h2>
-    <section :class="resultClass" class="assessment-card">
-        <div v-if="!assessment">
-            <p>Analyse en cours...</p>
-        </div>
-        <div v-else>
-            <p>NIVEAU: {{ assessment.level }}</p>
-            <p>CONTEXTE:</p>
-            <p>{{ assessment.context }}</p>
-            <p>ANALYSE:</p>
-            <p>{{ assessment.analysis }}</p>
-            <p>RECOMMANDATIONS:</p>
-            <p>{{ assessment.recommendations }}</p>
-            <p>SOURCES:</p>
-            <p>{{ assessment.sources }}</p>
-        </div>
+    <section :class="['assessment-card', resultClass]">
+        <p><strong>NIVEAU:</strong> {{ assessment.level }}</p>
+        <p><strong>CONTEXTE:</strong> {{ assessment.context }}</p>
+        <p><strong>ANALYSE:</strong> {{ assessment.analysis }}</p>
+        <p><strong>RECOMMANDATIONS:</strong> {{ assessment.recommendations }}</p>
+        <p><strong>SOURCES:</strong> {{ assessment.sources }}</p>
+        <p><strong>STATUS:</strong> {{ assessment.status }}</p>
     </section>
 </template>
 
 <style scoped>
 .assessment-card {
-    max-width: 600px;
-    padding: 1rem;
     border: 1px solid #bbb;
     border-radius: 8px;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #222;
-    margin: 1rem auto;
-}
-
-.assessment-card h2 {
-    text-align: center;
-    font-weight: 600;
     margin-bottom: 1rem;
 }
 

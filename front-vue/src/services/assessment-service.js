@@ -13,7 +13,7 @@ const api = axios.create({
 
 setupAxiosInterceptors(api)
 
-export async function fetchAssessmentByPatientId(id) {
+export async function fetchAssessmentsByPatientId(id) {
     try {
         const response = await api.get(`/assessments/${id}`)
         return response.data.data
@@ -22,7 +22,26 @@ export async function fetchAssessmentByPatientId(id) {
             if (axios.isAxiosError(error) && error.response) {
                 setError(
                     error.response.data.message ||
-                        "Erreur lors de la récupération de l'évaluation.",
+                    "Erreur lors de la récupération des évaluations.",
+                )
+            } else {
+                setError('Erreur de connexion.')
+            }
+        }
+        throw error
+    }
+}
+
+export async function generateAssessmentByPatientId(id) {
+    try {
+        const response = await api.get(`/assessments/${id}/generate`)
+        return response.data.data
+    } catch (error) {
+        if (error.response?.status !== 401) {
+            if (axios.isAxiosError(error) && error.response) {
+                setError(
+                    error.response.data.message ||
+                    "Erreur lors de la génération de l'évaluation.",
                 )
             } else {
                 setError('Erreur de connexion.')

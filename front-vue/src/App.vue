@@ -154,7 +154,7 @@ watch(
 .user-meta {
     display: flex;
     flex-direction: column;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: #555;
 }
 
