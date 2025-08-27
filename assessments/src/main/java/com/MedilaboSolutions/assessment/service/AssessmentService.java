@@ -119,8 +119,8 @@ public class AssessmentService {
     private String enrichSources(String aiSourcesText) {
         try {
             // Pattern to handle: "- [[ref-XXX], page YYY]" AND "- [[], page YYY]" (without ref)
-            // Capture only "ref-" followed by digits
-            Pattern pattern = Pattern.compile("-?\\s*\\[\\[(ref-\\d+)?\\],\\s*page\\s+(\\d+)\\]");
+            Pattern pattern = Pattern.compile("-?\\s*\\[\\[(ref-[A-Za-z0-9]+)?\\],\\s*page\\s+(\\d+)\\]");
+
             Matcher matcher = pattern.matcher(aiSourcesText);
 
             StringBuilder enrichedSourceText = new StringBuilder();
@@ -135,33 +135,31 @@ public class AssessmentService {
                 String key;
                 String content;
 
-                if (ref != null) {
-                    // If ref exists → keep only the ref
+                if (ref != null && ref.matches("ref-\\d+")) {
+                    // If ref exists AND contains only digits → keep only the ref
                     key = ref;
                     String jsonKey = "[" + ref + "]";
 
                     content = cachedRefsFromFile.getOrDefault(
-                        jsonKey,
-                        "Référence fictive (origine: depuis un document supplémentaire rajouté afin d'illustrer la capacité de l’application à exploiter plusieurs fichiers dans notre RAG)."
+                            jsonKey,
+                            "Référence fictive (origine: depuis un document supplémentaire rajouté afin d'illustrer la capacité de l'application à exploiter plusieurs fichiers dans notre RAG)."
                     );
                 } else {
-                    // Otherwise → keep only the page
+                    // Otherwise (ref with letters or no ref) → keep only the page
                     key = "page " + page;
                     content = "Rapport de prévention et dépistage du diabète de type 2, HAS.";
                 }
 
                 String enrichedLine = String.format("- [%s] : %s", key, content);
+
                 enrichedSourceText.append(enrichedLine);
             }
 
             return patternMatched ? enrichedSourceText.toString().trim() : aiSourcesText;
+
         } catch (Exception e) {
             log.error("Erreur lors de l'enrichissement des sources", e);
             return aiSourcesText;
         }
     }
-
-
-
-
 }
