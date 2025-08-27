@@ -12,32 +12,97 @@ const resultClass = computed(() => {
     if (!props.assessment?.level) return ''
 
     switch (props.assessment.level) {
-        case 'VERY_LOW':
-            return 'risk-very-low'
-        case 'LOW':
-            return 'risk-low'
-        case 'MODERATE':
-            return 'risk-moderate'
-        case 'HIGH':
-            return 'risk-high'
-        default:
-            return ''
+        case 'VERY_LOW': return 'risk-very-low'
+        case 'LOW': return 'risk-low'
+        case 'MODERATE': return 'risk-moderate'
+        case 'HIGH': return 'risk-high'
+        default: return ''
     }
 })
+
+const statusIcon = computed(() => {
+    switch (props.assessment.status) {
+        case 'ACCEPTED': return '/icons/status_accepted.svg'
+        case 'UPDATED': return '/icons/status_updated.svg'
+        case 'REJECTED': return '/icons/status_rejected.svg'
+        case 'PENDING': return '/icons/status_pending.svg'
+        default: return '/icons/status_pending.svg'
+    }
+})
+
+const levelIcon = computed(() => {
+    switch (props.assessment.level) {
+        case 'VERY_LOW': return '/icons/risk_very_low.svg'
+        case 'LOW': return '/icons/risk_low.svg'
+        case 'MODERATE': return '/icons/risk_moderate.svg'
+        case 'HIGH': return '/icons/risk_high.svg'
+        default: return '/icons/risk_low.svg'
+    }
+})
+
+const canEdit = computed(() => props.assessment.status === 'PENDING')
+
+const handleAccept = () => console.log('Accept clicked')
+const handleModify = () => console.log('Modify clicked')
+const handleReject = () => console.log('Reject clicked')
 </script>
 
 <template>
     <section :class="['assessment-card', resultClass]">
-        <p><strong>NIVEAU:</strong> {{ assessment.level }}</p>
-        <p><strong>CONTEXTE:</strong> {{ assessment.context }}</p>
-        <p><strong>ANALYSE:</strong> {{ assessment.analysis }}</p>
-        <p><strong>RECOMMANDATIONS:</strong> {{ assessment.recommendations }}</p>
-        <p><strong>SOURCES:</strong> {{ assessment.sources }}</p>
-        <p><strong>STATUS:</strong> {{ assessment.status }}</p>
-        <p><strong>CRÉÉ LE:</strong> {{ new Date(assessment.createdAt).toLocaleString() }}</p>
-        <p><strong>MISE À JOUR:</strong> {{ assessment.updatedAt ? new Date(assessment.updatedAt).toLocaleString() : ' ---' }}</p>
+        <div class="card-container">
+            <!-- Left: 80% -->
+            <div class="card-left">
+                <!-- Main information section -->
+                <div class="info-main">
+                    <p><strong>CONTEXTE</strong></p>
+                    <ul>
+                        <li v-for="(item, index) in assessment.context" :key="index">{{ item }}</li>
+                    </ul>
+
+                    <p><strong>ANALYSE</strong></p>
+                    <p>{{ assessment.analysis }}</p>
+
+                    <p><strong>RECOMMANDATIONS</strong></p>
+                    <ul>
+                        <li v-for="(item, index) in assessment.recommendations" :key="index">{{ item }}</li>
+                    </ul>
+                </div>
+
+                <!-- Secondary information section -->
+                <div class="info-secondary">
+                    <p><strong>SOURCES</strong></p>
+                    <ul>
+                        <li v-for="(item, index) in assessment.sources" :key="index">{{ item }}</li>
+                    </ul>
+
+                    <p><strong>CRÉÉ LE - </strong> {{ new Date(assessment.createdAt).toLocaleString() }}</p>
+                </div>
+            </div>
+
+            <!-- Right: 20% -->
+            <div class="card-right">
+                <div class="info-boxes">
+                    <div class="level-box">
+                        <p class="level-label">RISQUE</p>
+                        <img :src="levelIcon" alt="level" width="100" height="100" />
+                    </div>
+                    
+                    <div class="status-box">
+                        <p class="status-label">STATUT</p>
+                        <img :src="statusIcon" alt="status" width="100" height="100" />
+                    </div>
+                </div>
+
+                <div class="action-box">
+                    <button @click="handleAccept" :disabled="!canEdit">Accepter</button>
+                    <button @click="handleModify" :disabled="!canEdit">Modifier</button>
+                    <button @click="handleReject" :disabled="!canEdit">Refuser</button>
+                </div>
+            </div>
+        </div>
     </section>
 </template>
+
 
 <style scoped>
 .assessment-card {
@@ -47,27 +112,91 @@ const resultClass = computed(() => {
     padding: 2rem;
 }
 
-.risk-very-low {
-    background-color: #d0e7ff;
-    border-color: #8ab4f8;
-    color: #1a3e72;
+/* Container flex */
+.card-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 200px;
 }
 
-.risk-low {
-    background-color: #fff9c4;
-    border-color: #f0e68c;
-    color: #6b5700;
+/* Left content 80% */
+.card-left {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 4rem;
 }
 
-.risk-moderate {
-    background-color: #ffe0b2;
-    border-color: #ffb74d;
-    color: #7a4b00;
+.info-secondary {
+    opacity: 0.9;
+    font-size: 0.75em;
 }
 
-.risk-high {
-    background-color: #ffcdd2;
-    border-color: #f28b82;
-    color: #7f1f1f;
+/* Right panel 20% */
+.card-right {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
 }
+
+.info-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 12px 0;
+}
+
+.level-box,
+.status-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 1rem 0;
+}
+
+.level-box img,
+.status-box img {
+    height: auto;
+}
+
+.level-box p,
+.status-box p {
+    margin: 0;
+    text-align: center;
+}
+
+/* Action box */
+.action-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+    margin-bottom: 12px;
+    
+}
+
+.action-box button {
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.action-box button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.action-box button:nth-child(1) { background-color: #4caf50; color: white; }
+.action-box button:nth-child(2) { background-color: #2196f3; color: white; }
+.action-box button:nth-child(3) { background-color: #f44336; color: white; }
 </style>

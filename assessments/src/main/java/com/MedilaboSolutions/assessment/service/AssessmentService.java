@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -103,17 +104,26 @@ public class AssessmentService {
         Assessment generatedAssessment = Assessment.builder()
                 .patId(patId)
                 .level(aiResponse.level())
-                .context(aiResponse.context())
-                .analysis(aiResponse.analysis())
-                .recommendations(aiResponse.recommendations())
-                .sources(sourcesEnriched)
                 .status("PENDING")
+                .context(parseBulletPoints(aiResponse.context()))
+                .analysis(aiResponse.analysis())
+                .recommendations(parseBulletPoints(aiResponse.recommendations()))
+                .sources(parseBulletPoints(sourcesEnriched))
                 .build();
 
         assessmentRepository.save(generatedAssessment);
 
         // Returning the final result
         return assessmentMapper.toAssessmentDto(generatedAssessment);
+    }
+
+    private List<String> parseBulletPoints(String text) {
+        if (text == null || text.isEmpty()) return List.of();
+        return Arrays.stream(text.split("\n"))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .map(s -> s.startsWith("- ") ? s.substring(2).trim() : s)
+                .toList();
     }
 
     private String enrichSources(String aiSourcesText) {
@@ -150,7 +160,7 @@ public class AssessmentService {
                     content = "Rapport de prévention et dépistage du diabète de type 2, HAS.";
                 }
 
-                String enrichedLine = String.format("- [%s] : %s", key, content);
+                String enrichedLine = String.format("- [%s] : %s%n", key, content);
 
                 enrichedSourceText.append(enrichedLine);
             }

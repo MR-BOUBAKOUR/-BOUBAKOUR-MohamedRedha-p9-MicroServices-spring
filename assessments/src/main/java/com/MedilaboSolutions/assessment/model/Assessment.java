@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "assessments")
@@ -25,20 +26,26 @@ public class Assessment {
     @Column(nullable = false)
     private String level;
 
-    @Column(columnDefinition = "TEXT")
-    private String context;
+    @Column(nullable = false)
+    private String status; // PENDING, ACCEPTED, UPDATED, REJECTED
+
+    @ElementCollection
+    @CollectionTable(name = "assessment_contexts", joinColumns = @JoinColumn(name = "assessment_id"))
+    @Column(name = "context_item", columnDefinition = "TEXT")
+    private List<String> context;
 
     @Column(columnDefinition = "TEXT")
     private String analysis;
 
-    @Column(columnDefinition = "TEXT")
-    private String recommendations;
+    @ElementCollection
+    @CollectionTable(name = "assessment_recommendations", joinColumns = @JoinColumn(name = "assessment_id"))
+    @Column(name = "recommendation_item", columnDefinition = "TEXT")
+    private List<String> recommendations;
 
-    @Column(columnDefinition = "TEXT")
-    private String sources;
-
-    @Column(nullable = false)
-    private String status; // PENDING, ACCEPTED, REJECTED
+    @ElementCollection
+    @CollectionTable(name = "assessment_sources", joinColumns = @JoinColumn(name = "assessment_id"))
+    @Column(name = "source_item", columnDefinition = "TEXT")
+    private List<String> sources;
 
     @Column(updatable = false, nullable = false)
     private Instant createdAt;

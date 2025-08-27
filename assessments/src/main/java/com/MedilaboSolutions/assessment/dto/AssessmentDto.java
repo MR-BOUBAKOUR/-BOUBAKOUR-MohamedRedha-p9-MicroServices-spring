@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -12,15 +13,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class AssessmentDto {
 
+    private Long id;
+
     private Long patId;
-
     private String level;
-    private String context;
-    private String analysis;
-    private String recommendations;
-    private String sources;
-
     private String status;
+
+    private List<String> context;
+    private String analysis;
+    private List<String> recommendations;
+    private List<String> sources;
 
     private Instant createdAt;
     private Instant updatedAt;
