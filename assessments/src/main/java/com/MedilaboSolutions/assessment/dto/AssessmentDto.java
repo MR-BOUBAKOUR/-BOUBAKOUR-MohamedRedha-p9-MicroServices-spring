@@ -2,6 +2,7 @@ package com.MedilaboSolutions.assessment.dto;
 
 import lombok.*;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Getter
@@ -21,6 +22,6 @@ public class AssessmentDto {
 
     private String status;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private Instant createdAt;
+    private Instant updatedAt;
 }

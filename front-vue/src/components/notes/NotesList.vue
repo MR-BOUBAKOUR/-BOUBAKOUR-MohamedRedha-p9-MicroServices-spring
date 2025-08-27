@@ -9,7 +9,7 @@ defineProps({
 
 <template>
     <section class="notes-section">
-        <h2>Notes</h2>
+        <h2>Notes médicales</h2>
         <TransitionGroup tag="ul" name="list" class="notes-list" v-if="notes.length > 0">
             <li v-for="note in notes" :key="note.id" class="note-card">
                 {{ note.note }}

@@ -9,7 +9,7 @@ defineProps({
 
 <template>
     <section class="assessments-section">
-        <h2>Assessments</h2>
+        <h2>Évaluations médicales</h2>
 
         <TransitionGroup
             tag="ul"
