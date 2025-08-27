@@ -31,106 +31,111 @@ CREATE TABLE IF NOT EXISTS assessment_sources (
 CREATE INDEX IF NOT EXISTS idx_assessments_pat_id ON assessments(pat_id);
 
 -- -----------------------
--- Patient 6
+-- Patient 1
 -- -----------------------
 INSERT INTO assessments (id, pat_id, level, status, analysis, created_at, updated_at)
-VALUES (6, 6, 'VERY_LOW', 'ACCEPTED', 'Observations cliniques simples, aucun signe inquiétant.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES (1, 1, 'VERY_LOW', 'ACCEPTED', 'Observations cliniques simples, aucun signe inquiétant.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO assessment_contexts (assessment_id, context_item)
 VALUES
-    (6, 'Le patient se sent généralement bien, pas de plainte majeure.'),
-    (6, 'Tension artérielle et poids dans les normes.'),
-    (6, 'Glycémie à jeun 0,95 g/L.'),
-    (6, 'Examen physique normal.');
+    (1, 'Le patient se sent généralement bien, pas de plainte majeure.'),
+    (1, 'Tension artérielle et poids dans les normes.'),
+    (1, 'Glycémie à jeun 0,95 g/L.'),
+    (1, 'Examen physique normal.');
 
 INSERT INTO assessment_recommendations (assessment_id, recommendation_item)
 VALUES
-    (6, 'Aucune recommandation spécifique pour le moment.');
+    (1, 'Aucune recommandation spécifique pour le moment.');
 
 INSERT INTO assessment_sources (assessment_id, source_item)
 VALUES
-    (6, 'exemple généré au lancement du service, pas de source');
+    (1, 'exemple généré au lancement du service, pas de source');
 
 -- -----------------------
--- Patient 7
+-- Patient 2
 -- -----------------------
 INSERT INTO assessments (id, pat_id, level, status, analysis, created_at, updated_at)
-VALUES (7, 7, 'LOW', 'ACCEPTED', 'Stress élevé et légère anomalie auditive, cholestérol légèrement élevé.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES (2, 2, 'LOW', 'ACCEPTED', 'Stress élevé et légère anomalie auditive, cholestérol légèrement élevé.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO assessment_contexts (assessment_id, context_item)
 VALUES
-    (7, 'Le patient se plaint de fatigue et de stress au travail.'),
-    (7, 'Légère perte auditive signalée récemment.'),
-    (7, 'Cholestérol total 2,2 g/L, LDL 1,5 g/L.');
+    (2, 'Le patient se plaint de fatigue et de stress au travail.'),
+    (2, 'Légère perte auditive signalée récemment.'),
+    (2, 'Cholestérol total 2,2 g/L, LDL 1,5 g/L.');
 
 INSERT INTO assessment_recommendations (assessment_id, recommendation_item)
 VALUES
-    (7, 'Suivi conseillé pour stress et contrôle lipidique.');
+    (2, 'Suivi conseillé pour stress et contrôle lipidique.');
 
 INSERT INTO assessment_sources (assessment_id, source_item)
 VALUES
-    (7, 'exemple généré au lancement du service, pas de source');
+    (2, 'exemple généré au lancement du service, pas de source');
 
 -- -----------------------
--- Patient 8
+-- Patient 3
 -- -----------------------
 INSERT INTO assessments (id, pat_id, level, status, analysis, created_at, updated_at)
-VALUES (8, 8, 'MODERATE', 'ACCEPTED', 'Fumeur, LDL légèrement élevé, légère toux, tests respiratoires normaux.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES (3, 3, 'MODERATE', 'ACCEPTED', 'Fumeur, LDL légèrement élevé, légère toux, tests respiratoires normaux.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO assessment_contexts (assessment_id, context_item)
 VALUES
-    (8, 'Le patient fumeur depuis 5 ans.'),
-    (8, 'Toux légère signalée.'),
-    (8, 'Spirométrie normale, radiographie thoracique sans anomalies.'),
-    (8, 'LDL légèrement élevé (1,6 g/L).');
+    (3, 'Le patient fumeur depuis 5 ans.'),
+    (3, 'Toux légère signalée.'),
+    (3, 'Spirométrie normale, radiographie thoracique sans anomalies.'),
+    (3, 'LDL légèrement élevé (1,6 g/L).');
 
 INSERT INTO assessment_recommendations (assessment_id, recommendation_item)
 VALUES
-    (8, 'Arrêt du tabac recommandé, suivi lipidique.');
+    (3, 'Arrêt du tabac recommandé, suivi lipidique.');
 
 INSERT INTO assessment_sources (assessment_id, source_item)
 VALUES
-    (8, 'exemple généré au lancement du service, pas de source');
+    (3, 'exemple généré au lancement du service, pas de source');
 
 -- -----------------------
--- Patient 9
+-- Patient 4
 -- -----------------------
 INSERT INTO assessments (id, pat_id, level, status, analysis, created_at, updated_at)
-VALUES (9, 9, 'MODERATE', 'ACCEPTED', 'Essoufflement modéré, douleurs lombaires, légère élévation HbA1C.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES (4, 4, 'MODERATE', 'ACCEPTED', 'Essoufflement modéré, douleurs lombaires, légère élévation HbA1C.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO assessment_contexts (assessment_id, context_item)
 VALUES
-    (9, 'Le patient se plaint d’essoufflement à l’effort et de douleurs lombaires après position assise prolongée.'),
-    (9, 'IMC 28, tension normale, rythme cardiaque régulier.'),
-    (9, 'Hémoglobine A1C 6,2 %.'),
-    (9, 'Cholestérol normal.');
+    (4, 'Le patient se plaint d’essoufflement à l’effort et de douleurs lombaires après position assise prolongée.'),
+    (4, 'IMC 28, tension normale, rythme cardiaque régulier.'),
+    (4, 'Hémoglobine A1C 6,2 %.'),
+    (4, 'Cholestérol normal.');
 
 INSERT INTO assessment_recommendations (assessment_id, recommendation_item)
 VALUES
-    (9, 'Kinésithérapie et suivi endocrinien conseillé.');
+    (4, 'Kinésithérapie et suivi endocrinien conseillé.');
 
 INSERT INTO assessment_sources (assessment_id, source_item)
 VALUES
-    (9, 'exemple généré au lancement du service, pas de source');
+    (4, 'exemple généré au lancement du service, pas de source');
 
 -- -----------------------
--- Patient 10
+-- Patient 5
 -- -----------------------
 INSERT INTO assessments (id, pat_id, level, status, analysis, created_at, updated_at)
-VALUES (10, 10, 'HIGH', 'ACCEPTED', 'Risque métabolique élevé, hyperglycémie et hypertension.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES (5, 5, 'HIGH', 'ACCEPTED', 'Risque métabolique élevé, hyperglycémie et hypertension.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO assessment_contexts (assessment_id, context_item)
 VALUES
-    (10, 'Patient à haut risque métabolique.'),
-    (10, 'IMC 31 kg/m², antécédents familiaux de diabète et hypertension.'),
-    (10, 'Glycémie à jeun 1,25 g/L, HbA1c 7,2 %.'),
-    (10, 'Polyurie et soif excessive.'),
-    (10, 'Tension 145/90 mmHg.');
+    (5, 'Patient à haut risque métabolique.'),
+    (5, 'IMC 31 kg/m², antécédents familiaux de diabète et hypertension.'),
+    (5, 'Glycémie à jeun 1,25 g/L, HbA1c 7,2 %.'),
+    (5, 'Polyurie et soif excessive.'),
+    (5, 'Tension 145/90 mmHg.');
 
 INSERT INTO assessment_recommendations (assessment_id, recommendation_item)
 VALUES
-    (10, 'Régime alimentaire, activité physique et suivi diabétologique conseillé.');
+    (5, 'Régime alimentaire, activité physique et suivi diabétologique conseillé.');
 
 INSERT INTO assessment_sources (assessment_id, source_item)
 VALUES
-    (10, 'exemple généré au lancement du service, pas de source');
+    (5, 'exemple généré au lancement du service, pas de source');
+
+-- -----------------------
+-- Reset sequence so that the next id starts at 6
+-- -----------------------
+SELECT setval('assessments_id_seq', 5);

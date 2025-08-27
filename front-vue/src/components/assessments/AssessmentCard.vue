@@ -70,12 +70,13 @@ const handleReject = () => console.log('Reject clicked')
 
                 <!-- Secondary information section -->
                 <div class="info-secondary">
+                    <p><strong>CRÉÉ LE</strong></p>
+                    <p>{{ new Date(assessment.createdAt).toLocaleString() }}</p>
+                    
                     <p><strong>SOURCES</strong></p>
                     <ul>
                         <li v-for="(item, index) in assessment.sources" :key="index">{{ item }}</li>
                     </ul>
-
-                    <p><strong>CRÉÉ LE - </strong> {{ new Date(assessment.createdAt).toLocaleString() }}</p>
                 </div>
             </div>
 
@@ -88,7 +89,7 @@ const handleReject = () => console.log('Reject clicked')
                     </div>
                     
                     <div class="status-box">
-                        <p class="status-label">STATUT</p>
+                        <p class="status-label">VALIDATION<br>MEDECIN</p>
                         <img :src="statusIcon" alt="status" width="100" height="100" />
                     </div>
                 </div>
@@ -139,14 +140,14 @@ const handleReject = () => console.log('Reject clicked')
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: stretch;
+    gap: 4rem;
 }
 
 .info-boxes {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin: 12px 0;
+    margin-bottom: 12px;
 }
 
 .level-box,
@@ -180,8 +181,6 @@ const handleReject = () => console.log('Reject clicked')
     flex-direction: column;
     width: 100%;
     gap: 0.5rem;
-    margin-bottom: 12px;
-    
 }
 
 .action-box button {

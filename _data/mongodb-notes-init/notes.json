@@ -1,91 +1,41 @@
 [
     {
-        "patId": 1,
-        "patFirstName": "TestNone",
-        "note": "Le patient déclare qu'il 'se sent très bien' Poids égal ou inférieur au poids recommandé"
-    },
-    {
-        "patId": 2,
-        "patFirstName": "TestBorderline",
-        "note": "Le patient déclare qu'il ressent beaucoup de stress au travail Il se plaint également que son audition est anormale dernièrement"
-    },
-    {
-        "patId": 2,
-        "patFirstName": "TestBorderline",
-        "note": "Le patient déclare avoir fait une réaction aux médicaments au cours des 3 derniers mois Il remarque également que son audition continue d'être anormale"
-    },
-    {
-        "patId": 3,
-        "patFirstName": "TestInDanger",
-        "note": "Le patient déclare qu'il fume depuis peu"
-    },
-    {
-        "patId": 3,
-        "patFirstName": "TestInDanger",
-        "note": "Le patient déclare qu'il est fumeur et qu'il a cessé de fumer l'année dernière Il se plaint également de crises d’apnée respiratoire anormales Tests de laboratoire indiquant un taux de cholestérol LDL élevé"
-    },
-    {
-        "patId": 4,
-        "patFirstName": "TestEarlyOnset",
-        "note": "Le patient déclare qu'il lui est devenu difficile de monter les escaliers Il se plaint également d’être essoufflé Tests de laboratoire indiquant que les anticorps sont élevés Réaction aux médicaments"
-    },
-    {
-        "patId": 4,
-        "patFirstName": "TestEarlyOnset",
-        "note": "Le patient déclare qu'il a mal au dos lorsqu'il reste assis pendant longtemps"
-    },
-    {
-        "patId": 4,
-        "patFirstName": "TestEarlyOnset",
-        "note": "Le patient déclare avoir commencé à fumer depuis peu Hémoglobine A1C supérieure au niveau recommandé"
-    },
-    {
-        "patId": 4,
-        "patFirstName": "TestEarlyOnset",
-        "note": "Taille, Poids, Cholestérol, Vertige et Réaction"
-    },
-    {
-      "patId": 5,
-      "patFirstName": "TestHighRisk",
-      "note": "IMC 31 kg/m², antécédents familiaux de diabète, hypertension artérielle et dyslipidémie. Il est sédentaire, consomme beaucoup de sucre et signale une fatigue chronique. Glycémie à jeun 1,25 g/L, HbA1c 7,2 %. Il se plaint également de polyurie et soif excessive."
-    },
-    {
-      "patId": 6,
+      "patId": 1,
       "patFirstName": "Jean",
       "note": "Le patient se sent généralement bien, pas de plainte majeure. Tension artérielle et poids dans les normes. Glycémie à jeun 0,95 g/L. Examen physique normal."
     },
     {
-      "patId": 7,
+      "patId": 2,
       "patFirstName": "Marie",
       "note": "Le patient se plaint de fatigue et de stress au travail. Légère perte auditive signalée récemment. Cholestérol total 2,2 g/L, LDL 1,5 g/L."
     },
     {
-      "patId": 7,
+      "patId": 2,
       "patFirstName": "Marie",
       "note": "Le patient rapporte une réaction cutanée aux médicaments au cours des 3 derniers mois. Pas d’infection active."
     },
     {
-      "patId": 8,
+      "patId": 3,
       "patFirstName": "Pierre",
       "note": "Le patient fumeur depuis 5 ans. Toux légère signalée. Spirométrie normale, radiographie thoracique sans anomalies. LDL légèrement élevé (1,6 g/L)."
     },
     {
-      "patId": 8,
+      "patId": 3,
       "patFirstName": "Pierre",
       "note": "Le patient a arrêté de fumer l’année dernière mais a repris récemment. Dyspnée nocturne occasionnelle."
     },
     {
-      "patId": 9,
+      "patId": 4,
       "patFirstName": "Sophie",
       "note": "Le patient se plaint d’essoufflement à l’effort et de douleurs lombaires après position assise prolongée. IMC 28, tension normale, rythme cardiaque régulier. Hémoglobine A1C 6,2 %. Cholestérol normal."
     },
     {
-      "patId": 9,
+      "patId": 4,
       "patFirstName": "Sophie",
       "note": "Le patient a commencé à fumer récemment. Signale vertiges occasionnels."
     },
     {
-      "patId": 10,
+      "patId": 5,
       "patFirstName": "Laurent",
       "note": "Patient à haut risque métabolique. IMC 31 kg/m², antécédents familiaux de diabète et hypertension. Glycémie à jeun 1,25 g/L, HbA1c 7,2 %. Polyurie et soif excessive. Tension 145/90 mmHg."
     }

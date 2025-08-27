@@ -14,12 +14,6 @@ CREATE TABLE patients  (
 );
 
 INSERT INTO patients (first_name, last_name, birth_date, gender, address, phone, early_onset_mail_sent) VALUES
-    ('TestNone', 'Test', '1966-12-31', 'F', '1 Brookside St', '100-222-3333', FALSE),
-    ('TestBorderline', 'Test', '1945-06-24', 'M', '2 High St', '200-333-4444', FALSE),
-    ('TestInDanger', 'Test', '2004-06-18', 'M', '3 Club Road', '300-444-5555', FALSE),
-    ('TestEarlyOnset', 'Test', '2002-06-28', 'F', '4 Valley Dr', '400-555-6666', FALSE),
-    ('TestHighRisk', 'Test', '1955-03-12', 'M', '5 River Rd', '500-666-7777', FALSE),
-
     ('Jean', 'Dupont', '1980-03-15', 'M', '12 Rue de la Paix', '501-123-4567', FALSE),
     ('Marie', 'Martin', '1975-08-22', 'F', '34 Avenue des Champs', '502-234-5678', FALSE),
     ('Pierre', 'Durand', '1990-01-10', 'M', '56 Boulevard Saint-Michel', '503-345-6789', FALSE),
