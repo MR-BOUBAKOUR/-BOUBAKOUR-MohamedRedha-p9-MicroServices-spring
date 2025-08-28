@@ -94,10 +94,10 @@ const handleReject = () => console.log('Reject clicked')
                     </div>
                 </div>
 
-                <div class="action-box">
-                    <button @click="handleAccept" :disabled="!canEdit">Accepter</button>
-                    <button @click="handleModify" :disabled="!canEdit">Modifier</button>
-                    <button @click="handleReject" :disabled="!canEdit">Refuser</button>
+                <div v-if="canEdit" class="action-box">
+                  <button @click="handleAccept">Accepter</button>
+                  <button @click="handleModify">Modifier</button>
+                  <button @click="handleReject">Refuser</button>
                 </div>
             </div>
         </div>
