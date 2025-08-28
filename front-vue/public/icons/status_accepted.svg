@@ -1,4 +1,17 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="12" cy="12" r="11" stroke="#4CAF50" stroke-width="2"/>
-    <path d="M7 12L10 15L17 8" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <!-- Outer frame -->
+    <rect x="1" y="1" width="118" height="118" rx="8" ry="8" stroke="#4CAF50" stroke-width="5" fill="none"/>
+
+    <!-- Circle (upper 70%) -->
+    <circle cx="60" cy="45" r="30" stroke="#4CAF50" stroke-width="5" fill="none"/>
+
+    <!-- Thin checkmark centered in the circle -->
+    <g transform="translate(60,45) scale(2.5)">
+        <path d="M-6 0 L-1 5 L6 -4" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+
+    <!-- Text (lower 30%) -->
+    <text x="60" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="800" text-anchor="middle" fill="#4CAF50">
+        Accepté
+    </text>
 </svg>

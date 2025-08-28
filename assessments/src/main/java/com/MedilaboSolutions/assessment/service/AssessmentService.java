@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Arrays;
@@ -61,13 +62,60 @@ public class AssessmentService {
         }
     }
 
-    public List<AssessmentDto> findAssessmentsByPatientId(Long patId, String correlationId) {
+    public List<AssessmentDto> findAssessmentsByPatientId(Long patId) {
         List<Assessment> assessments = assessmentRepository.findByPatIdOrderByCreatedAtDesc(patId);
 
         return assessments.stream()
                 .map(assessmentMapper::toAssessmentDto)
                 .toList();
     }
+
+    public AssessmentDto findAssessmentById(Long assessmentId) {
+        Assessment assessment = assessmentRepository.findById(assessmentId)
+                .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
+
+        return assessmentMapper.toAssessmentDto(assessment);
+    }
+
+    public AssessmentDto updateAssessment(Long assessmentId, AssessmentDto updatedAssessment) {
+        Assessment existingAssessment = assessmentRepository.findById(assessmentId)
+                .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
+
+        if (!"PENDING".equals(existingAssessment.getStatus())) {
+            throw new IllegalStateException("Only PENDING assessments can be modified");
+        }
+
+        existingAssessment.setLevel(updatedAssessment.getLevel());
+        existingAssessment.setAnalysis(updatedAssessment.getAnalysis());
+        existingAssessment.setContext(updatedAssessment.getContext());
+        existingAssessment.setRecommendations(updatedAssessment.getRecommendations());
+        existingAssessment.setSources(updatedAssessment.getSources());
+        existingAssessment.setStatus("UPDATED");
+        existingAssessment.setUpdatedAt(Instant.now());
+
+        assessmentRepository.save(existingAssessment);
+        log.info("Assessment {} updated", assessmentId);
+
+        return assessmentMapper.toAssessmentDto(existingAssessment);
+    }
+
+    public AssessmentDto updateStatus(Long assessmentId, String newStatus) {
+        Assessment existingAssessment = assessmentRepository.findById(assessmentId)
+                .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
+
+        if (!"PENDING".equals(existingAssessment.getStatus())) {
+            throw new IllegalStateException("Only PENDING assessments can be modified");
+        }
+
+        existingAssessment.setStatus(newStatus);
+        existingAssessment.setUpdatedAt(Instant.now());
+
+        assessmentRepository.save(existingAssessment);
+        log.info("Assessment {} updated to status {}", assessmentId, newStatus);
+
+        return assessmentMapper.toAssessmentDto(existingAssessment);
+    }
+
 
     public AssessmentDto generateAssessment(Long patId, String correlationId) {
 
@@ -152,7 +200,7 @@ public class AssessmentService {
 
                     content = cachedRefsFromFile.getOrDefault(
                             jsonKey,
-                            "Référence fictive (origine: depuis un document supplémentaire rajouté afin d'illustrer la capacité de l'application à exploiter plusieurs fichiers dans notre RAG)."
+                            "simulated_chunks.json (contient des informations médicales générées par ChatGPT : document supplémentaire ajouté pour illustrer la capacité de l'application à exploiter plusieurs fichiers dans notre RAG)."
                     );
                 } else {
                     // Otherwise (ref with letters or no ref) → keep only the page

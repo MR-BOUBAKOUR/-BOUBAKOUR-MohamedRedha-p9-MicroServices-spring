@@ -7,10 +7,12 @@ import { useAuthStore } from '@/stores/auth'
 const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
-const patientId = computed(() => route.params.id)
+const patientId = computed(() => route.params.patientId)
 
 const showReturnToPatientsLink = computed(() => route.name === 'patient')
-const showReturnToPatientLink = computed(() => route.name === 'patient-edit')
+const showReturnToPatientLink = computed(() =>
+    route.name === 'patient-edit' || route.name === 'assessment-edit'
+)
 
 const handleLogout = async () => {
     await authStore.logout()
@@ -82,7 +84,7 @@ watch(
                     </RouterLink>
                     <RouterLink
                         v-if="showReturnToPatientLink"
-                        :to="{ name: 'patient', params: { id: patientId } }"
+                        :to="{ name: 'patient', params: { patientId: patientId } }"
                     >
                         ◀ Retour à la fiche du patient
                     </RouterLink>

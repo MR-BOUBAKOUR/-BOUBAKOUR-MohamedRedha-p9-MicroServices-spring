@@ -4,6 +4,7 @@ import PatientsView from '../views/PatientsView.vue'
 import PatientView from '@/views/PatientView.vue'
 import LoginView from '@/views/LoginView.vue'
 import PatientEditView from '@/views/PatientEditView.vue'
+import AssessmentEditView from '@/views/AssessmentEditView.vue'
 import OAuth2CallbackView from '@/views/OAuth2CallbackView.vue'
 
 const router = createRouter({
@@ -28,15 +29,21 @@ const router = createRouter({
             meta: { requiresAuth: true },
         },
         {
-            path: '/patients/:id',
+            path: '/patients/:patientId',
             name: 'patient',
             component: PatientView,
             meta: { requiresAuth: true },
         },
         {
-            path: '/patients/:id/edit',
+            path: '/patients/:patientId/edit',
             name: 'patient-edit',
             component: PatientEditView,
+            meta: { requiresAuth: true },
+        },
+        {
+            path: '/patients/:patientId/assessments/:assessmentId/edit',
+            name: 'assessment-edit',
+            component: AssessmentEditView,
             meta: { requiresAuth: true },
         },
         {

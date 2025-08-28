@@ -45,7 +45,7 @@ public class SecurityConfig {
                     config.setAllowCredentials(true);
                     config.setAllowedOrigins(List.of("http://localhost:5173"));     // ⚠️ in prod — https
                     config.setAllowedHeaders(List.of("*"));
-                    config.setAllowedMethods(List.of("GET", "POST", "PUT", "OPTIONS"));
+                    config.setAllowedMethods(List.of("*"));
                     return config;
                 }))
                 // When an unauthenticated user tries to access a protected resource,

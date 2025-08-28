@@ -22,10 +22,7 @@ defineProps({
             </li>
 
             <!-- Existing assessments -->
-            <li
-                v-for="(assessment, index) in assessments"
-                :key="assessment.id ?? index"
-            >
+            <li v-for="(assessment, index) in assessments" :key="assessment.id ?? index">
                 <AssessmentCard :assessment="assessment" />
             </li>
         </TransitionGroup>

@@ -27,7 +27,7 @@ defineProps({
                 <td>{{ patient.birthDate }}</td>
                 <td>{{ patient.gender }}</td>
                 <td>
-                    <RouterLink :to="{ name: 'patient', params: { id: patient.id } }">
+                    <RouterLink :to="{ name: 'patient', params: { patientId: patient.id } }">
                         Voir
                     </RouterLink>
                 </td>

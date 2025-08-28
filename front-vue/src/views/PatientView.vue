@@ -10,7 +10,7 @@ import { fetchNotesByPatientId, createNote } from '@/services/note-service'
 import { fetchAssessmentsByPatientId, generateAssessmentByPatientId } from '@/services/assessment-service'
 
 const route = useRoute()
-const patientId = Number(route.params.id)
+const patientId = Number(route.params.patientId)
 
 const patient = ref()
 const notes = ref([])

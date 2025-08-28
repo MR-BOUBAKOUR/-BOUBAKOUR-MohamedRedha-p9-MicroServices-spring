@@ -13,9 +13,9 @@ const api = axios.create({
 
 setupAxiosInterceptors(api)
 
-export async function fetchAssessmentsByPatientId(id) {
+export async function fetchAssessmentsByPatientId(patientId) {
     try {
-        const response = await api.get(`/assessments/${id}`)
+        const response = await api.get(`/assessments/patient/${patientId}`)
         return response.data.data
     } catch (error) {
         if (error.response?.status !== 401) {
@@ -32,9 +32,9 @@ export async function fetchAssessmentsByPatientId(id) {
     }
 }
 
-export async function generateAssessmentByPatientId(id) {
+export async function generateAssessmentByPatientId(patientId) {
     try {
-        const response = await api.get(`/assessments/${id}/generate`)
+        const response = await api.get(`/assessments/patient/${patientId}/generate`)
         return response.data.data
     } catch (error) {
         if (error.response?.status !== 401) {
@@ -46,6 +46,77 @@ export async function generateAssessmentByPatientId(id) {
             } else {
                 setError('Erreur de connexion.')
             }
+        }
+        throw error
+    }
+}
+
+export async function fetchAssessmentById(assessmentId) {
+    try {
+        const response = await api.get(`/assessments/${assessmentId}`)
+        return response.data.data
+    } catch (error) {
+        if (error.response?.status !== 401) {
+            if (axios.isAxiosError(error) && error.response) {
+                setError(
+                    error.response.data.message ||
+                    "Erreur lors de la récupération de l'évaluation.",
+                )
+            } else {
+                setError('Erreur de connexion.')
+            }
+        }
+        throw error
+    }
+}
+
+export async function acceptAssessment(assessmentId) {
+    try {
+        const response = await api.patch(`/assessments/${assessmentId}/accept`)
+        return response.data.data
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            setError(
+                error.response.data.message ||
+                "Erreur lors de l'acceptation de l'évaluation."
+            )
+        } else {
+            setError('Erreur de connexion.')
+        }
+        throw error
+    }
+}
+
+export async function updateAssessment(assessmentId, updatedAssessment) {
+    try {
+        const response = await api.patch(`/assessments/${assessmentId}`, updatedAssessment)
+        return response.data.data
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            setError(
+                error.response.data.message ||
+                "Erreur lors de la mise à jour de l'évaluation."
+            )
+        } else {
+            setError('Erreur de connexion.')
+        }
+        throw error
+    }
+}
+
+
+export async function rejectAssessment(assessmentId) {
+    try {
+        const response = await api.patch(`/assessments/${assessmentId}/reject`)
+        return response.data.data
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            setError(
+                error.response.data.message ||
+                "Erreur lors du refus de l'évaluation."
+            )
+        } else {
+            setError('Erreur de connexion.')
         }
         throw error
     }

@@ -1,5 +1,10 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref} from 'vue'
+import { acceptAssessment, rejectAssessment } from '@/services/assessment-service.js'
+import { setError } from '@/stores/error.js'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const props = defineProps({
     assessment: {
@@ -8,47 +13,71 @@ const props = defineProps({
     },
 })
 
-const resultClass = computed(() => {
-    if (!props.assessment?.level) return ''
-
-    switch (props.assessment.level) {
-        case 'VERY_LOW': return 'risk-very-low'
-        case 'LOW': return 'risk-low'
-        case 'MODERATE': return 'risk-moderate'
-        case 'HIGH': return 'risk-high'
-        default: return ''
-    }
-})
+const currentStatus = ref(props.assessment.status)
 
 const statusIcon = computed(() => {
-    switch (props.assessment.status) {
-        case 'ACCEPTED': return '/icons/status_accepted.svg'
-        case 'UPDATED': return '/icons/status_updated.svg'
-        case 'REJECTED': return '/icons/status_rejected.svg'
-        case 'PENDING': return '/icons/status_pending.svg'
-        default: return '/icons/status_pending.svg'
+    switch (currentStatus.value) {
+        case 'ACCEPTED':
+            return '/icons/status_accepted.svg'
+        case 'UPDATED':
+            return '/icons/status_updated.svg'
+        case 'REJECTED':
+            return '/icons/status_rejected.svg'
+        case 'PENDING':
+            return '/icons/status_pending.svg'
+        default:
+            return '/icons/status_pending.svg'
     }
 })
 
 const levelIcon = computed(() => {
     switch (props.assessment.level) {
-        case 'VERY_LOW': return '/icons/risk_very_low.svg'
-        case 'LOW': return '/icons/risk_low.svg'
-        case 'MODERATE': return '/icons/risk_moderate.svg'
-        case 'HIGH': return '/icons/risk_high.svg'
-        default: return '/icons/risk_low.svg'
+        case 'VERY_LOW':
+            return '/icons/risk_very_low.svg'
+        case 'LOW':
+            return '/icons/risk_low.svg'
+        case 'MODERATE':
+            return '/icons/risk_moderate.svg'
+        case 'HIGH':
+            return '/icons/risk_high.svg'
+        default:
+            return '/icons/risk_low.svg'
     }
 })
 
-const canEdit = computed(() => props.assessment.status === 'PENDING')
+const canEdit = computed(() => currentStatus.value === 'PENDING')
 
-const handleAccept = () => console.log('Accept clicked')
-const handleModify = () => console.log('Modify clicked')
-const handleReject = () => console.log('Reject clicked')
+const handleAccept = async () => {
+    try {
+        const updated = await acceptAssessment(props.assessment.id)
+        currentStatus.value = updated.status
+    } catch (err) {
+        setError(err.message || 'Erreur lors de l’acceptation.')
+    }
+}
+
+const handleModify = () => {
+  router.push({
+    name: 'assessment-edit',
+    params: {
+      patientId: props.assessment.patId,
+      assessmentId: props.assessment.id,
+    },
+  })
+}
+
+const handleReject = async () => {
+    try {
+        const updated = await rejectAssessment(props.assessment.id)
+        currentStatus.value = updated.status
+    } catch (err) {
+        setError(err.message || 'Erreur lors du refus.')
+    }
+}
 </script>
 
 <template>
-    <section :class="['assessment-card', resultClass]">
+    <section class="assessment-card">
         <div class="card-container">
             <!-- Left: 80% -->
             <div class="card-left">
@@ -64,7 +93,9 @@ const handleReject = () => console.log('Reject clicked')
 
                     <p><strong>RECOMMANDATIONS</strong></p>
                     <ul>
-                        <li v-for="(item, index) in assessment.recommendations" :key="index">{{ item }}</li>
+                        <li v-for="(item, index) in assessment.recommendations" :key="index">
+                            {{ item }}
+                        </li>
                     </ul>
                 </div>
 
@@ -72,7 +103,7 @@ const handleReject = () => console.log('Reject clicked')
                 <div class="info-secondary">
                     <p><strong>CRÉÉ LE</strong></p>
                     <p>{{ new Date(assessment.createdAt).toLocaleString() }}</p>
-                    
+
                     <p><strong>SOURCES</strong></p>
                     <ul>
                         <li v-for="(item, index) in assessment.sources" :key="index">{{ item }}</li>
@@ -87,23 +118,22 @@ const handleReject = () => console.log('Reject clicked')
                         <p class="level-label">RISQUE</p>
                         <img :src="levelIcon" alt="level" width="100" height="100" />
                     </div>
-                    
+
                     <div class="status-box">
-                        <p class="status-label">VALIDATION<br>MEDECIN</p>
+                        <p class="status-label">AVIS<br>MEDECIN</p>
                         <img :src="statusIcon" alt="status" width="100" height="100" />
                     </div>
                 </div>
 
                 <div v-if="canEdit" class="action-box">
-                  <button @click="handleAccept">Accepter</button>
-                  <button @click="handleModify">Modifier</button>
-                  <button @click="handleReject">Refuser</button>
+                    <button @click="handleAccept">Accepter</button>
+                    <button @click="handleModify">Modifier</button>
+                    <button @click="handleReject">Refuser</button>
                 </div>
             </div>
         </div>
     </section>
 </template>
-
 
 <style scoped>
 .assessment-card {
@@ -131,7 +161,7 @@ const handleReject = () => console.log('Reject clicked')
 
 .info-secondary {
     opacity: 0.9;
-    font-size: 0.75em;
+    font-size: 0.65em;
 }
 
 /* Right panel 20% */
@@ -190,12 +220,16 @@ const handleReject = () => console.log('Reject clicked')
     cursor: pointer;
 }
 
-.action-box button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+.action-box button:nth-child(1) {
+    background-color: #4caf50;
+    color: white;
 }
-
-.action-box button:nth-child(1) { background-color: #4caf50; color: white; }
-.action-box button:nth-child(2) { background-color: #2196f3; color: white; }
-.action-box button:nth-child(3) { background-color: #f44336; color: white; }
+.action-box button:nth-child(2) {
+    background-color: #2196f3;
+    color: white;
+}
+.action-box button:nth-child(3) {
+    background-color: #f44336;
+    color: white;
+}
 </style>

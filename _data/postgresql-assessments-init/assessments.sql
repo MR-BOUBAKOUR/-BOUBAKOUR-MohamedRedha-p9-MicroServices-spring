@@ -136,7 +136,7 @@ VALUES
 -- Patient 5
 -- -----------------------
 INSERT INTO assessments (id, pat_id, level, status, analysis, created_at, updated_at)
-VALUES (5, 5, 'HIGH', 'ACCEPTED', 'Risque métabolique élevé, hyperglycémie et hypertension. IMC 31, antécédents familiaux de diabète. Polyurie et soif excessive. Risque élevé de complications cardiovasculaires et diabétiques.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES (5, 5, 'HIGH', 'PENDING', 'Risque métabolique élevé, hyperglycémie et hypertension. IMC 31, antécédents familiaux de diabète. Polyurie et soif excessive. Risque élevé de complications cardiovasculaires et diabétiques.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO assessment_contexts (assessment_id, context_item)
 VALUES
