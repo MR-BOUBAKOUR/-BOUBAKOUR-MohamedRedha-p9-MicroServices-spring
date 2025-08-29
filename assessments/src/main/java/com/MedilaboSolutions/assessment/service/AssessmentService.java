@@ -77,6 +77,17 @@ public class AssessmentService {
         return assessmentMapper.toAssessmentDto(assessment);
     }
 
+    public AssessmentDto createAssessment(Long patId, AssessmentCreateDto newAssessment) {
+        Assessment assessment = assessmentMapper.toAssessment(newAssessment);
+
+        assessment.setStatus("MANUAL");
+        assessment.setPatId(patId);
+
+        Assessment createdAssessment = assessmentRepository.save(assessment);
+
+        return assessmentMapper.toAssessmentDto(createdAssessment);
+    }
+
     public AssessmentDto updateAssessment(Long assessmentId, AssessmentDto updatedAssessment) {
         Assessment existingAssessment = assessmentRepository.findById(assessmentId)
                 .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
@@ -103,8 +114,8 @@ public class AssessmentService {
         Assessment existingAssessment = assessmentRepository.findById(assessmentId)
                 .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
 
-        if (!"PENDING".equals(existingAssessment.getStatus())) {
-            throw new IllegalStateException("Only PENDING assessments can be modified");
+        if (!"PENDING".equals(existingAssessment.getStatus()) && !"REFUSED-PENDING".equals(existingAssessment.getStatus())) {
+            throw new IllegalStateException("Only PENDING or REFUSED-PENDING assessments can be modified");
         }
 
         existingAssessment.setStatus(newStatus);
@@ -115,7 +126,6 @@ public class AssessmentService {
 
         return assessmentMapper.toAssessmentDto(existingAssessment);
     }
-
 
     public AssessmentDto generateAssessment(Long patId, String correlationId) {
 

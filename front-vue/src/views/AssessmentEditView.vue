@@ -19,7 +19,7 @@ onMounted(async () => {
 async function handleAssessmentUpdate(updatedAssessment) {
     try {
         await updateAssessment(assessmentId, updatedAssessment)
-        router.push({ name: 'patient', params: { patientId: patientId } })
+        router.push({ name: 'patient', params: { patientId } })
     } catch (e) {
         console.warn('Erreur lors de la mise à jour de l\'assessment.', e)
     }
@@ -30,7 +30,7 @@ async function handleAssessmentUpdate(updatedAssessment) {
     <main>
         <AssessmentForm
             v-if="assessment"
-            :assessment="assessment"
+            :initialData="assessment"
             @submit="handleAssessmentUpdate"
         />
     </main>

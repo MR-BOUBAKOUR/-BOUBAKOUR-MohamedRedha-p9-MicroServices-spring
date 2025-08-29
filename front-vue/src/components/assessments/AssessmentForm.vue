@@ -2,17 +2,16 @@
 import { ref } from 'vue'
 
 const props = defineProps({
-    assessment: { type: Object, required: true }
+    initialData: { type: Object, default: () => ({}) }
 })
-
 const emit = defineEmits(['submit'])
 
 const form = ref({
-    analysis: props.assessment.analysis || '',
-    level: props.assessment.level || '',
-    context: [...(props.assessment.context || [])],
-    recommendations: [...(props.assessment.recommendations || [])],
-    sources: [...(props.assessment.sources || [])],
+    analysis: props.initialData.analysis || '',
+    level: props.initialData.level || '',
+    context: [...(props.initialData.context || [])],
+    recommendations: [...(props.initialData.recommendations || [])],
+    sources: [...(props.initialData.sources || [])],
 })
 
 function handleSubmit() {
@@ -29,7 +28,7 @@ function handleSubmit() {
                     <input v-model="form.context[index]" />
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label>Analyse</label>
                 <textarea v-model="form.analysis" rows="15"></textarea>
@@ -44,7 +43,7 @@ function handleSubmit() {
                     <option value="HIGH">High</option>
                 </select>
             </div>
-            
+
             <div class="form-group">
                 <label>Recommandations</label>
                 <div v-for="(item, index) in form.recommendations" :key="index">
@@ -59,7 +58,7 @@ function handleSubmit() {
                 </div>
             </div>
 
-            <button type="submit">Mettre à jour l’évaluation</button>
+            <button type="submit">Enregistrer l’évaluation</button>
         </form>
     </section>
 </template>

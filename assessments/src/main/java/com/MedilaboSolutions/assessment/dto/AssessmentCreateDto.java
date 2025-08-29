@@ -1,28 +1,16 @@
 package com.MedilaboSolutions.assessment.dto;
 
-import lombok.*;
-
-import java.time.Instant;
+import lombok.Data;
 import java.util.List;
 
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-public class AssessmentDto {
-
-    private Long id;
+@Data
+public class AssessmentCreateDto {
 
     private Long patId;
     private String level;
-    private String status;
-
     private List<String> context;
+
     private String analysis;
     private List<String> recommendations;
     private List<String> sources;
-
-    private Instant createdAt;
-    private Instant updatedAt;
 }

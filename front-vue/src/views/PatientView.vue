@@ -7,7 +7,11 @@ import NoteForm from '@/components/notes/NoteForm.vue'
 import AssessmentsList from '@/components/assessments/AssessmentsList.vue'
 import { fetchPatientById } from '@/services/patient-service'
 import { fetchNotesByPatientId, createNote } from '@/services/note-service'
-import { fetchAssessmentsByPatientId, generateAssessmentByPatientId } from '@/services/assessment-service'
+import {
+    fetchAssessmentsByPatientId,
+    generateAssessmentByPatientId,
+    refuseAssessment,
+} from '@/services/assessment-service'
 
 const route = useRoute()
 const patientId = Number(route.params.patientId)
@@ -34,13 +38,27 @@ async function handleNoteCreate(note) {
 
         const createdNote = await createNote(newNote)
         notes.value.push(createdNote)
-        
+
         isAssessmentLoading.value = true
         await generateAssessmentByPatientId(patientId)
 
         assessments.value = await fetchAssessmentsByPatientId(patientId)
     } catch (e) {
         console.warn('Erreur lors de la création de la note.')
+    } finally {
+        isAssessmentLoading.value = false
+    }
+}
+
+async function handleAssessmentReload(assessment) {
+    try {
+        isAssessmentLoading.value = true
+        // update the final status of the previous assessment to "REFUSED"
+        await refuseAssessment(assessment.id)
+        // generate a new assessment
+        await generateAssessmentByPatientId(assessment.patId)
+
+        assessments.value = await fetchAssessmentsByPatientId(patientId)
     } finally {
         isAssessmentLoading.value = false
     }
@@ -52,6 +70,10 @@ async function handleNoteCreate(note) {
         <PatientCard v-if="patient" :patient="patient" />
         <NotesList :notes="notes" />
         <NoteForm @submit="handleNoteCreate" />
-        <AssessmentsList :assessments="assessments" :loading="isAssessmentLoading"/>
+        <AssessmentsList
+            @reload="handleAssessmentReload"
+            :assessments="assessments"
+            :loading="isAssessmentLoading"
+        />
     </main>
 </template>

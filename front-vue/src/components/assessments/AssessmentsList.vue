@@ -23,7 +23,7 @@ defineProps({
 
             <!-- Existing assessments -->
             <li v-for="(assessment, index) in assessments" :key="assessment.id ?? index">
-                <AssessmentCard :assessment="assessment" />
+                <AssessmentCard :assessment="assessment" @reload="$emit('reload', $event)"/>
             </li>
         </TransitionGroup>
 

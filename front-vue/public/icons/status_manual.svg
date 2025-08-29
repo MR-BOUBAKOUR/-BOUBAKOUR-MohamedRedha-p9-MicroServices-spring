@@ -1,0 +1,21 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <!-- Outer frame -->
+    <rect x="1" y="1" width="118" height="118" rx="8" ry="8" stroke="#FF9800" stroke-width="5" fill="none"/>
+
+    <!-- Circle (upper 70%) -->
+    <circle cx="60" cy="45" r="30" stroke="#FF9800" stroke-width="5" fill="none"/>
+
+    <!-- Human head icon -->
+    <g transform="translate(60,45) scale(1.8)">
+        <!-- Head circle -->
+        <circle cx="0" cy="-2" r="5" stroke="#FF9800" stroke-width="1.5" fill="none"/>
+        <!-- Shoulders / torso -->
+        <path d="M-6,5 q6,-4 12,0" stroke="#FF9800" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- Text (lower 30%) split on 2 lines -->
+    <text x="60" y="95" font-family="Arial, sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="#FF9800">
+        <tspan x="60" dy="0">Saisie</tspan>
+        <tspan x="60" dy="14">manuelle</tspan>
+    </text>
+</svg>

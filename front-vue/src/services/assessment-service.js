@@ -51,6 +51,23 @@ export async function generateAssessmentByPatientId(patientId) {
     }
 }
 
+export async function createAssessment(patientId, newAssessment) {
+    try {
+        const response = await api.post(`/assessments/patient/${patientId}/create`, newAssessment)
+        return response.data.data
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            setError(
+                error.response.data.message ||
+                "Erreur lors de la création de l'évaluation."
+            )
+        } else {
+            setError('Erreur de connexion.')
+        }
+        throw error
+    }
+}
+
 export async function fetchAssessmentById(assessmentId) {
     try {
         const response = await api.get(`/assessments/${assessmentId}`)
@@ -104,10 +121,26 @@ export async function updateAssessment(assessmentId, updatedAssessment) {
     }
 }
 
-
-export async function rejectAssessment(assessmentId) {
+export async function refusePendingAssessment(assessmentId) {
     try {
-        const response = await api.patch(`/assessments/${assessmentId}/reject`)
+        const response = await api.patch(`/assessments/${assessmentId}/refuse-pending`)
+        return response.data.data
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            setError(
+                error.response.data.message ||
+                "Erreur lors du refus transitoire de l'évaluation."
+            )
+        } else {
+            setError('Erreur de connexion.')
+        }
+        throw error
+    }
+}
+
+export async function refuseAssessment(assessmentId) {
+    try {
+        const response = await api.patch(`/assessments/${assessmentId}/refuse`)
         return response.data.data
     } catch (error) {
         if (axios.isAxiosError(error) && error.response) {

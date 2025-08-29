@@ -1,6 +1,6 @@
 <script setup>
-import { computed, ref} from 'vue'
-import { acceptAssessment, rejectAssessment } from '@/services/assessment-service.js'
+import { computed, ref } from 'vue'
+import { acceptAssessment, refusePendingAssessment } from '@/services/assessment-service.js'
 import { setError } from '@/stores/error.js'
 import { useRouter } from 'vue-router'
 
@@ -13,6 +13,8 @@ const props = defineProps({
     },
 })
 
+const emit = defineEmits(['reload'])
+
 const currentStatus = ref(props.assessment.status)
 
 const statusIcon = computed(() => {
@@ -21,8 +23,10 @@ const statusIcon = computed(() => {
             return '/icons/status_accepted.svg'
         case 'UPDATED':
             return '/icons/status_updated.svg'
-        case 'REJECTED':
-            return '/icons/status_rejected.svg'
+        case 'REFUSED':
+            return '/icons/status_refused.svg'
+        case 'MANUAL':
+            return '/icons/status_manual.svg'
         case 'PENDING':
             return '/icons/status_pending.svg'
         default:
@@ -45,7 +49,9 @@ const levelIcon = computed(() => {
     }
 })
 
-const canEdit = computed(() => currentStatus.value === 'PENDING')
+const canEdit = computed(() =>
+    currentStatus.value === 'PENDING' || currentStatus.value === 'REFUSED-PENDING'
+)
 
 const handleAccept = async () => {
     try {
@@ -57,22 +63,38 @@ const handleAccept = async () => {
 }
 
 const handleModify = () => {
-  router.push({
-    name: 'assessment-edit',
-    params: {
-      patientId: props.assessment.patId,
-      assessmentId: props.assessment.id,
-    },
-  })
+    router.push({
+        name: 'assessment-edit',
+        params: {
+            patientId: props.assessment.patId,
+            assessmentId: props.assessment.id,
+        },
+    })
 }
 
-const handleReject = async () => {
+const handleRefusedPending = async () => {
     try {
-        const updated = await rejectAssessment(props.assessment.id)
-        currentStatus.value = updated.status
+        const refusedPending = await refusePendingAssessment(props.assessment.id)
+        currentStatus.value = refusedPending.status
     } catch (err) {
-        setError(err.message || 'Erreur lors du refus.')
+        setError(err.message || 'Erreur lors du refus transitoire.')
     }
+}
+
+const handleReload = () => {
+    emit('reload', props.assessment)
+    // Can do better... FOR NOW *
+    currentStatus.value = "REFUSED"
+}
+
+const handleManual = () => {
+    router.push({
+        name: 'assessment-create-manual',
+        params: {
+            patientId: props.assessment.patId,
+            assessmentId: props.assessment.id,
+        },
+    })
 }
 </script>
 
@@ -120,15 +142,22 @@ const handleReject = async () => {
                     </div>
 
                     <div class="status-box">
-                        <p class="status-label">AVIS<br>MEDECIN</p>
+                        <p class="status-label">STATUT</p>
                         <img :src="statusIcon" alt="status" width="100" height="100" />
                     </div>
                 </div>
 
-                <div v-if="canEdit" class="action-box">
-                    <button @click="handleAccept">Accepter</button>
-                    <button @click="handleModify">Modifier</button>
-                    <button @click="handleReject">Refuser</button>
+                <div v-if="canEdit">
+                    <div v-if="currentStatus === 'PENDING'" class="action-box">
+                        <button class="button-accept" @click="handleAccept">Accepter</button>
+                        <button class="button-modify" @click="handleModify">Modifier</button>
+                        <button class="button-refuse" @click="handleRefusedPending">Refuser</button>
+                    </div>
+
+                    <div v-else-if="currentStatus === 'REFUSED-PENDING'" class="action-box">
+                        <button class="button-reload" @click="handleReload">Relancer une évaluation AI</button>
+                        <button class="button-manual" @click="handleManual">Créer une évaluation manuellement</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -218,18 +247,29 @@ const handleReject = async () => {
     border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
+    color: white;
+    border: none;
+    transition: background-color 0.2s;
 }
 
-.action-box button:nth-child(1) {
+.button-accept {
     background-color: #4caf50;
-    color: white;
 }
-.action-box button:nth-child(2) {
+
+.button-modify {
     background-color: #2196f3;
-    color: white;
 }
-.action-box button:nth-child(3) {
+
+.button-refuse {
     background-color: #f44336;
-    color: white;
+}
+
+.button-reload,
+.button-manual {
+    background-color: #ff9800;
+}
+
+.action-box button:hover {
+    opacity: 0.9;
 }
 </style>

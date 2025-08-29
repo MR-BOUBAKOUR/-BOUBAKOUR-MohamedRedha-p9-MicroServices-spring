@@ -6,6 +6,7 @@ import LoginView from '@/views/LoginView.vue'
 import PatientEditView from '@/views/PatientEditView.vue'
 import AssessmentEditView from '@/views/AssessmentEditView.vue'
 import OAuth2CallbackView from '@/views/OAuth2CallbackView.vue'
+import AssessmentCreateView from '@/views/AssessmentCreateView.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,12 @@ const router = createRouter({
             path: '/patients/:patientId/assessments/:assessmentId/edit',
             name: 'assessment-edit',
             component: AssessmentEditView,
+            meta: { requiresAuth: true },
+        },
+        {
+            path: '/patients/:patientId/assessments/:assessmentId/create',
+            name: 'assessment-create-manual',
+            component: AssessmentCreateView,
             meta: { requiresAuth: true },
         },
         {

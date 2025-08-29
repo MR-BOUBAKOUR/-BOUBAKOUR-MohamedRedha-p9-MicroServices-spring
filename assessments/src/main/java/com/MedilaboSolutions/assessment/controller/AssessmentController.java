@@ -1,5 +1,6 @@
 package com.MedilaboSolutions.assessment.controller;
 
+import com.MedilaboSolutions.assessment.dto.AssessmentCreateDto;
 import com.MedilaboSolutions.assessment.dto.AssessmentDto;
 import com.MedilaboSolutions.assessment.dto.SuccessResponse;
 import com.MedilaboSolutions.assessment.service.AssessmentService;
@@ -32,19 +33,6 @@ public class AssessmentController {
                 .body(new SuccessResponse<>(200, "Assessments fetched successfully", assessments));
     }
 
-    @GetMapping("/patient/{patientId}/generate")
-    public ResponseEntity<SuccessResponse<AssessmentDto>> generateAssessmentForPatient(
-            @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
-            @PathVariable Long patientId
-    ) {
-        log.info("Generating assessment for patientId={}", patientId);
-        AssessmentDto assessment = assessmentService.generateAssessment(patientId, correlationId);
-
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new SuccessResponse<>(200, "Assessment generated successfully", assessment));
-    }
-
     @GetMapping("/{assessmentId}")
     public ResponseEntity<SuccessResponse<AssessmentDto>> getAssessmentById(
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
@@ -56,6 +44,32 @@ public class AssessmentController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new SuccessResponse<>(200, "Assessment fetched successfully", assessment));
+    }
+
+    @GetMapping("/patient/{patientId}/generate")
+    public ResponseEntity<SuccessResponse<AssessmentDto>> generateAssessmentForPatient(
+            @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
+            @PathVariable Long patientId
+    ) {
+        log.info("Generating assessment for patientId={}", patientId);
+        AssessmentDto assessment = assessmentService.generateAssessment(patientId, correlationId);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new SuccessResponse<>(201, "Assessment generated successfully", assessment));
+    }
+
+    @PostMapping("/patient/{patientId}/create")
+    public ResponseEntity<SuccessResponse<AssessmentDto>> createAssessmentForPatient(
+            @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
+            @PathVariable Long patientId,
+            @RequestBody AssessmentCreateDto newAssessment
+    ) {
+        log.info("Creating assessment for patientId={}", patientId);
+        AssessmentDto savedAssessment = assessmentService.createAssessment(patientId, newAssessment);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new SuccessResponse<>(201, "Assessment created successfully", savedAssessment));
     }
 
     @PatchMapping("/{assessmentId}")
@@ -81,12 +95,21 @@ public class AssessmentController {
         return ResponseEntity.ok(new SuccessResponse<>(200, "Assessment accepted", updatedAssessment));
     }
 
-    @PatchMapping("/{assessmentId}/reject")
-    public ResponseEntity<SuccessResponse<AssessmentDto>> rejectAssessment(
+    @PatchMapping("/{assessmentId}/refuse-pending")
+    public ResponseEntity<SuccessResponse<AssessmentDto>> refusePendingAssessment(
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
             @PathVariable Long assessmentId
     ) {
-        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, "REJECTED");
-        return ResponseEntity.ok(new SuccessResponse<>(200, "Assessment rejected", updatedAssessment));
+        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, "REFUSED-PENDING");
+        return ResponseEntity.ok(new SuccessResponse<>(200, "Assessment pending refused", updatedAssessment));
+    }
+
+    @PatchMapping("/{assessmentId}/refuse")
+    public ResponseEntity<SuccessResponse<AssessmentDto>> refuseAssessment(
+            @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
+            @PathVariable Long assessmentId
+    ) {
+        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, "REFUSED");
+        return ResponseEntity.ok(new SuccessResponse<>(200, "Assessment refused", updatedAssessment));
     }
 }

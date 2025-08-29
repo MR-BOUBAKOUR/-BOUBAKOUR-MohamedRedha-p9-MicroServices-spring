@@ -11,7 +11,7 @@ const patientId = computed(() => route.params.patientId)
 
 const showReturnToPatientsLink = computed(() => route.name === 'patient')
 const showReturnToPatientLink = computed(() =>
-    route.name === 'patient-edit' || route.name === 'assessment-edit'
+    route.name === 'patient-edit' || route.name === 'assessment-edit' || route.name === 'assessment-create-manual'
 )
 
 const handleLogout = async () => {
