@@ -11,7 +11,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 @Configuration
 public class RabbitMQConfig {
-    public static final String QUEUE_NAME = "high-risk-assessments";
+    public static final String QUEUE_NAME = "assessment-report-ready";
 
     @Bean
     public Queue highRiskAssessmentQueue() {

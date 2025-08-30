@@ -154,3 +154,38 @@ export async function refuseAssessment(assessmentId) {
         throw error
     }
 }
+
+export async function downloadAssessmentPdf(assessmentId) {
+    try {
+        // responseType 'blob' tells Axios to return raw binary data instead of trying to parse JSON
+        const response = await api.get(`/assessments/${assessmentId}/download`, {
+            responseType: 'blob'
+        });
+
+        // Convert the raw bytes into a Blob object, telling the browser it's a PDF
+        const blobResponse = new Blob([response.data], { type: 'application/pdf' });
+
+        // Create a temporary URL that points to the Blob
+        const url = window.URL.createObjectURL(blobResponse);
+
+        // Create an invisible <a> element and set it up to download the file
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `assessment_${assessmentId}.pdf`;
+
+        // Append it to the DOM, trigger a click to start the download, then remove it
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Release the memory used by the temporary URL
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            setError(error.response.data.message || "Erreur lors du téléchargement du PDF.");
+        } else {
+            setError("Erreur de connexion.");
+        }
+        throw error;
+    }
+}

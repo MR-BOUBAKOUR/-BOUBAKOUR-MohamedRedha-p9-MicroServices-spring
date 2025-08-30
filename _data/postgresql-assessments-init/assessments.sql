@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS assessments (
     id BIGSERIAL PRIMARY KEY,
     pat_id BIGINT NOT NULL,
     level VARCHAR(50) NOT NULL,
-    status VARCHAR(50) NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'PENDING',
     analysis TEXT,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP

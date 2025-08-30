@@ -4,6 +4,7 @@ import com.MedilaboSolutions.assessment.dto.AssessmentCreateDto;
 import com.MedilaboSolutions.assessment.dto.AssessmentDto;
 import com.MedilaboSolutions.assessment.dto.SuccessResponse;
 import com.MedilaboSolutions.assessment.service.AssessmentService;
+import com.MedilaboSolutions.assessment.service.PdfService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.util.List;
 public class AssessmentController {
 
     private final AssessmentService assessmentService;
+    private final PdfService pdfService;
 
     @GetMapping("/patient/{patientId}")
     public ResponseEntity<SuccessResponse<List<AssessmentDto>>> getAssessmentsByPatientId(
@@ -66,7 +68,7 @@ public class AssessmentController {
             @RequestBody AssessmentCreateDto newAssessment
     ) {
         log.info("Creating assessment for patientId={}", patientId);
-        AssessmentDto savedAssessment = assessmentService.createAssessment(patientId, newAssessment);
+        AssessmentDto savedAssessment = assessmentService.createAssessment(patientId, newAssessment, correlationId);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new SuccessResponse<>(201, "Assessment created successfully", savedAssessment));
@@ -79,7 +81,7 @@ public class AssessmentController {
             @RequestBody AssessmentDto updatedAssessment
     ) {
         log.info("Updating assessment with id={}", assessmentId);
-        AssessmentDto savedAssessment = assessmentService.updateAssessment(assessmentId, updatedAssessment);
+        AssessmentDto savedAssessment = assessmentService.updateAssessment(assessmentId, updatedAssessment, correlationId);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -91,7 +93,7 @@ public class AssessmentController {
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
             @PathVariable Long assessmentId
     ) {
-        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, "ACCEPTED");
+        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, "ACCEPTED", correlationId);
         return ResponseEntity.ok(new SuccessResponse<>(200, "Assessment accepted", updatedAssessment));
     }
 
@@ -100,7 +102,7 @@ public class AssessmentController {
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
             @PathVariable Long assessmentId
     ) {
-        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, "REFUSED-PENDING");
+        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, "REFUSED-PENDING", correlationId);
         return ResponseEntity.ok(new SuccessResponse<>(200, "Assessment pending refused", updatedAssessment));
     }
 
@@ -109,7 +111,22 @@ public class AssessmentController {
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
             @PathVariable Long assessmentId
     ) {
-        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, "REFUSED");
+        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, "REFUSED", correlationId);
         return ResponseEntity.ok(new SuccessResponse<>(200, "Assessment refused", updatedAssessment));
+    }
+
+    @GetMapping("/{assessmentId}/download")
+    public ResponseEntity<byte[]> downloadAssessmentPdf(
+            @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
+            @PathVariable Long assessmentId
+    ) {
+        log.info("Generating PDF for assessmentId={}", assessmentId);
+
+        byte[] pdfBytes = pdfService.generatePdfAssessment(assessmentId, correlationId);
+
+        return ResponseEntity.ok()
+                .header("Content-Disposition", "inline; filename=assessment_" + assessmentId + ".pdf")
+                .contentType(org.springframework.http.MediaType.APPLICATION_PDF)
+                .body(pdfBytes);
     }
 }

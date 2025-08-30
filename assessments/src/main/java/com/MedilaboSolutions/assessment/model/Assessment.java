@@ -27,7 +27,7 @@ public class Assessment {
     private String level;
 
     @Column(nullable = false)
-    private String status; // PENDING, ACCEPTED, UPDATED, REJECTED
+    private String status = "PENDING"; // PENDING, ACCEPTED, UPDATED, REJECTED
 
     @ElementCollection
     @CollectionTable(name = "assessment_contexts", joinColumns = @JoinColumn(name = "assessment_id"))

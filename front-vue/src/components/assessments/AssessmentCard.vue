@@ -1,6 +1,10 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { acceptAssessment, refusePendingAssessment } from '@/services/assessment-service.js'
+import {
+    acceptAssessment,
+    downloadAssessmentPdf,
+    refusePendingAssessment,
+} from '@/services/assessment-service.js'
 import { setError } from '@/stores/error.js'
 import { useRouter } from 'vue-router'
 
@@ -49,9 +53,11 @@ const levelIcon = computed(() => {
     }
 })
 
-const canEdit = computed(() =>
-    currentStatus.value === 'PENDING' || currentStatus.value === 'REFUSED-PENDING'
+const canEdit = computed(
+    () => currentStatus.value === 'PENDING' || currentStatus.value === 'REFUSED-PENDING',
 )
+
+const canDownload = computed(() => ['ACCEPTED', 'UPDATED', 'MANUAL'].includes(currentStatus.value))
 
 const handleAccept = async () => {
     try {
@@ -84,7 +90,7 @@ const handleRefusedPending = async () => {
 const handleReload = () => {
     emit('reload', props.assessment)
     // Can do better... FOR NOW *
-    currentStatus.value = "REFUSED"
+    currentStatus.value = 'REFUSED'
 }
 
 const handleManual = () => {
@@ -95,6 +101,14 @@ const handleManual = () => {
             assessmentId: props.assessment.id,
         },
     })
+}
+
+const handleDownload = async () => {
+    try {
+        await downloadAssessmentPdf(props.assessment.id)
+    } catch (err) {
+        setError(err.message || 'Erreur lors téléchargement du PDF.')
+    }
 }
 </script>
 
@@ -155,9 +169,19 @@ const handleManual = () => {
                     </div>
 
                     <div v-else-if="currentStatus === 'REFUSED-PENDING'" class="action-box">
-                        <button class="button-reload" @click="handleReload">Relancer une évaluation AI</button>
-                        <button class="button-manual" @click="handleManual">Créer une évaluation manuellement</button>
+                        <button class="button-reload" @click="handleReload">
+                            Relancer une évaluation AI
+                        </button>
+                        <button class="button-manual" @click="handleManual">
+                            Créer une évaluation manuellement
+                        </button>
                     </div>
+                </div>
+
+                <div v-if="canDownload" class="action-box">
+                    <button class="button-download" @click="handleDownload">
+                        Télécharger l’évaluation
+                    </button>
                 </div>
             </div>
         </div>
@@ -252,7 +276,8 @@ const handleManual = () => {
     transition: background-color 0.2s;
 }
 
-.button-accept {
+.button-accept,
+.button-download {
     background-color: #4caf50;
 }
 

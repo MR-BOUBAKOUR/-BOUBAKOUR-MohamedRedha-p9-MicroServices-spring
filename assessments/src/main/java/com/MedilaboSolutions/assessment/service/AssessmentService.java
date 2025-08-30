@@ -8,6 +8,7 @@ import com.MedilaboSolutions.assessment.service.client.NoteFeignClient;
 import com.MedilaboSolutions.assessment.service.client.PatientFeignClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +18,7 @@ import java.io.InputStream;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -32,16 +30,19 @@ public class AssessmentService {
     private final PatientFeignClient patientFeignClient;
     private final NoteFeignClient noteFeignClient;
 
+    private final RabbitTemplate rabbitTemplate;
+
     private final AiAssessmentService aiAssessmentService;
 
     private final AssessmentRepository assessmentRepository;
+
     private final AssessmentMapper assessmentMapper;
 
     private final Map<String, String> cachedRefsFromFile;
 
     public AssessmentService(
             PatientFeignClient patientFeignClient,
-            NoteFeignClient noteFeignClient,
+            NoteFeignClient noteFeignClient, RabbitTemplate rabbitTemplate,
             AiAssessmentService aiAssessmentService,
             AssessmentRepository assessmentRepository,
             AssessmentMapper assessmentMapper,
@@ -50,6 +51,7 @@ public class AssessmentService {
     ) {
         this.patientFeignClient = patientFeignClient;
         this.noteFeignClient = noteFeignClient;
+        this.rabbitTemplate = rabbitTemplate;
         this.aiAssessmentService = aiAssessmentService;
         this.assessmentRepository = assessmentRepository;
         this.assessmentMapper = assessmentMapper;
@@ -77,18 +79,22 @@ public class AssessmentService {
         return assessmentMapper.toAssessmentDto(assessment);
     }
 
-    public AssessmentDto createAssessment(Long patId, AssessmentCreateDto newAssessment) {
+    public AssessmentDto createAssessment(Long patId, AssessmentCreateDto newAssessment, String correlationId) {
         Assessment assessment = assessmentMapper.toAssessment(newAssessment);
 
-        assessment.setStatus("MANUAL");
         assessment.setPatId(patId);
+        assessment.setStatus("PENDING");
 
+        // Saving the assessment to generate an ID
         Assessment createdAssessment = assessmentRepository.save(assessment);
+
+        // Using updateStatus to trigger the email event
+        updateStatus(createdAssessment.getId(), "MANUAL", correlationId);
 
         return assessmentMapper.toAssessmentDto(createdAssessment);
     }
 
-    public AssessmentDto updateAssessment(Long assessmentId, AssessmentDto updatedAssessment) {
+    public AssessmentDto updateAssessment(Long assessmentId, AssessmentDto updatedAssessment, String correlationId) {
         Assessment existingAssessment = assessmentRepository.findById(assessmentId)
                 .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
 
@@ -101,22 +107,18 @@ public class AssessmentService {
         existingAssessment.setContext(updatedAssessment.getContext());
         existingAssessment.setRecommendations(updatedAssessment.getRecommendations());
         existingAssessment.setSources(updatedAssessment.getSources());
-        existingAssessment.setStatus("UPDATED");
-        existingAssessment.setUpdatedAt(Instant.now());
 
         assessmentRepository.save(existingAssessment);
-        log.info("Assessment {} updated", assessmentId);
+
+        // Using updateStatus to trigger the email event
+        updateStatus(assessmentId, "UPDATED", correlationId);
 
         return assessmentMapper.toAssessmentDto(existingAssessment);
     }
 
-    public AssessmentDto updateStatus(Long assessmentId, String newStatus) {
+    public AssessmentDto updateStatus(Long assessmentId, String newStatus, String correlationId) {
         Assessment existingAssessment = assessmentRepository.findById(assessmentId)
                 .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
-
-        if (!"PENDING".equals(existingAssessment.getStatus()) && !"REFUSED-PENDING".equals(existingAssessment.getStatus())) {
-            throw new IllegalStateException("Only PENDING or REFUSED-PENDING assessments can be modified");
-        }
 
         existingAssessment.setStatus(newStatus);
         existingAssessment.setUpdatedAt(Instant.now());
@@ -124,7 +126,22 @@ public class AssessmentService {
         assessmentRepository.save(existingAssessment);
         log.info("Assessment {} updated to status {}", assessmentId, newStatus);
 
+        if (Set.of("ACCEPTED", "UPDATED", "MANUAL").contains(newStatus)) {
+            publishAssessmentReportEvent(existingAssessment, correlationId);
+        }
+
         return assessmentMapper.toAssessmentDto(existingAssessment);
+    }
+
+    private void publishAssessmentReportEvent(Assessment assessment, String correlationId) {
+        AssessmentReportReadyEvent event = new AssessmentReportReadyEvent(
+                assessment.getId(),
+                assessment.getPatId(),
+                correlationId
+        );
+        rabbitTemplate.convertAndSend("assessment-report-ready", event);
+        log.info("AssessmentReportReadyEvent published for assessmentId={} (patientId={}) with correlationId={}",
+                assessment.getId(), assessment.getPatId(), correlationId);
     }
 
     public AssessmentDto generateAssessment(Long patId, String correlationId) {
