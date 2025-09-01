@@ -34,7 +34,7 @@ export async function fetchAssessmentsByPatientId(patientId) {
 
 export async function generateAssessmentByPatientId(patientId) {
     try {
-        const response = await api.get(`/assessments/patient/${patientId}/generate`)
+        const response = await api.post(`/assessments/patient/${patientId}/generate`)
         return response.data.data
     } catch (error) {
         if (error.response?.status !== 401) {

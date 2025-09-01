@@ -18,9 +18,9 @@ public class AiAssessmentService {
 
     private final ChatClient chatClient;
     private final VectorStoreDocumentRetriever documentRetriever;
-    private final SummarizerService summarizerService;
+    private final AiSummarizerService aiSummarizerService;
 
-    public AiAssessmentResponse evaluateDiabetesRisk(int age, String gender, String medicalNotes) {
+    public AiAssessmentResponse assessDiabetesRisk(int age, String gender, String medicalNotes) {
 
         if (medicalNotes == null || medicalNotes.isBlank()) {
             log.warn("Pas de notes médicales : retour direct VERY_LOW");
@@ -75,7 +75,7 @@ public class AiAssessmentService {
         }
 
         // Summarize retrieved chunks while keeping their references and page numbers
-        Document summarizedChunks = summarizerService.summarizeChunks(retrievedChunks);
+        Document summarizedChunks = aiSummarizerService.summarizeChunks(retrievedChunks);
 
         return summarizedChunks.getText();
     }

@@ -65,15 +65,15 @@ public class PdfService {
             Font footerFont = FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 8, Color.GRAY);
 
             // Header
-            Paragraph subtitle = new Paragraph("Medilabo Solutions", titleFont);
-            subtitle.setAlignment(Element.ALIGN_CENTER);
-            subtitle.setSpacingAfter(5);
-            document.add(subtitle);
-
-            Paragraph title = new Paragraph("Rapport d'évaluation médicale", headerFont);
+            Paragraph title = new Paragraph("Medilabo Solutions", titleFont);
             title.setAlignment(Element.ALIGN_CENTER);
-            title.setSpacingAfter(20);
+            title.setSpacingAfter(5);
             document.add(title);
+
+            Paragraph subtitle = new Paragraph("Rapport d'évaluation médicale", headerFont);
+            subtitle.setAlignment(Element.ALIGN_CENTER);
+            subtitle.setSpacingAfter(20);
+            document.add(subtitle);
 
             // Patient data
             document.add(new Paragraph("Informations Patient", headerFont));

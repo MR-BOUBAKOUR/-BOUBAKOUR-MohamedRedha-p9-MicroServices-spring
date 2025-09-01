@@ -18,7 +18,7 @@ import java.util.Map;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class IngestionService {
+public class RagIngestionService {
 
     private final VectorStore vectorStore;
     private final ObjectMapper objectMapper;

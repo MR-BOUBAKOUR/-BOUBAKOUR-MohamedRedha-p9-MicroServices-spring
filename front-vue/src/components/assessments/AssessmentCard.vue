@@ -49,12 +49,12 @@ const levelIcon = computed(() => {
         case 'HIGH':
             return '/icons/risk_high.svg'
         default:
-            return '/icons/risk_low.svg'
+            return null
     }
 })
 
 const canEdit = computed(
-    () => currentStatus.value === 'PENDING' || currentStatus.value === 'REFUSED-PENDING',
+    () => currentStatus.value === 'PENDING' || currentStatus.value === 'REFUSED_PENDING',
 )
 
 const canDownload = computed(() => ['ACCEPTED', 'UPDATED', 'MANUAL'].includes(currentStatus.value))
@@ -168,7 +168,7 @@ const handleDownload = async () => {
                         <button class="button-refuse" @click="handleRefusedPending">Refuser</button>
                     </div>
 
-                    <div v-else-if="currentStatus === 'REFUSED-PENDING'" class="action-box">
+                    <div v-else-if="currentStatus === 'REFUSED_PENDING'" class="action-box">
                         <button class="button-reload" @click="handleReload">
                             Relancer une évaluation AI
                         </button>

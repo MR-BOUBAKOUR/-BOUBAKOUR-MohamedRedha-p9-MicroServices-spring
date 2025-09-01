@@ -3,11 +3,13 @@ package com.MedilaboSolutions.assessment;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 // allow our assessment ms to connect to the other microservices
 // will replace the usage of "RestTemplate / webClient"
 // --> Declarative approach (a JPA repository "like" approach")
 @EnableFeignClients
+@EnableScheduling
 @SpringBootApplication
 public class AssessmentApplication {
 

@@ -1,5 +1,7 @@
 package com.MedilaboSolutions.assessment.service;
 
+import com.MedilaboSolutions.assessment.config.RabbitMQConfig;
+import com.MedilaboSolutions.assessment.controller.AssessmentSseController;
 import com.MedilaboSolutions.assessment.dto.*;
 import com.MedilaboSolutions.assessment.mapper.AssessmentMapper;
 import com.MedilaboSolutions.assessment.model.Assessment;
@@ -30,22 +32,23 @@ public class AssessmentService {
     private final PatientFeignClient patientFeignClient;
     private final NoteFeignClient noteFeignClient;
 
-    private final RabbitTemplate rabbitTemplate;
-
     private final AiAssessmentService aiAssessmentService;
-
     private final AssessmentRepository assessmentRepository;
-
     private final AssessmentMapper assessmentMapper;
+
+    private final AssessmentSseController sseController;
+    private final RabbitTemplate rabbitTemplate;
 
     private final Map<String, String> cachedRefsFromFile;
 
     public AssessmentService(
             PatientFeignClient patientFeignClient,
-            NoteFeignClient noteFeignClient, RabbitTemplate rabbitTemplate,
+            NoteFeignClient noteFeignClient,
             AiAssessmentService aiAssessmentService,
             AssessmentRepository assessmentRepository,
             AssessmentMapper assessmentMapper,
+            RabbitTemplate rabbitTemplate,
+            AssessmentSseController sseController,
             @Value("classpath:docs/guidelines_result_refs.json") Resource refsFile,
             ObjectMapper objectMapper
     ) {
@@ -55,6 +58,7 @@ public class AssessmentService {
         this.aiAssessmentService = aiAssessmentService;
         this.assessmentRepository = assessmentRepository;
         this.assessmentMapper = assessmentMapper;
+        this.sseController = sseController;
 
         // Load the JSON file into an independent variable
         try (InputStream is = refsFile.getInputStream()) {
@@ -65,7 +69,16 @@ public class AssessmentService {
     }
 
     public List<AssessmentDto> findAssessmentsByPatientId(Long patId) {
-        List<Assessment> assessments = assessmentRepository.findByPatIdOrderByCreatedAtDesc(patId);
+        List<AssessmentStatus> allowedStatuses = List.of(
+                AssessmentStatus.PENDING,
+                AssessmentStatus.REFUSED_PENDING,
+                AssessmentStatus.ACCEPTED,
+                AssessmentStatus.UPDATED,
+                AssessmentStatus.MANUAL
+        );
+
+        List<Assessment> assessments =
+                assessmentRepository.findByPatIdAndStatusInOrderByCreatedAtDesc(patId, allowedStatuses);
 
         return assessments.stream()
                 .map(assessmentMapper::toAssessmentDto)
@@ -83,13 +96,11 @@ public class AssessmentService {
         Assessment assessment = assessmentMapper.toAssessment(newAssessment);
 
         assessment.setPatId(patId);
-        assessment.setStatus("PENDING");
-
-        // Saving the assessment to generate an ID
+        // Saving for the assessment id generation
         Assessment createdAssessment = assessmentRepository.save(assessment);
 
         // Using updateStatus to trigger the email event
-        updateStatus(createdAssessment.getId(), "MANUAL", correlationId);
+        updateStatus(createdAssessment.getId(), AssessmentStatus.MANUAL, correlationId);
 
         return assessmentMapper.toAssessmentDto(createdAssessment);
     }
@@ -97,10 +108,6 @@ public class AssessmentService {
     public AssessmentDto updateAssessment(Long assessmentId, AssessmentDto updatedAssessment, String correlationId) {
         Assessment existingAssessment = assessmentRepository.findById(assessmentId)
                 .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
-
-        if (!"PENDING".equals(existingAssessment.getStatus())) {
-            throw new IllegalStateException("Only PENDING assessments can be modified");
-        }
 
         existingAssessment.setLevel(updatedAssessment.getLevel());
         existingAssessment.setAnalysis(updatedAssessment.getAnalysis());
@@ -111,40 +118,41 @@ public class AssessmentService {
         assessmentRepository.save(existingAssessment);
 
         // Using updateStatus to trigger the email event
-        updateStatus(assessmentId, "UPDATED", correlationId);
+        updateStatus(assessmentId, AssessmentStatus.UPDATED, correlationId);
 
         return assessmentMapper.toAssessmentDto(existingAssessment);
     }
 
-    public AssessmentDto updateStatus(Long assessmentId, String newStatus, String correlationId) {
-        Assessment existingAssessment = assessmentRepository.findById(assessmentId)
-                .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
+    public AssessmentDto queueAiAssessmentForProcessing(Long patId, String correlationId) {
 
-        existingAssessment.setStatus(newStatus);
-        existingAssessment.setUpdatedAt(Instant.now());
+        Assessment assessment = new Assessment();
 
-        assessmentRepository.save(existingAssessment);
-        log.info("Assessment {} updated to status {}", assessmentId, newStatus);
+        assessment.setPatId(patId);
 
-        if (Set.of("ACCEPTED", "UPDATED", "MANUAL").contains(newStatus)) {
-            publishAssessmentReportEvent(existingAssessment, correlationId);
-        }
+        Assessment createdAssessment = assessmentRepository.save(assessment);
 
-        return assessmentMapper.toAssessmentDto(existingAssessment);
-    }
+        updateStatus(createdAssessment.getId(), AssessmentStatus.QUEUED, correlationId);
 
-    private void publishAssessmentReportEvent(Assessment assessment, String correlationId) {
-        AssessmentReportReadyEvent event = new AssessmentReportReadyEvent(
-                assessment.getId(),
-                assessment.getPatId(),
+        AiAssessmentProcessEvent event = new AiAssessmentProcessEvent(
+                createdAssessment.getId(),
+                createdAssessment.getPatId(),
                 correlationId
         );
-        rabbitTemplate.convertAndSend("assessment-report-ready", event);
-        log.info("AssessmentReportReadyEvent published for assessmentId={} (patientId={}) with correlationId={}",
-                assessment.getId(), assessment.getPatId(), correlationId);
+
+        // Will be processed by AiAssessmentProcessListener
+        rabbitTemplate.convertAndSend(RabbitMQConfig.AI_QUEUE_NAME, event);
+
+        return assessmentMapper.toAssessmentDto(createdAssessment);
     }
 
-    public AssessmentDto generateAssessment(Long patId, String correlationId) {
+    public void processQueuedAiAssessment(Long assessmentId, Long patId, String correlationId) {
+
+        // Fetch the existing assessment
+        Assessment assessment = assessmentRepository.findById(assessmentId)
+                .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
+
+        // Mark as processing
+        updateStatus(assessment.getId(), AssessmentStatus.PROCESSING, correlationId);
 
         // Finding the patient data
         ResponseEntity<SuccessResponse<PatientDto>> patientResponse = patientFeignClient.getPatientById(patId, correlationId);
@@ -168,28 +176,61 @@ public class AssessmentService {
                 .filter(Objects::nonNull)
                 .collect(Collectors.joining(" / "));
 
-        // Using the AI for the assessment
-        AiAssessmentResponse aiResponse = aiAssessmentService.evaluateDiabetesRisk(age, gender, notesText);
+        // AI Call
+        AiAssessmentResponse aiResponse = aiAssessmentService.assessDiabetesRisk(age, gender, notesText);
         assert aiResponse != null;
 
-        // Enrich the raw AI sources by replacing refs with detailed content
+        // Enrich the raw AI sources item by replacing the refs with their detailed content
         String sourcesEnriched = enrichSources(aiResponse.sources());
 
         // Saving the assessment produced with the status "PENDING" so that the doctor can evaluate it
-        Assessment generatedAssessment = Assessment.builder()
-                .patId(patId)
-                .level(aiResponse.level())
-                .status("PENDING")
-                .context(parseBulletPoints(aiResponse.context()))
-                .analysis(aiResponse.analysis())
-                .recommendations(parseBulletPoints(aiResponse.recommendations()))
-                .sources(parseBulletPoints(sourcesEnriched))
-                .build();
+        assessment.setLevel(aiResponse.level());
+        assessment.setContext(parseBulletPoints(aiResponse.context()));
+        assessment.setAnalysis(aiResponse.analysis());
+        assessment.setRecommendations(parseBulletPoints(aiResponse.recommendations()));
+        assessment.setSources(parseBulletPoints(sourcesEnriched));
 
-        assessmentRepository.save(generatedAssessment);
+        assessmentRepository.save(assessment);
 
-        // Returning the final result
-        return assessmentMapper.toAssessmentDto(generatedAssessment);
+        // Mark as pending -> ready for the decision-making
+        updateStatus(assessment.getId(), AssessmentStatus.PENDING, correlationId);
+    }
+
+    public AssessmentDto updateStatus(Long assessmentId, AssessmentStatus newStatus, String correlationId) {
+        Assessment existingAssessment = assessmentRepository.findById(assessmentId)
+                .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
+
+        if (Set.of(AssessmentStatus.ACCEPTED, AssessmentStatus.UPDATED, AssessmentStatus.MANUAL, AssessmentStatus.REFUSED)
+                .contains(existingAssessment.getStatus())) {
+            throw new IllegalStateException(
+                    "Assessment with status " + existingAssessment.getStatus() + " cannot be modified"
+            );
+        }
+
+        existingAssessment.setUpdatedAt(Instant.now());
+        existingAssessment.setStatus(newStatus);
+
+        assessmentRepository.save(existingAssessment);
+        log.info("Assessment {} updated to status {}", assessmentId, newStatus);
+
+        AssessmentDto dto = assessmentMapper.toAssessmentDto(existingAssessment);
+
+        if (Set.of(AssessmentStatus.QUEUED, AssessmentStatus.PROCESSING, AssessmentStatus.PENDING).contains(newStatus)) {
+            sseController.emitAssessmentEvent(dto);
+        }
+
+        if (Set.of(AssessmentStatus.ACCEPTED, AssessmentStatus.UPDATED, AssessmentStatus.MANUAL).contains(newStatus)) {
+            AssessmentReportReadyEvent event = new AssessmentReportReadyEvent(
+                    existingAssessment.getId(),
+                    existingAssessment.getPatId(),
+                    correlationId
+            );
+
+            // Will be processed by NotificationListener in the notifications microservices
+            rabbitTemplate.convertAndSend(RabbitMQConfig.NOTIFICATION_QUEUE_NAME, event);
+        }
+
+        return dto;
     }
 
     private List<String> parseBulletPoints(String text) {

@@ -1,5 +1,6 @@
 package com.MedilaboSolutions.assessment.model;
 
+import com.MedilaboSolutions.assessment.dto.AssessmentStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,13 +24,15 @@ public class Assessment {
     @Column(nullable = false)
     private Long patId;
 
-    @Column(nullable = false)
+    @Column
     private String level;
 
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String status = "PENDING"; // PENDING, ACCEPTED, UPDATED, REJECTED
+    private AssessmentStatus status = AssessmentStatus.NONE;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "assessment_contexts", joinColumns = @JoinColumn(name = "assessment_id"))
     @Column(name = "context_item", columnDefinition = "TEXT")
     private List<String> context;
@@ -37,12 +40,12 @@ public class Assessment {
     @Column(columnDefinition = "TEXT")
     private String analysis;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "assessment_recommendations", joinColumns = @JoinColumn(name = "assessment_id"))
     @Column(name = "recommendation_item", columnDefinition = "TEXT")
     private List<String> recommendations;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "assessment_sources", joinColumns = @JoinColumn(name = "assessment_id"))
     @Column(name = "source_item", columnDefinition = "TEXT")
     private List<String> sources;
@@ -50,7 +53,7 @@ public class Assessment {
     @Column(updatable = false, nullable = false)
     private Instant createdAt;
 
-    @Column(nullable = false)
+    @Column
     private Instant updatedAt;
 
     @PrePersist

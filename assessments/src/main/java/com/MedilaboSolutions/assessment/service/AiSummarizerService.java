@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SummarizerService {
+public class AiSummarizerService {
 
     private final ChatClient chatClient;
 

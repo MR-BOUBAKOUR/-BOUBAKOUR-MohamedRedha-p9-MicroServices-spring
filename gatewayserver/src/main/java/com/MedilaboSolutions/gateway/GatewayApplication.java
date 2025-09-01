@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDateTime;
 
+import static org.springframework.cloud.gateway.support.RouteMetadataUtils.CONNECT_TIMEOUT_ATTR;
+import static org.springframework.cloud.gateway.support.RouteMetadataUtils.RESPONSE_TIMEOUT_ATTR;
+
 @SpringBootApplication
 public class GatewayApplication {
 
@@ -43,6 +46,15 @@ public class GatewayApplication {
 						)
 						.uri("lb://assessments")
 				)
+                .route(p -> p
+                        .path("/v1/assessments/sse/**")
+                        .filters(f -> f
+                                .rewritePath("/v1/assessments/sse/(?<segment>.*)", "/assessments/sse/${segment}")
+                        )
+                        .metadata(RESPONSE_TIMEOUT_ATTR, 0) // Timeout infini pour SSE
+                        .metadata(CONNECT_TIMEOUT_ATTR, 10000)
+                        .uri("lb://assessments")
+                )
 				.route(p -> p
 						.path("/v1/notes")
 						.filters(f -> f

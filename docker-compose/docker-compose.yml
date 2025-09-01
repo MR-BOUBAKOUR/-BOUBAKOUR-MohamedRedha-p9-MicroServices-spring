@@ -202,13 +202,13 @@ services:
     image: postgres:15
     ports:
       - "5432:5432"
+    volumes:
+      # - gatewayserver-db-postgresql-data:/var/lib/postgresql/data
+      - ../_data/postgresql-gateway-init:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_DB: ${POSTGRES_GATEWAY_DATABASE}
       POSTGRES_USER: ${POSTGRES_GATEWAY_USER}
       POSTGRES_PASSWORD: ${POSTGRES_GATEWAY_PASSWORD}
-    volumes:
-      # - gatewayserver-db-postgresql-data:/var/lib/postgresql/data
-      - ../_data/postgresql-gateway-init:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
     healthcheck:
@@ -224,14 +224,14 @@ services:
     image: mysql:8
     ports:
       - "3306:3306"
+    volumes:
+      # - patients-db-mysql-data:/var/lib/mysql
+      - ../_data/mysql-patients-init:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_PATIENTS_DATABASE}
       MYSQL_USER: ${MYSQL_PATIENTS_USER}
       MYSQL_PASSWORD: ${MYSQL_PATIENTS_PASSWORD}
-    volumes:
-      # - patients-db-mysql-data:/var/lib/mysql
-      - ../_data/mysql-patients-init:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
     healthcheck:
@@ -265,13 +265,13 @@ services:
     image: pgvector/pgvector:pg16
     ports:
       - "5433:5432"
+    volumes:
+#       - assessments-db-postgresql-data:/var/lib/postgresql/data
+        - ../_data/postgresql-assessments-init:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_DB: ${POSTGRES_ASSESSMENTS_DATABASE}
       POSTGRES_USER: ${POSTGRES_ASSESSMENTS_USER}
       POSTGRES_PASSWORD: ${POSTGRES_ASSESSMENTS_PASSWORD}
-    volumes:
-#       - assessments-db-postgresql-data:/var/lib/postgresql/data
-        - ../_data/postgresql-assessments-init:/docker-entrypoint-initdb.d
     networks:
       - medilabosolutions-net
     healthcheck:
@@ -289,6 +289,8 @@ services:
     image: rabbitmq:4.1.2
     ports:
       - "5672:5672"  # AMQP Port
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
@@ -303,29 +305,6 @@ services:
     mem_reservation: 256m
 
   # ==================================================== Local AI =====================================================
-
-#  ollama:
-#    image: ollama/ollama:latest
-#    container_name: ollama
-#    restart: unless-stopped
-#    ports:
-#      - "11434:11434"
-#    volumes:
-#      - ollama_data:/root/.ollama
-#    environment:
-#      - OLLAMA_HOST=0.0.0.0
-#    networks:
-#      - medilabosolutions-net
-#    deploy:
-#      resources:
-#        limits:
-#          memory: 8G
-#        reservations:
-#          memory: 4G
-#          devices:
-#            - driver: nvidia
-#              count: 1
-#              capabilities: [gpu]
 
   ollama:
       image: ollama/ollama:latest
@@ -515,11 +494,11 @@ services:
     profiles: [monitoring]
     container_name: backend
     image: grafana/loki:latest
-    volumes:
-      - ./observability/loki/loki-config.yaml:/etc/loki/config.yaml
     ports:
       - "3100"
       - "7946"
+    volumes:
+      - ./observability/loki/loki-config.yaml:/etc/loki/config.yaml
     command: "-config.file=/etc/loki/config.yaml -target=backend -legacy-read-mode=false"
     depends_on:
       - gateway
@@ -612,6 +591,7 @@ volumes:
   #  patients-db-mysql-data:
   #  notes-db-mongodb-data:
   #  assessments-db-postgresql-data:
+  rabbitmq-data:
   grafana-data:
   ollama_data:
     driver: local

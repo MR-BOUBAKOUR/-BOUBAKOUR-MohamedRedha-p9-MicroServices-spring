@@ -2,6 +2,7 @@ package com.MedilaboSolutions.assessment.controller;
 
 import com.MedilaboSolutions.assessment.dto.AssessmentCreateDto;
 import com.MedilaboSolutions.assessment.dto.AssessmentDto;
+import com.MedilaboSolutions.assessment.dto.AssessmentStatus;
 import com.MedilaboSolutions.assessment.dto.SuccessResponse;
 import com.MedilaboSolutions.assessment.service.AssessmentService;
 import com.MedilaboSolutions.assessment.service.PdfService;
@@ -48,17 +49,18 @@ public class AssessmentController {
                 .body(new SuccessResponse<>(200, "Assessment fetched successfully", assessment));
     }
 
-    @GetMapping("/patient/{patientId}/generate")
-    public ResponseEntity<SuccessResponse<AssessmentDto>> generateAssessmentForPatient(
+    @PostMapping("/patient/{patientId}/generate")
+    public ResponseEntity<SuccessResponse<AssessmentDto>> generateAiAssessmentForPatient(
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
             @PathVariable Long patientId
     ) {
-        log.info("Generating assessment for patientId={}", patientId);
-        AssessmentDto assessment = assessmentService.generateAssessment(patientId, correlationId);
+        log.info("Queuing assessment generation request for patientId={}", patientId);
+
+        AssessmentDto assessment = assessmentService.queueAiAssessmentForProcessing(patientId, correlationId);
 
         return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new SuccessResponse<>(201, "Assessment generated successfully", assessment));
+                .status(HttpStatus.CREATED)
+                .body(new SuccessResponse<>(201, "Assessment queued successfully", assessment));
     }
 
     @PostMapping("/patient/{patientId}/create")
@@ -93,7 +95,7 @@ public class AssessmentController {
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
             @PathVariable Long assessmentId
     ) {
-        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, "ACCEPTED", correlationId);
+        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, AssessmentStatus.ACCEPTED, correlationId);
         return ResponseEntity.ok(new SuccessResponse<>(200, "Assessment accepted", updatedAssessment));
     }
 
@@ -102,7 +104,7 @@ public class AssessmentController {
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
             @PathVariable Long assessmentId
     ) {
-        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, "REFUSED-PENDING", correlationId);
+        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, AssessmentStatus.REFUSED_PENDING, correlationId);
         return ResponseEntity.ok(new SuccessResponse<>(200, "Assessment pending refused", updatedAssessment));
     }
 
@@ -111,7 +113,7 @@ public class AssessmentController {
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
             @PathVariable Long assessmentId
     ) {
-        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, "REFUSED", correlationId);
+        AssessmentDto updatedAssessment = assessmentService.updateStatus(assessmentId, AssessmentStatus.REFUSED, correlationId);
         return ResponseEntity.ok(new SuccessResponse<>(200, "Assessment refused", updatedAssessment));
     }
 
