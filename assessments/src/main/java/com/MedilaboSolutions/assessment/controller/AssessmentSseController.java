@@ -22,7 +22,7 @@ public class AssessmentSseController {
     @GetMapping(value = "/{patientId}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter subscribe(@PathVariable Long patientId) {
         // Timeout infini
-        SseEmitter emitter = new SseEmitter(0L);
+        SseEmitter emitter = new SseEmitter(16 * 60_000L); // 16 minutes (the accessToken expires in 15 minutes)
         emitters.put(patientId, emitter);
 
         // Nettoyage quand le client se déconnecte

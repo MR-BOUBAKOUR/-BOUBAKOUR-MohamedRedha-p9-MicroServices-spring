@@ -50,7 +50,7 @@ public class GatewayApplication {
 						.filters(f -> f
 								.rewritePath("/v1/assessments/sse/(?<segment>.*)", "/assessments/sse/${segment}")
 						)
-                        .metadata(RESPONSE_TIMEOUT_ATTR, 0) // Timeout infini pour SSE
+						.metadata(RESPONSE_TIMEOUT_ATTR, 16 * 60_000) // 16 minutes (the accessToken expires in 15 minutes)
                         .metadata(CONNECT_TIMEOUT_ATTR, 10000)
                         .uri("lb://assessments")
                 )
