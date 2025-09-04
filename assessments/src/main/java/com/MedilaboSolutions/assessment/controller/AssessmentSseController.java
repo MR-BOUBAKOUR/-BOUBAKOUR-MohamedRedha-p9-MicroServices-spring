@@ -34,18 +34,37 @@ public class AssessmentSseController {
         return emitter;
     }
 
-    public void emitAssessmentEvent(AssessmentDto dto) {
-        Long patientId = dto.getPatId();
-        SseEmitter emitter = emitters.get(patientId);
-
+    public void emitAssessmentProgress(Long assessmentId, Long patId, String message, Integer percent) {
+        SseEmitter emitter = emitters.get(patId);
         if (emitter != null) {
             try {
                 emitter.send(SseEmitter.event()
-                        .name("assessment-update")
+                        .name("assessment-progress")
+                        .data(Map.of(
+                                "assessmentId", assessmentId,
+                                "patId", patId,
+                                "message", message,
+                                "progress", percent
+                        ))
+                );
+            } catch (IOException e) {
+                log.warn("Failed to send progress SSE to patientId {}: {}", patId, e.getMessage());
+                emitters.remove(patId);
+            }
+        }
+    }
+
+    public void emitAssessmentGenerated(AssessmentDto dto) {
+        Long patientId = dto.getPatId();
+        SseEmitter emitter = emitters.get(patientId);
+        if (emitter != null) {
+            try {
+                emitter.send(SseEmitter.event()
+                        .name("assessment-generated")
                         .data(dto)
                 );
             } catch (IOException e) {
-                log.warn("Failed to send SSE to patientId {}: {}", patientId, e.getMessage());
+                log.warn("Failed to send generated SSE to patientId {}: {}", patientId, e.getMessage());
                 emitters.remove(patientId);
             }
         }

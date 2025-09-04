@@ -70,6 +70,8 @@ public class AssessmentService {
 
     public List<AssessmentDto> findAssessmentsByPatientId(Long patId) {
         List<AssessmentStatus> allowedStatuses = List.of(
+                AssessmentStatus.QUEUED,
+                AssessmentStatus.PROCESSING,
                 AssessmentStatus.PENDING,
                 AssessmentStatus.REFUSED_PENDING,
                 AssessmentStatus.ACCEPTED,
@@ -128,7 +130,7 @@ public class AssessmentService {
         Assessment assessment = new Assessment();
 
         assessment.setPatId(patId);
-
+        // Saving for the assessment id generation
         Assessment createdAssessment = assessmentRepository.save(assessment);
 
         updateStatus(createdAssessment.getId(), AssessmentStatus.QUEUED, correlationId);
@@ -154,6 +156,8 @@ public class AssessmentService {
         // Mark as processing
         updateStatus(assessment.getId(), AssessmentStatus.PROCESSING, correlationId);
 
+        sseController.emitAssessmentProgress(assessmentId, assessment.getPatId(), "Récupération du dossier médical", 10);
+
         // Finding the patient data
         ResponseEntity<SuccessResponse<PatientDto>> patientResponse = patientFeignClient.getPatientById(patId, correlationId);
         if (patientResponse.getBody() == null || patientResponse.getBody().getData() == null) {
@@ -177,13 +181,15 @@ public class AssessmentService {
                 .collect(Collectors.joining(" / "));
 
         // AI Call
-        AiAssessmentResponse aiResponse = aiAssessmentService.assessDiabetesRisk(age, gender, notesText);
+        AiAssessmentResponse aiResponse = aiAssessmentService.assessDiabetesRisk(age, gender, notesText, assessment);
         assert aiResponse != null;
 
         // Enrich the raw AI sources item by replacing the refs with their detailed content
+        sseController.emitAssessmentProgress(assessment.getId(), assessment.getPatId(), "Vérification des références médicales", 90);
         String sourcesEnriched = enrichSources(aiResponse.sources());
 
         // Saving the assessment produced with the status "PENDING" so that the doctor can evaluate it
+        sseController.emitAssessmentProgress(assessment.getId(), assessment.getPatId(), "Finalisation du rapport", 95);
         assessment.setLevel(aiResponse.level());
         assessment.setContext(parseBulletPoints(aiResponse.context()));
         assessment.setAnalysis(aiResponse.analysis());
@@ -215,8 +221,16 @@ public class AssessmentService {
 
         AssessmentDto dto = assessmentMapper.toAssessmentDto(existingAssessment);
 
-        if (Set.of(AssessmentStatus.QUEUED, AssessmentStatus.PROCESSING, AssessmentStatus.PENDING).contains(newStatus)) {
-            sseController.emitAssessmentEvent(dto);
+        if (newStatus == AssessmentStatus.QUEUED) {
+            sseController.emitAssessmentProgress(assessmentId, dto.getPatId(), "En file d'attente", 0);
+        }
+
+        if (newStatus == AssessmentStatus.PROCESSING) {
+            sseController.emitAssessmentProgress(assessmentId, dto.getPatId(), "Début du traitement", 5);
+        }
+
+        if (newStatus == AssessmentStatus.PENDING) {
+            sseController.emitAssessmentGenerated(dto);
         }
 
         if (Set.of(AssessmentStatus.ACCEPTED, AssessmentStatus.UPDATED, AssessmentStatus.MANUAL).contains(newStatus)) {
@@ -268,7 +282,7 @@ public class AssessmentService {
 
                     content = cachedRefsFromFile.getOrDefault(
                             jsonKey,
-                            "simulated_chunks.json (contient des informations médicales générées par ChatGPT : document supplémentaire ajouté pour illustrer la capacité de l'application à exploiter plusieurs fichiers dans notre RAG)."
+                            "simulated_chunks.json (contient des informations médicales générées par ChatGPT: document supplémentaire ajouté pour illustrer la capacité de l'application à exploiter plusieurs fichiers dans notre RAG)."
                     );
                 } else {
                     // Otherwise (ref with letters or no ref) → keep only the page

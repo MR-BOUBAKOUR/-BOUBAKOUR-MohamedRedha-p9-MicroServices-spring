@@ -1,6 +1,7 @@
 package com.MedilaboSolutions.gateway.security;
 
 import com.MedilaboSolutions.gateway.filters.AuthFilter;
+import com.MedilaboSolutions.gateway.filters.SseAuthFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,7 @@ import java.util.List;
 public class SecurityConfig {
 
     private final AuthFilter authFilter;
+    private final SseAuthFilter sseAuthFilter;
     private final UnauthorizedEntryPoint unauthorizedEntryPoint;
     private final OAuth2SuccessHandler oauth2SuccessHandler;
     private final OAuth2FailureHandler oauth2FailureHandler;
@@ -92,6 +94,7 @@ public class SecurityConfig {
                         })
                 )
                 // Adds the custom JWT auth filter BEFORE Spring Security’s default authentication processing
+                .addFilterBefore(sseAuthFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 .addFilterBefore(authFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 // Disable HTTP Basic auth (no browser popup)
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)

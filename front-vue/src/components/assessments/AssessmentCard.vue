@@ -23,18 +23,18 @@ const currentStatus = ref(props.assessment.status)
 
 const statusIcon = computed(() => {
     switch (currentStatus.value) {
+        case 'PENDING':
+            return '/icons/status_pending.svg'
         case 'ACCEPTED':
             return '/icons/status_accepted.svg'
         case 'UPDATED':
             return '/icons/status_updated.svg'
-        case 'REFUSED':
-            return '/icons/status_refused.svg'
         case 'MANUAL':
             return '/icons/status_manual.svg'
-        case 'PENDING':
-            return '/icons/status_pending.svg'
+        case 'REFUSED':
+            return '/icons/status_refused.svg'
         default:
-            return '/icons/status_pending.svg'
+            return null
     }
 })
 

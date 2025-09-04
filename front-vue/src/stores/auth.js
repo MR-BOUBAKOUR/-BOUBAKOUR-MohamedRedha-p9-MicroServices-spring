@@ -140,7 +140,7 @@ export const useAuthStore = defineStore('auth', () => {
                 imageUrl: pictureUrl,
             }
 
-            // We trigger a new refreshTimer (if it reachs under 2 minutes, we come back here)
+            // We trigger a new refreshTimer (if it reaches under 2 minutes, we come back here)
             scheduleTokenRefresh(expiresIn)
             return true
 

@@ -49,8 +49,8 @@ public class AssessmentController {
                 .body(new SuccessResponse<>(200, "Assessment fetched successfully", assessment));
     }
 
-    @PostMapping("/patient/{patientId}/generate")
-    public ResponseEntity<SuccessResponse<AssessmentDto>> generateAiAssessmentForPatient(
+    @PostMapping("/patient/{patientId}/queue")
+    public ResponseEntity<SuccessResponse<AssessmentDto>> queueAiAssessmentForPatient(
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
             @PathVariable Long patientId
     ) {
@@ -60,7 +60,7 @@ public class AssessmentController {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new SuccessResponse<>(201, "Assessment queued successfully", assessment));
+                .body(new SuccessResponse<>(201, "Assessment created and queued successfully", assessment));
     }
 
     @PostMapping("/patient/{patientId}/create")

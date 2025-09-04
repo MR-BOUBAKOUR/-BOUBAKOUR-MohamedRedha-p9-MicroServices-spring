@@ -1,6 +1,8 @@
 package com.MedilaboSolutions.assessment.service;
 
+import com.MedilaboSolutions.assessment.controller.AssessmentSseController;
 import com.MedilaboSolutions.assessment.dto.AiAssessmentResponse;
+import com.MedilaboSolutions.assessment.model.Assessment;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
@@ -19,8 +21,9 @@ public class AiAssessmentService {
     private final ChatClient chatClient;
     private final VectorStoreDocumentRetriever documentRetriever;
     private final AiSummarizerService aiSummarizerService;
+    private final AssessmentSseController sseController;
 
-    public AiAssessmentResponse assessDiabetesRisk(int age, String gender, String medicalNotes) {
+    public AiAssessmentResponse assessDiabetesRisk(int age, String gender, String medicalNotes, Assessment assessment) {
 
         if (medicalNotes == null || medicalNotes.isBlank()) {
             log.warn("Pas de notes médicales : retour direct VERY_LOW");
@@ -35,10 +38,12 @@ public class AiAssessmentService {
         try {
 
             // Step 1: retrieve and summarize the relevant guideline chunks
+            sseController.emitAssessmentProgress(assessment.getId(), assessment.getPatId(), "Consultation de la base de connaissances", 20);
             String relevantGuidelines = retrieveAndSummarizeChunks(medicalNotes);
             log.info("Résumé final des chunks pertinents : {}", relevantGuidelines);
 
             // Step 2: perform the diabetes risk assessment using patient data and summarized guidelines
+            sseController.emitAssessmentProgress(assessment.getId(), assessment.getPatId(), "Génération du diagnostique", 50);
             return performDiabetesAssessment(age, gender, medicalNotes, relevantGuidelines);
 
         } catch (Exception e) {
