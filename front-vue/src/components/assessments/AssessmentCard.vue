@@ -31,6 +31,8 @@ const statusIcon = computed(() => {
             return '/icons/status_updated.svg'
         case 'MANUAL':
             return '/icons/status_manual.svg'
+        case 'REFUSED_PENDING':
+            return '/icons/status_pending.svg'
         case 'REFUSED':
             return '/icons/status_refused.svg'
         default:

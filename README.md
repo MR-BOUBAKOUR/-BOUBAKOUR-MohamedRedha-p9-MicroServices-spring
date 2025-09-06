@@ -1,10 +1,26 @@
-MediLabo Solutions - Diabetes risk assessment
+MediLabo Solutions - the AI medical assistant for diabetes risk assessment
 
-Microservices application for diabetes risk assessment built with Spring Boot and Vue.js.
-
-🔍 [Performance analysis](_doc/performance-analysis.md) : the main performance bottleneck was the system resource contention caused by running the app, monitoring, and load tests on the same machine - not the application itself.
+Microservices application built with Spring Boot and Vue.js.
 
 📄 [Documentation & Reports](https://mr-boubakour.github.io/-BOUBAKOUR-MohamedRedha-p9-MicroServices-spring/) : includes **Javadoc** and **JaCoCo reports** for the microservices where documentation and test coverage bring the most value.
+
+---
+
+### 🧰 Technology stack
+
+| Category                             | Technologies / Tools (🕒 Postponed)                                                                                                                                                                   |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Backend**                          | Java 21<br>Spring Boot 3.4.1 (web, security, data, cloud, actuator, etc.)<br>Spring Cloud Gateway (Reactive)<br>Eureka                                                                                |
+| **Frontend**                         | Vue.js 3<br>Pinia<br>Axios                                                                                                                                                                            |
+| **Data Storage**                     | MySQL<br>MongoDB<br>PostgreSQL (reactive)<br>PostgreSQL (with vector extension, for the RAG)                                                                                                          |
+| **Communication**            | REST API<br>OpenFeign<br>RabbitMQ<br>SSE (Server-Sent Events)                                                                                                                                          |
+| **Testing & Automation**             | unit        : Mockito, MockMvc<br>integration : TestContainers, MockMvc<br>e2e         : TestContainers, RestAssured, Awaitility<br> performance       : K6                                           |
+| **Containerisation & Orchestration** | Docker<br>Docker-Compose<br>🕒 Kubernetes                                                                                                                                                             |
+| **CI/CD**                            | GitHub Actions<br>GitHub Pages (JaCoCo & JavaDoc)<br>Docker Hub                                                                                                                                       |
+| **Observability & Monitoring**       | logs   : Alloy, Loki, Grafana<br>metrics : Micrometer, Prometheus, Grafana<br>traces  : OpenTelemetry, Tempo, Grafana<br><br>custom dashboard : based on JVM (Micrometer) & Spring Boot obs templates |
+| **Resilience & Fault Tolerance**     | 🕒 Resilience4J                                                                                                                                                                                       |
+| **AI Integration**                   | Ollama (Llama 3.2 3B & nomic-embed-text)                                                                                                                                                              |
+
 
 ---
 
@@ -12,48 +28,32 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 
 ![Big picture.png](_img/big_picture.png)
 
-<details>
-<summary>Architecture details (click to expand)</summary>
-
-- **Microservices architecture**, each service owning a clear business responsibility.
-- **Single page application** built with Vue.js 3, communicating securely with the API gateway.
-- **Reactive API gateway** centralizes routing, authentication, and authorization. (Reactive DB)
-- **Service discovery** via Eureka enables dynamic routing and scalability.
-- **Synchronous** REST for standard service communication; **asynchronous** messaging via RabbitMQ for critical events.
+- **Microservices architecture**, each service own a clear business responsibility.
+- **Single page application** built with Vue.js 3.
+- **Reactive API gateway** centralizes routing, authentication, and authorization. (Reactive PostgresQL DB)
+- **Service discovery via Eureka** enables dynamic routing and scalability.
+- **Communication**
+  - REST & FeignClient.
+  - RabbitMQ - for critical events.
+  - SSE (Server-Sent Events) - streams in real-time the AI assessment progress to the frontend
 - **Core business services**:
-  - Patients service - manages patient records with relational storage.
-  - Notes service - handles medical notes using a NoSQL store.
-  - Assessments service - evaluates diabetes risk, detects risk level changes, and emits high-risk events.
-  - Notifications service - consumes events and sends alert emails to healthcare professionals.
-- **Integrated observability**: logs, metrics, and traces collected and visualized via a custom Grafana dashboard.
+  - Patients service - manages patient records (Mysql DB).
+  - Notes service - handles medical notes (Mongo DB).
+  - Assessments service – uses the local AI to produce a structured assessment for review and validation by the doctor
+  - Notifications service – when an assessment is validated by the doctor, an email is sent with the PDF assessment attached
+- **Local AI** – summarizes relevant chunks and generates the structured assessment
+- **Observability**: logs, metrics, and traces collected and visualized via a custom Grafana dashboard.
 - **Multi-layered testing strategy**:
   - Unit and integration tests on core services.
   - End-to-end tests cover full doctor journey across services.
   - Performance testing to evaluate system behavior under load
 - **CI/CD** automates testing, documentation, and image publishing.
 
-</details>
-
-
-
 ---
 
-### 🧰 Technology stack
+### 📈 Business flow
 
-| Category                             | Technologies / Tools (⚠️ on the roadmap - 🕒 Postponed)                                                                                                                                              |
-|--------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Backend**                          | Java 21, Spring Boot 3.4.1, Spring Security, Eureka, Spring Cloud Gateway *(Reactive)*                                                                                                               |
-| **Frontend**                        | Vue.js 3, Pinia, Axios                                                                                                                                                                               |
-| **Data Storage**                     | MySQL, MongoDB, PostgreSQL *(Reactive)*                                                                                                                                                              |
-| **Inter-service Communication**      | REST API, OpenFeign, RabbitMQ                                                                                                                                                                        |
-| **Testing & Automation**             | unit        : Mockito, MockMvc<br>integration : TestContainers, MockMvc<br>e2e         : TestContainers, RestAssured, Awaitility<br> performance       : K6                                          |
-| **Containerisation & Orchestration** | Docker, Docker-Compose, 🕒 *Kubernetes*                                                                                                                                                              |
-| **CI/CD**                            | GitHub Actions, GitHub Pages (JaCoCo & JavaDoc), Docker Hub                                                                                                                                          |
-| **Observability & Monitoring**       | logs   : Alloy, Loki, Grafana<br>metrics : Micrometer, Prometheus, Grafana<br>traces  : OpenTelemetry, Tempo, Grafana<br><br>custom dashboard : based on JVM (Micrometer) & Spring Boot obs templates |
-| **Resilience & Fault Tolerance**     | ⚠️ *Resilience4J*                                                                                                                                                                                    |
-| **AI Integration**                  | ⚠️ *Ollama (Llama 3.2 3B)* - Local LLM for basic diabetes risk assessment                                                                                                                            |
-
-
+![business_flow.png](_img/business_flow.png)
 
 ---
 
@@ -72,6 +72,60 @@ Microservices application for diabetes risk assessment built with Spring Boot an
 | `oauth2-access&refresh` | OAuth2 with Google + classic login (Access & Refresh tokens for both) | ✅ *Current*                                                                                                                      |
 | `keycloak` | Keycloak integration | 🕒 *Postponed*                                  |
 </details>
+
+---
+
+### 🔔 Event-driven
+
+![event_driven.png](_img/event_driven.png)
+
+The system implements asynchronous communication using RabbitMQ for critical events:
+
+- **AiAssessmentProcessEvent** – published by the Assessments service when a new AI assessment is queued for processing.
+  - The queue is configured to handle events **one by one** (concurrency = 1) to avoid overloading the local AI when many assessments are requested simultaneously.
+  - Consumed by `AiAssessmentProcessListener`, which triggers the AI pipeline.
+
+- **AssessmentReportReadyEvent** – published by the Assessments service when an assessment has been validated by the doctor and is ready to be sent.
+  - Consumed by `the Notifications service`, which triggers the sending of an email with the PDF assessment attached.
+
+> **Note concerning the SSE (Server-Sent Events)** - streams real-time assessment progress directly to the frontend while the AI generates the structured assessment.
+
+---
+
+### 🔄 Data processing
+
+![data_processing_for_rag.png](_img/data_processing_for_rag.png)
+
+---
+
+### 🧠 IA workflow — Assessments service
+
+![ai_workflow.png](_img/ai_workflow.png)
+
+- **Input**
+  - Patient's medical record
+
+- **Guidelines Preparation** (the data process presented in the previous section)
+  - Convert the guidelines document into JSON with chunks + metadata (guidelines chunks)
+  - Extract references into a JSON file (medical references/sources)
+  - Embed the chunks using Nomic embed text
+  - Index the vectors + metadata into the vector database
+
+- **Patient Record Vectorization**
+  - Embed the patient's medical record using Nomic embed text
+  - Retrieve the Top-5 most relevant chunks from the vector database
+
+- **Summarization**
+  - Generate a contextual summary based on the retrieved chunks
+
+- **Final Diagnosis**
+  - Inputs: summary + patient's medical record
+  - Structured output:
+    - Risk level (VERY_LOW, LOW, MODERATE, HIGH)
+    - Context summary
+    - Medical analysis (diagnosis)
+    - Recommendations
+    - Sources (retrieved from the guidelines JSON references)
 
 ---
 
@@ -190,7 +244,7 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose/docker-co
 </details>
 
 <details>
-<summary>📄 2. Stress testing</summary>
+<summary>📄 2. Stress testing (click to expand)</summary>
 
 > ### Context
 >
@@ -221,7 +275,7 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose/docker-co
 </details>
 
 <details>
-<summary>📄 3. Spike testing</summary>
+<summary>📄 3. Spike testing (click to expand)</summary>
 
 > ### Context
 >
@@ -251,7 +305,7 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose/docker-co
 </details>
 
 <details>
-<summary>📄 4. Soak testing</summary>
+<summary>📄 4. Soak testing (click to expand)</summary>
 
 > ### Context
 >
@@ -283,17 +337,10 @@ TEST_TYPE=realistic TEST_PROFILE=load docker-compose -f docker-compose/docker-co
 <br>
 
 #### ✅ Systematic analysis outlining performance constraints and testing methodology
+
+the main performance bottleneck was the system resource contention caused by running the app, monitoring, and load tests on the same machine - not the application itself.
+
 👉 [Read the full performance analysis](_doc/performance-analysis.md)
-
----
-
-### 🔔 Event-driven
-
-The system implements asynchronous communication using **RabbitMQ** for critical notifications:
-
-- **High-Risk assessment events** - when a patient is assessed as `"Early onset"`, the **Assessments** service publishes an event to the `high-risk-assessments` queue
-- **No duplicates** - the alert is triggered only when the risk changes to `"Early onset"`
-- **Email notifications** - the **Notifications** service consumes these events and sends automated email alerts to healthcare providers (emails are intercepted using **Mailtrap** during development)
 
 ---
 
@@ -307,6 +354,20 @@ The system implements asynchronous communication using **RabbitMQ** for critical
 
 ### ❌ Out of scope
 
-- **Spring Cloud Config Server** - no centralized configuration management. *(used in a different project, with RabbitMQ as the refresh trigger and a GitHub repository for versioning and storing configurations)*
-- **Secrets manager** - secrets are managed via environment variables.
-- **Front-end testing**  - deprioritized to focus efforts on back-end reliability and service integration.
+Potential improvements and extensions for the project if additional time and resources were available:
+
+- **Centralized Configuration** – implement Spring Cloud Config Server for centralized configuration management. *(Used in a different project, with RabbitMQ as the refresh trigger and a GitHub repository for versioning and storing configurations.)*
+
+- **Secrets Management** – integrate a dedicated secrets manager for secure handling of credentials.
+
+- **Front-end Testing** – expand coverage to include end-to-end UI tests.
+
+- **Identity & Access Management** – integrate Keycloak for centralized authentication and authorization.
+
+- **Container Orchestration** – deploy and manage services on Kubernetes for scalability and reliability.
+
+- **Advanced Monitoring & Alerting** – add advanced monitoring and alerting for AI processing pipeline and SSE streams.
+
+- **Business Dashboard** – integrate Metabase for business analytics and reporting.
+
+- **Model-Context-Protocol (MCP)** – implement as a dedicated microservice that allows the AI to autonomously access external tools, services, and data sources, standardizing interactions and improving integration and interoperability.
