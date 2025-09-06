@@ -107,7 +107,7 @@ The system implements asynchronous communication using RabbitMQ for critical eve
 
 ---
 
-### 🧠 IA workflow — Assessments service
+### 🧠 IA workflow
 
 ![ai_workflow.png](_img/ai_workflow.png)
 
