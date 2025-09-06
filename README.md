@@ -77,7 +77,7 @@ Microservices application built with Spring Boot and Vue.js.
 
 ### 🔔 Event-driven
 
-![event_driven.png](_img/event_driven.png)
+![event_driven_flow.png](_img/event_driven_flow.png)
 
 The system implements asynchronous communication using RabbitMQ for critical events:
 
