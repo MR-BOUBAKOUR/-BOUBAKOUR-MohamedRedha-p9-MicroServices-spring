@@ -13,13 +13,13 @@ Microservices application built with Spring Boot and Vue.js.
 | **Backend**                          | Java 21<br>Spring Boot 3.4.1 (web, security, data, cloud, actuator, etc.)<br>Spring Cloud Gateway (Reactive)<br>Eureka                                                                                |
 | **Frontend**                         | Vue.js 3<br>Pinia<br>Axios                                                                                                                                                                            |
 | **Data Storage**                     | MySQL<br>MongoDB<br>PostgreSQL (reactive)<br>PostgreSQL (with vector extension, for the RAG)                                                                                                          |
-| **Communication**            | REST API<br>OpenFeign<br>RabbitMQ<br>SSE (Server-Sent Events)                                                                                                                                          |
+| **Communication**            | REST API<br>OpenFeign<br>RabbitMQ<br>SSE (Server-Sent Events)                                                                                                                                         |
 | **Testing & Automation**             | unit        : Mockito, MockMvc<br>integration : TestContainers, MockMvc<br>e2e         : TestContainers, RestAssured, Awaitility<br> performance       : K6                                           |
 | **Containerisation & Orchestration** | Docker<br>Docker-Compose<br>🕒 Kubernetes                                                                                                                                                             |
 | **CI/CD**                            | GitHub Actions<br>GitHub Pages (JaCoCo & JavaDoc)<br>Docker Hub                                                                                                                                       |
 | **Observability & Monitoring**       | logs   : Alloy, Loki, Grafana<br>metrics : Micrometer, Prometheus, Grafana<br>traces  : OpenTelemetry, Tempo, Grafana<br><br>custom dashboard : based on JVM (Micrometer) & Spring Boot obs templates |
 | **Resilience & Fault Tolerance**     | 🕒 Resilience4J                                                                                                                                                                                       |
-| **AI Integration**                   | Ollama (Llama 3.2 3B & nomic-embed-text)                                                                                                                                                              |
+| **AI Integration**                   | Ollama : Llama 3.2 3B & nomic-embed-text                                                                                                                                                              |
 
 
 ---
@@ -29,24 +29,33 @@ Microservices application built with Spring Boot and Vue.js.
 ![Big picture.png](_img/big_picture.png)
 
 - **Microservices architecture**, each service own a clear business responsibility.
+
 - **Single page application** built with Vue.js 3.
+
 - **Reactive API gateway** centralizes routing, authentication, and authorization. (Reactive PostgresQL DB)
+
 - **Service discovery via Eureka** enables dynamic routing and scalability.
+
 - **Communication**
   - REST & FeignClient.
   - RabbitMQ - for critical events.
-  - SSE (Server-Sent Events) - streams in real-time the AI assessment progress to the frontend
+  - SSE (Server-Sent Events) - streams in real-time the AI assessment progress to the frontend.
+  
 - **Core business services**:
   - Patients service - manages patient records (Mysql DB).
   - Notes service - handles medical notes (Mongo DB).
-  - Assessments service – uses the local AI to produce a structured assessment for review and validation by the doctor
-  - Notifications service – when an assessment is validated by the doctor, an email is sent with the PDF assessment attached
+  - Assessments service – uses the local AI to produce a structured assessment for review and validation by the doctor.
+  - Notifications service – when an assessment is validated by the doctor, an email is sent with the PDF assessment attached.
+
 - **Local AI** – summarizes relevant chunks and generates the structured assessment
+
 - **Observability**: logs, metrics, and traces collected and visualized via a custom Grafana dashboard.
+
 - **Multi-layered testing strategy**:
   - Unit and integration tests on core services.
   - End-to-end tests cover full doctor journey across services.
-  - Performance testing to evaluate system behavior under load
+  - Performance testing to evaluate system behavior under load.
+  
 - **CI/CD** automates testing, documentation, and image publishing.
 
 ---
@@ -121,6 +130,7 @@ The system implements asynchronous communication using RabbitMQ for critical eve
 - **Final Diagnosis**
   - Inputs: summary + patient's medical record
   - Structured output:
+  
     - Risk level (VERY_LOW, LOW, MODERATE, HIGH)
     - Context summary
     - Medical analysis (diagnosis)
