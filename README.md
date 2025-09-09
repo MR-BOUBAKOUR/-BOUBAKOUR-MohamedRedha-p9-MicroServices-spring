@@ -62,7 +62,9 @@ Microservices application built with Spring Boot and Vue.js.
 
 ### 📈 Business flow
 
-![business_flow.png](_img/business_flow.png)
+![user_nav_flow_1.png](_img/user_nav_flow_1.png)
+
+![user_nav_flow_2.png](_img/user_nav_flow_2.png)
 
 ---
 
