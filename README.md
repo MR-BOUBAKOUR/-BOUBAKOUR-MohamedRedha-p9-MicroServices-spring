@@ -111,7 +111,7 @@ The system implements asynchronous communication using RabbitMQ for critical eve
 
 ### 🧠 IA workflow
 
-![ai_workflow.png](_img/ai_workflow.png)
+![ai_rag_workflow.png](_img/ai_rag_workflow.png)
 
 - **Input**
   - Patient's medical record
