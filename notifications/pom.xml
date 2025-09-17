@@ -151,7 +151,7 @@
 						<exclude>**/mapper/*</exclude>
 						<exclude>**/repository/*</exclude>
 						<!-- Third party -->
-						<exclude>**/service/MailtrapEmailService.class</exclude>
+                        <exclude>**/service/MailtrapService.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>

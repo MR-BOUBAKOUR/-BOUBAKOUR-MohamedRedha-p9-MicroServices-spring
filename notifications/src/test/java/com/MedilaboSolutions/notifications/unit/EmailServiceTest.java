@@ -54,13 +54,13 @@ class EmailServiceTest {
         emailService.sendAssessmentReportEmail(event);
 
         // Then
-//        verify(mailtrapService).sendEmail(
-//                eq("sender@test.com"),
-//                eq("recipient@test.com"),
-//                eq("Assessment Report Ready - ID 123"),
-//                eq("The assessment report is ready. Please find the PDF attached."),
-//                eq("dummy-pdf-content".getBytes()),
-//                eq("assessment-123.pdf")
-//        );
+        verify(mailtrapService).sendEmail(
+                eq("sender@test.com"),
+                eq("recipient@test.com"),
+                eq("Medilabo Solutions - Rapport d'Évaluation Disponible"),
+                eq("Bonjour,\n\nVotre rapport d'évaluation médicale est prêt.\n\nMerci."),
+                eq("dummy-pdf-content".getBytes()),
+                eq("assessment_123.pdf")
+        );
     }
 }
