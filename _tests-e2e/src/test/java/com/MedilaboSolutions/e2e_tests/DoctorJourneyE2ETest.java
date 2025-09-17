@@ -268,9 +268,9 @@ public class DoctorJourneyE2ETest {
                 .then()
                 .statusCode(200)
                 .body("data.patId", equalTo(createdPatientId))
-                .body("data.assessmentResult", notNullValue())
+                .body("data.level", notNullValue())
                 .extract()
-                .path("data.assessmentResult");
+                .path("data.level");
     }
 
     private void verifyPatientDataConsistency() {
@@ -301,7 +301,7 @@ public class DoctorJourneyE2ETest {
                 .then()
                 .statusCode(200)
                 .body("data.patId", equalTo(createdPatientId))
-                .body("data.assessmentResult", anyOf(
+                .body("data.level", anyOf(
                         equalTo("None"),
                         equalTo("Borderline"),
                         equalTo("In Danger"),

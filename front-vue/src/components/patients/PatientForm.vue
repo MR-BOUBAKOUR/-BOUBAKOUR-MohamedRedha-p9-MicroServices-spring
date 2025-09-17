@@ -78,6 +78,10 @@ function handleSubmit() {
     max-width: 300px;
 }
 
+ .patient-card button {
+    max-width: 300px;
+ }
+
 .patient-form {
     flex-direction: column;
 }

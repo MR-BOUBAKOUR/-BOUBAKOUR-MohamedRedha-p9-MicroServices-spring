@@ -1,9 +1,11 @@
 package com.MedilaboSolutions.notifications.service;
 
-import com.MedilaboSolutions.notifications.Dto.HighRiskAssessmentEvent;
+import com.MedilaboSolutions.notifications.Dto.AssessmentReportReadyEvent;
 import com.MedilaboSolutions.notifications.config.EmailProperties;
+import com.MedilaboSolutions.notifications.service.client.AssessmentFeignClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -12,28 +14,38 @@ import org.springframework.stereotype.Service;
 public class EmailService {
 
     private final EmailProperties emailProperties;
-    private final MailtrapEmailService mailtrapEmailService;
+    private final AssessmentFeignClient assessmentFeignClient;
 
-    public void sendHighRiskEmail(HighRiskAssessmentEvent event) {
-        String subject = "High Risk Alert - Patient " + event.getPatLastname();
-        String body = String.format("Patient %s %s has been assessed as '%s'. Please take necessary action.",
-                event.getPatFirstName(),
-                event.getPatLastname(),
-                event.getRiskLevel()
+    private final MailtrapService mailtrapService;
+
+    public void sendAssessmentReportEmail(AssessmentReportReadyEvent event) {
+
+        ResponseEntity<byte[]> pdfResponse = assessmentFeignClient.downloadAssessmentPdf(
+                event.getAssessmentId(),
+                event.getCorrelationId()
         );
 
-        mailtrapEmailService.sendEmail(
+        byte[] pdfBytes = pdfResponse.getBody();
+        String fileName = "assessment_" + event.getAssessmentId() + ".pdf";
+
+        String subject = "Medilabo Solutions - Rapport d'Évaluation Disponible";
+        String body = "Bonjour,\n\nVotre rapport d'évaluation médicale est prêt.\n\nMerci.";
+
+        mailtrapService.sendEmail(
                 emailProperties.getSender(),
                 emailProperties.getRecipient(),
                 subject,
-                body
+                body,
+                pdfBytes,
+                fileName
         );
 
-        log.info("📧 Email sent to {} for patient {} {} with risk level '{}'",
+        log.info("📧 Email with PDF sent to {} - content : assessment {} of the patient {} - correlationId : {}",
                 emailProperties.getRecipient(),
-                event.getPatFirstName(),
-                event.getPatLastname(),
-                event.getRiskLevel()
+                event.getAssessmentId(),
+                event.getPatientId(),
+                event.getCorrelationId()
         );
     }
 }
+

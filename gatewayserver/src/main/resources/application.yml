@@ -1,11 +1,12 @@
 server:
   port: 8071
-  ssl:
-    enabled: true
-    key-store: classpath:keystore.p12
-    key-store-password: ${KEY_STORE_PASSWORD}
-    key-store-type: PKCS12
-    key-alias: spring
+# ⚠️ in prod — https
+#  ssl:
+#    enabled: true
+#    key-store: classpath:keystore.p12
+#    key-store-password: ${KEY_STORE_PASSWORD}
+#    key-store-type: PKCS12
+#    key-alias: spring
 
 spring:
   application:
@@ -23,8 +24,8 @@ spring:
           # Activate the lowerCase for the URIs ( -> upperCase: false)
           lowerCaseServiceId: true
       httpclient:
-        connect-timeout: 3000
-        response-timeout: 5s
+        connect-timeout: 5000
+        response-timeout: 30s
 
   security:
     oauth2:
@@ -46,9 +47,10 @@ spring:
             user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
             user-name-attribute: sub
 
+# ⚠️ In prod, need to be in https
 cors:
-  frontend-success-url: https://localhost:5173/oauth2/success
-  frontend-error-url: https://localhost:5173/login
+  frontend-success-url: http://localhost:5173/oauth2/success
+  frontend-error-url: http://localhost:5173/login
 
 management:
   endpoints:

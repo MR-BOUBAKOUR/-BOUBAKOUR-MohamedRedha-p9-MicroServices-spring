@@ -10,11 +10,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
-    public static final String QUEUE_NAME = "high-risk-assessments";
+
+    // Queue for notifications after doctor decision
+    public static final String NOTIFICATION_QUEUE_NAME = "assessment-report-ready";
 
     @Bean
-    public Queue highRiskAssessmentQueue() {
-        return new Queue(QUEUE_NAME, false);
+    public Queue assessmentReportQueue() {
+        // durable=false because it's only for notifications
+        return new Queue(NOTIFICATION_QUEUE_NAME, false);
     }
 
     // JSON message converter for RabbitMQ to serialize/deserialize messages as JSON

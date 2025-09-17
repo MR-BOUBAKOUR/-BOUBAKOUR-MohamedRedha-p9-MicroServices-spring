@@ -67,6 +67,10 @@ const handleGoogleLogin = () => {
     border: 1px solid #ccc;
 }
 
+.login-form button  {
+    max-width: 300px;
+}
+
 .oauth-separator {
     text-align: center;
     margin: 1.5rem auto;
@@ -74,8 +78,8 @@ const handleGoogleLogin = () => {
 }
 
 .google-login-btn {
+    max-width: 300px;
     display: block;
     margin: 1.5rem auto;
-    width: 100%;
 }
 </style>

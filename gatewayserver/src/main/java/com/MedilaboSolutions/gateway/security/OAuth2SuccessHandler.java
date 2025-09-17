@@ -62,7 +62,7 @@ public class OAuth2SuccessHandler implements ServerAuthenticationSuccessHandler 
 
                     ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", refreshToken)
                             .httpOnly(true)
-                            .secure(true)
+                            .secure(false) // ⚠️ In prod, need to be true (HTTPS)
                             .sameSite("Strict")
                             .maxAge(Duration.ofMillis(refreshTokenExpirationMs))
                             .path("/")

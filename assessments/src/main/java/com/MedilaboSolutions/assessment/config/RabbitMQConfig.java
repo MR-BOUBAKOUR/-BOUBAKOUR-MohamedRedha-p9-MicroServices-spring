@@ -11,11 +11,23 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 @Configuration
 public class RabbitMQConfig {
-    public static final String QUEUE_NAME = "high-risk-assessments";
+
+    // Queue for notifications after doctor decision
+    public static final String NOTIFICATION_QUEUE_NAME = "assessment-report-ready";
+
+    // Queue for AI workflow processing
+    public static final String AI_QUEUE_NAME = "assessments-to-process";
 
     @Bean
-    public Queue highRiskAssessmentQueue() {
-        return new Queue(QUEUE_NAME, false);
+    public Queue assessmentReportQueue() {
+        // durable=false because it's only for notifications
+        return new Queue(NOTIFICATION_QUEUE_NAME, false);
+    }
+
+    @Bean
+    public Queue assessmentProcessQueue() {
+        // durable=true to ensure AI messages are not lost if service crashes
+        return new Queue(AI_QUEUE_NAME, true);
     }
 
     // JSON message converter for RabbitMQ to serialize/deserialize messages as JSON

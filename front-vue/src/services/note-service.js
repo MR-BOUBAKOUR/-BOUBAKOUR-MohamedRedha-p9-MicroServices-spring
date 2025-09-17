@@ -3,7 +3,7 @@ import { setError, clearError } from '@/stores/error'
 import { setupAxiosInterceptors } from './api'
 
 const api = axios.create({
-    baseURL: 'https://localhost:8071/v1',
+    baseURL: `${import.meta.env.VITE_GATEWAY_URL}/v1`,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
@@ -13,9 +13,9 @@ const api = axios.create({
 
 setupAxiosInterceptors(api)
 
-export async function fetchNotesByPatientId(id) {
+export async function fetchNotesByPatientId(noteId) {
     try {
-        const response = await api.get(`/notes/${id}`)
+        const response = await api.get(`/notes/${noteId}`)
         return response.data.data
     } catch (error) {
         if (error.response?.status !== 401) {

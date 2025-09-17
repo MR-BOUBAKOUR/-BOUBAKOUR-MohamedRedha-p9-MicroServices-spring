@@ -3,7 +3,7 @@ import { setError, clearError } from '@/stores/error'
 import { setupAxiosInterceptors } from './api'
 
 const api = axios.create({
-    baseURL: 'https://localhost:8071/v1',
+    baseURL: `${import.meta.env.VITE_GATEWAY_URL}/v1`,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
@@ -31,9 +31,9 @@ export async function fetchPatients() {
     }
 }
 
-export async function fetchPatientById(id) {
+export async function fetchPatientById(patientId) {
     try {
-        const response = await api.get(`/patients/${id}`)
+        const response = await api.get(`/patients/${patientId}`)
         return response.data.data
     } catch (error) {
         if (error.response?.status !== 401) {
@@ -66,9 +66,9 @@ export async function createPatient(newPatient) {
     }
 }
 
-export async function updatePatient(id, updatedPatient) {
+export async function updatePatient(patientId, updatedPatient) {
     try {
-        const response = await api.put(`/patients/${id}`, updatedPatient)
+        const response = await api.put(`/patients/${patientId}`, updatedPatient)
         return response.data.data
     } catch (error) {
         if (error.response?.status !== 401) {

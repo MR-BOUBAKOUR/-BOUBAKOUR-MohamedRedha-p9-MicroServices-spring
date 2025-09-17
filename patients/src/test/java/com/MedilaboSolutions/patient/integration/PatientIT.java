@@ -54,8 +54,8 @@ class PatientIT extends AbstractMySQLContainerTest {
         mockMvc.perform(get("/patients/1")
                         .header("medilabo-solutions-correlation-id", "test-correlation-id"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.firstName").value("TestNone"))
-                .andExpect(jsonPath("$.data.lastName").value("Test"));
+                .andExpect(jsonPath("$.data.firstName").value("Jean"))
+                .andExpect(jsonPath("$.data.lastName").value("Dupont"));
     }
 
     @Test
@@ -64,7 +64,7 @@ class PatientIT extends AbstractMySQLContainerTest {
         mockMvc.perform(get("/patients"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray())
-                .andExpect(jsonPath("$.data.length()").value(Matchers.greaterThanOrEqualTo(4))); // 4 patients dans le dump
+                .andExpect(jsonPath("$.data.length()").value(Matchers.greaterThanOrEqualTo(40)));
     }
 
     @Test

@@ -1,19 +1,64 @@
 CREATE DATABASE IF NOT EXISTS medilabosolutions;
 USE medilabosolutions;
 
-CREATE TABLE patient (
+DROP TABLE IF EXISTS patients;
+CREATE TABLE patients  (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     birth_date DATE NOT NULL,
     gender CHAR(1) NOT NULL,
-    address VARCHAR(100),
+    address VARCHAR(100) NOT NULL,
     phone VARCHAR(20),
     early_onset_mail_sent BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-INSERT INTO patient (first_name, last_name, birth_date, gender, address, phone, early_onset_mail_sent) VALUES
-    ('TestNone', 'Test', '1966-12-31', 'F', '1 Brookside St', '100-222-3333', FALSE),
-    ('TestBorderline', 'Test', '1945-06-24', 'M', '2 High St', '200-333-4444', FALSE),
-    ('TestInDanger', 'Test', '2004-06-18', 'M', '3 Club Road', '300-444-5555', FALSE),
-    ('TestEarlyOnset', 'Test', '2002-06-28', 'F', '4 Valley Dr', '400-555-6666', TRUE);
+INSERT INTO patients (first_name, last_name, birth_date, gender, address, phone, early_onset_mail_sent) VALUES
+    ('Jean', 'Dupont', '1980-03-15', 'M', '12 Rue de la Paix', '501-123-4567', FALSE),
+    ('Marie', 'Martin', '1975-08-22', 'F', '34 Avenue des Champs', '502-234-5678', FALSE),
+    ('Pierre', 'Durand', '1990-01-10', 'M', '56 Boulevard Saint-Michel', '503-345-6789', FALSE),
+    ('Sophie', 'Bernard', '1985-12-05', 'F', '78 Rue Victor Hugo', '504-456-7890', FALSE),
+    ('Laurent', 'Petit', '1988-07-18', 'M', '90 Place de la République', '505-567-8901', FALSE),
+
+    ('Claire', 'Robert', '1992-04-30', 'F', '23 Rue Montmartre', '506-678-9012', FALSE),
+    ('Nicolas', 'Richard', '1983-11-12', 'M', '45 Avenue Voltaire', '507-789-0123', FALSE),
+    ('Isabelle', 'Moreau', '1977-09-03', 'F', '67 Rue de Rivoli', '508-890-1234', FALSE),
+    ('Antoine', 'Simon', '1995-02-14', 'M', '89 Boulevard Haussmann', '509-901-2345', FALSE),
+    ('Camille', 'Michel', '1981-06-27', 'F', '12 Rue de la Bastille', '510-012-3456', FALSE),
+    ('Julien', 'Leroy', '1986-10-08', 'M', '34 Avenue Foch', '511-123-4567', FALSE),
+    ('Aurélie', 'Roux', '1993-05-19', 'F', '56 Rue Danton', '512-234-5678', FALSE),
+    ('Maxime', 'Vincent', '1979-12-25', 'M', '78 Place Vendôme', '513-345-6789', FALSE),
+    ('Emilie', 'Fournier', '1987-03-07', 'F', '90 Rue de Rennes', '514-456-7890', FALSE),
+    ('Thomas', 'Morel', '1991-08-16', 'M', '23 Boulevard Saint-Germain', '515-567-8901', FALSE),
+    ('Julie', 'Girard', '1984-01-28', 'F', '45 Avenue Marceau', '516-678-9012', FALSE),
+    ('Sébastien', 'André', '1989-09-11', 'M', '67 Rue de Turbigo', '517-789-0123', FALSE),
+    ('Laetitia', 'Lefebvre', '1976-04-23', 'F', '89 Place des Vosges', '518-890-1234', FALSE),
+    ('Fabien', 'Mercier', '1994-11-04', 'M', '12 Rue Saint-Antoine', '519-901-2345', FALSE),
+    ('Céline', 'Dupuis', '1982-06-17', 'F', '34 Avenue de la Grande Armée', '520-012-3456', FALSE),
+    ('Rémi', 'Blanc', '1987-02-28', 'M', '56 Rue du Faubourg Saint-Honoré', '521-123-4567', FALSE),
+    ('Nathalie', 'Guerin', '1978-10-09', 'F', '78 Boulevard de Clichy', '522-234-5678', FALSE),
+    ('David', 'Muller', '1992-07-20', 'M', '90 Rue de la Pompe', '523-345-6789', FALSE),
+    ('Virginie', 'Henry', '1985-12-31', 'F', '23 Avenue Kléber', '524-456-7890', FALSE),
+    ('Guillaume', 'Rousseau', '1990-05-12', 'M', '45 Rue de Passy', '525-567-8901', FALSE),
+    ('Sandrine', 'Nicolas', '1973-01-24', 'F', '67 Place de la Concorde', '526-678-9012', FALSE),
+    ('Christophe', 'Faure', '1996-08-06', 'M', '89 Rue de Belleville', '527-789-0123', FALSE),
+    ('Stéphanie', 'Barbier', '1981-03-18', 'F', '12 Boulevard de la Villette', '528-890-1234', FALSE),
+    ('François', 'Renard', '1988-10-29', 'M', '34 Avenue Parmentier', '529-901-2345', FALSE),
+    ('Valérie', 'Bourgeois', '1974-07-11', 'F', '56 Rue Oberkampf', '530-012-3456', FALSE),
+    ('Olivier', 'Gaillard', '1993-04-22', 'M', '78 Place de la Nation', '531-123-4567', FALSE),
+    ('Caroline', 'Brun', '1986-11-03', 'F', '90 Avenue de la République', '532-234-5678', FALSE),
+    ('Matthieu', 'Roche', '1991-06-15', 'M', '23 Rue de Charonne', '533-345-6789', FALSE),
+    ('Patricia', 'Lopez', '1977-01-26', 'F', '45 Boulevard Voltaire', '534-456-7890', FALSE),
+    ('Benjamin', 'Roy', '1995-09-07', 'M', '67 Rue Saint-Maur', '535-567-8901', FALSE),
+    ('Karine', 'Bertrand', '1983-04-19', 'F', '89 Avenue de la République', '536-678-9012', FALSE),
+    ('Jérôme', 'Martinez', '1989-11-30', 'M', '12 Rue de Ménilmontant', '537-789-0123', FALSE),
+    ('Sylvie', 'Garcia', '1975-08-12', 'F', '34 Place des Fêtes', '538-890-1234', FALSE),
+    ('Florian', 'Sanchez', '1994-03-24', 'M', '56 Avenue Jean Jaurès', '539-901-2345', FALSE),
+    ('Amélie', 'Thomas', '1987-10-05', 'F', '78 Rue de Belleville', '540-012-3456', FALSE),
+    ('Vincent', 'Durand', '1992-05-17', 'M', '90 Boulevard de Belleville', '541-123-4567', FALSE),
+    ('Hélène', 'Dubois', '1980-12-28', 'F', '23 Rue des Pyrénées', '542-234-5678', FALSE),
+    ('Cédric', 'Clement', '1986-07-09', 'M', '45 Avenue Gambetta', '543-345-6789', FALSE),
+    ('Agnès', 'Joly', '1978-02-21', 'F', '67 Rue de Bagnolet', '544-456-7890', FALSE),
+    ('Ludovic', 'Gauthier', '1993-09-02', 'M', '89 Place Gambetta', '545-567-8901', FALSE),
+    ('Corinne', 'Meunier', '1974-06-14', 'F', '12 Avenue de la Porte de Bagnolet', '546-678-9012', FALSE),
+    ('Philippe', 'Barre', '1997-01-25', 'M', '34 Rue de Montreuil', '547-789-0123', FALSE);

@@ -50,7 +50,7 @@ export const useAuthStore = defineStore('auth', () => {
     const login = async (credentials) => {
         try {
             const authApi = axios.create({
-                baseURL: 'https://localhost:8071',
+                baseURL: import.meta.env.VITE_GATEWAY_URL,
                 timeout: 10000,
                 headers: {
                     'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     const loginWithGoogle = () => {
-        window.location.href = 'https://localhost:8071/oauth2/google'
+        window.location.href = `${import.meta.env.VITE_GATEWAY_URL}/oauth2/google`
     }
 
     const logout = async (silent = false) => {
@@ -100,7 +100,7 @@ export const useAuthStore = defineStore('auth', () => {
             }
 
             const authApi = axios.create({
-                baseURL: 'https://localhost:8071',
+                baseURL: import.meta.env.VITE_GATEWAY_URL,
                 withCredentials: true,
             })
             await authApi.post('/logout')
@@ -120,7 +120,7 @@ export const useAuthStore = defineStore('auth', () => {
     const refreshToken = async () => {
         try {
             const authApi = axios.create({
-                baseURL: 'https://localhost:8071',
+                baseURL: import.meta.env.VITE_GATEWAY_URL,
                 timeout: 10000,
                 // No Authorization header needed: refresh is handled via HttpsOnly cookie
                 // Enable the sending of the refreshToken cookie to the backend domain
@@ -140,7 +140,7 @@ export const useAuthStore = defineStore('auth', () => {
                 imageUrl: pictureUrl,
             }
 
-            // We trigger a new refreshTimer (if it reachs under 2 minutes, we come back here)
+            // We trigger a new refreshTimer (if it reaches under 2 minutes, we come back here)
             scheduleTokenRefresh(expiresIn)
             return true
 

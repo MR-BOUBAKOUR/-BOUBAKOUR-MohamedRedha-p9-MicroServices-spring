@@ -5,8 +5,9 @@ import PatientForm from '@/components/patients/PatientForm.vue'
 import { fetchPatientById, updatePatient } from '@/services/patient-service'
 
 const route = useRoute()
-const patientId = Number(route.params.id)
 const router = useRouter()
+
+const patientId = Number(route.params.patientId)
 
 const patient = ref(null)
 
@@ -17,7 +18,7 @@ onMounted(async () => {
 async function handlePatientUpdate(updatedPatient) {
     try {
         await updatePatient(patientId, updatedPatient)
-        router.push({ name: 'patient', params: { id: patientId } })
+        router.push({ name: 'patient', params: { patientId: patientId } })
     } catch (e) {
         console.warn('Erreur lors de la mise à jour du patient.')
     }

@@ -4,7 +4,8 @@ global:
 
 scrape_configs:
   - job_name: 'gatewayserver'
-    scheme: https
+    # ⚠️ in prod — https
+    scheme: http
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: [ 'gatewayserver:8071' ]

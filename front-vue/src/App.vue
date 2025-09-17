@@ -7,10 +7,12 @@ import { useAuthStore } from '@/stores/auth'
 const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
-const patientId = computed(() => route.params.id)
+const patientId = computed(() => route.params.patientId)
 
 const showReturnToPatientsLink = computed(() => route.name === 'patient')
-const showReturnToPatientLink = computed(() => route.name === 'patient-edit')
+const showReturnToPatientLink = computed(() =>
+    route.name === 'patient-edit' || route.name === 'assessment-edit' || route.name === 'assessment-create-manual'
+)
 
 const handleLogout = async () => {
     await authStore.logout()
@@ -27,7 +29,7 @@ watch(
 
 <template>
     <div class="conteneur">
-        <div v-if="authStore.isInitializing" class="loader">Loading authentication...</div>
+        <div v-if="authStore.isInitializing">Loading authentication...</div>
 
         <template v-else>
             <header>
@@ -82,7 +84,7 @@ watch(
                     </RouterLink>
                     <RouterLink
                         v-if="showReturnToPatientLink"
-                        :to="{ name: 'patient', params: { id: patientId } }"
+                        :to="{ name: 'patient', params: { patientId: patientId } }"
                     >
                         ◀ Retour à la fiche du patient
                     </RouterLink>
@@ -154,7 +156,7 @@ watch(
 .user-meta {
     display: flex;
     flex-direction: column;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: #555;
 }
 

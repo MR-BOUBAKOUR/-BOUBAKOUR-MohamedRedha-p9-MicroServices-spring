@@ -16,7 +16,7 @@ defineProps({
             <li><strong>Adresse :</strong> {{ patient.address }}</li>
             <li><strong>Téléphone :</strong> {{ patient.phone }}</li>
         </ul>
-        <RouterLink :to="{ name: 'patient-edit', params: { id: patient.id } }">
+        <RouterLink :to="{ name: 'patient-edit', params: { patientId: patient.id } }">
             Mettre à jour la fiche du patient ▶
         </RouterLink>
     </section>

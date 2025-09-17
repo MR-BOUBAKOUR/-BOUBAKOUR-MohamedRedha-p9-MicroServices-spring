@@ -1,6 +1,7 @@
 package com.MedilaboSolutions.gateway.security;
 
 import com.MedilaboSolutions.gateway.filters.AuthFilter;
+import com.MedilaboSolutions.gateway.filters.SseAuthFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,7 @@ import java.util.List;
 public class SecurityConfig {
 
     private final AuthFilter authFilter;
+    private final SseAuthFilter sseAuthFilter;
     private final UnauthorizedEntryPoint unauthorizedEntryPoint;
     private final OAuth2SuccessHandler oauth2SuccessHandler;
     private final OAuth2FailureHandler oauth2FailureHandler;
@@ -43,9 +45,9 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
                     config.setAllowCredentials(true);
-                    config.setAllowedOrigins(List.of("https://localhost:5173"));
+                    config.setAllowedOrigins(List.of("http://localhost:5173"));     // ⚠️ in prod — https
                     config.setAllowedHeaders(List.of("*"));
-                    config.setAllowedMethods(List.of("GET", "POST", "PUT", "OPTIONS"));
+                    config.setAllowedMethods(List.of("*"));
                     return config;
                 }))
                 // When an unauthenticated user tries to access a protected resource,
@@ -81,7 +83,7 @@ public class SecurityConfig {
                                     (authentication != null) ? authentication.getName() : "anonymous");
                             ResponseCookie clearCookie = ResponseCookie.from("refreshToken", "")
                                     .httpOnly(true)
-                                    .secure(true)
+                                    .secure(false) // ⚠️ In prod, need to be true (HTTPS)
                                     .sameSite("Strict")
                                     .maxAge(Duration.ZERO)
                                     .path("/")
@@ -92,6 +94,7 @@ public class SecurityConfig {
                         })
                 )
                 // Adds the custom JWT auth filter BEFORE Spring Security’s default authentication processing
+                .addFilterBefore(sseAuthFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 .addFilterBefore(authFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 // Disable HTTP Basic auth (no browser popup)
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)

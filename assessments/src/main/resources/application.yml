@@ -4,11 +4,49 @@ server:
 spring:
   application:
     name: assessments
+  datasource:
+    url: ${POSTGRES_ASSESSMENTS_URL}
+    username: ${POSTGRES_ASSESSMENTS_USER}
+    password: ${POSTGRES_ASSESSMENTS_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          time_zone: UTC
   rabbitmq:
     host: ${SPRING_RABBITMQ_HOST}
     port: ${SPRING_RABBITMQ_PORT}
     username: ${SPRING_RABBITMQ_USERNAME}
     password: ${SPRING_RABBITMQ_PASSWORD}
+  ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL}
+      embedding:
+        model: nomic-embed-text:latest
+        options:
+          num-ctx: 2048
+      chat:
+        model: llama3.2:latest
+        options:
+          # the precision of the response (low temp = doctor / high temp = more creative)
+          temperature: 0.1
+          # define the number of the tokens generated on the response
+          num-predict: 750
+          # define the number of the tokens for the context
+          num-ctx: 2048
+          # repetition allowed (the higher, the less repetition is allowed)
+          repeat_penalty: 1.15
+
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+        table-name: guideline_chunks
+        # embedding vector(768) in the DB
+        dimensions: 768
 
 management:
   # In production, limit exposure (include: "health,info")

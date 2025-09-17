@@ -1,0 +1,18 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <!-- Outer frame -->
+    <rect x="1" y="1" width="118" height="118" rx="8" ry="8" stroke="#F44336" stroke-width="5" fill="none"/>
+
+    <!-- Circle (upper 70%) -->
+    <circle cx="60" cy="45" r="30" stroke="#F44336" stroke-width="5" fill="none"/>
+
+    <!-- Cross centered in the circle -->
+    <g transform="translate(60,45)">
+        <line x1="-12" y1="-12" x2="12" y2="12" stroke="#F44336" stroke-width="5" stroke-linecap="round"/>
+        <line x1="12" y1="-12" x2="-12" y2="12" stroke="#F44336" stroke-width="5" stroke-linecap="round"/>
+    </g>
+
+    <!-- Text (lower 30%) -->
+    <text x="60" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="800" text-anchor="middle" fill="#F44336">
+        Refusé
+    </text>
+</svg>
