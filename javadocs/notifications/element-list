@@ -3,3 +3,4 @@ com.MedilaboSolutions.notifications.config
 com.MedilaboSolutions.notifications.Dto
 com.MedilaboSolutions.notifications.listener
 com.MedilaboSolutions.notifications.service
+com.MedilaboSolutions.notifications.service.client

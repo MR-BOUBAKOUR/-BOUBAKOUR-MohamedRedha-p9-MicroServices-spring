@@ -2,5 +2,10 @@ com.MedilaboSolutions.assessment
 com.MedilaboSolutions.assessment.config
 com.MedilaboSolutions.assessment.controller
 com.MedilaboSolutions.assessment.dto
+com.MedilaboSolutions.assessment.exception
+com.MedilaboSolutions.assessment.listener
+com.MedilaboSolutions.assessment.mapper
+com.MedilaboSolutions.assessment.model
+com.MedilaboSolutions.assessment.repository
 com.MedilaboSolutions.assessment.service
 com.MedilaboSolutions.assessment.service.client

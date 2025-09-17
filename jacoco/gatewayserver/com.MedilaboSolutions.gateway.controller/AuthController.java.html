@@ -64,7 +64,7 @@ public class AuthController {
                 // Store refresh token in an HttpOnly cookie which will be sent only in requests from the same domain
 <span class="fc" id="L65">                ResponseCookie refreshCookie = ResponseCookie.from(&quot;refreshToken&quot;, refreshToken)</span>
 <span class="fc" id="L66">                    .httpOnly(true)         // Prevent access from JavaScript (XSS protection)</span>
-<span class="fc" id="L67">                    .secure(true)          // ⚠️ In production, need to be true (HTTPS)</span>
+<span class="fc" id="L67">                    .secure(false)          // ⚠️ In prod, need to be true (HTTPS)</span>
 <span class="fc" id="L68">                    .sameSite(&quot;Strict&quot;)     // Cross-site requests won’t include the cookie, (CSRF attacks protection)</span>
 <span class="fc" id="L69">                    .maxAge(Duration.ofMillis(refreshTokenExpirationMs))</span>
 <span class="fc" id="L70">                    .path(&quot;/&quot;)              // Cookie included in requests to all paths on the same domain</span>

@@ -1,40 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EmailService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">notifications</a> &gt; <a href="index.source.html" class="el_package">com.MedilaboSolutions.notifications.service</a> &gt; <span class="el_source">EmailService.java</span></div><h1>EmailService.java</h1><pre class="source lang-java linenums">package com.MedilaboSolutions.notifications.service;
 
-import com.MedilaboSolutions.notifications.Dto.HighRiskAssessmentEvent;
+import com.MedilaboSolutions.notifications.Dto.AssessmentReportReadyEvent;
 import com.MedilaboSolutions.notifications.config.EmailProperties;
+import com.MedilaboSolutions.notifications.service.client.AssessmentFeignClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-<span class="fc" id="L9">@Slf4j</span>
+<span class="fc" id="L11">@Slf4j</span>
 @RequiredArgsConstructor
 @Service
 public class EmailService {
 
     private final EmailProperties emailProperties;
-    private final MailtrapEmailService mailtrapEmailService;
+    private final AssessmentFeignClient assessmentFeignClient;
 
-    public void sendHighRiskEmail(HighRiskAssessmentEvent event) {
-<span class="fc" id="L18">        String subject = &quot;High Risk Alert - Patient &quot; + event.getPatLastname();</span>
-<span class="fc" id="L19">        String body = String.format(&quot;Patient %s %s has been assessed as '%s'. Please take necessary action.&quot;,</span>
-<span class="fc" id="L20">                event.getPatFirstName(),</span>
-<span class="fc" id="L21">                event.getPatLastname(),</span>
-<span class="fc" id="L22">                event.getRiskLevel()</span>
+    private final MailtrapService mailtrapService;
+
+    public void sendAssessmentReportEmail(AssessmentReportReadyEvent event) {
+
+<span class="fc" id="L23">        ResponseEntity&lt;byte[]&gt; pdfResponse = assessmentFeignClient.downloadAssessmentPdf(</span>
+<span class="fc" id="L24">                event.getAssessmentId(),</span>
+<span class="fc" id="L25">                event.getCorrelationId()</span>
         );
 
-<span class="fc" id="L25">        mailtrapEmailService.sendEmail(</span>
-<span class="fc" id="L26">                emailProperties.getSender(),</span>
-<span class="fc" id="L27">                emailProperties.getRecipient(),</span>
+<span class="fc" id="L28">        byte[] pdfBytes = pdfResponse.getBody();</span>
+<span class="fc" id="L29">        String fileName = &quot;assessment_&quot; + event.getAssessmentId() + &quot;.pdf&quot;;</span>
+
+<span class="fc" id="L31">        String subject = &quot;Medilabo Solutions - Rapport d'Évaluation Disponible&quot;;</span>
+<span class="fc" id="L32">        String body = &quot;Bonjour,\n\nVotre rapport d'évaluation médicale est prêt.\n\nMerci.&quot;;</span>
+
+<span class="fc" id="L34">        mailtrapService.sendEmail(</span>
+<span class="fc" id="L35">                emailProperties.getSender(),</span>
+<span class="fc" id="L36">                emailProperties.getRecipient(),</span>
                 subject,
-                body
+                body,
+                pdfBytes,
+                fileName
         );
 
-<span class="fc" id="L32">        log.info(&quot;📧 Email sent to {} for patient {} {} with risk level '{}'&quot;,</span>
-<span class="fc" id="L33">                emailProperties.getRecipient(),</span>
-<span class="fc" id="L34">                event.getPatFirstName(),</span>
-<span class="fc" id="L35">                event.getPatLastname(),</span>
-<span class="fc" id="L36">                event.getRiskLevel()</span>
+<span class="fc" id="L43">        log.info(&quot;📧 Email with PDF sent to {} - content : assessment {} of the patient {} - correlationId : {}&quot;,</span>
+<span class="fc" id="L44">                emailProperties.getRecipient(),</span>
+<span class="fc" id="L45">                event.getAssessmentId(),</span>
+<span class="fc" id="L46">                event.getPatientId(),</span>
+<span class="fc" id="L47">                event.getCorrelationId()</span>
         );
-<span class="fc" id="L38">    }</span>
+<span class="fc" id="L49">    }</span>
 }
+
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AiAssessmentService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assessment</a> &gt; <a href="index.source.html" class="el_package">com.MedilaboSolutions.assessment.service</a> &gt; <span class="el_source">AiAssessmentService.java</span></div><h1>AiAssessmentService.java</h1><pre class="source lang-java linenums">package com.MedilaboSolutions.assessment.service;
+
+import com.MedilaboSolutions.assessment.controller.AssessmentSseController;
+import com.MedilaboSolutions.assessment.dto.AiAssessmentResponse;
+import com.MedilaboSolutions.assessment.model.Assessment;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.rag.Query;
+import org.springframework.ai.rag.retrieval.search.VectorStoreDocumentRetriever;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+<span class="fc" id="L16">@Slf4j</span>
+@Service
+@RequiredArgsConstructor
+public class AiAssessmentService {
+
+    private final ChatClient chatClient;
+    private final VectorStoreDocumentRetriever documentRetriever;
+    private final AiSummarizerService aiSummarizerService;
+    private final AssessmentSseController sseController;
+
+    public AiAssessmentResponse assessDiabetesRisk(int age, String gender, String medicalNotes, Assessment assessment) {
+
+<span class="fc bfc" id="L28" title="All 4 branches covered.">        if (medicalNotes == null || medicalNotes.isBlank()) {</span>
+<span class="fc" id="L29">            log.warn(&quot;Pas de notes médicales : retour direct VERY_LOW&quot;);</span>
+<span class="fc" id="L30">            return AiAssessmentResponse.builder()</span>
+<span class="fc" id="L31">                    .level(&quot;VERY_LOW&quot;)</span>
+<span class="fc" id="L32">                    .context(&quot;Absence de notes.&quot;)</span>
+<span class="fc" id="L33">                    .analysis(&quot;Impossible de conclure objectivement.&quot;)</span>
+<span class="fc" id="L34">                    .recommendations(&quot;Revoir le patient avec des données complémentaires.&quot;)</span>
+<span class="fc" id="L35">                    .build();</span>
+        }
+
+        try {
+
+            // Step 1: retrieve and summarize the relevant guideline chunks
+<span class="fc" id="L41">            sseController.emitAssessmentProgress(assessment.getId(), assessment.getPatId(), &quot;Consultation de la base de connaissances&quot;, 20);</span>
+<span class="fc" id="L42">            String relevantGuidelines = retrieveAndSummarizeChunks(medicalNotes);</span>
+<span class="fc" id="L43">            log.info(&quot;Résumé final des chunks pertinents : {}&quot;, relevantGuidelines);</span>
+
+            // Step 2: perform the diabetes risk assessment using patient data and summarized guidelines
+<span class="fc" id="L46">            sseController.emitAssessmentProgress(assessment.getId(), assessment.getPatId(), &quot;Génération du diagnostique&quot;, 50);</span>
+<span class="fc" id="L47">            return performDiabetesAssessment(age, gender, medicalNotes, relevantGuidelines);</span>
+
+<span class="fc" id="L49">        } catch (Exception e) {</span>
+<span class="fc" id="L50">            log.error(&quot;Erreur lors de l'évaluation du risque diabétique&quot;, e);</span>
+<span class="fc" id="L51">            return AiAssessmentResponse.builder()</span>
+<span class="fc" id="L52">                    .level(&quot;ERROR&quot;)</span>
+<span class="fc" id="L53">                    .context(&quot;Impossible d'évaluer le risque&quot;)</span>
+<span class="fc" id="L54">                    .analysis(&quot;Erreur technique lors de l'analyse&quot;)</span>
+<span class="fc" id="L55">                    .recommendations(&quot;Veuillez réessayer plus tard&quot;)</span>
+<span class="fc" id="L56">                    .build();</span>
+        }
+    }
+
+    private String retrieveAndSummarizeChunks(String medicalNotes) {
+<span class="fc" id="L61">        log.info(&quot;Recherche de chunks pertinents pour les notes médicales&quot;);</span>
+
+        // Build the query object from the medical notes for vector-based retrieval
+<span class="fc" id="L64">        Query query = new Query(medicalNotes);</span>
+<span class="fc" id="L65">        List&lt;Document&gt; retrievedChunks = documentRetriever.retrieve(query);</span>
+
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (retrievedChunks.isEmpty()) {</span>
+<span class="fc" id="L68">            log.warn(&quot;Aucun chunk pertinent trouvé dans la base de connaissances&quot;);</span>
+<span class="fc" id="L69">            return &quot;Aucune directive médicale spécifique trouvée.&quot;;</span>
+        }
+
+<span class="fc" id="L72">        log.info(&quot;Trouvé {} chunks pertinents, résumé en cours...&quot;, retrievedChunks.size());</span>
+
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        for (int i = 0; i &lt; retrievedChunks.size(); i++) {</span>
+<span class="fc" id="L75">            Document doc = retrievedChunks.get(i);</span>
+<span class="fc" id="L76">            log.info(&quot;=========================== Chunk #{} ===========================&quot;, i + 1);</span>
+<span class="fc" id="L77">            log.info(&quot;Chunk #{} : {}&quot;, i + 1, doc.getText());</span>
+<span class="fc" id="L78">            log.info(&quot;Metadata #{} : {}&quot;, i + 1, doc.getMetadata());</span>
+<span class="fc" id="L79">            log.info(&quot;=================================================================&quot;);</span>
+        }
+
+        // Summarize retrieved chunks while keeping their references and page numbers
+<span class="fc" id="L83">        Document summarizedChunks = aiSummarizerService.summarizeChunks(retrievedChunks);</span>
+
+<span class="fc" id="L85">        return summarizedChunks.getText();</span>
+    }
+
+    private AiAssessmentResponse performDiabetesAssessment(int age, String gender, String medicalNotes, String guidelines) {
+<span class="fc" id="L89">        log.info(&quot;Évaluation du risque diabétique avec directives médicales&quot;);</span>
+
+<span class="fc" id="L91">        String systemPrompt = &quot;&quot;&quot;</span>
+            Vous êtes une IA experte en évaluation du risque diabétique pour assistance médicale.
+            Le destinataire étant un professionnel de santé, adopter un langage expert.
+            
+            Vous avez accès aux directives médicales suivantes, ainsi qu’à leurs sources :
+            %s
+            
+            Basez votre évaluation sur :
+            1. Les données du patient fournies
+            2. Les directives médicales ci-dessus
+            
+            L'analyse doit citer explicitement les points pertinents des directives médicales et les mobiliser pour justifier le NIVEAU de risque.
+            Évitez les généralités.
+            
+            Si directives médicales non-pertinentes ou absentes: votre expertise médicale
+            Si les données sont insuffisantes: NIVEAU = &quot;VERY_LOW&quot; et CONTEXTE = &quot;Données insuffisantes.&quot;
+
+            Répondez strictement au format suivant, en 5 sections séparées par ### :
+            
+            NIVEAU: [VERY_LOW | LOW | MODERATE | HIGH]
+            ###
+            CONTEXTE: [Liste des faits observables et antécédents pertinents uniquement. Aucun diagnostic toléré dans cette section]
+            ###
+            ANALYSE: [Raisonnement médical justifiant le NIVEAU, 3-4 phrases, concis, sans répétitions]
+            ###
+            RECOMMANDATIONS: [Liste de 3 actions concrètes, spécifiques, orientées suivi ou traitement.]
+            ###
+            SOURCES: [Liste des paires refs/pages utilisées dans les sections ANALYSE et RECOMMANDATIONS
+                Si aucune ref/page = format stricte: vide
+                sinon = format stricte:
+                - [[ref-A], page B]
+                - [[ref-C], page D]
+            ]
+<span class="fc" id="L124">            &quot;&quot;&quot;.formatted(guidelines);</span>
+
+<span class="fc" id="L126">        String userPrompt = &quot;&quot;&quot;</span>
+            Évaluez le risque de diabète pour ce patient :
+            Âge : %d
+            Sexe : %s
+            Notes médicales : %s
+<span class="fc" id="L131">            &quot;&quot;&quot;.formatted(age, gender, medicalNotes);</span>
+
+<span class="fc" id="L133">        String response = chatClient.prompt()</span>
+<span class="fc" id="L134">                .system(systemPrompt)</span>
+<span class="fc" id="L135">                .user(userPrompt)</span>
+<span class="fc" id="L136">                .call()</span>
+<span class="fc" id="L137">                .content()</span>
+<span class="fc" id="L138">                .trim();</span>
+
+<span class="fc" id="L140">        log.info(&quot;Évaluation du risque diabétique terminée&quot;);</span>
+<span class="fc" id="L141">        return parseResponse(response);</span>
+    }
+
+    private AiAssessmentResponse parseResponse(String response) {
+<span class="fc" id="L145">        String level = &quot;ERROR&quot;;</span>
+<span class="fc" id="L146">        String context = &quot;Données manquantes&quot;;</span>
+<span class="fc" id="L147">        String analysis = &quot;Données manquantes&quot;;</span>
+<span class="fc" id="L148">        String recommendations = &quot;Données manquantes&quot;;</span>
+<span class="fc" id="L149">        String sources = &quot;Données manquantes&quot;;</span>
+
+<span class="fc" id="L151">        String[] sections = response.split(&quot;###&quot;);</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        for (String section : sections) {</span>
+<span class="fc" id="L153">            section = section.trim();</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">            if (section.startsWith(&quot;NIVEAU:&quot;)) {</span>
+<span class="fc" id="L155">                level = section.substring(&quot;NIVEAU:&quot;.length()).trim();</span>
+<span class="fc bfc" id="L156" title="All 2 branches covered.">            } else if (section.startsWith(&quot;CONTEXTE:&quot;)) {</span>
+<span class="fc" id="L157">                context = section.substring(&quot;CONTEXTE:&quot;.length()).trim();</span>
+<span class="fc bfc" id="L158" title="All 2 branches covered.">            } else if (section.startsWith(&quot;ANALYSE:&quot;)) {</span>
+<span class="fc" id="L159">                analysis = section.substring(&quot;ANALYSE:&quot;.length()).trim();</span>
+<span class="fc bfc" id="L160" title="All 2 branches covered.">            } else if (section.startsWith(&quot;RECOMMANDATIONS:&quot;)) {</span>
+<span class="fc" id="L161">                recommendations = section.substring(&quot;RECOMMANDATIONS:&quot;.length()).trim();</span>
+<span class="fc bfc" id="L162" title="All 2 branches covered.">            } else if (section.startsWith(&quot;SOURCES:&quot;)) {</span>
+<span class="fc" id="L163">                sources = section.substring(&quot;SOURCES:&quot;.length()).trim();</span>
+            }
+        }
+
+<span class="fc" id="L167">        return AiAssessmentResponse.builder()</span>
+<span class="fc" id="L168">                .level(level)</span>
+<span class="fc" id="L169">                .context(context)</span>
+<span class="fc" id="L170">                .analysis(analysis)</span>
+<span class="fc" id="L171">                .recommendations(recommendations)</span>
+<span class="fc" id="L172">                .sources(sources)</span>
+<span class="fc" id="L173">                .build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

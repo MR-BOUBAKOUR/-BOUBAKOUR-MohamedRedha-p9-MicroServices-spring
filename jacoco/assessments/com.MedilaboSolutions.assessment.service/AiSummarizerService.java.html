@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AiSummarizerService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assessment</a> &gt; <a href="index.source.html" class="el_package">com.MedilaboSolutions.assessment.service</a> &gt; <span class="el_source">AiSummarizerService.java</span></div><h1>AiSummarizerService.java</h1><pre class="source lang-java linenums">package com.MedilaboSolutions.assessment.service;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.document.Document;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+<span class="fc" id="L14">@Slf4j</span>
+@Service
+@RequiredArgsConstructor
+public class AiSummarizerService {
+
+    private final ChatClient chatClient;
+
+    public Document summarizeChunks(List&lt;Document&gt; retrievedChunks) {
+<span class="fc bfc" id="L22" title="All 4 branches covered.">        if (retrievedChunks == null || retrievedChunks.isEmpty()) {</span>
+<span class="fc" id="L23">            return new Document(&quot;Aucun contenu médical disponible.&quot;, Map.of());</span>
+        }
+
+<span class="fc" id="L26">        log.info(&quot;Résumé de {} chunks en cours...&quot;, retrievedChunks.size());</span>
+
+        // Step 1: build the text including refs &amp; pages for each chunk
+<span class="fc" id="L29">        String combinedText = IntStream.range(0, retrievedChunks.size())</span>
+<span class="fc" id="L30">                .mapToObj(i -&gt; &quot;CHUNK &quot; + (i+1) + &quot;:\n&quot; + formatChunk(retrievedChunks.get(i)))</span>
+<span class="fc" id="L31">                .collect(Collectors.joining(&quot;\n\n&quot;));</span>
+
+        // Step 2: generate the summary using the AI model
+<span class="fc" id="L34">        String summarizedText = generateSummary(combinedText);</span>
+
+<span class="fc" id="L36">        log.info(&quot;Résumé généré avec succès&quot;);</span>
+<span class="fc" id="L37">        return new Document(summarizedText, Map.of(</span>
+<span class="fc" id="L38">                &quot;chunksCount&quot;, retrievedChunks.size(),</span>
+                &quot;type&quot;, &quot;summarized_guidelines&quot;
+        ));
+    }
+
+    private String formatChunk(Document doc) {
+<span class="fc" id="L44">        String pages = String.valueOf(doc.getMetadata().getOrDefault(&quot;pages&quot;, &quot;unknown&quot;));</span>
+<span class="fc" id="L45">        String refs = String.valueOf(doc.getMetadata().getOrDefault(&quot;refs&quot;, &quot;unknown&quot;));</span>
+
+<span class="fc" id="L47">        return String.format(&quot;%s [refs=%s, pages=%s]&quot;, doc.getText(), refs, pages);</span>
+    }
+
+    private String generateSummary(String combinedText) {
+        try {
+<span class="fc" id="L52">            return chatClient.prompt()</span>
+<span class="fc" id="L53">                    .system(&quot;&quot;&quot;</span>
+                        Vous êtes un assistant médical expert spécialisé dans la synthèse des directives médicales.
+                        Votre objectif est de résumer les chunks que vous recevez, en incluant obligatoirement la paire ref associée à chaque chunk SI ELLE EXISTE.
+
+                        INSTRUCTIONS :
+                        - 1 chunk = 1 résumé en une phrase + refs/pages .
+                        - résumé = critères, diagnostiques, seuils, et recommandations importantes
+
+                        RÈGLES :
+                        - Si le chunk contient des references : terminez le résumé en les évoquant
+                        - Si le chunk ne contient AUCUNE référence : ne mettez rien après le résumé
+
+                        Répondez strictement au format suivant :
+                        RESUME: [Liste des résumés ainsi que leur [[ref-A], page B] associés]
+                    &quot;&quot;&quot;)
+<span class="fc" id="L68">                    .user(combinedText)</span>
+<span class="fc" id="L69">                    .call()</span>
+<span class="fc" id="L70">                    .content()</span>
+<span class="fc" id="L71">                    .trim();</span>
+<span class="fc" id="L72">        } catch (Exception e) {</span>
+<span class="fc" id="L73">            log.warn(&quot;Erreur lors du résumé IA, retour du texte original&quot;, e);</span>
+<span class="fc" id="L74">            return combinedText;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

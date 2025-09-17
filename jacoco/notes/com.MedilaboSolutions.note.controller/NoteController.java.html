@@ -22,7 +22,7 @@ public class NoteController {
     private final NoteService noteService;
 
     @GetMapping(&quot;/{patId}&quot;)
-    public ResponseEntity&lt;SuccessResponse&lt;List&lt;NoteDto&gt;&gt;&gt; getNoteByPatientId(
+    public ResponseEntity&lt;SuccessResponse&lt;List&lt;NoteDto&gt;&gt;&gt; getNotesByPatientId(
             @PathVariable Long patId,
             @RequestHeader(&quot;medilabo-solutions-correlation-id&quot;) String correlationId
     ) {

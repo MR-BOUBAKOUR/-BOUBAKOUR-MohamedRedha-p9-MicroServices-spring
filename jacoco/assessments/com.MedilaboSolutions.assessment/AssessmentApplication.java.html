@@ -3,17 +3,19 @@
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 // allow our assessment ms to connect to the other microservices
 // will replace the usage of &quot;RestTemplate / webClient&quot;
 // --&gt; Declarative approach (a JPA repository &quot;like&quot; approach&quot;)
 @EnableFeignClients
+@EnableScheduling
 @SpringBootApplication
-<span class="fc" id="L12">public class AssessmentApplication {</span>
+<span class="fc" id="L14">public class AssessmentApplication {</span>
 
 	public static void main(String[] args) {
-<span class="nc" id="L15">		SpringApplication.run(AssessmentApplication.class, args);</span>
-<span class="nc" id="L16">	}</span>
+<span class="nc" id="L17">		SpringApplication.run(AssessmentApplication.class, args);</span>
+<span class="nc" id="L18">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

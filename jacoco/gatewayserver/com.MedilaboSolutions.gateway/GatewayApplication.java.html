@@ -1,77 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GatewayApplication.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gateway</a> &gt; <a href="index.source.html" class="el_package">com.MedilaboSolutions.gateway</a> &gt; <span class="el_source">GatewayApplication.java</span></div><h1>GatewayApplication.java</h1><pre class="source lang-java linenums">package com.MedilaboSolutions.gateway;
 
+import com.MedilaboSolutions.gateway.filters.SseAuthFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 
-import java.time.LocalDateTime;
+import static org.springframework.cloud.gateway.support.RouteMetadataUtils.CONNECT_TIMEOUT_ATTR;
+import static org.springframework.cloud.gateway.support.RouteMetadataUtils.RESPONSE_TIMEOUT_ATTR;
 
 @SpringBootApplication
-<span class="fc" id="L12">public class GatewayApplication {</span>
+<span class="fc" id="L14">public class GatewayApplication {</span>
 
 	public static void main(String[] args) {
-<span class="nc" id="L15">		SpringApplication.run(GatewayApplication.class, args);</span>
-<span class="nc" id="L16">	}</span>
+<span class="nc" id="L17">		SpringApplication.run(GatewayApplication.class, args);</span>
+<span class="nc" id="L18">	}</span>
 
 	@Bean
 	public RouteLocator customRoutes(RouteLocatorBuilder builder) {
-<span class="fc" id="L20">		return builder.routes()</span>
-<span class="fc" id="L21">				.route(p -&gt; p</span>
-<span class="fc" id="L22">						.path(&quot;/login&quot;)</span>
-<span class="fc" id="L23">						.filters(f -&gt; f</span>
+<span class="fc" id="L22">		return builder.routes()</span>
+<span class="fc" id="L23">				.route(p -&gt; p</span>
+<span class="fc" id="L24">						.path(&quot;/login&quot;)</span>
+<span class="fc" id="L25">						.filters(f -&gt; f</span>
 						)
-<span class="fc" id="L25">						.uri(&quot;forward:/login&quot;)</span>
+<span class="fc" id="L27">						.uri(&quot;forward:/login&quot;)</span>
 				)
-<span class="fc" id="L27">				.route(p -&gt; p</span>
-<span class="fc" id="L28">						.path(&quot;/refresh&quot;)</span>
-<span class="fc" id="L29">						.filters(f -&gt; f</span>
+<span class="fc" id="L29">				.route(p -&gt; p</span>
+<span class="fc" id="L30">						.path(&quot;/refresh&quot;)</span>
+<span class="fc" id="L31">						.filters(f -&gt; f</span>
 						)
-<span class="fc" id="L31">						.uri(&quot;forward:/refresh&quot;)</span>
+<span class="fc" id="L33">						.uri(&quot;forward:/refresh&quot;)</span>
 				)
-<span class="fc" id="L33">				.route(p -&gt; p</span>
-<span class="fc" id="L34">						.path(&quot;/logout&quot;)</span>
-<span class="fc" id="L35">						.filters(f -&gt; f</span>
+<span class="fc" id="L35">				.route(p -&gt; p</span>
+<span class="fc" id="L36">						.path(&quot;/logout&quot;)</span>
+<span class="fc" id="L37">						.filters(f -&gt; f</span>
 						)
-<span class="fc" id="L37">						.uri(&quot;forward:/logout&quot;)</span>
+<span class="fc" id="L39">						.uri(&quot;forward:/logout&quot;)</span>
 				)
-<span class="fc" id="L39">				.route(p -&gt; p</span>
-<span class="fc" id="L40">						.path(&quot;/v1/assessments/**&quot;)</span>
-<span class="fc" id="L41">						.filters( f -&gt; f</span>
-<span class="fc" id="L42">								.rewritePath(&quot;/v1/assessments/(?&lt;segment&gt;.*)&quot;,&quot;/assessments/${segment}&quot;)</span>
+<span class="fc" id="L41">				.route(p -&gt; p</span>
+<span class="fc" id="L42">						.path(&quot;/v1/assessments/**&quot;)</span>
+<span class="fc" id="L43">						.filters( f -&gt; f</span>
+<span class="fc" id="L44">								.rewritePath(&quot;/v1/assessments/(?&lt;segment&gt;.*)&quot;,&quot;/assessments/${segment}&quot;)</span>
 						)
-<span class="fc" id="L44">						.uri(&quot;lb://assessments&quot;)</span>
+<span class="fc" id="L46">						.uri(&quot;lb://assessments&quot;)</span>
 				)
-<span class="fc" id="L46">				.route(p -&gt; p</span>
-<span class="fc" id="L47">						.path(&quot;/v1/notes&quot;)</span>
-<span class="fc" id="L48">						.filters(f -&gt; f</span>
-<span class="fc" id="L49">								.rewritePath(&quot;/v1/notes&quot;, &quot;/notes&quot;)</span>
+<span class="fc" id="L48">                .route(p -&gt; p</span>
+<span class="fc" id="L49">                        .path(&quot;/v1/assessments/sse/**&quot;)</span>
+<span class="fc" id="L50">						.filters(f -&gt; f</span>
+<span class="fc" id="L51">								.rewritePath(&quot;/v1/assessments/sse/(?&lt;segment&gt;.*)&quot;, &quot;/assessments/sse/${segment}&quot;)</span>
 						)
-<span class="fc" id="L51">						.uri(&quot;lb://notes&quot;)</span>
-				)
-<span class="fc" id="L53">				.route(p -&gt; p</span>
-<span class="fc" id="L54">						.path(&quot;/v1/notes/**&quot;)</span>
-<span class="fc" id="L55">						.filters( f -&gt; f</span>
-<span class="fc" id="L56">								.rewritePath(&quot;/v1/notes/(?&lt;segment&gt;.*)&quot;,&quot;/notes/${segment}&quot;)</span>
+<span class="fc" id="L53">						.metadata(RESPONSE_TIMEOUT_ATTR, 16 * 60_000) // 16 minutes (the accessToken expires in 15 minutes)</span>
+<span class="fc" id="L54">                        .metadata(CONNECT_TIMEOUT_ATTR, 10000)</span>
+<span class="fc" id="L55">                        .uri(&quot;lb://assessments&quot;)</span>
+                )
+<span class="fc" id="L57">				.route(p -&gt; p</span>
+<span class="fc" id="L58">						.path(&quot;/v1/notes&quot;)</span>
+<span class="fc" id="L59">						.filters(f -&gt; f</span>
+<span class="fc" id="L60">								.rewritePath(&quot;/v1/notes&quot;, &quot;/notes&quot;)</span>
 						)
-<span class="fc" id="L58">						.uri(&quot;lb://notes&quot;)</span>
+<span class="fc" id="L62">						.uri(&quot;lb://notes&quot;)</span>
 				)
-<span class="fc" id="L60">				.route(p -&gt; p</span>
-<span class="fc" id="L61">						.path(&quot;/v1/patients&quot;)</span>
-<span class="fc" id="L62">						.filters(f -&gt; f</span>
-<span class="fc" id="L63">								.rewritePath(&quot;/v1/patients&quot;, &quot;/patients&quot;)</span>
+<span class="fc" id="L64">				.route(p -&gt; p</span>
+<span class="fc" id="L65">						.path(&quot;/v1/notes/**&quot;)</span>
+<span class="fc" id="L66">						.filters( f -&gt; f</span>
+<span class="fc" id="L67">								.rewritePath(&quot;/v1/notes/(?&lt;segment&gt;.*)&quot;,&quot;/notes/${segment}&quot;)</span>
 						)
-<span class="fc" id="L65">						.uri(&quot;lb://patients&quot;)</span>
+<span class="fc" id="L69">						.uri(&quot;lb://notes&quot;)</span>
 				)
-<span class="fc" id="L67">				.route(p -&gt; p</span>
-<span class="fc" id="L68">						.path(&quot;/v1/patients/**&quot;)</span>
-<span class="fc" id="L69">						.filters(f -&gt; f</span>
-<span class="fc" id="L70">								.rewritePath(&quot;/v1/patients/(?&lt;segment&gt;.*)&quot;, &quot;/patients/${segment}&quot;)</span>
+<span class="fc" id="L71">				.route(p -&gt; p</span>
+<span class="fc" id="L72">						.path(&quot;/v1/patients&quot;)</span>
+<span class="fc" id="L73">						.filters(f -&gt; f</span>
+<span class="fc" id="L74">								.rewritePath(&quot;/v1/patients&quot;, &quot;/patients&quot;)</span>
 						)
-<span class="fc" id="L72">						.uri(&quot;lb://patients&quot;)</span>
+<span class="fc" id="L76">						.uri(&quot;lb://patients&quot;)</span>
 				)
-<span class="fc" id="L74">				.build();</span>
+<span class="fc" id="L78">				.route(p -&gt; p</span>
+<span class="fc" id="L79">						.path(&quot;/v1/patients/**&quot;)</span>
+<span class="fc" id="L80">						.filters(f -&gt; f</span>
+<span class="fc" id="L81">								.rewritePath(&quot;/v1/patients/(?&lt;segment&gt;.*)&quot;, &quot;/patients/${segment}&quot;)</span>
+						)
+<span class="fc" id="L83">						.uri(&quot;lb://patients&quot;)</span>
+				)
+<span class="fc" id="L85">				.build();</span>
 	}
 
 }

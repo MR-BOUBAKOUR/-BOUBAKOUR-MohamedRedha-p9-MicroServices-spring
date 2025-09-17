@@ -1,108 +1,314 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AssessmentService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assessment</a> &gt; <a href="index.source.html" class="el_package">com.MedilaboSolutions.assessment.service</a> &gt; <span class="el_source">AssessmentService.java</span></div><h1>AssessmentService.java</h1><pre class="source lang-java linenums">package com.MedilaboSolutions.assessment.service;
 
 import com.MedilaboSolutions.assessment.config.RabbitMQConfig;
+import com.MedilaboSolutions.assessment.controller.AssessmentSseController;
 import com.MedilaboSolutions.assessment.dto.*;
+import com.MedilaboSolutions.assessment.exception.ResourceNotFoundException;
+import com.MedilaboSolutions.assessment.mapper.AssessmentMapper;
+import com.MedilaboSolutions.assessment.model.Assessment;
+import com.MedilaboSolutions.assessment.repository.AssessmentRepository;
 import com.MedilaboSolutions.assessment.service.client.NoteFeignClient;
 import com.MedilaboSolutions.assessment.service.client.PatientFeignClient;
-import lombok.RequiredArgsConstructor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.InputStream;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-<span class="fc" id="L18">@Slf4j</span>
-@RequiredArgsConstructor
+<span class="fc" id="L30">@Slf4j</span>
 @Service
 public class AssessmentService {
 
     private final PatientFeignClient patientFeignClient;
     private final NoteFeignClient noteFeignClient;
 
+    private final AiAssessmentService aiAssessmentService;
+    private final AssessmentRepository assessmentRepository;
+    private final AssessmentMapper assessmentMapper;
+
+    private final AssessmentSseController sseController;
     private final RabbitTemplate rabbitTemplate;
 
-    public AssessmentDto generateAssessment(Long patId, String correlationId) {
+    private final Map&lt;String, String&gt; cachedRefsFromFile;
 
-<span class="fc" id="L30">        ResponseEntity&lt;SuccessResponse&lt;PatientDto&gt;&gt; patient = patientFeignClient.getPatientById(patId, correlationId);</span>
-<span class="fc" id="L31">        String gender = Objects.requireNonNull(patient.getBody()).getData().getGender().toLowerCase();</span>
-<span class="fc" id="L32">        int age = calculateAge(patient.getBody().getData().getBirthDate());</span>
+    public AssessmentService(
+            PatientFeignClient patientFeignClient,
+            NoteFeignClient noteFeignClient,
+            AiAssessmentService aiAssessmentService,
+            AssessmentRepository assessmentRepository,
+            AssessmentMapper assessmentMapper,
+            RabbitTemplate rabbitTemplate,
+            AssessmentSseController sseController,
+            @Value(&quot;classpath:docs/guidelines_result_refs.json&quot;) Resource refsFile,
+            ObjectMapper objectMapper
+<span class="fc" id="L56">    ) {</span>
+<span class="fc" id="L57">        this.patientFeignClient = patientFeignClient;</span>
+<span class="fc" id="L58">        this.noteFeignClient = noteFeignClient;</span>
+<span class="fc" id="L59">        this.rabbitTemplate = rabbitTemplate;</span>
+<span class="fc" id="L60">        this.aiAssessmentService = aiAssessmentService;</span>
+<span class="fc" id="L61">        this.assessmentRepository = assessmentRepository;</span>
+<span class="fc" id="L62">        this.assessmentMapper = assessmentMapper;</span>
+<span class="fc" id="L63">        this.sseController = sseController;</span>
 
-<span class="fc" id="L34">        ResponseEntity&lt;SuccessResponse&lt;List&lt;NoteDto&gt;&gt;&gt; notes = noteFeignClient.getNoteByPatientId(patId, correlationId);</span>
-<span class="fc" id="L35">        int triggerCount = countMedicalTriggers(notes);</span>
+        // Load the JSON file into an independent variable
+<span class="fc" id="L66">        try (InputStream is = refsFile.getInputStream()) {</span>
+<span class="fc" id="L67">            this.cachedRefsFromFile = objectMapper.readValue(is, Map.class);</span>
+<span class="nc" id="L68">        } catch (Exception e) {</span>
+<span class="nc" id="L69">            throw new IllegalStateException(&quot;Impossible de charger le fichier de refs&quot;, e);</span>
+<span class="fc" id="L70">        }</span>
+<span class="fc" id="L71">    }</span>
 
-<span class="fc" id="L37">        String risk = evaluateRiskLevel(gender, age, triggerCount);</span>
-
-<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (&quot;Early onset&quot;.equals(risk)) {</span>
-<span class="fc bfc" id="L40" title="All 2 branches covered.">            if (!patient.getBody().getData().isEarlyOnsetMailSent()) {</span>
-<span class="fc" id="L41">                HighRiskAssessmentEvent event = new HighRiskAssessmentEvent(</span>
-                        patId,
-<span class="fc" id="L43">                        patient.getBody().getData().getFirstName(),</span>
-<span class="fc" id="L44">                        patient.getBody().getData().getLastName(),</span>
-                        risk
-                );
-<span class="fc" id="L47">                rabbitTemplate.convertAndSend(RabbitMQConfig.QUEUE_NAME, event);</span>
-<span class="fc" id="L48">                log.info(&quot;Published high risk assessment event to queue [{}]: {}&quot;, RabbitMQConfig.QUEUE_NAME, event);</span>
-
-<span class="fc" id="L50">                patientFeignClient.updateEarlyOnsetMailSent(patId, true, correlationId);</span>
-<span class="fc" id="L51">            }</span>
-        } else {
-<span class="fc bfc" id="L53" title="All 2 branches covered.">            if (patient.getBody().getData().isEarlyOnsetMailSent()) {</span>
-<span class="fc" id="L54">                patientFeignClient.updateEarlyOnsetMailSent(patId, false, correlationId);</span>
-            }
-        }
-
-<span class="fc" id="L58">        return new AssessmentDto(patId, risk);</span>
-    }
-
-    private int countMedicalTriggers(ResponseEntity&lt;SuccessResponse&lt;List&lt;NoteDto&gt;&gt;&gt; notes) {
-<span class="fc" id="L62">        int count = 0;</span>
-<span class="fc" id="L63">        List&lt;NoteDto&gt; allNotes = Objects.requireNonNull(notes.getBody()).getData();</span>
-
-<span class="fc" id="L65">        List&lt;String&gt; triggers = List.of(</span>
-                &quot;Hémoglobine A1C&quot;, &quot;Microalbumine&quot;, &quot;Taille&quot;, &quot;Poids&quot;,
-                &quot;Fumeur&quot;, &quot;Fumeuse&quot;, &quot;Anormal&quot;, &quot;Cholestérol&quot;,
-                &quot;Vertiges&quot;, &quot;Rechute&quot;, &quot;Réaction&quot;, &quot;Anticorps&quot;
+    public List&lt;AssessmentDto&gt; findAssessmentsByPatientId(Long patId) {
+<span class="fc" id="L74">        List&lt;AssessmentStatus&gt; allowedStatuses = List.of(</span>
+                AssessmentStatus.QUEUED,
+                AssessmentStatus.PROCESSING,
+                AssessmentStatus.PENDING,
+                AssessmentStatus.REFUSED_PENDING,
+                AssessmentStatus.ACCEPTED,
+                AssessmentStatus.UPDATED,
+                AssessmentStatus.MANUAL
         );
 
-<span class="fc bfc" id="L71" title="All 2 branches covered.">        for (NoteDto note : allNotes) {</span>
-<span class="fc" id="L72">            String noteContent = note.getNote().toLowerCase();</span>
-<span class="fc bfc" id="L73" title="All 2 branches covered.">            for (String trigger : triggers) {</span>
-<span class="fc bfc" id="L74" title="All 2 branches covered.">                if (noteContent.contains(trigger.toLowerCase())) {</span>
-<span class="fc" id="L75">                    count++;</span>
+<span class="fc" id="L84">        List&lt;Assessment&gt; assessments =</span>
+<span class="fc" id="L85">                assessmentRepository.findByPatIdAndStatusInOrderByCreatedAtDesc(patId, allowedStatuses);</span>
+
+<span class="fc" id="L87">        return assessments.stream()</span>
+<span class="fc" id="L88">                .map(assessmentMapper::toAssessmentDto)</span>
+<span class="fc" id="L89">                .toList();</span>
+    }
+
+    public AssessmentDto findAssessmentById(Long assessmentId) {
+<span class="fc" id="L93">        Assessment assessment = assessmentRepository.findById(assessmentId)</span>
+<span class="fc" id="L94">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Assessment not found with id &quot; + assessmentId));</span>
+
+<span class="fc" id="L96">        return assessmentMapper.toAssessmentDto(assessment);</span>
+    }
+
+    public AssessmentDto createAssessment(Long patId, AssessmentCreateDto newAssessment, String correlationId) {
+<span class="fc" id="L100">        Assessment assessment = assessmentMapper.toAssessment(newAssessment);</span>
+
+<span class="fc" id="L102">        assessment.setPatId(patId);</span>
+        // Saving for the assessment id generation
+<span class="fc" id="L104">        Assessment createdAssessment = assessmentRepository.save(assessment);</span>
+
+        // Using updateStatus to trigger the email event
+<span class="fc" id="L107">        updateStatus(createdAssessment.getId(), AssessmentStatus.MANUAL, correlationId);</span>
+
+<span class="fc" id="L109">        return assessmentMapper.toAssessmentDto(createdAssessment);</span>
+    }
+
+    public AssessmentDto updateAssessment(Long assessmentId, AssessmentDto updatedAssessment, String correlationId) {
+<span class="fc" id="L113">        Assessment existingAssessment = assessmentRepository.findById(assessmentId)</span>
+<span class="pc" id="L114">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Assessment not found with id &quot; + assessmentId));</span>
+
+<span class="fc" id="L116">        existingAssessment.setLevel(updatedAssessment.getLevel());</span>
+<span class="fc" id="L117">        existingAssessment.setAnalysis(updatedAssessment.getAnalysis());</span>
+<span class="fc" id="L118">        existingAssessment.setContext(updatedAssessment.getContext());</span>
+<span class="fc" id="L119">        existingAssessment.setRecommendations(updatedAssessment.getRecommendations());</span>
+<span class="fc" id="L120">        existingAssessment.setSources(updatedAssessment.getSources());</span>
+
+<span class="fc" id="L122">        assessmentRepository.save(existingAssessment);</span>
+
+        // Using updateStatus to trigger the email event
+<span class="fc" id="L125">        updateStatus(assessmentId, AssessmentStatus.UPDATED, correlationId);</span>
+
+<span class="fc" id="L127">        return assessmentMapper.toAssessmentDto(existingAssessment);</span>
+    }
+
+
+    public AssessmentDto queueAiAssessmentForProcessing(Long patId, String correlationId) {
+
+<span class="fc" id="L133">        Assessment assessment = new Assessment();</span>
+
+<span class="fc" id="L135">        assessment.setPatId(patId);</span>
+        // Saving for the assessment id generation
+<span class="fc" id="L137">        Assessment createdAssessment = assessmentRepository.save(assessment);</span>
+
+<span class="fc" id="L139">        updateStatus(createdAssessment.getId(), AssessmentStatus.QUEUED, correlationId);</span>
+
+<span class="fc" id="L141">        AiAssessmentProcessEvent event = new AiAssessmentProcessEvent(</span>
+<span class="fc" id="L142">                createdAssessment.getId(),</span>
+<span class="fc" id="L143">                createdAssessment.getPatId(),</span>
+                correlationId
+        );
+
+        // Will be processed by AiAssessmentProcessListener
+<span class="fc" id="L148">        rabbitTemplate.convertAndSend(RabbitMQConfig.AI_QUEUE_NAME, event);</span>
+
+<span class="fc" id="L150">        return assessmentMapper.toAssessmentDto(createdAssessment);</span>
+    }
+
+    public void processQueuedAiAssessment(Long assessmentId, Long patId, String correlationId) {
+
+        // Fetch the existing assessment
+<span class="fc" id="L156">        Assessment assessment = assessmentRepository.findById(assessmentId)</span>
+<span class="pc" id="L157">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Assessment not found with id &quot; + assessmentId));</span>
+
+        // Mark as processing
+<span class="fc" id="L160">        updateStatus(assessment.getId(), AssessmentStatus.PROCESSING, correlationId);</span>
+
+<span class="fc" id="L162">        sseController.emitAssessmentProgress(assessmentId, assessment.getPatId(), &quot;Récupération du dossier médical&quot;, 10);</span>
+
+        // Finding the patient data
+<span class="fc" id="L165">        ResponseEntity&lt;SuccessResponse&lt;PatientDto&gt;&gt; patientResponse = patientFeignClient.getPatientById(patId, correlationId);</span>
+<span class="pc bpc" id="L166" title="2 of 4 branches missed.">        if (patientResponse.getBody() == null || patientResponse.getBody().getData() == null) {</span>
+<span class="nc" id="L167">            throw new ResourceNotFoundException(&quot;Patient data not found for ID &quot; + patId);</span>
+        }
+<span class="fc" id="L169">        PatientDto patient = patientResponse.getBody().getData();</span>
+
+        // Finding the notes of the patient
+<span class="fc" id="L172">        ResponseEntity&lt;SuccessResponse&lt;List&lt;NoteDto&gt;&gt;&gt; notesResponse = noteFeignClient.getNoteByPatientId(patId, correlationId);</span>
+<span class="pc bpc" id="L173" title="2 of 4 branches missed.">        if (notesResponse.getBody() == null || notesResponse.getBody().getData() == null) {</span>
+<span class="nc" id="L174">            throw new ResourceNotFoundException(&quot;Notes not found for patient ID &quot; + patId);</span>
+        }
+<span class="fc" id="L176">        List&lt;NoteDto&gt; notes = notesResponse.getBody().getData();</span>
+
+        // Preparing the data for the AI
+<span class="fc" id="L179">        int age = Period.between(patient.getBirthDate(), LocalDate.now()).getYears();</span>
+<span class="fc" id="L180">        String gender = patient.getGender();</span>
+<span class="fc" id="L181">        String notesText = notes.stream()</span>
+<span class="fc" id="L182">                .map(NoteDto::getNote)</span>
+<span class="fc" id="L183">                .filter(Objects::nonNull)</span>
+<span class="fc" id="L184">                .collect(Collectors.joining(&quot; / &quot;));</span>
+
+        // AI Call
+<span class="fc" id="L187">        AiAssessmentResponse aiResponse = aiAssessmentService.assessDiabetesRisk(age, gender, notesText, assessment);</span>
+<span class="pc bpc" id="L188" title="1 of 2 branches missed.">        assert aiResponse != null;</span>
+
+        // Enrich the raw AI sources item by replacing the refs with their detailed content
+<span class="fc" id="L191">        sseController.emitAssessmentProgress(assessment.getId(), assessment.getPatId(), &quot;Vérification des références médicales&quot;, 90);</span>
+<span class="fc" id="L192">        String sourcesEnriched = enrichSources(aiResponse.sources());</span>
+
+        // Saving the assessment produced with the status &quot;PENDING&quot; so that the doctor can evaluate it
+<span class="fc" id="L195">        sseController.emitAssessmentProgress(assessment.getId(), assessment.getPatId(), &quot;Finalisation du rapport&quot;, 95);</span>
+<span class="fc" id="L196">        assessment.setLevel(aiResponse.level());</span>
+<span class="fc" id="L197">        assessment.setContext(parseBulletPoints(aiResponse.context()));</span>
+<span class="fc" id="L198">        assessment.setAnalysis(aiResponse.analysis());</span>
+<span class="fc" id="L199">        assessment.setRecommendations(parseBulletPoints(aiResponse.recommendations()));</span>
+<span class="fc" id="L200">        assessment.setSources(parseBulletPoints(sourcesEnriched));</span>
+
+<span class="fc" id="L202">        assessmentRepository.save(assessment);</span>
+
+        // Mark as pending -&gt; ready for the decision-making
+<span class="fc" id="L205">        updateStatus(assessment.getId(), AssessmentStatus.PENDING, correlationId);</span>
+<span class="fc" id="L206">    }</span>
+
+    public AssessmentDto updateStatus(Long assessmentId, AssessmentStatus newStatus, String correlationId) {
+<span class="fc" id="L209">        Assessment existingAssessment = assessmentRepository.findById(assessmentId)</span>
+<span class="pc" id="L210">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Assessment not found with id &quot; + assessmentId));</span>
+
+<span class="fc" id="L212">        if (Set.of(AssessmentStatus.ACCEPTED, AssessmentStatus.UPDATED, AssessmentStatus.MANUAL, AssessmentStatus.REFUSED)</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">                .contains(existingAssessment.getStatus())) {</span>
+<span class="fc" id="L214">            throw new IllegalStateException(</span>
+<span class="fc" id="L215">                    &quot;Assessment with status &quot; + existingAssessment.getStatus() + &quot; cannot be modified&quot;</span>
+            );
+        }
+
+<span class="fc" id="L219">        existingAssessment.setUpdatedAt(Instant.now());</span>
+<span class="fc" id="L220">        existingAssessment.setStatus(newStatus);</span>
+
+<span class="fc" id="L222">        assessmentRepository.save(existingAssessment);</span>
+<span class="fc" id="L223">        log.info(&quot;Assessment {} updated to status {}&quot;, assessmentId, newStatus);</span>
+
+<span class="fc" id="L225">        AssessmentDto dto = assessmentMapper.toAssessmentDto(existingAssessment);</span>
+
+<span class="fc bfc" id="L227" title="All 2 branches covered.">        if (newStatus == AssessmentStatus.QUEUED) {</span>
+<span class="fc" id="L228">            sseController.emitAssessmentProgress(assessmentId, dto.getPatId(), &quot;En file d'attente&quot;, 0);</span>
+        }
+
+<span class="fc bfc" id="L231" title="All 2 branches covered.">        if (newStatus == AssessmentStatus.PROCESSING) {</span>
+<span class="fc" id="L232">            sseController.emitAssessmentProgress(assessmentId, dto.getPatId(), &quot;Début du traitement&quot;, 5);</span>
+        }
+
+<span class="fc bfc" id="L235" title="All 2 branches covered.">        if (newStatus == AssessmentStatus.PENDING) {</span>
+<span class="fc" id="L236">            sseController.emitAssessmentGenerated(dto);</span>
+        }
+
+<span class="fc bfc" id="L239" title="All 2 branches covered.">        if (Set.of(AssessmentStatus.ACCEPTED, AssessmentStatus.UPDATED, AssessmentStatus.MANUAL).contains(newStatus)) {</span>
+<span class="fc" id="L240">            AssessmentReportReadyEvent event = new AssessmentReportReadyEvent(</span>
+<span class="fc" id="L241">                    existingAssessment.getId(),</span>
+<span class="fc" id="L242">                    existingAssessment.getPatId(),</span>
+                    correlationId
+            );
+
+            // Will be processed by NotificationListener in the notifications microservices
+<span class="fc" id="L247">            rabbitTemplate.convertAndSend(RabbitMQConfig.NOTIFICATION_QUEUE_NAME, event);</span>
+        }
+
+<span class="fc" id="L250">        return dto;</span>
+    }
+
+    @Transactional
+    public void deleteAllAssessments() {
+<span class="fc" id="L255">        assessmentRepository.deleteAll();</span>
+<span class="fc" id="L256">    }</span>
+
+    private List&lt;String&gt; parseBulletPoints(String text) {
+<span class="pc bpc" id="L259" title="2 of 4 branches missed.">        if (text == null || text.isEmpty()) return new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L260">        return Arrays.stream(text.split(&quot;\n&quot;))</span>
+<span class="fc" id="L261">                .map(String::trim)</span>
+<span class="pc bpc" id="L262" title="1 of 2 branches missed.">                .filter(s -&gt; !s.isEmpty())</span>
+<span class="fc bfc" id="L263" title="All 2 branches covered.">                .map(s -&gt; s.startsWith(&quot;- &quot;) ? s.substring(2).trim() : s)</span>
+<span class="fc" id="L264">                .collect(Collectors.toCollection(ArrayList::new)); // mutable</span>
+    }
+
+    private String enrichSources(String aiSourcesText) {
+        try {
+            // Pattern to handle: &quot;- [[ref-XXX], page YYY]&quot; AND &quot;- [[], page YYY]&quot; (without ref)
+<span class="fc" id="L270">            Pattern pattern = Pattern.compile(&quot;-?\\s*\\[\\[(ref-[A-Za-z0-9]+)?\\],\\s*page\\s+(\\d+)\\]&quot;);</span>
+
+<span class="fc" id="L272">            Matcher matcher = pattern.matcher(aiSourcesText);</span>
+
+<span class="fc" id="L274">            StringBuilder enrichedSourceText = new StringBuilder();</span>
+<span class="fc" id="L275">            boolean patternMatched = false;</span>
+
+<span class="fc bfc" id="L277" title="All 2 branches covered.">            while (matcher.find()) {</span>
+<span class="fc" id="L278">                patternMatched = true;</span>
+
+<span class="fc" id="L280">                String ref = matcher.group(1);   // e.g., &quot;ref-328&quot; or null if no ref</span>
+<span class="fc" id="L281">                String page = matcher.group(2);  // e.g., &quot;328&quot;</span>
+
+                String key;
+                String content;
+
+<span class="pc bpc" id="L286" title="2 of 4 branches missed.">                if (ref != null &amp;&amp; ref.matches(&quot;ref-\\d+&quot;)) {</span>
+                    // If ref exists AND contains only digits → keep only the ref
+<span class="fc" id="L288">                    key = ref;</span>
+<span class="fc" id="L289">                    String jsonKey = &quot;[&quot; + ref + &quot;]&quot;;</span>
+
+<span class="fc" id="L291">                    content = cachedRefsFromFile.getOrDefault(</span>
+                            jsonKey,
+                            &quot;simulated_chunks.json (contient des informations médicales générées par ChatGPT: document supplémentaire ajouté pour illustrer la capacité de l'application à exploiter plusieurs fichiers dans notre RAG).&quot;
+                    );
+<span class="fc" id="L295">                } else {</span>
+                    // Otherwise (ref with letters or no ref) → keep only the page
+<span class="nc" id="L297">                    key = &quot;page &quot; + page;</span>
+<span class="nc" id="L298">                    content = &quot;Rapport de prévention et dépistage du diabète de type 2, HAS.&quot;;</span>
                 }
-<span class="fc" id="L77">            }</span>
-<span class="fc" id="L78">        }</span>
-<span class="fc" id="L79">        return count;</span>
-    }
 
-    private String evaluateRiskLevel(String gender, int age, int triggerCount) {
-<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (triggerCount == 0) {</span>
-<span class="fc" id="L84">            return &quot;None&quot;;</span>
-        }
-<span class="pc bpc" id="L86" title="1 of 2 branches missed.">        if (age &gt; 30) {</span>
-<span class="fc bfc" id="L87" title="All 2 branches covered.">            if (triggerCount &gt;= 8) return &quot;Early onset&quot;;</span>
-<span class="fc bfc" id="L88" title="All 2 branches covered.">            if (triggerCount &gt;= 6) return &quot;In Danger&quot;;</span>
-<span class="pc bpc" id="L89" title="1 of 2 branches missed.">            if (triggerCount &gt;= 2) return &quot;Borderline&quot;;</span>
-        }
-        else {
-<span class="nc bnc" id="L92" title="All 2 branches missed.">            if (&quot;m&quot;.equals(gender)) {</span>
-<span class="nc bnc" id="L93" title="All 2 branches missed.">                if (triggerCount &gt;= 5) return &quot;Early onset&quot;;</span>
-<span class="nc bnc" id="L94" title="All 2 branches missed.">                if (triggerCount &gt;= 3) return &quot;In Danger&quot;;</span>
-<span class="nc bnc" id="L95" title="All 2 branches missed.">            } else if (&quot;f&quot;.equals(gender)) {</span>
-<span class="nc bnc" id="L96" title="All 2 branches missed.">                if (triggerCount &gt;= 7) return &quot;Early onset&quot;;</span>
-<span class="nc bnc" id="L97" title="All 2 branches missed.">                if (triggerCount &gt;= 4) return &quot;In Danger&quot;;</span>
-            }
-        }
+<span class="fc" id="L301">                String enrichedLine = String.format(&quot;- [%s] : %s%n&quot;, key, content);</span>
 
-<span class="nc" id="L101">        return &quot;None&quot;;</span>
-    }
+<span class="fc" id="L303">                enrichedSourceText.append(enrichedLine);</span>
+<span class="fc" id="L304">            }</span>
 
-    private int calculateAge(LocalDate birthday) {
-<span class="fc" id="L105">        return Period.between(birthday, LocalDate.now()).getYears();</span>
+<span class="pc bpc" id="L306" title="1 of 2 branches missed.">            return patternMatched ? enrichedSourceText.toString().trim() : aiSourcesText;</span>
+
+<span class="nc" id="L308">        } catch (Exception e) {</span>
+<span class="nc" id="L309">            log.error(&quot;Erreur lors de l'enrichissement des sources&quot;, e);</span>
+<span class="nc" id="L310">            return aiSourcesText;</span>
+        }
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
