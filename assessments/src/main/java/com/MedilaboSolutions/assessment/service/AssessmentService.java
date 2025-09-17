@@ -3,6 +3,7 @@ package com.MedilaboSolutions.assessment.service;
 import com.MedilaboSolutions.assessment.config.RabbitMQConfig;
 import com.MedilaboSolutions.assessment.controller.AssessmentSseController;
 import com.MedilaboSolutions.assessment.dto.*;
+import com.MedilaboSolutions.assessment.exception.ResourceNotFoundException;
 import com.MedilaboSolutions.assessment.mapper.AssessmentMapper;
 import com.MedilaboSolutions.assessment.model.Assessment;
 import com.MedilaboSolutions.assessment.repository.AssessmentRepository;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
 import java.time.Instant;
@@ -64,7 +66,7 @@ public class AssessmentService {
         try (InputStream is = refsFile.getInputStream()) {
             this.cachedRefsFromFile = objectMapper.readValue(is, Map.class);
         } catch (Exception e) {
-            throw new RuntimeException("Impossible de charger le fichier de refs", e);
+            throw new IllegalStateException("Impossible de charger le fichier de refs", e);
         }
     }
 
@@ -89,7 +91,7 @@ public class AssessmentService {
 
     public AssessmentDto findAssessmentById(Long assessmentId) {
         Assessment assessment = assessmentRepository.findById(assessmentId)
-                .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
+                .orElseThrow(() -> new ResourceNotFoundException("Assessment not found with id " + assessmentId));
 
         return assessmentMapper.toAssessmentDto(assessment);
     }
@@ -109,7 +111,7 @@ public class AssessmentService {
 
     public AssessmentDto updateAssessment(Long assessmentId, AssessmentDto updatedAssessment, String correlationId) {
         Assessment existingAssessment = assessmentRepository.findById(assessmentId)
-                .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
+                .orElseThrow(() -> new ResourceNotFoundException("Assessment not found with id " + assessmentId));
 
         existingAssessment.setLevel(updatedAssessment.getLevel());
         existingAssessment.setAnalysis(updatedAssessment.getAnalysis());
@@ -124,6 +126,7 @@ public class AssessmentService {
 
         return assessmentMapper.toAssessmentDto(existingAssessment);
     }
+
 
     public AssessmentDto queueAiAssessmentForProcessing(Long patId, String correlationId) {
 
@@ -151,7 +154,7 @@ public class AssessmentService {
 
         // Fetch the existing assessment
         Assessment assessment = assessmentRepository.findById(assessmentId)
-                .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
+                .orElseThrow(() -> new ResourceNotFoundException("Assessment not found with id " + assessmentId));
 
         // Mark as processing
         updateStatus(assessment.getId(), AssessmentStatus.PROCESSING, correlationId);
@@ -161,14 +164,14 @@ public class AssessmentService {
         // Finding the patient data
         ResponseEntity<SuccessResponse<PatientDto>> patientResponse = patientFeignClient.getPatientById(patId, correlationId);
         if (patientResponse.getBody() == null || patientResponse.getBody().getData() == null) {
-            throw new IllegalStateException("Patient data not found for ID " + patId);
+            throw new ResourceNotFoundException("Patient data not found for ID " + patId);
         }
         PatientDto patient = patientResponse.getBody().getData();
 
         // Finding the notes of the patient
         ResponseEntity<SuccessResponse<List<NoteDto>>> notesResponse = noteFeignClient.getNoteByPatientId(patId, correlationId);
         if (notesResponse.getBody() == null || notesResponse.getBody().getData() == null) {
-            throw new IllegalStateException("Notes not found for patient ID " + patId);
+            throw new ResourceNotFoundException("Notes not found for patient ID " + patId);
         }
         List<NoteDto> notes = notesResponse.getBody().getData();
 
@@ -204,7 +207,7 @@ public class AssessmentService {
 
     public AssessmentDto updateStatus(Long assessmentId, AssessmentStatus newStatus, String correlationId) {
         Assessment existingAssessment = assessmentRepository.findById(assessmentId)
-                .orElseThrow(() -> new IllegalArgumentException("Assessment not found with id " + assessmentId));
+                .orElseThrow(() -> new ResourceNotFoundException("Assessment not found with id " + assessmentId));
 
         if (Set.of(AssessmentStatus.ACCEPTED, AssessmentStatus.UPDATED, AssessmentStatus.MANUAL, AssessmentStatus.REFUSED)
                 .contains(existingAssessment.getStatus())) {
@@ -247,13 +250,18 @@ public class AssessmentService {
         return dto;
     }
 
+    @Transactional
+    public void deleteAllAssessments() {
+        assessmentRepository.deleteAll();
+    }
+
     private List<String> parseBulletPoints(String text) {
-        if (text == null || text.isEmpty()) return List.of();
+        if (text == null || text.isEmpty()) return new ArrayList<>();
         return Arrays.stream(text.split("\n"))
                 .map(String::trim)
                 .filter(s -> !s.isEmpty())
                 .map(s -> s.startsWith("- ") ? s.substring(2).trim() : s)
-                .toList();
+                .collect(Collectors.toCollection(ArrayList::new)); // mutable
     }
 
     private String enrichSources(String aiSourcesText) {

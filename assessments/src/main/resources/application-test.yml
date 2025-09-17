@@ -1,0 +1,46 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+
+  ai:
+    ollama:
+      base-url: "http://localhost:11434"
+      chat:
+        model: "mock-model"
+        options:
+          temperature: 0.1
+          num-predict: 100
+          num-ctx: 1024
+      embedding:
+        model: "mock-embed-model"
+        options:
+          num-ctx: 1024
+    vectorstore:
+      pgvector:
+        initialize-schema: false
+        table-name: test_guideline_chunks
+        dimensions: 768
+
+eureka:
+  client:
+    enabled: false
+    register-with-eureka: false
+    fetch-registry: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info"
+
+logging:
+  level:
+    com.MedilaboSolutions.assessment: INFO
+    org.springframework.ai: WARN
+    org.hibernate.SQL: WARN
+    org.springframework.amqp: INFO
+    org.testcontainers: INFO
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [TEST] [%thread] %-5level %logger{36} - %msg%n"

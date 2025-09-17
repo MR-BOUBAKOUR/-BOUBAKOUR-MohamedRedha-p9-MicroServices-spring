@@ -83,4 +83,8 @@ public class AssessmentSseController {
             }
         });
     }
+
+    public Map<Long, SseEmitter> getEmitters() {
+        return emitters;
+    }
 }

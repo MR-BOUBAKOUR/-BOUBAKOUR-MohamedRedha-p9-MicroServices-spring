@@ -156,7 +156,7 @@ public class PdfService {
 
         } catch (Exception e) {
             log.error("Error generating PDF for assessment {}", assessment.getId(), e);
-            throw new RuntimeException("PDF generation failed", e);
+            throw new IllegalStateException("PDF generation failed", e);
         }
     }
 }
