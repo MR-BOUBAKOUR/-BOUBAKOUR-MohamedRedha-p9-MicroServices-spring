@@ -1,5 +1,4 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 notifications,com.MedilaboSolutions.notifications,NotificationsApplication,5,3,0,0,2,1,1,1,1,1
-notifications,com.MedilaboSolutions.notifications.listener,NotificationListener,5,8,0,0,2,2,0,2,0,2
+notifications,com.MedilaboSolutions.notifications.listener,NotificationListener,0,13,0,0,0,4,0,2,0,2
 notifications,com.MedilaboSolutions.notifications.service,EmailService,0,64,0,0,0,17,0,2,0,2
-notifications,com.MedilaboSolutions.notifications.service,MailtrapService,59,4,0,0,23,1,2,1,2,1

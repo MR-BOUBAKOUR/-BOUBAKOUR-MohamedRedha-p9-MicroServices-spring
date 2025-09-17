@@ -17,7 +17,7 @@ public class NotificationListener {
     @RabbitListener(queues = &quot;assessment-report-ready&quot;)
     public void handleAssessmentReportEvent(AssessmentReportReadyEvent event) {
 <span class="fc" id="L19">        log.info(&quot;Received assessment report event: {}&quot;, event);</span>
-<span class="nc" id="L20">        emailService.sendAssessmentReportEmail(event);</span>
-<span class="nc" id="L21">    }</span>
+<span class="fc" id="L20">        emailService.sendAssessmentReportEmail(event);</span>
+<span class="fc" id="L21">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
