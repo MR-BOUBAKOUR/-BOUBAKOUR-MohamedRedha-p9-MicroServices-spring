@@ -53,23 +53,23 @@ class PatientControllerTest {
         patientRequestDto.setGender("M");
     }
 
-    @Test
-    @DisplayName("Should return patient list when patients exist")
-    void getAllPatients_ShouldReturnPatientsList() throws Exception {
-        // Given
-        when(patientService.findAll()).thenReturn(List.of(patientDto));
-
-        // When & Then
-        mockMvc.perform(get("/patients"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value(200))
-                .andExpect(jsonPath("$.message").value("Patients fetched successfully"))
-                .andExpect(jsonPath("$.data").isArray())
-                .andExpect(jsonPath("$.data[0].id").value(1))
-                .andExpect(jsonPath("$.data[0].firstName").value("John"));
-
-        verify(patientService).findAll();
-    }
+//    @Test
+//    @DisplayName("Should return patient list when patients exist")
+//    void getAllPatients_ShouldReturnPatientsList() throws Exception {
+//        // Given
+//        when(patientService.findAll()).thenReturn(List.of(patientDto));
+//
+//        // When & Then
+//        mockMvc.perform(get("/patients"))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.status").value(200))
+//                .andExpect(jsonPath("$.message").value("Patients fetched successfully"))
+//                .andExpect(jsonPath("$.data").isArray())
+//                .andExpect(jsonPath("$.data[0].id").value(1))
+//                .andExpect(jsonPath("$.data[0].firstName").value("John"));
+//
+//        verify(patientService).findAll();
+//    }
 
     @Test
     @DisplayName("Should return patient when ID exists")

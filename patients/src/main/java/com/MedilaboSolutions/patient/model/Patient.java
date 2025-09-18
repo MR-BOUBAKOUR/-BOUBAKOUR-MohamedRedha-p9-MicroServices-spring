@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Entity
@@ -38,4 +39,21 @@ public class Patient {
 
     @Column(name = "early_onset_mail_sent", nullable = false)
     private boolean earlyOnsetMailSent = false;
+
+    @Column(updatable = false, nullable = false)
+    private Instant createdAt;
+
+    @Column
+    private Instant updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = Instant.now();
+        updatedAt = createdAt;
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = Instant.now();
+    }
 }

@@ -74,12 +74,11 @@ function handleSubmit() {
     border: 1px solid #ccc;
     margin: 2rem auto;
     padding: 1rem;
-    border-radius: 8px;
-    max-width: 300px;
+    max-width: 400px;
 }
 
  .patient-card button {
-    max-width: 300px;
+    max-width: 400px;
  }
 
 .patient-form {

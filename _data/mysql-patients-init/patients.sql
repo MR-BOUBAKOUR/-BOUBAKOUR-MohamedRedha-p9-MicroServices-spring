@@ -1,16 +1,17 @@
 CREATE DATABASE IF NOT EXISTS medilabosolutions;
 USE medilabosolutions;
 
-DROP TABLE IF EXISTS patients;
-CREATE TABLE patients  (
+CREATE TABLE IF NOT EXISTS patients (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     birth_date DATE NOT NULL,
     gender CHAR(1) NOT NULL,
-    address VARCHAR(100) NOT NULL,
+    address VARCHAR(100),
     phone VARCHAR(20),
-    early_onset_mail_sent BOOLEAN NOT NULL DEFAULT FALSE
+    early_onset_mail_sent BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
 );
 
 INSERT INTO patients (first_name, last_name, birth_date, gender, address, phone, early_onset_mail_sent) VALUES
