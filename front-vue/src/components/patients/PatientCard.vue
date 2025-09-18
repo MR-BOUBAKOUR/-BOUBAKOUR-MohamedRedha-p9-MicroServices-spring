@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-    <section class="patient-card">
+    <div class="patient-card">
         <h2>{{ patient.firstName }} | {{ patient.lastName }}</h2>
         <ul>
             <li><strong>Date de naissance :</strong> {{ patient.birthDate }}</li>
@@ -19,15 +19,19 @@ defineProps({
         <RouterLink :to="{ name: 'patient-edit', params: { patientId: patient.id } }">
             Mettre à jour la fiche du patient ▶
         </RouterLink>
-    </section>
+    </div>
 </template>
 
 <style scoped>
 .patient-card {
     border: 1px solid #ccc;
-    margin: 2rem auto;
+    margin: 2rem 0;
     padding: 1rem;
     border-radius: 8px;
-    max-width: 600px;
+    max-width: 350px;
+}
+
+.patient-card h2 {
+    margin: 0;
 }
 </style>

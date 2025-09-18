@@ -9,17 +9,13 @@ const form = ref({
 
 function handleSubmit() {
     emit('submit', form.value)
-
-    form.value = {
-        note: '',
-    }
+    form.value = { note: '' }
 }
 </script>
 
 <template>
     <form @submit.prevent="handleSubmit" class="patient-form">
-        <input v-model="form.note" required />
-
+        <textarea v-model="form.note" required />
         <button type="submit">Ajouter une note</button>
     </form>
 </template>
@@ -27,7 +23,23 @@ function handleSubmit() {
 <style scoped>
 .patient-form {
     display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
+    flex-direction: column;
+    height: 100%;
+}
+
+.patient-form textarea {
+    flex: 1;
+    min-height: 403px;
+    resize: none;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1.4;
+    border: 1px solid #ccc;
+}
+
+.patient-form button {
+    margin-top: 1rem;
+    align-self: center;
+    padding: 0.5rem 1rem;
 }
 </style>

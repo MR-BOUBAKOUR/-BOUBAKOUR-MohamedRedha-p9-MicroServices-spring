@@ -17,28 +17,44 @@ const route = useRoute()
 const patientId = Number(route.params.patientId)
 
 const patient = ref()
-const notes = ref([])
 
-// --- Pagination assessments ---
+// --- Notes pagination ---
+const notes = ref([])
+const notesTotalPages = ref(0)
+const notesCurrentPage = ref(0)
+const notesIsFirstPage = ref(true)
+const notesIsLastPage = ref(false)
+
+// --- Assessments pagination ---
 const assessments = ref([])
-const totalPages = ref(0)
-const currentPage = ref(0)
-const isFirstPage = ref(true)
-const isLastPage = ref(false)
+const assessmentsTotalPages = ref(0)
+const assessmentsCurrentPage = ref(0)
+const assessmentsIsFirstPage = ref(true)
+const assessmentsIsLastPage = ref(false)
 
 let eventSource = null
 let progressInterval = null
 
 const sseStates = {}
 
+// --- Charger une page de notes ---
+async function loadNotes(page = 0, size = 3) {
+    const result = await fetchNotesByPatientId(patientId, page, size)
+    notes.value = result.content || []
+    notesTotalPages.value = result.totalPages || 0
+    notesCurrentPage.value = result.number || 0
+    notesIsFirstPage.value = result.first || false
+    notesIsLastPage.value = result.last || false
+}
+
 // --- Charger une page d'assessments ---
 async function loadAssessments(page = 0, size = 3) {
     const result = await fetchAssessmentsByPatientId(patientId, page, size)
     assessments.value = normalizeAssessments(result.content || [])
-    totalPages.value = result.totalPages || 0
-    currentPage.value = result.number || 0
-    isFirstPage.value = result.first || false
-    isLastPage.value = result.last || false
+    assessmentsTotalPages.value = result.totalPages || 0
+    assessmentsCurrentPage.value = result.number || 0
+    assessmentsIsFirstPage.value = result.first || false
+    assessmentsIsLastPage.value = result.last || false
 }
 
 // --- Helper pour injecter "en attente" ou "en cours" ---
@@ -77,7 +93,7 @@ function normalizeAssessments(list) {
 onMounted(async () => {
     // --- Chargement initial ---
     patient.value = await fetchPatientById(patientId)
-    notes.value = await fetchNotesByPatientId(patientId)
+    await loadNotes()
     await loadAssessments()
 
     // --- SSE subscription ---
@@ -150,47 +166,118 @@ onBeforeUnmount(() => {
 
 async function handleNoteCreate(note) {
     const newNote = { patId: patient.value.id, patient: patient.value.firstName, ...note }
-    const createdNote = await createNote(newNote)
-    notes.value.push(createdNote)
+
+    await createNote(newNote)
 
     await queueAssessmentByPatientId(patientId)
-    await loadAssessments(currentPage.value)
+    await loadNotes()
+    await loadAssessments()
 }
 
 async function handleAssessmentReload(assessment) {
     await refuseAssessment(assessment.id)
     await queueAssessmentByPatientId(assessment.patId)
-    await loadAssessments(currentPage.value)
+    await loadAssessments()
 }
 </script>
 
 <template>
     <main>
-        <PatientCard v-if="patient" :patient="patient" />
-        <NotesList :notes="notes" />
-        <NoteForm @submit="handleNoteCreate" />
+        <section class="infos-section">
+            <PatientCard v-if="patient" :patient="patient" />
+        </section>
 
-        <div class="assessments-list-section">
+        <section class="notes-section">
+            <h2>Notes médicales</h2>
+
+            <div class="notes-container">
+                <!-- Formulaire à gauche -->
+                <div class="note-form">
+                    <NoteForm @submit="handleNoteCreate" />
+                </div>
+
+                <!-- Liste des notes à droite -->
+                <div class="notes-list-wrapper">
+                    <NotesList class="notes-list" :notes="notes" />
+
+                    <div class="pagination" v-if="notesTotalPages > 1">
+                        <button
+                            :disabled="notesIsFirstPage"
+                            @click="loadNotes(notesCurrentPage - 1)"
+                        >
+                            Précédent
+                        </button>
+                        <span>{{ notesCurrentPage + 1 }} / {{ notesTotalPages }}</span>
+                        <button
+                            :disabled="notesIsLastPage"
+                            @click="loadNotes(notesCurrentPage + 1)"
+                        >
+                            Suivant
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="assessments-section">
+            <h2>Évaluations médicales</h2>
+
             <AssessmentsList @reload="handleAssessmentReload" :assessments="assessments" />
-            <div class="pagination" v-if="totalPages > 1">
-                <button :disabled="isFirstPage" @click="loadAssessments(currentPage - 1)">
+            <div class="pagination" v-if="assessmentsTotalPages > 1">
+                <button
+                    :disabled="assessmentsIsFirstPage"
+                    @click="loadAssessments(assessmentsCurrentPage - 1)"
+                >
                     Précédent
                 </button>
-                <span>{{ currentPage + 1 }} / {{ totalPages }}</span>
-                <button :disabled="isLastPage" @click="loadAssessments(currentPage + 1)">
+                <span>{{ assessmentsCurrentPage + 1 }} / {{ assessmentsTotalPages }}</span>
+                <button
+                    :disabled="assessmentsIsLastPage"
+                    @click="loadAssessments(assessmentsCurrentPage + 1)"
+                >
                     Suivant
                 </button>
             </div>
-        </div>
+        </section>
     </main>
 </template>
 
 <style scoped>
+.notes-section,
+.assessments-section {
+    margin-top: 2rem;
+}
+
+.notes-section h2,
+.assessments-section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.notes-container {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.note-form {
+    flex: 1 1 0;
+}
+
+.notes-list-wrapper {
+    flex: 1 1 0;
+}
+
 .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    margin: 2rem 0;
+    margin: 1rem 0;
+}
+
+.assessments-section {
+    display: flex;
+    flex-direction: column;
 }
 </style>

@@ -35,7 +35,7 @@ async function handlePatientCreate(newPatient) {
     <main class="patients-page">
         <div class="patients-container">
             <!-- Liste + pagination -->
-            <div class="patients-list-section">
+            <section class="patients-section">
                 <div class="patients-list">
                     <PatientsList :patients="patients" />
                 </div>
@@ -48,12 +48,12 @@ async function handlePatientCreate(newPatient) {
                         Suivant
                     </button>
                 </div>
-            </div>
+            </section>
 
             <!-- Formulaire -->
-            <div class="patient-form-section">
+            <section class="patient-form-section">
                 <PatientForm @submit="handlePatientCreate" submitLabel="Ajouter un patient" />
-            </div>
+            </section>
         </div>
     </main>
 </template>
@@ -76,7 +76,7 @@ async function handlePatientCreate(newPatient) {
 }
 
 /* Section Liste */
-.patients-list-section {
+.patients-section {
     flex: 2;
     display: flex;
     flex-direction: column;
@@ -85,7 +85,7 @@ async function handlePatientCreate(newPatient) {
 }
 
 .patients-list {
-    height: 500px; /* hauteur fixe pour la table seule */
+    height: 500px;
     width: 100%;
 }
 
@@ -102,6 +102,6 @@ async function handlePatientCreate(newPatient) {
 /* Formulaire */
 .patient-form-section {
     flex: 1;
-    height: 700px; /* même hauteur que liste + pagination */
+    height: 700px;
 }
 </style>

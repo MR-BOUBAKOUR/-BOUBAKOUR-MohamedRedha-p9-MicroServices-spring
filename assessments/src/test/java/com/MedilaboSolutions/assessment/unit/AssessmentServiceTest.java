@@ -242,7 +242,7 @@ class AssessmentServiceTest {
         when(patientFeignClient.getPatientById(patId, correlationId))
                 .thenReturn(ResponseEntity.ok(new SuccessResponse<>(200, "Success", patient)));
 
-        when(noteFeignClient.getNoteByPatientId(patId, correlationId))
+        when(noteFeignClient.getAllNotesByPatientId(patId, correlationId))
                 .thenReturn(ResponseEntity.ok(new SuccessResponse<>(200, "Success", notes)));
 
         when(aiAssessmentService.assessDiabetesRisk(anyInt(), anyString(), anyString(), any()))

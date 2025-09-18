@@ -169,7 +169,7 @@ public class AssessmentService {
         PatientDto patient = patientResponse.getBody().getData();
 
         // Finding the notes of the patient
-        ResponseEntity<SuccessResponse<List<NoteDto>>> notesResponse = noteFeignClient.getNoteByPatientId(patId, correlationId);
+        ResponseEntity<SuccessResponse<List<NoteDto>>> notesResponse = noteFeignClient.getAllNotesByPatientId(patId, correlationId);
         if (notesResponse.getBody() == null || notesResponse.getBody().getData() == null) {
             throw new ResourceNotFoundException("Notes not found for patient ID " + patId);
         }

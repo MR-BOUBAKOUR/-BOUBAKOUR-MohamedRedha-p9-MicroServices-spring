@@ -13,8 +13,8 @@ import java.util.List;
 @FeignClient("notes")
 public interface NoteFeignClient {
 
-    @GetMapping(value = "/notes/{patId}")
-    ResponseEntity<SuccessResponse<List<NoteDto>>> getNoteByPatientId(
+    @GetMapping(value = "/notes/all/{patId}")
+    ResponseEntity<SuccessResponse<List<NoteDto>>> getAllNotesByPatientId(
             @PathVariable Long patId,
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId
     );
