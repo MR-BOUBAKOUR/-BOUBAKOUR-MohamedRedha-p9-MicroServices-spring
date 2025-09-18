@@ -8,6 +8,10 @@ import com.MedilaboSolutions.assessment.service.AssessmentService;
 import com.MedilaboSolutions.assessment.service.PdfService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,17 +28,21 @@ public class AssessmentController {
     private final PdfService pdfService;
 
     @GetMapping("/patient/{patientId}")
-    public ResponseEntity<SuccessResponse<List<AssessmentDto>>> getAssessmentsByPatientId(
+    public ResponseEntity<SuccessResponse<Page<AssessmentDto>>> getAssessmentsByPatientId(
             @RequestHeader("medilabo-solutions-correlation-id") String correlationId,
-            @PathVariable Long patientId
+            @PathVariable Long patientId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size
     ) {
-        log.info("Fetching assessments list for patientId={}", patientId);
-        List<AssessmentDto> assessments = assessmentService.findAssessmentsByPatientId(patientId);
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new SuccessResponse<>(200, "Assessments fetched successfully", assessments));
+        Page<AssessmentDto> assessments = assessmentService.findByPatientId(patientId, pageable);
+
+        return ResponseEntity.ok(
+                new SuccessResponse<>(200, "Assessments fetched successfully", assessments)
+        );
     }
+
 
     @GetMapping("/{assessmentId}")
     public ResponseEntity<SuccessResponse<AssessmentDto>> getAssessmentById(

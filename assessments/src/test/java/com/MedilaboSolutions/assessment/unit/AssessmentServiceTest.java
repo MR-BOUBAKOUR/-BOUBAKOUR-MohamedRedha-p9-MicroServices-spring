@@ -20,6 +20,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.*;
 import org.springframework.http.ResponseEntity;
 
 import java.time.Instant;
@@ -79,23 +80,26 @@ class AssessmentServiceTest {
     }
 
     @Test
-    @DisplayName("Should find assessments by patient ID")
-    void shouldFindAssessmentsByPatientId() {
+    @DisplayName("Should find assessments by patient ID with pagination")
+    void shouldFindAssessmentsByPatientIdWithPagination() {
         // Given
         Long patId = 1L;
+        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "createdAt"));
         Assessment assessment = createTestAssessment();
         AssessmentDto expectedDto = createTestAssessmentDto();
 
-        when(assessmentRepository.findByPatIdAndStatusInOrderByCreatedAtDesc(eq(patId), anyList()))
-                .thenReturn(List.of(assessment));
+        Page<Assessment> assessmentPage = new PageImpl<>(List.of(assessment));
+
+        when(assessmentRepository.findByPatIdAndStatusIn(eq(patId), anyList(), eq(pageable)))
+                .thenReturn(assessmentPage);
         when(assessmentMapper.toAssessmentDto(assessment)).thenReturn(expectedDto);
 
         // When
-        List<AssessmentDto> result = assessmentService.findAssessmentsByPatientId(patId);
+        Page<AssessmentDto> result = assessmentService.findByPatientId(patId, pageable);
 
         // Then
-        assertThat(result).hasSize(1);
-        assertThat(result.getFirst()).isEqualTo(expectedDto);
+        assertThat(result.getContent()).hasSize(1);
+        assertThat(result.getContent().getFirst()).isEqualTo(expectedDto);
     }
 
     @Test

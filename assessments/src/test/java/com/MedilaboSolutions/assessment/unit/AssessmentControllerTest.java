@@ -10,6 +10,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -56,17 +60,20 @@ class AssessmentControllerTest {
     @Test
     @DisplayName("Should fetch assessments by patient ID")
     void getAssessmentsByPatientId_ShouldReturnList() throws Exception {
-        when(assessmentService.findAssessmentsByPatientId(1L))
-                .thenReturn(List.of(assessmentDto));
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<AssessmentDto> page = new PageImpl<>(List.of(assessmentDto), pageable, 1);
+
+        when(assessmentService.findByPatientId(eq(1L), any(Pageable.class)))
+                .thenReturn(page);
 
         mockMvc.perform(get("/assessments/patient/1")
                         .header("medilabo-solutions-correlation-id", "test-corr"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value(200))
                 .andExpect(jsonPath("$.message").value("Assessments fetched successfully"))
-                .andExpect(jsonPath("$.data[0].id").value(1));
+                .andExpect(jsonPath("$.data.content[0].id").value(1));
 
-        verify(assessmentService).findAssessmentsByPatientId(1L);
+        verify(assessmentService).findByPatientId(eq(1L), any(Pageable.class));
     }
 
     @Test
