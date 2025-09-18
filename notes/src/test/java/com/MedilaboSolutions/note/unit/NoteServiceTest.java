@@ -13,6 +13,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -56,19 +60,22 @@ class NoteServiceTest {
     }
 
     @Test
-    @DisplayName("Should return list of notes when patient ID exists")
-    void findByPatientId_ShouldReturnNotes() {
-        when(noteRepository.findByPatId(1L)).thenReturn(List.of(note));
+    @DisplayName("Should return page of notes when patient ID exists")
+    void findByPatientId_ShouldReturnNotesPage() {
+        Pageable pageable = PageRequest.of(0, 3);
+        Page<Note> notePage = new PageImpl<>(List.of(note));
+        when(noteRepository.findByPatId(1L, pageable)).thenReturn(notePage);
         when(noteMapper.toNoteDto(note)).thenReturn(noteDto);
 
-        List<NoteDto> result = noteService.findByPatientId(1L);
+        Page<NoteDto> result = noteService.findByPatientId(1L, pageable);
 
-        assertThat(result).hasSize(1);
-        assertThat(result.getFirst()).isEqualTo(noteDto);
+        assertThat(result.getContent()).hasSize(1);
+        assertThat(result.getContent().getFirst()).isEqualTo(noteDto);
 
-        verify(noteRepository).findByPatId(1L);
+        verify(noteRepository).findByPatId(1L, pageable);
         verify(noteMapper).toNoteDto(note);
     }
+
 
     @Test
     @DisplayName("Should save and return note when input is valid")

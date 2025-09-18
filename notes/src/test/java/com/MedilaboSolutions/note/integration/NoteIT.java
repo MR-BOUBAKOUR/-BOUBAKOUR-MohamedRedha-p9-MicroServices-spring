@@ -49,8 +49,8 @@ class NoteIT extends AbstractMongoContainerTest {
         mockMvc.perform(get("/notes/1")
                         .header("medilabo-solutions-correlation-id", "test-correlation-id"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data").isArray())
-                .andExpect(jsonPath("$.data[0].patId").value(1));
+                .andExpect(jsonPath("$.data.content").isArray())
+                .andExpect(jsonPath("$.data.content[0].patId").value(1));
     }
 
     @Test
