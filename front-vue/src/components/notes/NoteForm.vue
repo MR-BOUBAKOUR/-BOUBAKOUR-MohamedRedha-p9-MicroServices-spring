@@ -15,7 +15,7 @@ function handleSubmit() {
 
 <template>
     <form @submit.prevent="handleSubmit" class="patient-form">
-        <textarea v-model="form.note" required />
+        <textarea v-model="form.note" required></textarea>
         <button type="submit">Ajouter une note</button>
     </form>
 </template>
