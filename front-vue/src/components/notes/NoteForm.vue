@@ -38,7 +38,7 @@ function handleSubmit() {
 }
 
 .patient-form button {
-    margin-top: 1rem;
+    margin: 1rem;
     align-self: center;
     padding: 0.5rem 1rem;
 }
