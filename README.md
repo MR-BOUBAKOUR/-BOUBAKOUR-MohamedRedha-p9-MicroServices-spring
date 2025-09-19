@@ -8,7 +8,7 @@ Microservices application built with Spring Boot and Vue.js.
 
 ### ⚡ Running the application locally
 
-Copy the `.env` file from the `_doc` folder to the `docker-compose` folder
+> Copy the `.env` file from the `_doc` folder to the `docker-compose` folder
 
 From the docker-compose folder:
   - Default (no monitoring): `docker-compose up`
@@ -18,9 +18,13 @@ From the front-vue folder:
   - `npm install`
   - `npm run dev`
 
-Access the app at [http://localhost:5173](http://localhost:5173)
+Open your browser at `http://localhost:5173`
 
-32GB RAM recommended, GPU will be used if available
+Credentials:
+- User: `prenom_medecin`
+- Password: `123`
+
+32GB RAM recommended, the GPU (Nvidia) will be used if available, otherwise, it will fall back to the CPU.
 
 ---
 
