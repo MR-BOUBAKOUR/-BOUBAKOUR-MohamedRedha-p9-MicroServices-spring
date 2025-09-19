@@ -41,3 +41,6 @@ keystore.p12
 **/.data
 **/.env
 .env
+
+# allow _doc/..env
+!_doc/.env
