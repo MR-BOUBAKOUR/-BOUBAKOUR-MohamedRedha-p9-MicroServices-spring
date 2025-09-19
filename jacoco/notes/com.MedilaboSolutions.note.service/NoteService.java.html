@@ -7,11 +7,14 @@ import com.MedilaboSolutions.note.mapper.NoteMapper;
 import com.MedilaboSolutions.note.repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-<span class="fc" id="L14">@Slf4j</span>
+<span class="fc" id="L17">@Slf4j</span>
 @RequiredArgsConstructor
 @Service
 public class NoteService {
@@ -19,24 +22,28 @@ public class NoteService {
     private final NoteRepository noteRepository;
     private final NoteMapper noteMapper;
 
-    public List&lt;NoteDto&gt; findByPatientId(Long patId) {
-<span class="fc" id="L23">        List&lt;Note&gt; notes = noteRepository.findByPatId(patId);</span>
+    public Page&lt;NoteDto&gt; findByPatientId(Long patId, Pageable pageable) {
+<span class="fc" id="L26">        Page&lt;Note&gt; notes = noteRepository.findByPatId(patId, pageable);</span>
+<span class="fc" id="L27">        return notes.map(noteMapper::toNoteDto);</span>
+    }
 
-<span class="fc" id="L25">        return notes.stream()</span>
-<span class="fc" id="L26">                .map(noteMapper::toNoteDto)</span>
-<span class="fc" id="L27">                .toList();</span>
+    public List&lt;NoteDto&gt; findAllByPatientId(Long patId) {
+<span class="nc" id="L31">        return noteRepository.findByPatId(patId)</span>
+<span class="nc" id="L32">                .stream()</span>
+<span class="nc" id="L33">                .map(noteMapper::toNoteDto)</span>
+<span class="nc" id="L34">                .collect(Collectors.toList());</span>
     }
 
     public NoteDto create(NoteRequestDto noteDto) {
-<span class="fc" id="L31">        Note saved = noteRepository.save(noteMapper.toNote(noteDto));</span>
-<span class="fc" id="L32">        return noteMapper.toNoteDto(saved);</span>
+<span class="fc" id="L38">        Note saved = noteRepository.save(noteMapper.toNote(noteDto));</span>
+<span class="fc" id="L39">        return noteMapper.toNoteDto(saved);</span>
     }
 
     public void deleteByPatientId(Long patId) {
-<span class="fc" id="L36">        List&lt;Note&gt; notes = noteRepository.findByPatId(patId);</span>
-<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (!notes.isEmpty()) {</span>
-<span class="fc" id="L38">            noteRepository.deleteAll(notes);</span>
+<span class="fc" id="L43">        List&lt;Note&gt; notes = noteRepository.findByPatId(patId);</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (!notes.isEmpty()) {</span>
+<span class="fc" id="L45">            noteRepository.deleteAll(notes);</span>
         }
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L47">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

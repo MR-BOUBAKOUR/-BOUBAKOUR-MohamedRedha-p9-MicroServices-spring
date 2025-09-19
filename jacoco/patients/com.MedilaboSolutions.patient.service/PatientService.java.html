@@ -7,6 +7,8 @@ import com.MedilaboSolutions.patient.exception.ResourceNotFoundException;
 import com.MedilaboSolutions.patient.mapper.PatientMapper;
 import com.MedilaboSolutions.patient.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,46 +20,45 @@ public class PatientService {
     private final PatientRepository patientRepository;
     private final PatientMapper patientMapper;
 
-    public List&lt;PatientDto&gt; findAll() {
-<span class="fc" id="L22">        return patientRepository.findAll().stream()</span>
-<span class="fc" id="L23">                .map(patientMapper::toPatientDto)</span>
-<span class="fc" id="L24">                .toList();</span>
+    public Page&lt;PatientDto&gt; findAll(Pageable pageable) {
+<span class="fc" id="L24">        return patientRepository.findAll(pageable)</span>
+<span class="fc" id="L25">                .map(patientMapper::toPatientDto);</span>
     }
 
     public PatientDto findById(Long id) {
-<span class="fc" id="L28">        return patientRepository.findById(id)</span>
-<span class="fc" id="L29">                .map(patientMapper::toPatientDto)</span>
-<span class="fc" id="L30">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
+<span class="fc" id="L29">        return patientRepository.findById(id)</span>
+<span class="fc" id="L30">                .map(patientMapper::toPatientDto)</span>
+<span class="fc" id="L31">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
     }
 
     public PatientDto create(PatientRequestDto patientDto) {
-<span class="fc" id="L34">        Patient saved = patientRepository.save(patientMapper.toPatient(patientDto));</span>
-<span class="fc" id="L35">        return patientMapper.toPatientDto(saved);</span>
+<span class="fc" id="L35">        Patient saved = patientRepository.save(patientMapper.toPatient(patientDto));</span>
+<span class="fc" id="L36">        return patientMapper.toPatientDto(saved);</span>
     }
 
     public PatientDto update(long id, PatientRequestDto patientDto) {
-<span class="fc" id="L39">        patientRepository.findById(id)</span>
-<span class="fc" id="L40">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
+<span class="fc" id="L40">        patientRepository.findById(id)</span>
+<span class="fc" id="L41">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
 
-<span class="fc" id="L42">        Patient patientToUpdate = patientMapper.toPatient(patientDto);</span>
-<span class="fc" id="L43">        patientToUpdate.setId(id);</span>
+<span class="fc" id="L43">        Patient patientToUpdate = patientMapper.toPatient(patientDto);</span>
+<span class="fc" id="L44">        patientToUpdate.setId(id);</span>
 
-<span class="fc" id="L45">        Patient saved = patientRepository.save(patientToUpdate);</span>
-<span class="fc" id="L46">        return patientMapper.toPatientDto(saved);</span>
+<span class="fc" id="L46">        Patient saved = patientRepository.save(patientToUpdate);</span>
+<span class="fc" id="L47">        return patientMapper.toPatientDto(saved);</span>
     }
 
     public void deleteById(Long id) {
-<span class="fc" id="L50">        patientRepository.findById(id)</span>
-<span class="fc" id="L51">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
+<span class="fc" id="L51">        patientRepository.findById(id)</span>
+<span class="fc" id="L52">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
 
-<span class="fc" id="L53">        patientRepository.deleteById(id);</span>
-<span class="fc" id="L54">    }</span>
+<span class="fc" id="L54">        patientRepository.deleteById(id);</span>
+<span class="fc" id="L55">    }</span>
 
     public void updateEarlyOnsetMailSent(Long id, boolean mailSent) {
-<span class="fc" id="L57">        Patient patient = patientRepository.findById(id)</span>
-<span class="fc" id="L58">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
-<span class="fc" id="L59">        patient.setEarlyOnsetMailSent(mailSent);</span>
-<span class="fc" id="L60">        patientRepository.save(patient);</span>
-<span class="fc" id="L61">    }</span>
+<span class="fc" id="L58">        Patient patient = patientRepository.findById(id)</span>
+<span class="fc" id="L59">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Ressource not found.&quot;));</span>
+<span class="fc" id="L60">        patient.setEarlyOnsetMailSent(mailSent);</span>
+<span class="fc" id="L61">        patientRepository.save(patient);</span>
+<span class="fc" id="L62">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

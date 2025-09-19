@@ -7,13 +7,17 @@ import com.MedilaboSolutions.note.service.NoteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-<span class="fc" id="L16">@Slf4j</span>
+<span class="fc" id="L20">@Slf4j</span>
 @RequiredArgsConstructor
 @RequestMapping(&quot;/notes&quot;)
 @RestController
@@ -22,34 +26,47 @@ public class NoteController {
     private final NoteService noteService;
 
     @GetMapping(&quot;/{patId}&quot;)
-    public ResponseEntity&lt;SuccessResponse&lt;List&lt;NoteDto&gt;&gt;&gt; getNotesByPatientId(
+    public ResponseEntity&lt;SuccessResponse&lt;Page&lt;NoteDto&gt;&gt;&gt; getNotesByPatientId(
+            @PathVariable Long patId,
+            @RequestParam(defaultValue = &quot;0&quot;) int page,
+            @RequestParam(defaultValue = &quot;3&quot;) int size,
+            @RequestHeader(&quot;medilabo-solutions-correlation-id&quot;) String correlationId
+    ) {
+<span class="fc" id="L35">        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, &quot;createdAt&quot;));</span>
+<span class="fc" id="L36">        Page&lt;NoteDto&gt; notes = noteService.findByPatientId(patId, pageable);</span>
+
+<span class="fc" id="L38">        return ResponseEntity</span>
+<span class="fc" id="L39">                .status(HttpStatus.OK)</span>
+<span class="fc" id="L40">                .body(new SuccessResponse&lt;&gt;(200, &quot;Notes fetched successfully&quot;, notes));</span>
+    }
+
+    @GetMapping(&quot;/all/{patId}&quot;)
+    public ResponseEntity&lt;SuccessResponse&lt;List&lt;NoteDto&gt;&gt;&gt; getAllNotesByPatientId(
             @PathVariable Long patId,
             @RequestHeader(&quot;medilabo-solutions-correlation-id&quot;) String correlationId
     ) {
-<span class="fc" id="L29">        log.info(&quot;Fetching notes for patientId={}&quot;, patId);</span>
-<span class="fc" id="L30">        List&lt;NoteDto&gt; notes = noteService.findByPatientId(patId);</span>
+<span class="nc" id="L48">        log.info(&quot;Fetching notes for patientId={}&quot;, patId);</span>
+<span class="nc" id="L49">        List&lt;NoteDto&gt; notes = noteService.findAllByPatientId(patId);</span>
 
-<span class="fc" id="L32">        return ResponseEntity</span>
-<span class="fc" id="L33">                .status(HttpStatus.OK)</span>
-<span class="fc" id="L34">                .body(new SuccessResponse&lt;&gt;(200, &quot;Note fetched successfully&quot;, notes));</span>
+<span class="nc" id="L51">        return ResponseEntity.ok(new SuccessResponse&lt;&gt;(200, &quot;Note fetched successfully&quot;, notes));</span>
     }
 
     @PostMapping
     public ResponseEntity&lt;SuccessResponse&lt;NoteDto&gt;&gt; createNote(@Valid @RequestBody NoteRequestDto noteDto) {
-<span class="fc" id="L39">        log.info(&quot;Creating note for patientId={}&quot;, noteDto.getPatId());</span>
-<span class="fc" id="L40">        NoteDto note = noteService.create(noteDto);</span>
+<span class="fc" id="L56">        log.info(&quot;Creating note for patientId={}&quot;, noteDto.getPatId());</span>
+<span class="fc" id="L57">        NoteDto note = noteService.create(noteDto);</span>
 
-<span class="fc" id="L42">        return ResponseEntity</span>
-<span class="fc" id="L43">                .status(HttpStatus.CREATED)</span>
-<span class="fc" id="L44">                .body(new SuccessResponse&lt;&gt;(201, &quot;Note created successfully&quot;, note));</span>
+<span class="fc" id="L59">        return ResponseEntity</span>
+<span class="fc" id="L60">                .status(HttpStatus.CREATED)</span>
+<span class="fc" id="L61">                .body(new SuccessResponse&lt;&gt;(201, &quot;Note created successfully&quot;, note));</span>
     }
 
     @DeleteMapping(&quot;/{patId}&quot;)
     public ResponseEntity&lt;Void&gt; deleteNotesByPatientId(@PathVariable Long patId) {
-<span class="fc" id="L49">        log.info(&quot;Deleting notes for patientId={}&quot;, patId);</span>
-<span class="fc" id="L50">        noteService.deleteByPatientId(patId);</span>
+<span class="nc" id="L66">        log.info(&quot;Deleting notes for patientId={}&quot;, patId);</span>
+<span class="nc" id="L67">        noteService.deleteByPatientId(patId);</span>
 
-<span class="fc" id="L52">        return ResponseEntity.noContent().build();</span>
+<span class="nc" id="L69">        return ResponseEntity.noContent().build();</span>
     }
 
 }
