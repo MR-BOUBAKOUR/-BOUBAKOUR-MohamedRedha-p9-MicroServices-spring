@@ -65,6 +65,9 @@ const handleAccept = async () => {
     try {
         const updated = await acceptAssessment(props.assessment.id)
         currentStatus.value = updated.status
+
+        // Émettre un event pour rafraîchir la section infos
+        emit('accepted', updated)
     } catch (err) {
         setError(err.message || 'Erreur lors de l’acceptation.')
     }

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import PatientCard from '@/components/patients/PatientCard.vue'
 import NotesList from '@/components/notes/NotesList.vue'
@@ -8,6 +8,7 @@ import AssessmentsList from '@/components/assessments/AssessmentsList.vue'
 import { fetchPatientById } from '@/services/patient-service'
 import { fetchNotesByPatientId, createNote } from '@/services/note-service'
 import {
+    downloadAssessmentPdf,
     fetchAssessmentsByPatientId,
     queueAssessmentByPatientId,
     refuseAssessment,
@@ -36,6 +37,38 @@ let eventSource = null
 let progressInterval = null
 
 const sseStates = {}
+
+// --- Dernier assessment confirmé ---
+const lastConfirmedAssessment = computed(() => {
+    return (
+        [...assessments.value]
+            .filter((a) => ['ACCEPTED', 'UPDATED', 'MANUAL'].includes(a.status))
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0] || null
+    )
+})
+
+// --- Y a-t-il une évaluation en attente ? ---
+const hasWaitingAssessment = computed(() =>
+    assessments.value.some((a) =>
+        ['QUEUED', 'PROCESSING', 'PENDING', 'REFUSED_PENDING'].includes(a.status),
+    ),
+)
+
+const lastLevelIconAssessment = computed(() => {
+    if (!lastConfirmedAssessment.value) return null
+    switch (lastConfirmedAssessment.value.level) {
+        case 'VERY_LOW':
+            return '/icons/risk_very_low.svg'
+        case 'LOW':
+            return '/icons/risk_low.svg'
+        case 'MODERATE':
+            return '/icons/risk_moderate.svg'
+        case 'HIGH':
+            return '/icons/risk_high.svg'
+        default:
+            return null
+    }
+})
 
 // --- Charger une page de notes ---
 async function loadNotes(page = 0, size = 3) {
@@ -162,6 +195,12 @@ onBeforeUnmount(() => {
     if (progressInterval) clearInterval(progressInterval)
 })
 
+const handleDownloadLast = async () => {
+    if (lastConfirmedAssessment.value) {
+        await downloadAssessmentPdf(lastConfirmedAssessment.value.id)
+    }
+}
+
 // --- Notes / Assessment actions ---
 
 async function handleNoteCreate(note) {
@@ -171,6 +210,10 @@ async function handleNoteCreate(note) {
 
     await queueAssessmentByPatientId(patientId)
     await loadNotes()
+    await loadAssessments()
+}
+
+async function handleAssessmentAccepted() {
     await loadAssessments()
 }
 
@@ -184,7 +227,39 @@ async function handleAssessmentReload(assessment) {
 <template>
     <main>
         <section class="infos-section">
-            <PatientCard v-if="patient" :patient="patient" />
+            <!-- Toujours présent -->
+            <div class="infos-block patient-block">
+                <PatientCard v-if="patient" :patient="patient" />
+            </div>
+
+            <!-- Dernier risque confirmé -->
+            <div v-if="lastConfirmedAssessment" class="infos-block">
+                <h3>Dernier risque confirmé</h3>
+                <div class="last-risk">
+                    <img :src="lastLevelIconAssessment" alt="level" width="120" height="120" />
+                </div>
+            </div>
+
+            <!-- Télécharger -->
+            <div v-if="lastConfirmedAssessment" class="infos-block">
+                <h3>Dernière évaluation validée</h3>
+                <div>
+                    <button class="button-download" @click="handleDownloadLast">Télécharger</button>
+                </div>
+            </div>
+
+            <!-- Évaluation en attente -->
+            <div v-if="hasWaitingAssessment" class="infos-block">
+                <h3>Évaluation en attente</h3>
+                <div class="evaluation-icon">
+                    <img
+                        src="/icons/evaluation_todo.svg"
+                        alt="Évaluation à faire"
+                        width="120"
+                        height="120"
+                    />
+                </div>
+            </div>
         </section>
 
         <section class="notes-section">
@@ -222,7 +297,11 @@ async function handleAssessmentReload(assessment) {
         <section class="assessments-section">
             <h2>Évaluations médicales</h2>
 
-            <AssessmentsList @reload="handleAssessmentReload" :assessments="assessments" />
+            <AssessmentsList
+                @accepted="handleAssessmentAccepted"
+                @reload="handleAssessmentReload"
+                :assessments="assessments"
+            />
             <div class="pagination" v-if="assessmentsTotalPages > 1">
                 <button
                     :disabled="assessmentsIsFirstPage"
@@ -243,6 +322,7 @@ async function handleAssessmentReload(assessment) {
 </template>
 
 <style scoped>
+.infos-section,
 .notes-section,
 .assessments-section {
     margin-top: 2rem;
@@ -279,5 +359,65 @@ async function handleAssessmentReload(assessment) {
 .assessments-section {
     display: flex;
     flex-direction: column;
+}
+
+/* Infos section horizontale homogène */
+.infos-section {
+    display: flex;
+    gap: 2rem;
+    align-items: stretch;
+}
+
+/* Chaque bloc */
+.infos-block {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* PatientCard = plus large (≈40%) */
+.patient-block {
+    flex: 2;
+}
+
+/* Titres des blocs (sauf PatientCard) */
+.infos-block h3 {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    align-self: flex-start;
+}
+
+.infos-block:not(.patient-block) > *:not(h3) {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.button-download {
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    border: none;
+    transition: background-color 0.2s;
+    background-color: #4caf50;
+    width: 120px;
+    height: 60px;
+}
+
+.button-download:hover {
+    opacity: 0.9;
 }
 </style>

@@ -23,14 +23,6 @@ defineProps({
 </template>
 
 <style scoped>
-.patient-card {
-    border: 1px solid #ccc;
-    margin: 2rem 0;
-    padding: 1rem;
-    border-radius: 8px;
-    max-width: 350px;
-}
-
 .patient-card h2 {
     margin: 0;
 }

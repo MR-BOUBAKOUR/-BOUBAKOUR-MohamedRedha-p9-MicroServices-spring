@@ -55,7 +55,7 @@ defineProps({
 }
 
 .note-content.expanded {
-    max-height: 1000px;
+    max-height: 2000px;
 }
 
 .toggle-btn {

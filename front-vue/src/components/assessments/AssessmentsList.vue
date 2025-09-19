@@ -15,7 +15,12 @@ defineProps({
                 v-if="assessment.progress !== undefined"
                 :assessment="assessment"
             />
-            <AssessmentCard v-else :assessment="assessment" @reload="$emit('reload', $event)" />
+            <AssessmentCard
+                v-else
+                :assessment="assessment"
+                @accepted="$emit('accepted', $event)"
+                @reload="$emit('reload', $event)"
+            />
         </li>
     </TransitionGroup>
 
