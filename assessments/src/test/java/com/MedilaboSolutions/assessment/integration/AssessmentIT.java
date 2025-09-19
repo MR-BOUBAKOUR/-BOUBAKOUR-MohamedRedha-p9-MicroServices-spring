@@ -80,7 +80,7 @@ class AssessmentIT extends AbstractContainerTest {
         when(patientFeignClient.getPatientById(anyLong(), anyString()))
                 .thenReturn(ResponseEntity.ok(new SuccessResponse<>(200, "Success", testPatient)));
 
-        when(noteFeignClient.getNoteByPatientId(anyLong(), anyString()))
+        when(noteFeignClient.getAllNotesByPatientId(anyLong(), anyString()))
                 .thenReturn(ResponseEntity.ok(new SuccessResponse<>(200, "Success", testNotes)));
     }
 
@@ -184,8 +184,8 @@ class AssessmentIT extends AbstractContainerTest {
             .statusCode(200)
             .body("status", equalTo(200))
             .body("message", equalTo("Assessments fetched successfully"))
-            .body("data", hasSize(1))
-            .body("data[0].patId", equalTo(PATIENT_ID.intValue()));
+            .body("data.content", hasSize(1))
+            .body("data.content[0].patId", equalTo(PATIENT_ID.intValue()));
     }
 
     @Test

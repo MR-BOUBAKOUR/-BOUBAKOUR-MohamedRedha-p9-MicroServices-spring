@@ -13,9 +13,9 @@ const api = axios.create({
 
 setupAxiosInterceptors(api)
 
-export async function fetchAssessmentsByPatientId(patientId) {
+export async function fetchAssessmentsByPatientId(patientId, page = 0, size = 3) {
     try {
-        const response = await api.get(`/assessments/patient/${patientId}`)
+        const response = await api.get(`/assessments/patient/${patientId}`, { params: { page, size } })
         return response.data.data
     } catch (error) {
         if (error.response?.status !== 401) {

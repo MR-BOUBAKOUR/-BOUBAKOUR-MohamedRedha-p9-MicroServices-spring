@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,23 +72,21 @@ public class AssessmentService {
         }
     }
 
-    public List<AssessmentDto> findAssessmentsByPatientId(Long patId) {
-        List<AssessmentStatus> allowedStatuses = List.of(
-                AssessmentStatus.QUEUED,
-                AssessmentStatus.PROCESSING,
-                AssessmentStatus.PENDING,
-                AssessmentStatus.REFUSED_PENDING,
-                AssessmentStatus.ACCEPTED,
-                AssessmentStatus.UPDATED,
-                AssessmentStatus.MANUAL
-        );
-
-        List<Assessment> assessments =
-                assessmentRepository.findByPatIdAndStatusInOrderByCreatedAtDesc(patId, allowedStatuses);
-
-        return assessments.stream()
-                .map(assessmentMapper::toAssessmentDto)
-                .toList();
+    public Page<AssessmentDto> findByPatientId(Long patientId, Pageable pageable) {
+        return assessmentRepository.findByPatIdAndStatusIn(
+                        patientId,
+                        List.of(
+                                AssessmentStatus.QUEUED,
+                                AssessmentStatus.PROCESSING,
+                                AssessmentStatus.PENDING,
+                                AssessmentStatus.REFUSED_PENDING,
+                                AssessmentStatus.ACCEPTED,
+                                AssessmentStatus.UPDATED,
+                                AssessmentStatus.MANUAL
+                        ),
+                        pageable
+                )
+                .map(assessmentMapper::toAssessmentDto);
     }
 
     public AssessmentDto findAssessmentById(Long assessmentId) {
@@ -169,7 +169,7 @@ public class AssessmentService {
         PatientDto patient = patientResponse.getBody().getData();
 
         // Finding the notes of the patient
-        ResponseEntity<SuccessResponse<List<NoteDto>>> notesResponse = noteFeignClient.getNoteByPatientId(patId, correlationId);
+        ResponseEntity<SuccessResponse<List<NoteDto>>> notesResponse = noteFeignClient.getAllNotesByPatientId(patId, correlationId);
         if (notesResponse.getBody() == null || notesResponse.getBody().getData() == null) {
             throw new ResourceNotFoundException("Notes not found for patient ID " + patId);
         }

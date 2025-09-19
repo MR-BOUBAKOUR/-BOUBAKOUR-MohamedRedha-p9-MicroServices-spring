@@ -63,8 +63,8 @@ class PatientIT extends AbstractMySQLContainerTest {
     void getAllPatients_ShouldReturnPatientsList() throws Exception {
         mockMvc.perform(get("/patients"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data").isArray())
-                .andExpect(jsonPath("$.data.length()").value(Matchers.greaterThanOrEqualTo(40)));
+                .andExpect(jsonPath("$.data.content").isArray())
+                .andExpect(jsonPath("$.data.content.length()").value(Matchers.greaterThanOrEqualTo(10)));
     }
 
     @Test

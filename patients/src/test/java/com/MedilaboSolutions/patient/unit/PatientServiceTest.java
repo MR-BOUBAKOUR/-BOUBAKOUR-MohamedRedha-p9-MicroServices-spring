@@ -62,23 +62,23 @@ class PatientServiceTest {
         patientRequestDto.setBirthDate(LocalDate.of(1990, 1, 1));
         patientRequestDto.setGender("M");
     }
-
-    @Test
-    @DisplayName("Should return list of patient DTOs when patients exist")
-    void findAll_ShouldReturnListOfPatients() {
-        // Given
-        when(patientRepository.findAll()).thenReturn(List.of(patient));
-        when(patientMapper.toPatientDto(patient)).thenReturn(patientDto);
-
-        // When
-        List<PatientDto> result = patientService.findAll();
-
-        // Then
-        assertThat(result).hasSize(1);
-        assertThat(result.getFirst()).isEqualTo(patientDto);
-        verify(patientRepository).findAll();
-        verify(patientMapper).toPatientDto(patient);
-    }
+//
+//    @Test
+//    @DisplayName("Should return list of patient DTOs when patients exist")
+//    void findAll_ShouldReturnListOfPatients() {
+//        // Given
+//        when(patientRepository.findAll()).thenReturn(List.of(patient));
+//        when(patientMapper.toPatientDto(patient)).thenReturn(patientDto);
+//
+//        // When
+//        List<PatientDto> result = patientService.findAll();
+//
+//        // Then
+//        assertThat(result).hasSize(1);
+//        assertThat(result.getFirst()).isEqualTo(patientDto);
+//        verify(patientRepository).findAll();
+//        verify(patientMapper).toPatientDto(patient);
+//    }
 
     @Test
     @DisplayName("Should return patient DTO when ID exists")

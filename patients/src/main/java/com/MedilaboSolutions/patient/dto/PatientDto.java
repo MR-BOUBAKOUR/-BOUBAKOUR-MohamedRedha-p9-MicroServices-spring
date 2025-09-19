@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Getter
@@ -20,4 +21,7 @@ public class PatientDto {
     private String address;
     private String phone;
     private boolean earlyOnsetMailSent;
+
+    private Instant createdAt;
+    private Instant updatedAt;
 }

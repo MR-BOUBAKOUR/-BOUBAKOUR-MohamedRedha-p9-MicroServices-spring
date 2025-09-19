@@ -7,6 +7,8 @@ import com.MedilaboSolutions.patient.exception.ResourceNotFoundException;
 import com.MedilaboSolutions.patient.mapper.PatientMapper;
 import com.MedilaboSolutions.patient.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,10 +20,9 @@ public class PatientService {
     private final PatientRepository patientRepository;
     private final PatientMapper patientMapper;
 
-    public List<PatientDto> findAll() {
-        return patientRepository.findAll().stream()
-                .map(patientMapper::toPatientDto)
-                .toList();
+    public Page<PatientDto> findAll(Pageable pageable) {
+        return patientRepository.findAll(pageable)
+                .map(patientMapper::toPatientDto);
     }
 
     public PatientDto findById(Long id) {
