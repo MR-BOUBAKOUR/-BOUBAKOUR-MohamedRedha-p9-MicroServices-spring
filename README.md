@@ -1,8 +1,34 @@
 MediLabo Solutions - the AI medical assistant for diabetes risk assessment
 
-Microservices application built with Spring Boot and Vue.js.
+**Client**: MediLabo Private Healthcare Center (for demonstration purposes, doesn't exist)
 
-📄 [Documentation & Reports](https://mr-boubakour.github.io/-BOUBAKOUR-MohamedRedha-p9-MicroServices-spring/) : includes **Javadoc** and **JaCoCo reports** for the microservices where documentation and test coverage bring the most value.
+**Problem**: The need to standardize diabetes risk assessments, ensure full traceability of medical decisions, and maintain a reliable history of patient evolution.
+
+**Solution**: Develop a microservices web application with a local AI, enabling doctors to automate, standardize, and track diabetes risk assessments.
+
+---
+
+### 📦 Deliverables
+
+[Documentation & Reports](https://mr-boubakour.github.io/-BOUBAKOUR-MohamedRedha-p9-MicroServices-spring/) : includes Javadoc and JaCoCo reports for the microservices where documentation and test coverage bring the most value.
+
+[Docker images](https://hub.docker.com/repositories/redikan7) : published Docker images for the microservices.
+
+[Performance analysis report](_doc/performance-analysis.md) : investigation of system behavior under controlled load scenarios, identifying environmental bottlenecks, isolating service performance, and providing actionable insights for reliable and reproducible testing.
+
+[Wireframes](_doc/wireframes.pdf) : visual layout for the application
+
+[AI assessment screenshot exemple](_doc/example_ai_assessment_6.png) : including :
+- the diabetes risk level
+- context summary of the patient record
+- medical analysis
+- recommendations
+- sources & references (when the RAG/guidelines are used)
+- action buttons (the decision-making part)
+- status indicator of the assessment (pending at this stage, waiting for the doctor validation)
+
+
+[Final assessment PDF exemple](_doc/example_final_assessment_6.pdf) : produced following doctor validation to ensure the accuracy of the diagnosis.
 
 ---
 
@@ -15,8 +41,8 @@ Microservices application built with Spring Boot and Vue.js.
 
 
 2. From the docker-compose folder
-   - default (no monitoring): `docker-compose up`
-   - with monitoring: `docker-compose --profile monitoring up`
+   - default (no monitoring) : `docker-compose up`
+   - with monitoring : `docker-compose --profile monitoring up`
 
 
 3. From the front-vue folder
@@ -25,12 +51,12 @@ Microservices application built with Spring Boot and Vue.js.
 
 
 4. Open your browser at
-   - `http://localhost:5173`
-
+   - `http://localhost:5173` (the application front-end)
+   - `http://localhost:3000` (the Grafana dashboard. The [monitoring] profile must be enabled)
 
 5. Credentials
-   - user: `prenom_medecin`
-   - password: `123`
+   - user : `prenom_medecin`
+   - password : `123`
 
 32GB RAM recommended, the GPU (Nvidia) will be used if available, otherwise, it will fall back to the CPU.
 
