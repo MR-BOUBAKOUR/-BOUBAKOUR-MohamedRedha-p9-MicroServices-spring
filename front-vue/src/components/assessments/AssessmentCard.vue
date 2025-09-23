@@ -17,7 +17,7 @@ const props = defineProps({
     },
 })
 
-const emit = defineEmits(['reload'])
+const emit = defineEmits(['accepted', 'reload'])
 
 const currentStatus = ref(props.assessment.status)
 

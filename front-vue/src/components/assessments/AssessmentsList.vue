@@ -5,6 +5,8 @@ import ProgressAssessmentCard from './ProgressAssessmentCard.vue'
 defineProps({
     assessments: { type: Array, required: true },
 })
+
+defineEmits(['accepted', 'reload'])
 </script>
 
 <template>
