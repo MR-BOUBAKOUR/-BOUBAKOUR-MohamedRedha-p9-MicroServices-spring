@@ -18,6 +18,8 @@ MediLabo Solutions - the AI medical assistant for diabetes risk assessment
 
 [Wireframes](_doc/wireframes.pdf) : visual layout for the application
 
+[Kanban board](https://www.notion.so/277c127a6083809aa2d1d2df7d2e5c67?v=277c127a6083816cbda2000c506b2eb3&source=copy_link) : project task tracking on Notion
+
 [AI assessment screenshot exemple](_doc/example_ai_assessment_6.png) : including :
 - the diabetes risk level
 - context summary of the patient record
